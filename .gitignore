@@ -1,4 +1,7 @@
 .cache/
-dist/index.html
-dist/main*
-dist/phaser*
+dist/*.js
+dist/*.map
+dist/*.html
+
+# Dependency directories
+node_modules/
