@@ -1,6 +1,6 @@
 import { CST } from "../CST.ts";
 import { CYBR_Scene } from "./CYBR_Scene.js";
-import { CYBR_Button } from "../UI/CYBR_Button.js";
+import { CYBR_Button } from "../UI/CYBR_Button.ts";
 import { SceneGame } from "./SceneGame.js";
 
 
