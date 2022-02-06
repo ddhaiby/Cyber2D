@@ -1,8 +1,26 @@
-import {Attribute} from "./Attribute.js";
+import { CYBR_Weapon } from "Weapons/CYBR_Weapon";
+import {Attribute} from "./Attribute";
 
 export class Pawn extends Phaser.Physics.Arcade.Sprite
 {
-    constructor(scene, x, y, texture)
+    public currentWeapon: CYBR_Weapon;
+
+    public startPosition: Phaser.Math.Vector2;
+
+    // States
+    protected isLookingUp: boolean;
+    protected isLookingDown: boolean;
+    protected isMoving: boolean;
+    protected isJumping: boolean;
+    protected isFiring: boolean;
+
+    // Attributes
+    protected attributes: Phaser.Structs.Map<string, Attribute>;
+
+    private _overlapped: boolean;
+    public overlapped: boolean;
+
+    constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture, frame?: string | number)
     {
         super(scene, x, y, texture);
 
@@ -12,7 +30,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     // Init
     ////////////////////////////////////////////////////////////////////////
 
-    init(scene)
+    init(scene: Phaser.Scene)
     {
         scene.add.existing(this);
         scene.physics.add.existing(this);
@@ -67,8 +85,8 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
     initAttributes()
     {
-        this.attributes = new Phaser.Structs.Map([["maxHealth", new Attribute("maxHealth", 100)],
-                                                  ["health",    new Attribute("health", 100)]]);
+        this.attributes = new Phaser.Structs.Map([]);
+        this.attributes.set("maxHealth", new Attribute(100)).set("health", new Attribute(100));
     }
 
     // Overlap
@@ -104,7 +122,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         }
     }
 
-    move(speed)
+    move(speed: number)
     {
         if (!this.dead())
         {
@@ -151,7 +169,9 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
     jump()
     {
-        if (!this.dead() && this.body.onFloor())
+        let body = this.body as Phaser.Physics.Arcade.Body;
+
+        if (!this.dead() && body.onFloor())
         {
             this.setVelocityY(-330);
             this.isJumping = true;
@@ -220,7 +240,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         }
     }
 
-    fire(fireAngle)
+    fire(fireAngle?: number)
     {
         if (this.currentWeapon)
         {
@@ -247,7 +267,8 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
                 else
                     fireAngle = this.anims.currentAnim.key == "right" ? 0 : 180;
             }
-            this.currentWeapon.fire(fireAngle);
+            this.currentWeapon.fireAngle = fireAngle;
+            this.currentWeapon.fire();
             this.isFiring = true;
         }
     }

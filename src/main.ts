@@ -1,7 +1,7 @@
 /** @type {import("../typings/phaser")} */
 
-import { SceneMainMenu_UI } from "./Scenes/SceneMainMenu_UI.js";
-import { SceneGame } from "./Scenes/SceneGame.js";
+import { SceneMainMenu_UI } from "./Scenes/SceneMainMenu_UI";
+import { SceneGame } from "./Scenes/SceneGame";
 
 var game = new Phaser.Game({
     type: Phaser.AUTO,
