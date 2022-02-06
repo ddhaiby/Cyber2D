@@ -1,8 +1,18 @@
-import { CST } from "../CST.ts";
-import { CYBR_Scene } from "./CYBR_Scene.js";
+import { Player } from "Pawns/Player";
+import { CST } from "../CST";
+import { CYBR_Scene } from "./CYBR_Scene";
+import { SceneGame } from "./SceneGame";
 
 export class SceneGame_UI extends CYBR_Scene
 {
+    private sceneGame: SceneGame;
+    private player: Player;
+
+    // UI Items
+    private healthBar: Phaser.GameObjects.Graphics;
+    private tokenScoreItem: Map<string, Phaser.GameObjects.GameObject>;
+    private lifeItem: Map<string, Phaser.GameObjects.GameObject>;
+
     constructor()
     {
         super({key: CST.SCENES.GAME_UI});
@@ -64,16 +74,15 @@ export class SceneGame_UI extends CYBR_Scene
     {
         let healthBar = this.add.graphics({ x: 12, y: 12 });
 
-        healthBar.width = 160;
-        healthBar.height = 16;
+        // TODO: use width and height
+        //healthBar.width = 160;
+        //healthBar.height = 16;
         healthBar.fillStyle(0x990000);
-        healthBar.fillRect(0, 0, healthBar.width, healthBar.height);
+        healthBar.fillRect(0, 0, 160, 16/*healthBar.width, healthBar.height*/);
         
         this.sceneGame.events.on("playerHealthChanged", (health)=> {
-            let x = healthBar.x;
-            let y = healthBar.y;
-            let width = healthBar.width * health.getCurrentValue() / this.player.getMaxHealth();
-            let height = healthBar.height;
+            let width = 160/*healthBar.width*/ * health.getCurrentValue() / this.player.getMaxHealth();
+            let height = 16/*healthBar.height*/;
 
             healthBar.clear();
             healthBar.fillStyle(0x990000);
@@ -87,7 +96,7 @@ export class SceneGame_UI extends CYBR_Scene
     {
         // Image
         let tokenImageX = this.healthBar.x;
-        let tokenImageY = this.healthBar.y + this.healthBar.height + 8;
+        let tokenImageY = this.healthBar.y + 16/*this.healthBar.height*/ + 8;
 
         let tokenImage = this.add.image(tokenImageX, tokenImageY, "token").setScale(1);
         tokenImage.x += tokenImage.width / 2;
@@ -97,7 +106,7 @@ export class SceneGame_UI extends CYBR_Scene
         let textX = tokenImage.x + tokenImage.width;
         let textY = tokenImage.y + 1;
     
-        let tokenText = this.add.text(textX, textY, "0", { font: '18px Arial', fill: '#000000' });
+        let tokenText = this.add.text(textX, textY, "0", { font: '18px Arial', color: '#000000' });
         tokenText.x -= tokenText.width / 2;
         tokenText.y -= tokenText.height / 2;
         
@@ -105,15 +114,17 @@ export class SceneGame_UI extends CYBR_Scene
             tokenText.text = collectedTokens;
         }, this);
 
-        return new Map([[ "image", tokenImage ], [ "text", tokenText ]]);
+        return new Map<string, Phaser.GameObjects.GameObject>().set("image", tokenImage).set("text", tokenText);
     }
 
     // TODO: Review position
     createLifeItem()
     {
+        let tokenImage = this.tokenScoreItem.get("image") as Phaser.GameObjects.Image;
+
         // Image
-        let lifeImageX = this.tokenScoreItem.get("image").x;
-        let lifeImageY = this.tokenScoreItem.get("image").y + this.tokenScoreItem.get("image").height;
+        let lifeImageX = tokenImage.x;
+        let lifeImageY = tokenImage.y + tokenImage.height;
 
         let lifeImage = this.add.image(lifeImageX, lifeImageY, "eyeball", 9).setScale(1);
         lifeImage.y += lifeImage.height / 2;
@@ -122,20 +133,20 @@ export class SceneGame_UI extends CYBR_Scene
         let textX = lifeImage.x + lifeImage.width;
         let textY = lifeImage.y + 1;
     
-        let lifeText = this.add.text(textX, textY, this.sceneGame.remainLife, { font: '18px Arial', fill: '#000000' });
+        let lifeText = this.add.text(textX, textY, this.sceneGame.getRemainLife().toString(), { font: '18px Arial', color: '#000000' });
         lifeText.x -= lifeText.width / 2;
         lifeText.y -= lifeText.height / 2;
         
         this.sceneGame.events.on("onPlayerRemainLifeChanged", (remainLife)=> {
-            lifeText.text = Math.max(0, remainLife);
+            lifeText.text = Math.max(0, remainLife).toString();
         }, this);
 
-        return new Map([[ "image", lifeImage ], [ "text", lifeText ]]);
+        return new Map<string, Phaser.GameObjects.GameObject>().set("image", lifeImage).set("text", lifeText);
     }
 
     createGameOverScreen()
     {
-        let gameOverText = this.add.text(0, 0, "GAME OVER", { font: '54px Arial', fill: '#000000' });
+        let gameOverText = this.add.text(0, 0, "GAME OVER", { font: '54px Arial', color: '#000000' });
         gameOverText.visible = false;
         this.centerItem(gameOverText);
 

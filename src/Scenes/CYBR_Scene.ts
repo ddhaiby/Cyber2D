@@ -1,11 +1,11 @@
 export class CYBR_Scene extends Phaser.Scene
 {
-    constructor(config)
+    constructor(config: string | Phaser.Types.Scenes.SettingsConfig)
     {
         super(config);
     }
 
-    centerItem(item, offsetX, offsetY)
+    centerItem(item, offsetX?: number, offsetY?: number)
     {
         if (offsetX == undefined)
             offsetX = 0;
@@ -15,14 +15,14 @@ export class CYBR_Scene extends Phaser.Scene
 
         let sceneWidth = this.scale.displaySize.width;
         let sceneHeight = this.scale.displaySize.height;
-    
+
         item.x = (sceneWidth - item.width) / 2 + offsetX; 
         item.y = (sceneHeight - item.height) / 2 + offsetY;
 
         return item;
     }
     
-    centerVItem(item, offsetY)
+    centerVItem(item, offsetY?: number)
     {
         if (offsetY == undefined)
             offsetY = 0;
@@ -33,7 +33,7 @@ export class CYBR_Scene extends Phaser.Scene
         return item;
     }
 
-    centerHItem(item, offsetX)
+    centerHItem(item, offsetX?: number)
     {
         if (offsetX == undefined)
             offsetX = 0;

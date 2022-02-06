@@ -1,14 +1,17 @@
-import { CST } from "../CST.ts";
-import { CYBR_Scene } from "./CYBR_Scene.js";
-import { CYBR_Button } from "../UI/CYBR_Button.ts";
+import { CST } from "../CST";
+import { CYBR_Scene } from "./CYBR_Scene";
+import { CYBR_Button } from "../UI/CYBR_Button";
+import { SceneGame } from "./SceneGame";
+import { CYBR_Graphics } from "../UI/CYBR_Graphics";
 
 export class SceneGameMenu_UI extends CYBR_Scene
 {
+    private sceneGame: SceneGame;
+
     constructor()
     {
         super({key: CST.SCENES.GAMEMENU_UI});
 
-        this.cursors = null;
         this.sceneGame = null;
     }
 
@@ -52,7 +55,9 @@ export class SceneGameMenu_UI extends CYBR_Scene
     create()
     {
         // Background
-        let background = this.add.graphics();
+        // TODO: use width and height
+    
+        let background = new CYBR_Graphics(this);
         background.width = 500;
         background.height = 320;
         background.fillStyle(0x171822);
@@ -90,5 +95,8 @@ export class SceneGameMenu_UI extends CYBR_Scene
     // Update
     ////////////////////////////////////////////////////////////////////////
 
-    update() {}
+    update(time: number, delta: number)
+    {
+        super.update(time, delta);
+    }
 }

@@ -1,7 +1,12 @@
-import {Pawn} from "../Pawn.js";
+import {Pawn} from "../Pawn";
 
 export class BasicAI extends Pawn
 {
+    // TODO: Review the quality of code. These test members were used for training
+    private test: number;
+    private testFire: number;
+    private left: boolean;
+
     constructor(scene, x, y, texture)
     {
        super(scene, x, y, texture);

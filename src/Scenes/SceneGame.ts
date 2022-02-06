@@ -1,31 +1,37 @@
-import { CST } from "../CST.ts";
-import { CYBR_Scene } from "./CYBR_Scene.js";
-import {SceneGame_UI} from "./SceneGame_UI.js";
-import {SceneGameMenu_UI} from "./SceneGameMenu_UI.js";
+import { CST } from "../CST";
+import { CYBR_Scene } from "./CYBR_Scene";
+import {SceneGame_UI} from "./SceneGame_UI";
+import {SceneGameMenu_UI} from "./SceneGameMenu_UI";
 
-import {BasicAI} from "../Pawns/AIs/BasicAI.js";
-import {Player} from "../Pawns/Player.js";
+import {BasicAI} from "../Pawns/AIs/BasicAI";
+import {Player} from "../Pawns/Player";
 
-import {CYBR_Weapon} from "../Weapons/CYBR_Weapon.ts";
+import {CYBR_Weapon} from "../Weapons/CYBR_Weapon";
 import {Bullet} from "phaser3-weapon-plugin";
 
 export class SceneGame extends CYBR_Scene
 {
+    private player: Player;
+    private enemies: Phaser.Physics.Arcade.StaticGroup;
+    private platforms: Phaser.Physics.Arcade.StaticGroup;
+    private movingPlatforms: Phaser.Physics.Arcade.StaticGroup;
+    private backgrounds: Phaser.Physics.Arcade.StaticGroup;
+    private tokens: Phaser.Physics.Arcade.StaticGroup;
+    private portals: Phaser.Physics.Arcade.StaticGroup;
+    
+    private collectedTokens: integer;
+    private remainLife: integer;
+    private deadZoneY: number;
+    
+    private gameOver: boolean;
+    private playerStartPosition: Phaser.Math.Vector2;
+    public currentLevel: integer;
+
+    private keysPlayer: object;
+
     constructor()
     {
         super({key: CST.SCENES.GAME});
-        this.player = null;
-        this.AIs = null;
-        this.platforms = null;
-        this.movingPlatforms = null;
-        this.tokens = null;
-        this.portals = null;
-        this.collectedTokens = 0;
-        this.gameOver = false;
-        this.remainLife = 0;
-        this.deadZoneY = 1200;
-
-        this.playerStartPosition = new Phaser.Math.Vector2(0, 0);
     }
 
     // Init
@@ -92,7 +98,7 @@ export class SceneGame extends CYBR_Scene
 
         this.platforms = this.physics.add.staticGroup();
         this.backgrounds = this.physics.add.staticGroup();
-        this.AIEnemies = this.physics.add.staticGroup();
+        this.enemies = this.physics.add.staticGroup();
         this.tokens = this.physics.add.staticGroup();
         this.portals = this.physics.add.staticGroup();
 
@@ -138,24 +144,25 @@ export class SceneGame extends CYBR_Scene
         this.respawnPlayer();
     }
 
-    createGameMode(level)
+    createGameMode(level?: integer)
     {
-        this.playerStartPosition.x = 100;
-        this.playerStartPosition.y = 360;
+        this.playerStartPosition= new Phaser.Math.Vector2(100, 360);
         this.setRemainLife(0);
         this.setCollectedTokens(0);
     }
 
-    createBackground(level)
+    createBackground(level?: integer)
     {
         this.backgrounds.clear(true, true)
 
         this.add.image(0, 0, "sky").setScale(12);
-        this.add.text(780, 100, "WELCOME TO CYBR WORLD", { font: '30px Gemunu Libre', fill: '#000000' });
+        this.add.text(780, 100, "WELCOME TO CYBR WORLD", { font: '30px Gemunu Libre', color: '#000000' });
     }
 
-    createPlatforms(level)
+    createPlatforms(level?: integer)
     {
+        this.deadZoneY = 1200;
+
         this.platforms.clear(true, true);
         //let levelData = this.cache.json.get('LevelData');
         //console.log(levelData);
@@ -196,31 +203,30 @@ export class SceneGame extends CYBR_Scene
         //this.movingPlatforms.children.getArray()[0].setVelocityY(-10)
     }
 
-    createPortals(level)
+    createPortals(level?: integer)
     {
         this.portals.clear(true, true);
         this.portals.create(3530, 420, 'portal');
     }
 
-    createTokens(level)
+    createTokens(level?: integer)
     {
         this.tokens.clear(true, true);
 
         this.tokens.createMultiple({
-            key: "token", repeat: 4, allowGravity: false,
+            key: "token", /*quantity*/repeat: 4,
             setXY: { x: 440, y: 260, stepX: 80 },
         });
 
         this.tokens.createMultiple({
-            key: "token", repeat: 3, allowGravity: false,
+            key: "token", repeat: 3,
             setXY: { x: 1220, y: 360, stepX: 80 },
         });
 
         this.tokens.createMultiple({
-            key: "token",
-            repeat: 3,
+            key: "token", repeat: 3, // allowGravity: false
             setXY: { x: 1140, y: 240, stepY: 40 },
-            allowGravity: false
+           
         });
 
         // this.tokens.add({
@@ -229,17 +235,17 @@ export class SceneGame extends CYBR_Scene
         //     setXY: { x: 440, y: 200, stepX: 80 },
         //     allowGravity: false
         // })
-
-        //this.physics.add.collider(this.tokens, this.platforms);
     }
 
     restartTokens()
     {
         this.setCollectedTokens(0);
-        this.tokens.getChildren().forEach(token => { token.enableBody(true, token.x, token.y, true, true); });
+        this.tokens.getChildren().forEach(function (token: Phaser.Physics.Arcade.Sprite) {
+            token.enableBody(true, token.x, token.y, true, true);
+        }, this);
     }
 
-    createPlayer(level)
+    createPlayer(level?: integer)
     {
         if (this.player)
         {            
@@ -264,52 +270,51 @@ export class SceneGame extends CYBR_Scene
         this.physics.add.overlap(this.player, this.portals, this.completeLevel, null, this);
     }
 
-    createAIs(level)
+    createAIs(level?: integer)
     {
-        this.AIEnemies.clear(true, true);
+        this.enemies.clear(true, true);
 
-        this.AIEnemies.add(new BasicAI(this, 200, 360, "eyeball"));
+        this.enemies.add(new BasicAI(this, 200, 360, "eyeball"));
 
         // Zone 1
-        this.AIEnemies.add(new BasicAI(this, 1490, 452, "eyeball"));
+        this.enemies.add(new BasicAI(this, 1490, 452, "eyeball"));
 
         // Zone 2
-        this.AIEnemies.add(new BasicAI(this, 3080, 420, "eyeball"));
-        this.AIEnemies.add(new BasicAI(this, 3280, 420, "eyeball"));
-        this.AIEnemies.add(new BasicAI(this, 3480, 420, "eyeball"));
+        this.enemies.add(new BasicAI(this, 3080, 420, "eyeball"));
+        this.enemies.add(new BasicAI(this, 3280, 420, "eyeball"));
+        this.enemies.add(new BasicAI(this, 3480, 420, "eyeball"));
         
         // TODO: Position of the enemies could be based on the platform.
-        // this.AIEnemies.add(new BasicAI(this, 1050, 490, "eyeball"));
-        // this.AIEnemies.add(new BasicAI(this, 1160, 490, "eyeball"));
+        // this.enemies.add(new BasicAI(this, 1050, 490, "eyeball"));
+        // this.enemies.add(new BasicAI(this, 1160, 490, "eyeball"));
         
-        // this.AIEnemies.add(new BasicAI(this, 1200, 400, "eyeball"));
-        // this.AIEnemies.add(new BasicAI(this, 1260, 400, "eyeball"));
-        // this.AIEnemies.add(new BasicAI(this, 1220, 400, "eyeball"));
+        // this.enemies.add(new BasicAI(this, 1200, 400, "eyeball"));
+        // this.enemies.add(new BasicAI(this, 1260, 400, "eyeball"));
+        // this.enemies.add(new BasicAI(this, 1220, 400, "eyeball"));
 
-        
-        this.physics.add.collider(this.AIEnemies, this.platforms);
+        this.physics.add.collider(this.enemies, this.platforms);
 
-        this.AIEnemies.getChildren().forEach(ai => {
+        this.enemies.getChildren().forEach(function (ai: BasicAI) {
             ai.startPosition = new Phaser.Math.Vector2(ai.x, ai.y);
             this.physics.add.overlap(this.player, ai, this.onPlayerOverlapEnnemy.bind(this), this.canPlayerOverlapEnnemy.bind(this)); 
             let collider = this.physics.add.overlap(this.player.currentWeapon.bullets, ai, this.onWeaponHitEnnemy.bind(this), this.canHitEnemy.bind(this, ai)); 
             this.player.currentWeapon.addCollider(collider);
 
             ai.on("die", this.onEnemyDie.bind(this, ai));
-        });
+        }, this);
     }
 
     restartAIs()
     {
-        this.AIEnemies.getChildren().forEach(AI => {
-            AI.enableBody(true, AI.startPosition.x, AI.startPosition.y, true, true);
-            AI.setHealth(AI.getMaxHealth());
-        });
+        this.enemies.getChildren().forEach(function (ai: BasicAI) {
+            ai.enableBody(true, ai.startPosition.x, ai.startPosition.y, true, true);
+            ai.setHealth(ai.getMaxHealth());
+        }, this);
     }
 
-    createCameras(level)
+    createCameras(level?: integer)
     {
-        this.cameras.main.setBounds(0, 0, this.physics.world, this.worldHeight);
+        //this.cameras.main.setBounds(0, 0, this.physics.world, this.worldHeight);
         this.cameras.main.startFollow(this.player);
     }
 
@@ -352,14 +357,16 @@ export class SceneGame extends CYBR_Scene
     // Update
     ////////////////////////////////////////////////////////////////////////
 
-    update()
+    update(time: number, delta: number)
     {
+        super.update(time, delta);
+
         // TODO: Find a cleaner way (is there a trigger box with Phaser?) - Probably add this to gameMode
         if (this.player.y > this.deadZoneY && !this.player.dead())
             this.player.setHealth(0);
 
         this.player.update();
-        this.AIEnemies.getChildren().forEach(ai => { ai.update(); } );
+        this.enemies.getChildren().forEach(ai => { ai.update(); }, this);
     }
 
     // Enemies

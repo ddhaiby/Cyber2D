@@ -1,8 +1,9 @@
 export class Attribute
 {
-    constructor(name, baseValue)
+    private _baseValue: number;
+
+    constructor(baseValue)
     {
-        this.name = name;
         this._baseValue = baseValue;
     }
 
