@@ -254,16 +254,16 @@ export class SceneGame extends CYBR_Scene
         }
 
         this.player = new Player(this, this.playerStartPosition.x, this.playerStartPosition.y, "eyeball", this.keysPlayer);
-        this.physics.add.collider(this.player, this.platforms);
+        this.respawnPlayer();
 
         this.player.on("healthChanged", this.onPlayerHealthChanged.bind(this));
         this.player.on("die", this.onPlayerDie.bind(this));
 
-        this.physics.add.overlap(this.player, this.tokens, this.collectToken, null, this);
-
         let weapon = new CYBR_Weapon(this, 30, "bullet");
         this.player.equipWeapon(weapon);
 
+        this.physics.add.collider(this.player, this.platforms);
+        this.physics.add.overlap(this.player, this.tokens, this.collectToken, null, this);
         let collider = this.physics.add.collider(weapon.bullets, this.platforms, this.onWeaponHitPlatforms.bind(this));
         this.player.currentWeapon.addCollider(collider);
 
