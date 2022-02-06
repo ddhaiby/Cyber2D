@@ -399,14 +399,9 @@ export class SceneGame extends CYBR_Scene
     // Player
     ////////////////////////////////////////////////////////////////////////
 
-    canPlayerOverlapEnnemy(obj1, obj2/*player: Player, enemy: Pawn*/)
+    canPlayerOverlapEnnemy(player: Player, enemy: Pawn)
     {
-        // let wasOverlapped = player.overlapped || enemy.overlapped;
-        // console.log(wasOverlapped)
-        // return !wasOverlapped && !player.dead() && !enemy.dead();
-        let wasOverlapped = obj1.wasOverlapped || obj2.wasOverlapped;
-        let dead = obj1.dead() || obj2.dead();
-        return !wasOverlapped && !dead;
+        return !player.dead() && !enemy.dead();
     }
 
     onPlayerOverlapEnnemy(player: Player, enemy: Pawn)
