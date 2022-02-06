@@ -120,6 +120,10 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
             else
                 this.onOverlapEnd();
         }
+
+        let body = this.body as Phaser.Physics.Arcade.Body;
+        if (body.onFloor())
+            this.isJumping = false;
     }
 
     move(speed: number)
