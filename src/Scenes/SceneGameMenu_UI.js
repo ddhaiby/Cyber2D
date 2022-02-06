@@ -76,8 +76,7 @@ export class SceneGameMenu_UI extends CYBR_Scene
 
         buttonRestart.on("pointerup", (pointer) => {
             this.sceneGame.showGameMenu(false);
-            //this.sceneGame.restartLevel();
-            this.sceneGame.startLevel(1);
+            this.sceneGame.restartLevel();
             this.sceneGame.scene.setActive(true);
         });
 
