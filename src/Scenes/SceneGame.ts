@@ -314,7 +314,7 @@ export class SceneGame extends CYBR_Scene
 
     createCameras(level?: integer)
     {
-        //this.cameras.main.setBounds(0, 0, this.physics.world, this.worldHeight);
+        this.cameras.main.setBounds(0, 0, 20000, 1080);
         this.cameras.main.startFollow(this.player);
     }
 
