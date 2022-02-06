@@ -1,7 +1,9 @@
-import { Player } from "Pawns/Player";
 import { CST } from "../CST";
 import { CYBR_Scene } from "./CYBR_Scene";
 import { SceneGame } from "./SceneGame";
+import { CYBR_HealthBar } from "../UI/CYBR_HealthBar";
+import { Attribute } from "../Pawns/Attribute";
+import { Player } from "Pawns/Player";
 
 export class SceneGame_UI extends CYBR_Scene
 {
@@ -61,17 +63,13 @@ export class SceneGame_UI extends CYBR_Scene
 
     createHealthBar()
     {
-        let healthBar = this.add.graphics({ x: 12, y: 12 });
-
-        // TODO: use width and height
-        //healthBar.width = 160;
-        //healthBar.height = 16;
+        let healthBar = new CYBR_HealthBar(this, { x: 12, y: 12, width: 160, height: 16 });
         healthBar.fillStyle(0x990000);
-        healthBar.fillRect(0, 0, 160, 16/*healthBar.width, healthBar.height*/);
+        healthBar.fillRect(0, 0, healthBar.width, healthBar.height);
         
-        this.sceneGame.events.on("playerHealthChanged", (health)=> {
-            let width = 160/*healthBar.width*/ * health.getCurrentValue() / this.player.getMaxHealth();
-            let height = 16/*healthBar.height*/;
+        this.sceneGame.events.on("playerHealthChanged", (health: Attribute)=> {
+            let width = healthBar.width * health.getCurrentValue() / this.player.getMaxHealth();
+            let height = healthBar.height;
 
             healthBar.clear();
             healthBar.fillStyle(0x990000);
@@ -126,7 +124,7 @@ export class SceneGame_UI extends CYBR_Scene
         lifeText.x -= lifeText.width / 2;
         lifeText.y -= lifeText.height / 2;
         
-        this.sceneGame.events.on("onPlayerRemainLifeChanged", (remainLife)=> {
+        this.sceneGame.events.on("onPlayerRemainLifeChanged", (remainLife: integer)=> {
             lifeText.text = Math.max(0, remainLife).toString();
         }, this);
 
@@ -139,7 +137,7 @@ export class SceneGame_UI extends CYBR_Scene
         gameOverText.visible = false;
         this.centerItem(gameOverText);
 
-        this.sceneGame.events.on("onGameOverChanged", (gameOver)=> {
+        this.sceneGame.events.on("onGameOverChanged", (gameOver: boolean)=> {
             gameOverText.visible = gameOver;
         }, this);
     }
