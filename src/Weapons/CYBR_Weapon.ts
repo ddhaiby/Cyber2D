@@ -1,8 +1,12 @@
-import { consts } from "phaser3-weapon-plugin";
+import { Bullet, consts } from "phaser3-weapon-plugin";
 
 export class CYBR_Weapon
 {
-    constructor(scene, bulletLimit, key)
+    private _colliders: Array<Phaser.Physics.Arcade.Collider>;
+    private _weapon: Weapon;
+    bullets: Bullet;
+
+    constructor(scene: Phaser.Scene, bulletLimit: number, key: string)
     {
         this._weapon = scene.add.weapon(bulletLimit, key);
         this._weapon.bulletGravity = new Phaser.Math.Vector2(0, -scene.physics.world.gravity.y); // So the bullets ignore the gravity
@@ -13,13 +17,13 @@ export class CYBR_Weapon
         this._weapon.bulletKillType = consts.KillType.KILL_WORLD_BOUNDS;
         this.bullets = this._weapon.bullets;
 
-        this.colliders = [];
+        this._colliders = [];
     }
 
     fire(fireAngle)
     {
         if (fireAngle != undefined)
-            this._weapon.fireAngle = fireAngle;        
+            this._weapon.fireAngle = fireAngle;
         this._weapon.fire();
     }
 
@@ -30,14 +34,14 @@ export class CYBR_Weapon
 
     destroy()
     {
-        for (let collider of this.colliders)
+        for (let collider of this._colliders)
             collider.destroy();
         this._weapon.destroy();
     }
 
     // Necessary to correctly destroy the weapon.
-    saveCollider(collider)
+    addCollider(collider)
     {
-        this.colliders.push(collider);
+        this._colliders.push(collider);
     }
 }

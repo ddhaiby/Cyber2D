@@ -6,7 +6,7 @@ import {SceneGameMenu_UI} from "./SceneGameMenu_UI.js";
 import {BasicAI} from "../Pawns/AIs/BasicAI.js";
 import {Player} from "../Pawns/Player.js";
 
-import {CYBR_Weapon} from "../Weapons/CYBR_Weapon.js";
+import {CYBR_Weapon} from "../Weapons/CYBR_Weapon.ts";
 import {Bullet} from "phaser3-weapon-plugin";
 
 import { WeaponPlugin } from 'phaser3-weapon-plugin' // npm install phaser3-weapon-plugin
@@ -267,7 +267,7 @@ export class SceneGame extends CYBR_Scene
         this.player.equipWeapon(weapon);
 
         let collider = this.physics.add.collider(weapon.bullets, this.platforms, this.onWeaponHitPlatforms.bind(this));
-        this.player.currentWeapon.saveCollider(collider);
+        this.player.currentWeapon.addCollider(collider);
 
         this.physics.add.overlap(this.player, this.portals, this.completeLevel, null, this);
     }
@@ -301,7 +301,7 @@ export class SceneGame extends CYBR_Scene
             ai.startPosition = new Phaser.Math.Vector2(ai.x, ai.y);
             this.physics.add.overlap(this.player, ai, this.onPlayerOverlapEnnemy.bind(this), this.canPlayerOverlapEnnemy.bind(this)); 
             let collider = this.physics.add.overlap(this.player.currentWeapon.bullets, ai, this.onWeaponHitEnnemy.bind(this), this.canHitEnemy.bind(this, ai)); 
-            this.player.currentWeapon.saveCollider(collider);
+            this.player.currentWeapon.addCollider(collider);
 
             ai.on("die", this.onEnemyDie.bind(this, ai));
         });
