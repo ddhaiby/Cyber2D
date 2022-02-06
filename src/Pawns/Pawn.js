@@ -247,7 +247,8 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
                 else
                     fireAngle = this.anims.currentAnim.key == "right" ? 0 : 180;
             }
-            this.currentWeapon.fire(fireAngle);
+            this.currentWeapon.fireAngle = fireAngle;
+            this.currentWeapon.fire();
             this.isFiring = true;
         }
     }

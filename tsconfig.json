@@ -1,0 +1,10 @@
+{
+	"compilerOptions":
+	{
+		"baseUrl": "./src",
+		"module": "commonjs",
+		"target": "es6"
+	},
+	"include": ["./src/**/*", "./lib/**/*", "./typings/**/*"],
+	"typeRoots": ["./typings"],                       /* List of folders to include type definitions from. */
+}

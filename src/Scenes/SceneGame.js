@@ -9,8 +9,6 @@ import {Player} from "../Pawns/Player.js";
 import {CYBR_Weapon} from "../Weapons/CYBR_Weapon.ts";
 import {Bullet} from "phaser3-weapon-plugin";
 
-import { WeaponPlugin } from 'phaser3-weapon-plugin' // npm install phaser3-weapon-plugin
-
 export class SceneGame extends CYBR_Scene
 {
     constructor()
@@ -90,7 +88,6 @@ export class SceneGame extends CYBR_Scene
   
     create()
     {
-        this.createPlugins();
         this.createKeyboardMap();
 
         this.platforms = this.physics.add.staticGroup();
@@ -102,11 +99,6 @@ export class SceneGame extends CYBR_Scene
         this.currentLevel = 1;
         this.startLevel(this.currentLevel);
         this.createUI();
-    }
-
-    createPlugins()
-    {
-        this.plugins.installScenePlugin('WeaponPlugin', WeaponPlugin, 'weapons', this);
     }
 
     createKeyboardMap()
