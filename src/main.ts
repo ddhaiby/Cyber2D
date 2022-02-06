@@ -3,7 +3,7 @@
 import { SceneMainMenu_UI } from "./Scenes/SceneMainMenu_UI";
 import { SceneGame } from "./Scenes/SceneGame";
 
-var game = new Phaser.Game({
+new Phaser.Game({
     type: Phaser.AUTO,
     width: 800,
     height: 600,

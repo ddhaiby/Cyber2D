@@ -7,9 +7,9 @@ export class BasicAI extends Pawn
     private testFire: number;
     private left: boolean;
 
-    constructor(scene, x, y, texture)
+    constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture, frame?: string | number)
     {
-       super(scene, x, y, texture);
+       super(scene, x, y, texture, frame);
 
         this.test = 0;
         this.testFire = 0;

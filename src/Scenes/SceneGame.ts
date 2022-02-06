@@ -3,6 +3,7 @@ import { CYBR_Scene } from "./CYBR_Scene";
 import {SceneGame_UI} from "./SceneGame_UI";
 import {SceneGameMenu_UI} from "./SceneGameMenu_UI";
 
+import { Pawn } from "../Pawns/Pawn";
 import {BasicAI} from "../Pawns/AIs/BasicAI";
 import {Player} from "../Pawns/Player";
 
@@ -11,7 +12,7 @@ import {Bullet} from "phaser3-weapon-plugin";
 
 export class SceneGame extends CYBR_Scene
 {
-    private player: Player;
+    public player: Player;
     private enemies: Phaser.Physics.Arcade.StaticGroup;
     private platforms: Phaser.Physics.Arcade.StaticGroup;
     private movingPlatforms: Phaser.Physics.Arcade.StaticGroup;
@@ -122,7 +123,7 @@ export class SceneGame extends CYBR_Scene
         });
     }
 
-    startLevel(level)
+    startLevel(level: integer)
     {
         console.log("Level", level, "started");
 
@@ -326,19 +327,19 @@ export class SceneGame extends CYBR_Scene
         this.showGameMenu(false);
     }
 
-    showMainMenu(value)
+    showMainMenu(value: boolean)
     {
         this.scene.setActive(value, CST.SCENES.MAINMENU_UI);
         this.scene.setVisible(value, CST.SCENES.MAINMENU_UI);
     }
 
-    showGameUI(value)
+    showGameUI(value: boolean)
     {
         this.scene.setActive(value, CST.SCENES.GAME_UI);
         this.scene.setVisible(value, CST.SCENES.GAME_UI);
     }
 
-    showGameMenu(value)
+    showGameMenu(value: boolean)
     {
         this.scene.setActive(value, CST.SCENES.GAMEMENU_UI);
         this.scene.setVisible(value, CST.SCENES.GAMEMENU_UI);
@@ -347,7 +348,7 @@ export class SceneGame extends CYBR_Scene
             this.scene.pause();
     }
 
-    showGame(value)
+    showGame(value: boolean)
     {
         this.scene.setActive(value, CST.SCENES.GAME);
         this.scene.setVisible(value, CST.SCENES.GAME);
@@ -372,39 +373,25 @@ export class SceneGame extends CYBR_Scene
     // Enemies
     ////////////////////////////////////////////////////////////////////////
 
-    canHitEnemy(enemy)
+    canHitEnemy(enemy: Pawn)
     {
         return !enemy.dead();
     }
 
-    onWeaponHitEnnemy(obj1, obj2)
+    onWeaponHitEnnemy(bullet: Bullet, enemy: Pawn)
     {
-        let enemy, bullet;
-        if (obj1 instanceof BasicAI)
-        {
-            enemy = obj1;
-            bullet = obj2;
-        }
-        else
-        {
-            enemy = obj2;
-            bullet = obj1;
-        }
-
         enemy.hurt(35);
         bullet.kill();
     }
 
-    onWeaponHitPlatforms(obj1, obj2)
+    onWeaponHitPlatforms(bullet: Bullet, platform: Phaser.Physics.Arcade.Sprite)
     {
-        let bullet = (obj1 instanceof Bullet) ? obj1 : obj2;
-
         bullet.active = false;
         bullet.visible = false;
         bullet.kill();
     }
 
-    onEnemyDie(enemy)
+    onEnemyDie(enemy: Pawn)
     {
         this.time.delayedCall(800, ()=>{ enemy.disableBody(true, true); }, null, this);
     }
@@ -412,26 +399,28 @@ export class SceneGame extends CYBR_Scene
     // Player
     ////////////////////////////////////////////////////////////////////////
 
-    canPlayerOverlapEnnemy(obj1, obj2)
+    canPlayerOverlapEnnemy(obj1, obj2/*player: Player, enemy: Pawn*/)
     {
+        // let wasOverlapped = player.overlapped || enemy.overlapped;
+        // console.log(wasOverlapped)
+        // return !wasOverlapped && !player.dead() && !enemy.dead();
         let wasOverlapped = obj1.wasOverlapped || obj2.wasOverlapped;
         let dead = obj1.dead() || obj2.dead();
         return !wasOverlapped && !dead;
     }
 
-    onPlayerOverlapEnnemy(obj1, obj2)
+    onPlayerOverlapEnnemy(player: Player, enemy: Pawn)
     {
-        let other = (obj1 == this.player) ? obj2 : obj1;
-        if (!this.player.overlapped)
+        if (!player.overlapped)
         {
-            this.player.onOverlapBegin(other);
+            this.player.onOverlapBegin(enemy);
             this.player.hurt(35);
         }
         else
-            this.player.onOverlapContinue(other);
+            this.player.onOverlapContinue(enemy);
     }
 
-    onPlayerHealthChanged(health)
+    onPlayerHealthChanged(health: number)
     {
         this.events.emit("playerHealthChanged", health);
     }
@@ -450,11 +439,9 @@ export class SceneGame extends CYBR_Scene
         }
     }
 
-    collectToken(obj1, obj2)
+    collectToken(player: Player, token: Phaser.Physics.Arcade.Sprite)
     {
-        let token = (obj1 == this.player) ? obj2 : obj1;
         token.disableBody(true, true);
-
         this.setCollectedTokens(this.getCollectedTokens() + 1);
     }
 
@@ -469,7 +456,7 @@ export class SceneGame extends CYBR_Scene
         return this.gameOver;
     }
 
-    setGameOver(gameOver)
+    setGameOver(gameOver: boolean)
     {
         this.gameOver = gameOver;
         
@@ -505,7 +492,7 @@ export class SceneGame extends CYBR_Scene
         return this.remainLife;
     }
 
-    setRemainLife(remainLife)
+    setRemainLife(remainLife: integer)
     {
         this.remainLife = remainLife;
         this.events.emit("onPlayerRemainLifeChanged", this.remainLife);

@@ -179,17 +179,17 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         }
     }
 
-    hurt(health)
+    hurt(health: number)
     {
         this.setHealth(this.attributes.get("health").getCurrentValue() - health);
     }
 
-    heal(health)
+    heal(health: number)
     {
         this.setHealth(this.attributes.get("health").getCurrentValue() + health);
     }
 
-    setHealth(health)
+    setHealth(health: number)
     {
         this.attributes.get("health").setBaseValue(Math.max(0, Math.min(health, this.attributes.get("maxHealth").getCurrentValue())));
         this.emit("healthChanged", this.attributes.get("health"));
@@ -224,13 +224,13 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         return this.attributes.get("health").getCurrentValue() <= 0;
     }
 
-    equipWeapon(weapon)
+    equipWeapon(weapon: CYBR_Weapon)
     {
         this.currentWeapon = weapon;
         this.currentWeapon.trackSprite(this, 0, 0, false);
     }
 
-    unequipWeapon(destroyWeapon)
+    unequipWeapon(destroyWeapon?: boolean)
     {
         if (this.currentWeapon)
         {

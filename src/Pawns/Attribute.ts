@@ -2,12 +2,12 @@ export class Attribute
 {
     private _baseValue: number;
 
-    constructor(baseValue)
+    constructor(baseValue: number)
     {
         this._baseValue = baseValue;
     }
 
-    setBaseValue(baseValue)
+    setBaseValue(baseValue: number)
     {
         this._baseValue = baseValue;
     }

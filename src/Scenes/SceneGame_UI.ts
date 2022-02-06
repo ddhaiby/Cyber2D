@@ -16,14 +16,12 @@ export class SceneGame_UI extends CYBR_Scene
     constructor()
     {
         super({key: CST.SCENES.GAME_UI});
-
-        this.sceneGame = null;
     }
 
     // Init
     ////////////////////////////////////////////////////////////////////////
    
-    init(sceneGame)
+    init(sceneGame: SceneGame)
     { 
         this.sceneGame = sceneGame;
         this.player = sceneGame.player;
@@ -59,15 +57,6 @@ export class SceneGame_UI extends CYBR_Scene
         this.tokenScoreItem = this.createTokenScoreItem();
         this.lifeItem = this.createLifeItem();
         this.createGameOverScreen();
-    }
-
-    centerItem(item)
-    {
-        let sceneWidth = this.scale.displaySize.width;
-        let sceneHeight = this.scale.displaySize.height;
-    
-        item.x = (sceneWidth - item.width) / 2; 
-        item.y = (sceneHeight - item.height) / 2; 
     }
 
     createHealthBar()

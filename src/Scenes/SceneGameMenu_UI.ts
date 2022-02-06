@@ -3,6 +3,7 @@ import { CYBR_Scene } from "./CYBR_Scene";
 import { CYBR_Button } from "../UI/CYBR_Button";
 import { SceneGame } from "./SceneGame";
 import { CYBR_Graphics } from "../UI/CYBR_Graphics";
+import { Scene } from "phaser";
 
 export class SceneGameMenu_UI extends CYBR_Scene
 {
@@ -18,7 +19,7 @@ export class SceneGameMenu_UI extends CYBR_Scene
     // Init
     ////////////////////////////////////////////////////////////////////////
    
-    init(sceneGame)
+    init(sceneGame: SceneGame)
     { 
         this.sceneGame = sceneGame;
     }
@@ -55,8 +56,6 @@ export class SceneGameMenu_UI extends CYBR_Scene
     create()
     {
         // Background
-        // TODO: use width and height
-    
         let background = new CYBR_Graphics(this);
         background.width = 500;
         background.height = 320;

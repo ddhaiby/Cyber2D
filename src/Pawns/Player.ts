@@ -26,7 +26,7 @@ export class Player extends Pawn
         super.destroy();
     }
 
-    initKeys(keys)
+    initKeys(keys: IPlayerKeys)
     {
         this.keys = keys;
         keys.jump.on('down', function(event){ this.jump(); }, this);

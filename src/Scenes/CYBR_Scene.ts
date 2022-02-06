@@ -1,3 +1,5 @@
+import { CYBR_Graphics } from "../UI/CYBR_Graphics";
+
 export class CYBR_Scene extends Phaser.Scene
 {
     constructor(config: string | Phaser.Types.Scenes.SettingsConfig)
@@ -5,7 +7,7 @@ export class CYBR_Scene extends Phaser.Scene
         super(config);
     }
 
-    centerItem(item, offsetX?: number, offsetY?: number)
+    centerItem(item: Phaser.GameObjects.Image | Phaser.GameObjects.Text | CYBR_Graphics, offsetX?: number, offsetY?: number)
     {
         if (offsetX == undefined)
             offsetX = 0;
@@ -22,7 +24,7 @@ export class CYBR_Scene extends Phaser.Scene
         return item;
     }
     
-    centerVItem(item, offsetY?: number)
+    centerVItem(item: Phaser.GameObjects.Image | CYBR_Graphics, offsetY?: number)
     {
         if (offsetY == undefined)
             offsetY = 0;
@@ -33,7 +35,7 @@ export class CYBR_Scene extends Phaser.Scene
         return item;
     }
 
-    centerHItem(item, offsetX?: number)
+    centerHItem(item: Phaser.GameObjects.Image | CYBR_Graphics, offsetX?: number)
     {
         if (offsetX == undefined)
             offsetX = 0;
