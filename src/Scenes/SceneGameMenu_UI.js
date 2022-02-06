@@ -1,4 +1,4 @@
-import { CST } from "../CST.js";
+import { CST } from "../CST.ts";
 import { CYBR_Scene } from "./CYBR_Scene.js";
 import { CYBR_Button } from "../UI/CYBR_Button.js";
 

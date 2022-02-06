@@ -1,4 +1,4 @@
-import { CST } from "../CST.js";
+import { CST } from "../CST.ts";
 import { CYBR_Scene } from "./CYBR_Scene.js";
 
 export class SceneGame_UI extends CYBR_Scene

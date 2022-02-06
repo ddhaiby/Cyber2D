@@ -1,4 +1,4 @@
-import { CST } from "../CST.js";
+import { CST } from "../CST.ts";
 import { CYBR_Scene } from "./CYBR_Scene.js";
 import {SceneGame_UI} from "./SceneGame_UI.js";
 import {SceneGameMenu_UI} from "./SceneGameMenu_UI.js";
