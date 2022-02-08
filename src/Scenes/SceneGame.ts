@@ -415,9 +415,9 @@ export class SceneGame extends CYBR_Scene
             this.player.onOverlapContinue(enemy);
     }
 
-    onPlayerHealthChanged(health: number)
+    onPlayerHealthChanged(health: number, maxHealth: number)
     {
-        this.events.emit("playerHealthChanged", health);
+        this.events.emit("onPlayerHealthChanged", health, maxHealth);
     }
 
     onPlayerDie()

@@ -2,6 +2,7 @@ import { CST } from "../CST";
 import { CYBR_Scene } from "./CYBR_Scene";
 import { SceneGame } from "./SceneGame";
 import { CYBR_HealthBar } from "../UI/CYBR_HealthBar";
+import { CYBR_BulletBar } from "../UI/CYBR_BulletBar";
 import { Attribute } from "../Pawns/Attribute";
 import { Player } from "Pawns/Player";
 
@@ -11,9 +12,10 @@ export class SceneGame_UI extends CYBR_Scene
     private player: Player;
 
     // UI Items
-    private healthBar: Phaser.GameObjects.Graphics;
-    private tokenScoreItem: Map<string, Phaser.GameObjects.GameObject>;
-    private lifeItem: Map<string, Phaser.GameObjects.GameObject>;
+    private _healthBar: CYBR_HealthBar;
+    private _bulletBar: CYBR_BulletBar;
+    private _tokenScoreItem: Map<string, Phaser.GameObjects.GameObject>;
+    private _lifeItem: Map<string, Phaser.GameObjects.GameObject>;
 
     constructor()
     {
@@ -55,35 +57,40 @@ export class SceneGame_UI extends CYBR_Scene
 
     create()
     {
-        this.healthBar = this.createHealthBar();
-        this.tokenScoreItem = this.createTokenScoreItem();
-        this.lifeItem = this.createLifeItem();
+        this.createHealthBar();
+        this.createBulletBar();
+        this._tokenScoreItem = this.createTokenScoreItem();
+        this._lifeItem = this.createLifeItem();
         this.createGameOverScreen();
     }
 
     createHealthBar()
     {
-        let healthBar = new CYBR_HealthBar(this, { x: 12, y: 12, width: 160, height: 16 });
-        healthBar.fillStyle(0x990000);
-        healthBar.fillRect(0, 0, healthBar.width, healthBar.height);
-        
-        this.sceneGame.events.on("playerHealthChanged", (health: Attribute)=> {
-            let width = healthBar.width * health.getCurrentValue() / this.player.getMaxHealth();
-            let height = healthBar.height;
+        this._healthBar = new CYBR_HealthBar(this, { x: 12, y: 12, width: 160, height: 16, color: 0x990000, value: 1});
 
-            healthBar.clear();
-            healthBar.fillStyle(0x990000);
-            healthBar.fillRect(0, 0, width, height);
+        this.sceneGame.events.on("onPlayerHealthChanged", (health: Attribute, maxHealth: Attribute)=> {
+            this._healthBar.setValue(health.getCurrentValue() / maxHealth.getCurrentValue());
         }, this);
+    }
 
-        return healthBar;
+    createBulletBar()
+    {
+        // Bar
+        let bulletBarX = this._healthBar.x;
+        let bulletBarY = this._healthBar.y + this._healthBar.height;
+
+        this._bulletBar = new CYBR_BulletBar(this, { x: bulletBarX, y: bulletBarY, width: 160, height: 12, color: 0x005544, value: 0 });
+
+        this.sceneGame.events.on("onShotsChanged", (shots: number, fireLimit: number)=> {
+            this._bulletBar.setValue(shots / fireLimit);
+        }, this);
     }
 
     createTokenScoreItem()
     {
         // Image
-        let tokenImageX = this.healthBar.x;
-        let tokenImageY = this.healthBar.y + 16/*this.healthBar.height*/ + 8;
+        let tokenImageX = this._bulletBar.x;
+        let tokenImageY = this._bulletBar.y + this._bulletBar.height + 8;
 
         let tokenImage = this.add.image(tokenImageX, tokenImageY, "token").setScale(1);
         tokenImage.x += tokenImage.width / 2;
@@ -107,7 +114,7 @@ export class SceneGame_UI extends CYBR_Scene
     // TODO: Review position
     createLifeItem()
     {
-        let tokenImage = this.tokenScoreItem.get("image") as Phaser.GameObjects.Image;
+        let tokenImage = this._tokenScoreItem.get("image") as Phaser.GameObjects.Image;
 
         // Image
         let lifeImageX = tokenImage.x;

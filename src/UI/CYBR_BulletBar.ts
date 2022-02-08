@@ -1,12 +1,11 @@
-import { Color } from "phaser";
 import { CYBR_Graphics } from "./CYBR_Graphics";
 
-export class CYBR_HealthBar extends CYBR_Graphics
+export class CYBR_BulletBar extends CYBR_Graphics
 {
     /** Range value from 0 to 1 */
     private _value: number;
     private _color: number;
-
+    
     constructor(scene: Phaser.Scene, options?: Phaser.Types.GameObjects.Graphics.Options & {width?: number, height?: number, value?: number, color?: number})
     {
         super(scene, options);

@@ -195,7 +195,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     setHealth(health: number)
     {
         this.attributes.get("health").setBaseValue(Math.max(0, Math.min(health, this.attributes.get("maxHealth").getCurrentValue())));
-        this.emit("healthChanged", this.attributes.get("health"));
+        this.emit("healthChanged", this.attributes.get("health"), this.attributes.get("maxHealth"));
 
         if (this.dead())
         {
