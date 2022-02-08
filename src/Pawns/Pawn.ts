@@ -4,7 +4,6 @@ import {Attribute} from "./Attribute";
 export class Pawn extends Phaser.Physics.Arcade.Sprite
 {
     public currentWeapon: CYBR_Weapon;
-
     public startPosition: Phaser.Math.Vector2;
 
     // States
@@ -280,5 +279,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     stopFiring()
     {
         this.isFiring = false;
+        if (this.currentWeapon)
+            this.currentWeapon.stopFiring();
     }
 }
