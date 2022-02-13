@@ -32,9 +32,9 @@ export class Player extends Pawn
         keys.jump.on('down', function(event){ this.jump(); }, this);
     }
 
-    update()
+    update(...args: any[])
     {
-        super.update();
+        super.update(args);
 
         if (this.keys.up.isDown)
             this.lookUp();

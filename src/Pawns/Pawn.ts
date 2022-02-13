@@ -110,8 +110,10 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     // Update
     ////////////////////////////////////////////////////////////////////////
 
-    update()
+    update(...args: any[])
     {
+        super.update(args);
+
         if (this.overlapped)
         {
             if (this._overlapped)
