@@ -9,23 +9,31 @@ import {Player} from "../Pawns/Player";
 
 import {CYBR_Weapon} from "../Weapons/CYBR_Weapon";
 import {Bullet} from "phaser3-weapon-plugin";
+import { Token } from "../Tokens/Token";
+import { Portal } from "../Portals/Portal";
 
 export class SceneGame extends CYBR_Scene
 {
-    public player: Player;
-    private enemies: Phaser.Physics.Arcade.StaticGroup;
-    private platforms: Phaser.Physics.Arcade.StaticGroup;
-    private movingPlatforms: Phaser.Physics.Arcade.StaticGroup;
+	// TODO: Probably can use tileLayers for tokens and portals. See once we restart the scene on level clear
+    // Map
+    private currentMap: Phaser.Tilemaps.Tilemap;
+    private platforms: Phaser.Tilemaps.TilemapLayer;
+    private portals: Phaser.Physics.Arcade.StaticGroup;
     private backgrounds: Phaser.Physics.Arcade.StaticGroup;
     private tokens: Phaser.Physics.Arcade.StaticGroup;
-    private portals: Phaser.Physics.Arcade.StaticGroup;
-    
+
+    // Pawns
+    public player: Player;
+    private enemies: Phaser.Physics.Arcade.StaticGroup;
+
+    // GameMode
+    // private currentMode
+    private playerStartPosition: Phaser.Math.Vector2; // TODO: Make it belong to GameMode unless I can easily get player start position from the map
     private collectedTokens: integer;
     private remainLife: integer;
     private deadZoneY: number;
-    
     private gameOver: boolean;
-    private playerStartPosition: Phaser.Math.Vector2;
+
     public currentLevel: integer;
 
     private keysPlayer: object;
@@ -37,7 +45,8 @@ export class SceneGame extends CYBR_Scene
 
     // Init
     ////////////////////////////////////////////////////////////////////////
-   
+
+	// Todo: Probably store the currentLevel here. So I can load the right level
     init()
     {
         this.physics.world.setBounds(0, 0, 1920 * 6, 1080);
@@ -45,13 +54,25 @@ export class SceneGame extends CYBR_Scene
 
     // Preload
     ////////////////////////////////////////////////////////////////////////
-  
+
     preload()
     {
+        this.loadMaps();
         this.loadAudio();
         this.loadSprites();
         this.loadImages();
-        this.loadLevelData();
+    }
+
+    loadMaps()
+    {
+        this.load.setPath("./assets/maps");
+        this.load.image("terrain", "./terrain_atlas.png");
+
+        for (let i=1; i<= CST.LEVELS.LEVEL_COUNT; ++i)
+        {
+            const levelName = "level" + i.toString();
+            this.load.tilemapTiledJSON(levelName, "./" + levelName + "/" + levelName + ".json");
+        }
     }
 
     loadImages()
@@ -85,11 +106,6 @@ export class SceneGame extends CYBR_Scene
         //}
     }
 
-    loadLevelData()
-    {
-        //this.load.json("LevelData", "./assets/levels.json");
-    }
-
     // Create
     ////////////////////////////////////////////////////////////////////////
   
@@ -97,7 +113,6 @@ export class SceneGame extends CYBR_Scene
     {
         this.createKeyboardMap();
 
-        this.platforms = this.physics.add.staticGroup();
         this.backgrounds = this.physics.add.staticGroup();
         this.enemies = this.physics.add.staticGroup();
         this.tokens = this.physics.add.staticGroup();
@@ -128,13 +143,15 @@ export class SceneGame extends CYBR_Scene
         console.log("Level", level, "started");
 
         this.createGameMode(level);
-        this.createBackground(level);
-        this.createPlatforms(level);
-        this.createPortals(level);
-        this.createTokens(level);
-        this.createPlayer(level);
-        this.createAIs(level);
-        this.createCameras(level);
+        this.createBackground();
+        this.createMap(level);
+        this.createPlatforms();
+        this.createPortals();
+        this.createTokens();
+        this.createPlayer();
+        this.createEnemies();
+        this.createInteractions();
+        this.createCameras();
     }
 
     restartLevel()
@@ -147,109 +164,67 @@ export class SceneGame extends CYBR_Scene
 
     createGameMode(level?: integer)
     {
-        this.playerStartPosition= new Phaser.Math.Vector2(100, 360);
+        this.playerStartPosition= new Phaser.Math.Vector2(100, 290); // TODO: Should be based on the map
+        this.deadZoneY = 1200; // TODO: Should be based on the map. Perhaps have a special object for that ?
         this.setRemainLife(0);
         this.setCollectedTokens(0);
     }
 
-    createBackground(level?: integer)
+    createBackground()
     {
         this.backgrounds.clear(true, true)
-
-        this.add.image(0, 0, "sky").setScale(12);
-        this.add.text(780, 100, "WELCOME TO CYBR WORLD", { font: '30px Gemunu Libre', color: '#000000' });
+        this.backgrounds.add(this.add.image(0, 0, "sky").setScale(12));
     }
 
-    createPlatforms(level?: integer)
+    createMap(level?: integer)
     {
-        this.deadZoneY = 1200;
+        // TODO: Should I destroy before ?
+        //if (this.currentMap)
+        //    this.currentMap.destroy();
 
-        this.platforms.clear(true, true);
-        //let levelData = this.cache.json.get('LevelData');
-        //console.log(levelData);
-
-        // Zone 1
-        this.platforms.create(0, 400, 'ground').setScale(0.1,30).refreshBody();
-        this.platforms.create(0, 400, 'ground').setScale(3.5,1).refreshBody();
-        this.platforms.create(600, 352, 'ground').setScale(1,4).refreshBody();
-        this.platforms.create(1280, 450, 'ground').setScale(1,4).refreshBody();
-        this.platforms.create(1680, 498, 'ground').setScale(1,1).refreshBody();
-
-        // Zone 2: Several platform at the same time
-        this.platforms.create(2100, 390, 'ground').setScale(0.5,1).refreshBody();
-        this.platforms.create(2100, 590, 'ground').setScale(0.5,1).refreshBody();
-        
-        this.platforms.create(3080, 490, 'ground').setScale(4,1).refreshBody();
-
-        this.platforms.create(4000, 400, 'ground').setScale(0.1,30).refreshBody();
-
-        // this.platforms.create(950, 300, 'ground');
-        // this.platforms.create(1200, 568, 'ground').setScale(2).refreshBody();
-        // this.platforms.create(1300, 450, 'ground');
-        // this.platforms.create(1500, 270, 'ground');
-        // this.platforms.create(1900, 360, 'ground');
-        // this.platforms.create(2100, 480, 'ground').setScale(2).refreshBody();
-        // this.platforms.create(2420, 360, 'ground');
-        // this.platforms.create(2920, 360, 'ground');
-        // this.platforms.create(3120, 160, 'ground');
-
-        // this.platforms.create(3120, 360, 'ground');
-        // this.platforms.create(2920, 260, 'ground');
-
-        //this.movingPlatforms = this.physics.add.staticGroup();
-        //this.movingPlatforms.create(150, 350, 'ground');
-
-        // TODO: See how to move these platforms...
-        //console.log(this.movingPlatforms.children.getArray()[0])
-        //this.movingPlatforms.children.getArray()[0].setVelocityY(-10)
+        console.log("Create map...");
+        this.currentMap = this.add.tilemap("level" + level.toString());
     }
 
-    createPortals(level?: integer)
+    createPlatforms()
+    {
+        // TODO: Should I destroy before ?
+        //if (this.platforms)
+        //    this.platforms.destroy();
+
+        console.log("Create platforms...");
+        const terrain = this.currentMap.addTilesetImage("terrain_atlas", "terrain");
+        this.platforms = this.currentMap.createLayer("Platforms", [terrain], 0, 0);
+    }
+
+    createPortals()
     {
         this.portals.clear(true, true);
-        this.portals.create(3530, 420, 'portal');
+
+        // @ts-ignore - Problem with Phaser’s types. classType supports classes 
+        const portalObjects = this.currentMap.createFromObjects("Portals", {name: "Portal", classType: Portal});
+        portalObjects.map((portal: Portal)=>{
+            portal.setTexture("portal");
+            this.portals.add(portal);
+        });
     }
 
-    createTokens(level?: integer)
+    createTokens()
     {
         this.tokens.clear(true, true);
 
-        this.tokens.createMultiple({
-            key: "token", /*quantity*/repeat: 4,
-            setXY: { x: 440, y: 260, stepX: 80 },
+        // @ts-ignore - Problem with Phaser’s types. classType supports classes 
+        const tokenObjects = this.currentMap.createFromObjects("Tokens", {name: "Token", classType: Token});
+        tokenObjects.map((token: Token)=>{
+            token.setTexture("token");
+            this.tokens.add(token);
         });
-
-        this.tokens.createMultiple({
-            key: "token", repeat: 3,
-            setXY: { x: 1220, y: 360, stepX: 80 },
-        });
-
-        this.tokens.createMultiple({
-            key: "token", repeat: 3, // allowGravity: false
-            setXY: { x: 1140, y: 240, stepY: 40 },
-           
-        });
-
-        // this.tokens.add({
-        //     key: "token",
-        //     repeat: 4,
-        //     setXY: { x: 440, y: 200, stepX: 80 },
-        //     allowGravity: false
-        // })
     }
 
-    restartTokens()
-    {
-        this.setCollectedTokens(0);
-        this.tokens.getChildren().forEach(function (token: Phaser.Physics.Arcade.Sprite) {
-            token.enableBody(true, token.x, token.y, true, true);
-        }, this);
-    }
-
-    createPlayer(level?: integer)
+    createPlayer()
     {
         if (this.player)
-        {            
+        {
             this.player.unequipWeapon(true);
             this.player.destroy();
         }
@@ -262,46 +237,59 @@ export class SceneGame extends CYBR_Scene
 
         let weapon = new CYBR_Weapon(this, 30, "bullet");
         this.player.equipWeapon(weapon);
-
-        this.physics.add.collider(this.player, this.platforms);
-        this.physics.add.overlap(this.player, this.tokens, this.collectToken, null, this);
-        let collider = this.physics.add.collider(weapon.bullets, this.platforms, this.onWeaponHitPlatforms.bind(this));
-        this.player.currentWeapon.addCollider(collider);
-
-        this.physics.add.overlap(this.player, this.portals, this.completeLevel, null, this);
     }
 
-    createAIs(level?: integer)
+    createEnemies()
     {
         this.enemies.clear(true, true);
 
-        this.enemies.add(new BasicAI(this, 200, 360, "eyeball"));
-
-        // Zone 1
-        this.enemies.add(new BasicAI(this, 1490, 452, "eyeball"));
-
-        // Zone 2
-        this.enemies.add(new BasicAI(this, 3080, 420, "eyeball"));
-        this.enemies.add(new BasicAI(this, 3280, 420, "eyeball"));
-        this.enemies.add(new BasicAI(this, 3480, 420, "eyeball"));
+        // @ts-ignore - Problem with Phaser’s types. classType supports classes 
+        const enemyObjects = this.currentMap.createFromObjects("Enemies", {name: "BasicAI", classType: BasicAI});
         
-        // TODO: Position of the enemies could be based on the platform.
-        // this.enemies.add(new BasicAI(this, 1050, 490, "eyeball"));
-        // this.enemies.add(new BasicAI(this, 1160, 490, "eyeball"));
-        
-        // this.enemies.add(new BasicAI(this, 1200, 400, "eyeball"));
-        // this.enemies.add(new BasicAI(this, 1260, 400, "eyeball"));
-        // this.enemies.add(new BasicAI(this, 1220, 400, "eyeball"));
-
-        this.physics.add.collider(this.enemies, this.platforms);
+        enemyObjects.map((ai: BasicAI)=>{
+            ai.init(this, "eyeball");
+            this.enemies.add(ai);
+        })
 
         this.enemies.getChildren().forEach(function (ai: BasicAI) {
-            ai.startPosition = new Phaser.Math.Vector2(ai.x, ai.y);
+            ai.startPosition = new Phaser.Math.Vector2(ai.x, ai.y); // TODO: See if there is another way
+            ai.on("die", this.onEnemyDie.bind(this, ai));
+        }, this);
+    }
+
+    createInteractions()
+    {
+        this.platforms.setCollisionByProperty({collides:true});
+        this.physics.add.collider(this.enemies, this.platforms);
+        this.physics.add.collider(this.player, this.platforms);
+        this.physics.add.overlap(this.player, this.portals, this.completeLevel, null, this);
+        this.physics.add.overlap(this.player, this.tokens, this.collectToken, null, this);
+
+        if (this.player.currentWeapon)
+        {
+            let collider = this.physics.add.collider(this.player.currentWeapon.bullets, this.platforms, this.onWeaponHitPlatforms.bind(this));
+            this.player.currentWeapon.addCollider(collider);
+        }
+
+        this.enemies.getChildren().forEach(function (ai: BasicAI) {
             this.physics.add.overlap(this.player, ai, this.onPlayerOverlapEnnemy.bind(this), this.canPlayerOverlapEnnemy.bind(this)); 
             let collider = this.physics.add.overlap(this.player.currentWeapon.bullets, ai, this.onWeaponHitEnnemy.bind(this), this.canHitEnemy.bind(this, ai)); 
             this.player.currentWeapon.addCollider(collider);
+        }, this);
+    }
 
-            ai.on("die", this.onEnemyDie.bind(this, ai));
+    createCameras()
+    {
+        this.cameras.main.setBounds(0, 0, 20000, 1080);
+        this.cameras.main.startFollow(this.player);
+    }
+
+    restartTokens()
+    {
+        this.setCollectedTokens(0); // TODO: For gameMode
+
+        this.tokens.getChildren().forEach(function (token: Token) {
+            token.enableBody(true, token.x, token.y, true, true);
         }, this);
     }
 
@@ -311,12 +299,6 @@ export class SceneGame extends CYBR_Scene
             ai.enableBody(true, ai.startPosition.x, ai.startPosition.y, true, true);
             ai.setHealth(ai.getMaxHealth());
         }, this);
-    }
-
-    createCameras(level?: integer)
-    {
-        this.cameras.main.setBounds(0, 0, 20000, 1080);
-        this.cameras.main.startFollow(this.player);
     }
 
     createUI()
@@ -367,6 +349,7 @@ export class SceneGame extends CYBR_Scene
             this.player.setHealth(0);
 
         this.player.update();
+
         this.enemies.getChildren().forEach(ai => { ai.update(); }, this);
     }
 
@@ -384,7 +367,7 @@ export class SceneGame extends CYBR_Scene
         bullet.kill();
     }
 
-    onWeaponHitPlatforms(bullet: Bullet, platform: Phaser.Physics.Arcade.Sprite)
+    onWeaponHitPlatforms(bullet: Bullet, platform: Phaser.Tilemaps.TilemapLayer)
     {
         bullet.active = false;
         bullet.visible = false;
@@ -434,9 +417,9 @@ export class SceneGame extends CYBR_Scene
         }
     }
 
-    collectToken(player: Player, token: Phaser.Physics.Arcade.Sprite)
+    collectToken(player: Player, token: Token)
     {
-        token.disableBody(true, true);
+        token.disableBody(true, true)
         this.setCollectedTokens(this.getCollectedTokens() + 1);
     }
 
@@ -454,7 +437,7 @@ export class SceneGame extends CYBR_Scene
     setGameOver(gameOver: boolean)
     {
         this.gameOver = gameOver;
-        
+
         if (this.gameOver)
         {
             this.time.delayedCall(2000, () => {

@@ -29,8 +29,11 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     // Init
     ////////////////////////////////////////////////////////////////////////
 
-    init(scene: Phaser.Scene)
+    init(scene: Phaser.Scene, textureKey?: string)
     {
+        if (textureKey)
+            this.setTexture(textureKey);
+
         scene.add.existing(this);
         scene.physics.add.existing(this);
         
@@ -49,8 +52,13 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.isLookingDown = false;
     }
 
+    // TODO: Use an object with all the data of sprite. So I can be free of the animation and do nothing if the object is empty
     initAnimations()
     {
+        // Don't do anything if there is no texture
+        if (this.texture.key == "__DEFAULT" || this.texture.key == "")
+            return;
+
         this.anims.create({
             key: 'up',
             frames: this.anims.generateFrameNumbers(this.texture.key, { start: 0, end: 2 }),
