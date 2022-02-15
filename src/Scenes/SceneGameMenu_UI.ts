@@ -3,7 +3,6 @@ import { CYBR_Scene } from "./CYBR_Scene";
 import { CYBR_Button } from "../UI/CYBR_Button";
 import { SceneGame } from "./SceneGame";
 import { CYBR_Graphics } from "../UI/CYBR_Graphics";
-import { Scene } from "phaser";
 
 export class SceneGameMenu_UI extends CYBR_Scene
 {
@@ -85,8 +84,6 @@ export class SceneGameMenu_UI extends CYBR_Scene
         });
 
         buttonMainMenu.on("pointerup", (pointer) => {
-            this.sceneGame.showGameMenu(false);
-            this.sceneGame.showGame(false);
             this.sceneGame.showMainMenu(true);
         });
     }

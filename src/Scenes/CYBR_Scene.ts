@@ -1,5 +1,9 @@
 import { CYBR_Graphics } from "../UI/CYBR_Graphics";
 
+export interface SceneData {
+    level?: integer;
+}
+
 export class CYBR_Scene extends Phaser.Scene
 {
     constructor(config: string | Phaser.Types.Scenes.SettingsConfig)

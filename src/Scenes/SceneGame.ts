@@ -1,5 +1,6 @@
 import { CST } from "../CST";
 import { CYBR_Scene } from "./CYBR_Scene";
+import { SceneData } from "./CYBR_Scene";
 import {SceneGame_UI} from "./SceneGame_UI";
 import {SceneGameMenu_UI} from "./SceneGameMenu_UI";
 
@@ -46,9 +47,11 @@ export class SceneGame extends CYBR_Scene
     // Init
     ////////////////////////////////////////////////////////////////////////
 
-	// Todo: Probably store the currentLevel here. So I can load the right level
-    init()
+    init(data?: SceneData)
     {
+        this.currentLevel = data && data.level ? data.level : 1;
+
+        // TODO: See if I can set the bounds with the map
         this.physics.world.setBounds(0, 0, 1920 * 6, 1080);
     }
 
@@ -68,11 +71,8 @@ export class SceneGame extends CYBR_Scene
         this.load.setPath("./assets/maps");
         this.load.image("terrain", "./terrain_atlas.png");
 
-        for (let i=1; i<= CST.LEVELS.LEVEL_COUNT; ++i)
-        {
-            const levelName = "level" + i.toString();
-            this.load.tilemapTiledJSON(levelName, "./" + levelName + "/" + levelName + ".json");
-        }
+        const levelName = "level" + this.currentLevel.toString();
+        this.load.tilemapTiledJSON(levelName, "./" + levelName + "/" + levelName + ".json");
     }
 
     loadImages()
@@ -108,46 +108,37 @@ export class SceneGame extends CYBR_Scene
 
     // Create
     ////////////////////////////////////////////////////////////////////////
-  
-    create()
+
+    create(data?: SceneData)
     {
-        this.createKeyboardMap();
-
-        this.backgrounds = this.physics.add.staticGroup();
-        this.enemies = this.physics.add.staticGroup();
-        this.tokens = this.physics.add.staticGroup();
-        this.portals = this.physics.add.staticGroup();
-
-        this.currentLevel = 1;
-        this.startLevel(this.currentLevel);
+        this.startLevel();
         this.createUI();
     }
 
     createKeyboardMap()
     {
-        let keyESC = this.input.keyboard.addKey('ESC');
-        keyESC.on('down', function(event){ this.showGameMenu(true); }, this)
+        let keyESC = this.input.keyboard.addKey("ESC");
+        keyESC.on("down", function(event){ this.showGameMenu(true); }, this)
 
         this.keysPlayer = this.input.keyboard.addKeys({
-            up: 'Z',
-            down: 'S',
-            left: 'Q',
-            right: 'D',
-            jump: 'SPACE',
-            fire: 'K'
+            up: "Z",
+            down: "S",
+            left: "Q",
+            right: "D",
+            jump: "SPACE",
+            fire: "K"
         });
     }
 
-    startLevel(level: integer)
+    startLevel()
     {
-        console.log("Level", level, "started");
-
-        this.createGameMode(level);
+        this.createGameMode();
         this.createBackground();
-        this.createMap(level);
+        this.createMap();
         this.createPlatforms();
         this.createPortals();
         this.createTokens();
+        this.createKeyboardMap();
         this.createPlayer();
         this.createEnemies();
         this.createInteractions();
@@ -162,7 +153,18 @@ export class SceneGame extends CYBR_Scene
         this.respawnPlayer();
     }
 
-    createGameMode(level?: integer)
+    startNextLevel()
+    {
+        if (this.currentLevel < CST.LEVELS.LEVEL_COUNT)
+            this.scene.restart({level: this.currentLevel + 1});
+        else
+        {
+            this.scene.pause(CST.SCENES.GAME);
+            this.showGameMenu(true);
+        }
+    }
+
+    createGameMode()
     {
         this.playerStartPosition= new Phaser.Math.Vector2(100, 290); // TODO: Should be based on the map
         this.deadZoneY = 1200; // TODO: Should be based on the map. Perhaps have a special object for that ?
@@ -172,34 +174,24 @@ export class SceneGame extends CYBR_Scene
 
     createBackground()
     {
-        this.backgrounds.clear(true, true)
+        this.backgrounds = this.physics.add.staticGroup();
         this.backgrounds.add(this.add.image(0, 0, "sky").setScale(12));
     }
 
-    createMap(level?: integer)
+    createMap()
     {
-        // TODO: Should I destroy before ?
-        //if (this.currentMap)
-        //    this.currentMap.destroy();
-
-        console.log("Create map...");
-        this.currentMap = this.add.tilemap("level" + level.toString());
+        this.currentMap = this.add.tilemap("level" + this.currentLevel.toString());
     }
 
     createPlatforms()
     {
-        // TODO: Should I destroy before ?
-        //if (this.platforms)
-        //    this.platforms.destroy();
-
-        console.log("Create platforms...");
         const terrain = this.currentMap.addTilesetImage("terrain_atlas", "terrain");
         this.platforms = this.currentMap.createLayer("Platforms", [terrain], 0, 0);
     }
 
     createPortals()
     {
-        this.portals.clear(true, true);
+        this.portals = this.physics.add.staticGroup();
 
         // @ts-ignore - Problem with Phaser’s types. classType supports classes 
         const portalObjects = this.currentMap.createFromObjects("Portals", {name: "Portal", classType: Portal});
@@ -211,7 +203,7 @@ export class SceneGame extends CYBR_Scene
 
     createTokens()
     {
-        this.tokens.clear(true, true);
+        this.tokens = this.physics.add.staticGroup();
 
         // @ts-ignore - Problem with Phaser’s types. classType supports classes 
         const tokenObjects = this.currentMap.createFromObjects("Tokens", {name: "Token", classType: Token});
@@ -241,7 +233,7 @@ export class SceneGame extends CYBR_Scene
 
     createEnemies()
     {
-        this.enemies.clear(true, true);
+        this.enemies = this.physics.add.staticGroup();
 
         // @ts-ignore - Problem with Phaser’s types. classType supports classes 
         const enemyObjects = this.currentMap.createFromObjects("Enemies", {name: "BasicAI", classType: BasicAI});
@@ -303,16 +295,13 @@ export class SceneGame extends CYBR_Scene
 
     createUI()
     {
-        this.scene.add(CST.SCENES.GAME_UI, SceneGame_UI, true, this);
-        this.scene.add(CST.SCENES.GAMEMENU_UI, SceneGameMenu_UI, true, this);
+        if (!this.scene.get(CST.SCENES.GAME_UI))
+            this.scene.add(CST.SCENES.GAME_UI, SceneGame_UI, true, this);
+
+        if (!this.scene.get(CST.SCENES.GAMEMENU_UI))
+            this.scene.add(CST.SCENES.GAMEMENU_UI, SceneGameMenu_UI, true, this);
         
         this.showGameMenu(false);
-    }
-
-    showMainMenu(value: boolean)
-    {
-        this.scene.setActive(value, CST.SCENES.MAINMENU_UI);
-        this.scene.setVisible(value, CST.SCENES.MAINMENU_UI);
     }
 
     showGameUI(value: boolean)
@@ -327,7 +316,7 @@ export class SceneGame extends CYBR_Scene
         this.scene.setVisible(value, CST.SCENES.GAMEMENU_UI);
         
         if (value)
-            this.scene.pause();
+            this.showGame(true);
     }
 
     showGame(value: boolean)
@@ -337,13 +326,21 @@ export class SceneGame extends CYBR_Scene
         this.showGameUI(value);
     }
 
+    showMainMenu(value: boolean)
+    {
+        this.showGame(false);
+        this.showGameMenu(false);
+
+        this.scene.setActive(value, CST.SCENES.MAINMENU_UI);
+        this.scene.setVisible(value, CST.SCENES.MAINMENU_UI);
+    }
+
     // Update
     ////////////////////////////////////////////////////////////////////////
 
     update(time: number, delta: number)
     {
         super.update(time, delta);
-
         // TODO: Find a cleaner way (is there a trigger box with Phaser?) - Probably add this to gameMode
         if (this.player.y > this.deadZoneY && !this.player.dead())
             this.player.setHealth(0);
@@ -448,10 +445,9 @@ export class SceneGame extends CYBR_Scene
         this.events.emit("onGameOverChanged", gameOver);
     }
 
-    completeLevel()
+    completeLevel(player: Player, portal: Portal)
     {
-        this.currentLevel += 1;
-        this.startLevel(this.currentLevel);
+        this.startNextLevel();
     }
 
     getCollectedTokens()

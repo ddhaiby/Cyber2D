@@ -1,5 +1,6 @@
 import { CST } from "../CST";
 import { CYBR_Scene } from "./CYBR_Scene";
+import { SceneData } from "./CYBR_Scene";
 import { SceneGame } from "./SceneGame";
 import { CYBR_Button } from "../UI/CYBR_Button";
 import { CYBR_Graphics } from "../UI/CYBR_Graphics";
@@ -66,20 +67,18 @@ export class SceneMainMenu_UI extends CYBR_Scene
 
         // In my SceneMainMenu
         buttonPlay.on("pointerup", (pointer) => {
-            this.scene.setActive(false);
-            this.scene.setVisible(false);
-
             if (!this.sceneGame)
             {
+                // TODO: create the scene. Nonsense that it exists already and we restart the game then
                 this.sceneGame = this.scene.get(CST.SCENES.GAME) as SceneGame;
-                this.sceneGame.scene.start(CST.SCENES.GAME);
+                this.sceneGame.scene.restart();
             }
             else
             {
-                this.sceneGame.showGame(true);
-                this.sceneGame.currentLevel = 1;
-                this.sceneGame.startLevel(this.sceneGame.currentLevel);
+                this.sceneGame.scene.restart({level: 1});
             }
+            this.scene.setActive(false);
+            this.scene.setVisible(false);
         });
 
         buttonSettings.on("pointerup", (pointer) => {
