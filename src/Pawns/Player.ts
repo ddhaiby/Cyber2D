@@ -1,6 +1,6 @@
 import {Pawn} from "./Pawn";
 
-interface IPlayerKeys{
+export interface IPlayerKeys{
     up: Phaser.Input.Keyboard.Key;
     down: Phaser.Input.Keyboard.Key;
     left: Phaser.Input.Keyboard.Key;
@@ -13,10 +13,12 @@ export class Player extends Pawn
 {
     private keys: IPlayerKeys;
 
-    constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture, keys)
+    constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture, keys?: IPlayerKeys)
     {
        super(scene, x, y, texture);
-       this.initKeys(keys);
+
+       if (keys)
+        this.initKeys(keys);
     }
 
     destroy()
@@ -24,6 +26,13 @@ export class Player extends Pawn
         for (let k in this.keys)
             this.keys[k].removeAllListeners();
         super.destroy();
+    }
+
+    init(scene: Phaser.Scene, textureKey?: string, keys?: IPlayerKeys)
+    {
+        super.init(scene, textureKey);
+        if (keys)
+            this.initKeys(keys);
     }
 
     initKeys(keys: IPlayerKeys)

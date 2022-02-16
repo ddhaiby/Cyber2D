@@ -6,7 +6,7 @@ import {SceneGameMenu_UI} from "./SceneGameMenu_UI";
 
 import { Pawn } from "../Pawns/Pawn";
 import {BasicAI} from "../Pawns/AIs/BasicAI";
-import {Player} from "../Pawns/Player";
+import {IPlayerKeys, Player} from "../Pawns/Player";
 
 import {CYBR_Weapon} from "../Weapons/CYBR_Weapon";
 import {Bullet} from "phaser3-weapon-plugin";
@@ -36,7 +36,7 @@ export class SceneGame extends CYBR_Scene
 
     public currentLevel: integer;
 
-    private keysPlayer: object;
+    private keysPlayer: IPlayerKeys;
 
     constructor()
     {
@@ -92,7 +92,7 @@ export class SceneGame extends CYBR_Scene
             right: "D",
             jump: "SPACE",
             fire: "K"
-        });
+        }) as IPlayerKeys;
     }
 
     startLevel()
@@ -131,7 +131,6 @@ export class SceneGame extends CYBR_Scene
 
     createGameMode()
     {
-        this.playerStartPosition= new Phaser.Math.Vector2(100, 290); // TODO: Should be based on the map
         this.deadZoneY = 1200; // TODO: Should be based on the map. Perhaps have a special object for that ?
         this.setRemainLife(0);
         this.setCollectedTokens(0);
@@ -180,14 +179,20 @@ export class SceneGame extends CYBR_Scene
 
     createPlayer()
     {
-        this.player = new Player(this, this.playerStartPosition.x, this.playerStartPosition.y, "eyeball", this.keysPlayer);
-        this.respawnPlayer();
+        // @ts-ignore - Problem with Phaser’s types. classType supports classes 
+        const playerObjects = this.currentMap.createFromObjects("Player", {name: "Player", classType: Player});
+
+        // For this game, there should be exactly one player.
+        this.player = playerObjects[0] as Player;
+        this.player.init(this, "eyeball", this.keysPlayer);
 
         this.player.on("healthChanged", this.onPlayerHealthChanged.bind(this));
         this.player.on("die", this.onPlayerDie.bind(this));
 
         let weapon = new CYBR_Weapon(this, 30, "bullet");
         this.player.equipWeapon(weapon);
+
+        this.playerStartPosition = new Phaser.Math.Vector2(this.player.x, this.player.y)
     }
 
     createEnemies()
@@ -203,7 +208,6 @@ export class SceneGame extends CYBR_Scene
         })
 
         this.enemies.getChildren().forEach(function (ai: BasicAI) {
-            ai.startPosition = new Phaser.Math.Vector2(ai.x, ai.y); // TODO: See if there is another way
             ai.on("die", this.onEnemyDie.bind(this, ai));
         }, this);
     }
@@ -242,10 +246,8 @@ export class SceneGame extends CYBR_Scene
 
     restartAIs()
     {
-        this.enemies.getChildren().forEach(function (ai: BasicAI) {
-            ai.enableBody(true, ai.startPosition.x, ai.startPosition.y, true, true);
-            ai.setHealth(ai.getMaxHealth());
-        }, this);
+        this.enemies.clear(true, true);
+        this.createEnemies();
     }
 
     createUI()

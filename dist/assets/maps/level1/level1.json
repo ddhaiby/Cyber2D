@@ -327,8 +327,8 @@
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":228,
-                 "y":319.333333333333
+                 "x":1292,
+                 "y":1014
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -417,9 +417,32 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":11,
+         "name":"Player",
+         "objects":[
+                {
+                 "gid":222,
+                 "height":38,
+                 "id":64,
+                 "name":"Player",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":66,
+                 "y":319.333333333333
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":11,
- "nextobjectid":64,
+ "nextlayerid":12,
+ "nextobjectid":65,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",

@@ -5,7 +5,6 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 {
     // Weapons
     public currentWeapon: CYBR_Weapon;
-    public startPosition: Phaser.Math.Vector2;
 
     // States
     protected isLookingUp: boolean;

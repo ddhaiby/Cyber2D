@@ -45,7 +45,7 @@ export class SceneMainMenu_UI extends CYBR_Scene
 
         // In my SceneMainMenu
         buttonPlay.on("pointerup", (pointer) => {
-            const sceneData = {level: 1};
+            const sceneData = {level: 1} as SceneData;
 
             if (!this.scene.get(CST.SCENES.GAME))
                 this.sceneGame = this.scene.add(CST.SCENES.GAME, SceneGame, true, sceneData) as SceneGame;
