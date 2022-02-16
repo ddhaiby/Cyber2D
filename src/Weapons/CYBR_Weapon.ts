@@ -2,7 +2,6 @@ import { Weapon, consts, Bullet, ObjectWithTransform } from "phaser3-weapon-plug
 
 export class CYBR_Weapon extends Weapon
 {
-    private _colliders: Array<Phaser.Physics.Arcade.Collider>;
     private _time: Phaser.Time.Clock;
     private _timerReloadWeapon: Phaser.Time.TimerEvent;
     private _events: Phaser.Events.EventEmitter;
@@ -21,7 +20,6 @@ export class CYBR_Weapon extends Weapon
         this.bulletKillType = consts.KillType.KILL_WORLD_BOUNDS;
         this.fireLimit = 10;
 
-        this._colliders = [];
         this._time = scene.time;
         this._events = scene.events;
         this._timerReloadWeapon = this._time.delayedCall(0, () => {}); // Create an empty timer so I am sure it exists
@@ -31,23 +29,10 @@ export class CYBR_Weapon extends Weapon
         }, this)
     }
 
-    destroy()
-    {
-        for (let collider of this._colliders)
-            collider.destroy();
-        super.destroy();
-    }
-
-    // Necessary to correctly destroy the weapon.
-    addCollider(collider: Phaser.Physics.Arcade.Collider)
-    {
-        this._colliders.push(collider);
-    }
-
     fire(from?: Phaser.Math.Vector2 | Phaser.GameObjects.Sprite | ObjectWithTransform, x?: number, y?: number, offsetX?: number, offsetY?: number)
     {
         this.stopReloading();
-        super.fire(from, x, y, offsetX, offsetY);
+        return super.fire(from, x, y, offsetX, offsetY);
     }
 
     stopReloading()

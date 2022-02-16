@@ -3,6 +3,7 @@ import {Attribute} from "./Attribute";
 
 export class Pawn extends Phaser.Physics.Arcade.Sprite
 {
+    // Weapons
     public currentWeapon: CYBR_Weapon;
     public startPosition: Phaser.Math.Vector2;
 
@@ -16,6 +17,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     // Attributes
     protected attributes: Phaser.Structs.Map<string, Attribute>;
 
+    // Physic
     private _overlapped: boolean;
     public overlapped: boolean;
 
@@ -241,16 +243,6 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     {
         this.currentWeapon = weapon;
         this.currentWeapon.trackSprite(this, 0, 0, false);
-    }
-
-    unequipWeapon(destroyWeapon?: boolean)
-    {
-        if (this.currentWeapon)
-        {
-            if (destroyWeapon)
-                this.currentWeapon.destroy();
-            this.currentWeapon = null;
-        }
     }
 
     fire(fireAngle?: number)

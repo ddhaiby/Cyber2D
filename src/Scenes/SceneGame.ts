@@ -15,7 +15,6 @@ import { Portal } from "../Portals/Portal";
 
 export class SceneGame extends CYBR_Scene
 {
-	// TODO: Probably can use tileLayers for tokens and portals. See once we restart the scene on level clear
     // Map
     private currentMap: Phaser.Tilemaps.Tilemap;
     private platforms: Phaser.Tilemaps.TilemapLayer;
@@ -181,12 +180,6 @@ export class SceneGame extends CYBR_Scene
 
     createPlayer()
     {
-        if (this.player)
-        {
-            this.player.unequipWeapon(true);
-            this.player.destroy();
-        }
-
         this.player = new Player(this, this.playerStartPosition.x, this.playerStartPosition.y, "eyeball", this.keysPlayer);
         this.respawnPlayer();
 
@@ -224,15 +217,11 @@ export class SceneGame extends CYBR_Scene
         this.physics.add.overlap(this.player, this.tokens, this.collectToken, null, this);
 
         if (this.player.currentWeapon)
-        {
-            let collider = this.physics.add.collider(this.player.currentWeapon.bullets, this.platforms, this.onWeaponHitPlatforms.bind(this));
-            this.player.currentWeapon.addCollider(collider);
-        }
+            this.physics.add.collider(this.player.currentWeapon.bullets, this.platforms, this.onWeaponHitPlatforms.bind(this));
 
         this.enemies.getChildren().forEach(function (ai: BasicAI) {
             this.physics.add.overlap(this.player, ai, this.onPlayerOverlapEnnemy.bind(this), this.canPlayerOverlapEnnemy.bind(this)); 
-            let collider = this.physics.add.overlap(this.player.currentWeapon.bullets, ai, this.onWeaponHitEnnemy.bind(this), this.canHitEnemy.bind(this, ai)); 
-            this.player.currentWeapon.addCollider(collider);
+            this.physics.add.overlap(this.player.currentWeapon.bullets, ai, this.onWeaponHitEnnemy.bind(this), this.canHitEnemy.bind(this, ai)); 
         }, this);
     }
 
