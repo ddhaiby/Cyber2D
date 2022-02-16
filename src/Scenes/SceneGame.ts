@@ -97,8 +97,8 @@ export class SceneGame extends CYBR_Scene
     startLevel()
     {
         this.createGameMode();
-        this.createBackground();
         this.createMap();
+        this.createBackground();
         this.createPlatforms();
         this.createPortals();
         this.createTokens();
@@ -136,15 +136,18 @@ export class SceneGame extends CYBR_Scene
         this.setCollectedTokens(0);
     }
 
+    createMap()
+    {
+        this.currentMap = this.add.tilemap("level" + this.currentLevel.toString());
+    }
+
     createBackground()
     {
         this.backgrounds = this.physics.add.staticGroup();
         this.backgrounds.add(this.add.image(0, 0, "sky").setScale(12));
-    }
 
-    createMap()
-    {
-        this.currentMap = this.add.tilemap("level" + this.currentLevel.toString());
+        const terrain = this.currentMap.addTilesetImage("terrain_atlas", "terrain");
+        this.platforms = this.currentMap.createLayer("Background", [terrain], 0, 0);
     }
 
     createPlatforms()
