@@ -11,6 +11,7 @@ import {IPlayerKeys, Player} from "../Pawns/Player";
 import {CYBR_Weapon} from "../Weapons/CYBR_Weapon";
 import {Bullet} from "phaser3-weapon-plugin";
 import { Token } from "../Tokens/Token";
+import { EffectPickup } from "../Pickups/EffectPickup"
 import { Portal } from "../Portals/Portal";
 
 export class SceneGame extends CYBR_Scene
@@ -21,6 +22,7 @@ export class SceneGame extends CYBR_Scene
     private portals: Phaser.Physics.Arcade.StaticGroup;
     private backgrounds: Phaser.Physics.Arcade.StaticGroup;
     private tokens: Phaser.Physics.Arcade.StaticGroup;
+    private healItems: Phaser.Physics.Arcade.StaticGroup;
 
     // Pawns
     public player: Player;
@@ -100,6 +102,7 @@ export class SceneGame extends CYBR_Scene
         this.createPlatforms();
         this.createPortals();
         this.createTokens();
+        this.createPickupItems();
         this.createKeyboardMap();
         this.createPlayer();
         this.createEnemies();
@@ -110,6 +113,7 @@ export class SceneGame extends CYBR_Scene
     restartLevel()
     {
         this.restartTokens();
+        this.restartPickupItems();
         this.restartAIs();
         this.setRemainLife(0); // TODO: Call GameMode.restart() or something
         this.respawnPlayer();
@@ -177,6 +181,19 @@ export class SceneGame extends CYBR_Scene
         });
     }
 
+    createPickupItems()
+    {
+        this.healItems = this.physics.add.staticGroup();
+
+        // @ts-ignore - Problem with Phaser’s types. classType supports classes 
+        const pickupObjects = this.currentMap.createFromObjects("Pickups", {name: "Heal", classType: EffectPickup});
+        pickupObjects.map((pickup: EffectPickup)=>{
+            pickup.setTexture("healItem_48");
+            pickup.setValue(Number(pickup.data.list["value"]));
+            this.healItems.add(pickup);
+        });
+    }
+
     createPlayer()
     {
         // @ts-ignore - Problem with Phaser’s types. classType supports classes 
@@ -221,6 +238,7 @@ export class SceneGame extends CYBR_Scene
         this.physics.add.collider(this.player, this.platforms);
         this.physics.add.overlap(this.player, this.portals, this.completeLevel, null, this);
         this.physics.add.overlap(this.player, this.tokens, this.collectToken, null, this);
+        this.physics.add.overlap(this.player, this.healItems, this.healPlayer, null, this);
 
         if (this.player.currentWeapon)
             this.physics.add.collider(this.player.currentWeapon.bullets, this.platforms, this.onWeaponHitPlatforms.bind(this));
@@ -244,6 +262,13 @@ export class SceneGame extends CYBR_Scene
 
         this.tokens.getChildren().forEach(function (token: Token) {
             token.enableBody(true, token.x, token.y, true, true);
+        }, this);
+    }
+
+    restartPickupItems()
+    {
+        this.healItems.getChildren().forEach(function (pickup: EffectPickup) {
+            pickup.enableBody(true, pickup.x, pickup.y, true, true);
         }, this);
     }
 
@@ -378,8 +403,14 @@ export class SceneGame extends CYBR_Scene
 
     collectToken(player: Player, token: Token)
     {
-        token.disableBody(true, true)
+        token.disableBody(true, true);
         this.setCollectedTokens(this.getCollectedTokens() + 1);
+    }
+
+    healPlayer(player: Player, healItem: EffectPickup)
+    {
+        healItem.disableBody(true, true);
+        player.heal(healItem.value);
     }
 
     respawnPlayer()

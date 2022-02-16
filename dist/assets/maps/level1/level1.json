@@ -340,7 +340,61 @@
          "draworder":"topdown",
          "id":10,
          "name":"Pickups",
-         "objects":[],
+         "objects":[
+                {
+                 "gid":1019,
+                 "height":32,
+                 "id":66,
+                 "name":"Heal",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":30
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":53,
+                 "y":544
+                }, 
+                {
+                 "gid":1019,
+                 "height":32,
+                 "id":70,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":30
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":1026,
+                 "y":703
+                }, 
+                {
+                 "gid":1019,
+                 "height":32,
+                 "id":71,
+                 "name":"Heal",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":5
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":346.666666666667,
+                 "y":444
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -444,8 +498,8 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":236,
-                 "y":443.333333333333
+                 "x":80,
+                 "y":319.333333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -454,7 +508,7 @@
          "y":0
         }],
  "nextlayerid":12,
- "nextobjectid":66,
+ "nextobjectid":72,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",
