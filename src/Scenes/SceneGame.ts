@@ -49,9 +49,6 @@ export class SceneGame extends CYBR_Scene
     init(data?: SceneData)
     {
         this.currentLevel = data && data.level ? data.level : 1;
-
-        // TODO: See if I can set the bounds with the map
-        this.physics.world.setBounds(0, 0, 1920 * 6, 1080);
     }
 
     // Preload
@@ -131,7 +128,6 @@ export class SceneGame extends CYBR_Scene
 
     createGameMode()
     {
-        this.deadZoneY = 1200; // TODO: Should be based on the map. Perhaps have a special object for that ?
         this.setRemainLife(0);
         this.setCollectedTokens(0);
     }
@@ -151,6 +147,10 @@ export class SceneGame extends CYBR_Scene
     {
         const terrain = this.currentMap.addTilesetImage("terrain_atlas", "terrain");
         this.platforms = this.currentMap.createLayer("Platforms", [terrain], 0, 0);
+
+        const platformsBounds = this.platforms.getBounds();
+        this.physics.world.setBounds(0, 0, platformsBounds.width - platformsBounds.x, platformsBounds.height - platformsBounds.y);
+        this.deadZoneY = platformsBounds.height - platformsBounds.y;
     }
 
     createPortals()
@@ -231,7 +231,8 @@ export class SceneGame extends CYBR_Scene
 
     createCameras()
     {
-        this.cameras.main.setBounds(0, 0, 20000, 1080);
+        const platformsBounds = this.platforms.getBounds();
+        this.cameras.main.setBounds(0, 0, platformsBounds.width - platformsBounds.x, platformsBounds.height - platformsBounds.y);
         this.cameras.main.startFollow(this.player);
     }
 
@@ -298,7 +299,8 @@ export class SceneGame extends CYBR_Scene
     update(time: number, delta: number)
     {
         super.update(time, delta);
-        // TODO: Find a cleaner way (is there a trigger box with Phaser?) - Probably add this to gameMode
+        // TODO: Use WOLRD_BOUNDS callback: https://photonstorm.github.io/phaser3-docs/Phaser.Physics.Arcade.Events.html#event:WORLD_BOUNDS__anchor
+        // It exists on js but I don't see it on ts...
         if (this.player.y > this.deadZoneY && !this.player.dead())
             this.player.setHealth(0);
 

@@ -17,7 +17,6 @@ export class ScenePreloadAssets extends CYBR_Scene
     // Preload
     ////////////////////////////////////////////////////////////////////////
 
-    // TODO: Review all the asset you used...
     preload()
     {
         this.loadImages();
