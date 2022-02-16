@@ -27,8 +27,7 @@ export class SceneGame extends CYBR_Scene
     private enemies: Phaser.Physics.Arcade.StaticGroup;
 
     // GameMode
-    // private currentMode
-    private playerStartPosition: Phaser.Math.Vector2; // TODO: Make it belong to GameMode unless I can easily get player start position from the map
+    private spawnPositions: Phaser.Structs.Map<string, Phaser.Math.Vector2>;
     private collectedTokens: integer;
     private remainLife: integer;
     private deadZoneY: number;
@@ -73,6 +72,7 @@ export class SceneGame extends CYBR_Scene
 
     create(data?: SceneData)
     {
+        this.spawnPositions = new Phaser.Structs.Map([]);
         this.startLevel();
         this.createUI();
     }
@@ -192,7 +192,8 @@ export class SceneGame extends CYBR_Scene
         let weapon = new CYBR_Weapon(this, 30, "bullet");
         this.player.equipWeapon(weapon);
 
-        this.playerStartPosition = new Phaser.Math.Vector2(this.player.x, this.player.y)
+        this.player.setName(this.generateUniqueName(this.player));
+        this.spawnPositions.set(this.player.name, new Phaser.Math.Vector2(this.player.x, this.player.y));
     }
 
     createEnemies()
@@ -201,14 +202,15 @@ export class SceneGame extends CYBR_Scene
 
         // @ts-ignore - Problem with Phaser’s types. classType supports classes 
         const enemyObjects = this.currentMap.createFromObjects("Enemies", {name: "BasicAI", classType: BasicAI});
-        
-        enemyObjects.map((ai: BasicAI)=>{
-            ai.init(this, "eyeball");
-            this.enemies.add(ai);
-        })
+
+        enemyObjects.map((ai: BasicAI)=>{ this.enemies.add(ai); });
 
         this.enemies.getChildren().forEach(function (ai: BasicAI) {
+            ai.init(this, "eyeball");
             ai.on("die", this.onEnemyDie.bind(this, ai));
+            ai.setName(this.generateUniqueName(ai));
+
+            this.spawnPositions.set(ai.name, new Phaser.Math.Vector2(ai.x, ai.y));
         }, this);
     }
 
@@ -247,8 +249,9 @@ export class SceneGame extends CYBR_Scene
 
     restartAIs()
     {
-        this.enemies.clear(true, true);
-        this.createEnemies();
+        this.enemies.getChildren().forEach(function (ai: BasicAI) {
+            this.respawnPawn(ai);
+        }, this);
     }
 
     createUI()
@@ -381,8 +384,14 @@ export class SceneGame extends CYBR_Scene
 
     respawnPlayer()
     {
-        this.player.setPosition(this.playerStartPosition.x, this.playerStartPosition.y);
-        this.player.setHealth(this.player.getMaxHealth());
+        this.respawnPawn(this.player);
+    }
+
+    respawnPawn(pawn: Pawn)
+    {
+        const pawnPosition = this.spawnPositions.get(pawn.name);
+        pawn.enableBody(true, pawnPosition.x, pawnPosition.y, true, true);
+        pawn.setHealth(pawn.getMaxHealth());
     }
 
     IsGameOver()

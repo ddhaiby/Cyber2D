@@ -6,9 +6,17 @@ export interface SceneData {
 
 export class CYBR_Scene extends Phaser.Scene
 {
+    private static _idCount = 0;
+
     constructor(config: string | Phaser.Types.Scenes.SettingsConfig)
     {
         super(config);
+    }
+
+    generateUniqueName(gameObject: Phaser.GameObjects.GameObject)
+    {
+        ++CYBR_Scene._idCount;
+        return (typeof gameObject) + CYBR_Scene._idCount.toString(); // typeof always return "object". Consider using the string directly, or fix it.
     }
 
     centerItem(item: Phaser.GameObjects.Image | Phaser.GameObjects.Text | CYBR_Graphics, offsetX?: number, offsetY?: number)

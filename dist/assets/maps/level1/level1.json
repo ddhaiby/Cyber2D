@@ -411,6 +411,18 @@
                  "width":32,
                  "x":956,
                  "y":1022
+                }, 
+                {
+                 "gid":223,
+                 "height":36,
+                 "id":65,
+                 "name":"BasicAI",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":506,
+                 "y":448
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -432,8 +444,8 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":1586,
-                 "y":1021.33333333333
+                 "x":236,
+                 "y":443.333333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -442,7 +454,7 @@
          "y":0
         }],
  "nextlayerid":12,
- "nextobjectid":65,
+ "nextobjectid":66,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",
