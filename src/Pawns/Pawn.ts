@@ -138,13 +138,10 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
     move(speed: number)
     {
-        if (!this.dead())
-        {
-            const anim = (speed < 0) ? 'left' : 'right';
-            this.anims.play(anim, true);
-            this.setVelocityX(speed);
-            this.isMoving = true;
-        }
+        const anim = (speed < 0) ? 'left' : 'right';
+        this.anims.play(anim, true);
+        this.setVelocityX(speed);
+        this.isMoving = true;
     }
 
     stopMoving()
@@ -156,29 +153,20 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
     lookUp()
     {
-        if (!this.dead())
-        {
-            this.isLookingUp = true;
-            this.isLookingDown = false;
-        }
+        this.isLookingUp = true;
+        this.isLookingDown = false;
     }
 
     lookDown()
     {
-        if (!this.dead())
-        {
-            this.isLookingUp = false;
-            this.isLookingDown = true;
-        }
+        this.isLookingUp = false;
+        this.isLookingDown = true;
     }
     
     lookStraight()
     {
-        if (!this.dead())
-        {
-            this.isLookingUp = false;
-            this.isLookingDown = false;
-        }
+        this.isLookingUp = false;
+        this.isLookingDown = false;
     }
 
     jump()

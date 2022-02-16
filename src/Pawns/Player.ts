@@ -45,6 +45,9 @@ export class Player extends Pawn
     {
         super.update(args);
 
+        if (this.dead())
+            return;
+
         if (this.keys.up.isDown)
             this.lookUp();
         else if (this.keys.down.isDown)
