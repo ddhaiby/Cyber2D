@@ -392,6 +392,7 @@ export class SceneGame extends CYBR_Scene
         const pawnPosition = this.spawnPositions.get(pawn.name);
         pawn.enableBody(true, pawnPosition.x, pawnPosition.y, true, true);
         pawn.setHealth(pawn.getMaxHealth());
+        pawn.setVelocity(0,0);
     }
 
     IsGameOver()
