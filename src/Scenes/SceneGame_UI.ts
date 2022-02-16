@@ -31,27 +31,6 @@ export class SceneGame_UI extends CYBR_Scene
         this.player = sceneGame.player;
     }
 
-    // Preload
-    ////////////////////////////////////////////////////////////////////////
-  
-    preload()
-    {
-        this.loadSprites();
-        this.loadImages();
-    }
-
-    loadSprites()
-    {
-        this.load.setPath("./assets/sprite");
-        this.load.spritesheet("eyeball", "eyeball.png", { frameWidth: 32, frameHeight: 38 });
-    }
-
-    loadImages()
-    {
-        this.load.setPath("./assets/image");
-        this.load.image("token", "token_48.png");
-    }
-
     // Create
     ////////////////////////////////////////////////////////////////////////
 
@@ -92,7 +71,7 @@ export class SceneGame_UI extends CYBR_Scene
         let tokenImageX = this._bulletBar.x;
         let tokenImageY = this._bulletBar.y + this._bulletBar.height + 8;
 
-        let tokenImage = this.add.image(tokenImageX, tokenImageY, "token").setScale(1);
+        let tokenImage = this.add.image(tokenImageX, tokenImageY, "token_24");
         tokenImage.x += tokenImage.width / 2;
         tokenImage.y += tokenImage.height / 2;
 

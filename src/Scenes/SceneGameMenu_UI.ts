@@ -23,31 +23,6 @@ export class SceneGameMenu_UI extends CYBR_Scene
         this.sceneGame = sceneGame;
     }
 
-    // Preload
-    ////////////////////////////////////////////////////////////////////////
-  
-    preload()
-    {
-        this.loadSprites();
-        this.loadImages();
-    }
-
-    loadSprites()
-    {
-        this.load.setPath("./assets/sprite");
-    }
-
-    loadImages()
-    {
-        this.load.setPath("./assets/image/UI/GameMenu");
-        this.load.image("buttonPlay", "buttonPlay.png");
-        this.load.image("buttonMainMenu", "buttonMainMenu.png");
-        this.load.image("buttonRestart", "buttonRestart.png");
-        this.load.image("buttonResume", "buttonResume.png");
-        this.load.image("buttonSettings", "buttonSettings.png");
-        this.load.image("buttonLoginMetaMask", "buttonLoginMetaMask.png");
-    }
-
     // Create
     ////////////////////////////////////////////////////////////////////////
 

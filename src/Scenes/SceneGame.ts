@@ -60,50 +60,16 @@ export class SceneGame extends CYBR_Scene
 
     preload()
     {
-        this.loadMaps();
-        this.loadAudio();
-        this.loadSprites();
-        this.loadImages();
+        this.loadMap();
     }
 
-    loadMaps()
+    loadMap()
     {
         this.load.setPath("./assets/maps");
         this.load.image("terrain", "./terrain_atlas.png");
 
         const levelName = "level" + this.currentLevel.toString();
         this.load.tilemapTiledJSON(levelName, "./" + levelName + "/" + levelName + ".json");
-    }
-
-    loadImages()
-    {
-        this.load.setPath("./assets/image");
-        this.load.image("sky", "sky.png");
-        this.load.image("ground", "platform.png");
-        this.load.image("bullet", "bullet.png");
-        this.load.image("token", "token_24.png");
-        this.load.image("portal", "star.png");
-
-        //for (let prop in CST.IMAGE) {
-        //    this.load.image(CST.IMAGE[prop], CST.IMAGE[prop]);
-        //}
-    }
-
-    loadAudio()
-    {
-        this.load.setPath("./assets/audio");
-        //this.load.audio("shuinvy-childhood.mp3", "shuinvy-childhood.mp3");
-    }
-
-    loadSprites()
-    {
-        this.load.setPath("./assets/sprite");
-        this.load.spritesheet("eyeball", "eyeball.png", { frameWidth: 32, frameHeight: 38 });
-        this.load.spritesheet("anna", "anna.png", { frameWidth: 40, frameHeight: 60 });
-
-        //for (let prop in CST.SPRITE) {
-        //    this.load.spritesheet(CST.SPRITE[prop], CST.SPRITE[prop], frameConfig);
-        //}
     }
 
     // Create
@@ -208,7 +174,7 @@ export class SceneGame extends CYBR_Scene
         // @ts-ignore - Problem with Phaser’s types. classType supports classes 
         const tokenObjects = this.currentMap.createFromObjects("Tokens", {name: "Token", classType: Token});
         tokenObjects.map((token: Token)=>{
-            token.setTexture("token");
+            token.setTexture("token_24");
             this.tokens.add(token);
         });
     }

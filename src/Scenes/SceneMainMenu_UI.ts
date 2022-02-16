@@ -19,28 +19,6 @@ export class SceneMainMenu_UI extends CYBR_Scene
 
     init() {}
 
-    // Preload
-    ////////////////////////////////////////////////////////////////////////
-  
-    preload()
-    {
-        this.loadSprites();
-        this.loadImages();
-    }
-
-    loadSprites()
-    {
-        this.load.setPath("./assets/sprite");
-    }
-
-    loadImages()
-    {
-        this.load.setPath("./assets/image/UI/GameMenu");
-        this.load.image("buttonPlay", "buttonPlay.png");
-        this.load.image("buttonSettings", "buttonSettings.png");
-        this.load.image("buttonLoginMetaMask", "buttonLoginMetaMask.png");
-    }
-
     // Create
     ////////////////////////////////////////////////////////////////////////
 
@@ -67,16 +45,13 @@ export class SceneMainMenu_UI extends CYBR_Scene
 
         // In my SceneMainMenu
         buttonPlay.on("pointerup", (pointer) => {
-            if (!this.sceneGame)
-            {
-                // TODO: create the scene. Nonsense that it exists already and we restart the game then
-                this.sceneGame = this.scene.get(CST.SCENES.GAME) as SceneGame;
-                this.sceneGame.scene.restart();
-            }
+            const sceneData = {level: 1};
+
+            if (!this.scene.get(CST.SCENES.GAME))
+                this.sceneGame = this.scene.add(CST.SCENES.GAME, SceneGame, true, sceneData) as SceneGame;
             else
-            {
-                this.sceneGame.scene.restart({level: 1});
-            }
+                this.sceneGame.scene.restart(sceneData);
+
             this.scene.setActive(false);
             this.scene.setVisible(false);
         });

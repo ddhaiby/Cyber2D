@@ -1,14 +1,15 @@
 /** @type {import("../typings/phaser")} */
 
+import { CST } from "./CST";
 import { SceneMainMenu_UI } from "./Scenes/SceneMainMenu_UI";
-import { SceneGame } from "./Scenes/SceneGame";
+import { ScenePreloadAssets } from "./Scenes/ScenePreloadAssets";
 
-new Phaser.Game({
+let game = new Phaser.Game({
     type: Phaser.AUTO,
     width: 800,
     height: 600,
 
-    scene: [SceneMainMenu_UI, SceneGame],
+    scene: [ScenePreloadAssets],
 
     render: {
         pixelArt: true
