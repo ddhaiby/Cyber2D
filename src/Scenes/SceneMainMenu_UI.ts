@@ -54,6 +54,7 @@ export class SceneMainMenu_UI extends CYBR_Scene
 
             this.scene.setActive(false);
             this.scene.setVisible(false);
+            this.sceneGame.showGame(true);
         });
 
         buttonSettings.on("pointerup", (pointer) => {

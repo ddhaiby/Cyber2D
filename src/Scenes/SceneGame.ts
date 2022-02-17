@@ -309,20 +309,17 @@ export class SceneGame extends CYBR_Scene
         this.scene.setVisible(value, CST.SCENES.GAME_UI);
     }
 
-    showGameMenu(value: boolean)
-    {
-        this.scene.setActive(value, CST.SCENES.GAMEMENU_UI);
-        this.scene.setVisible(value, CST.SCENES.GAMEMENU_UI);
-        
-        if (value)
-            this.showGame(true);
-    }
-
     showGame(value: boolean)
     {
         this.scene.setActive(value, CST.SCENES.GAME);
         this.scene.setVisible(value, CST.SCENES.GAME);
         this.showGameUI(value);
+    }
+
+    showGameMenu(value: boolean)
+    {
+        this.scene.setActive(value, CST.SCENES.GAMEMENU_UI);
+        this.scene.setVisible(value, CST.SCENES.GAMEMENU_UI);
     }
 
     showMainMenu(value: boolean)
