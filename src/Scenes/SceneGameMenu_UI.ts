@@ -49,13 +49,13 @@ export class SceneGameMenu_UI extends CYBR_Scene
 
         buttonResume.on("pointerup", (pointer) => {
             this.sceneGame.showGameMenu(false);
-            this.sceneGame.scene.setActive(true);
+            this.sceneGame.showGame(true);
         });
 
         buttonRestart.on("pointerup", (pointer) => {
             this.sceneGame.showGameMenu(false);
+            this.sceneGame.showGame(true);
             this.sceneGame.restartLevel();
-            this.sceneGame.scene.setActive(true);
         });
 
         buttonMainMenu.on("pointerup", (pointer) => {

@@ -84,7 +84,10 @@ export class SceneGame extends CYBR_Scene
     createKeyboardMap()
     {
         let keyESC = this.input.keyboard.addKey("ESC");
-        keyESC.on("down", function(event){ this.showGameMenu(true); }, this)
+        keyESC.on("down", function(event){
+            this.showGameMenu(true);
+            this.scene.setActive(false, CST.SCENES.GAME);
+        }, this)
 
         this.keysPlayer = this.input.keyboard.addKeys({
             up: "Z",
@@ -449,6 +452,7 @@ export class SceneGame extends CYBR_Scene
         {
             this.time.delayedCall(2000, () => {
                 this.showGameMenu(true);
+                this.showGame(false);
             }, null, this);
         }
 
