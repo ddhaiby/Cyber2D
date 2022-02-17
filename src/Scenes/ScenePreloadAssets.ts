@@ -43,6 +43,7 @@ export class ScenePreloadAssets extends CYBR_Scene
         this.load.image("token_24", "token_24.png");
         this.load.image("token_48", "token_48.png");
         this.load.image("healItem_48", "healItem_48.png");
+        this.load.image("weaponBoost_48", "weaponBoost_48.png");
         this.load.image("portal", "star.png");
     }
 
