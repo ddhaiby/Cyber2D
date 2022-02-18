@@ -475,7 +475,7 @@ export class SceneGame extends CYBR_Scene
         this.events.emit("onCollectedTokenChanged", this.collectedTokens);
     }
 
-    private getRemainLife()
+    public getRemainLife()
     {
         return this.remainLife;
     }

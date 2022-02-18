@@ -3,7 +3,6 @@ import { CYBR_Scene } from "./CYBR_Scene";
 import { SceneGame } from "./SceneGame";
 import { CYBR_HealthBar } from "../UI/CYBR_HealthBar";
 import { CYBR_BulletBar } from "../UI/CYBR_BulletBar";
-import { Attribute } from "../Pawns/Attribute";
 import { Player } from "Pawns/Player";
 
 export class SceneGame_UI extends CYBR_Scene
@@ -47,8 +46,8 @@ export class SceneGame_UI extends CYBR_Scene
     {
         this._healthBar = new CYBR_HealthBar(this, { x: 12, y: 12, width: 160, height: 16, color: 0x990000, value: 1});
 
-        this.sceneGame.events.on("onPlayerHealthChanged", (health: Attribute, maxHealth: Attribute)=> {
-            this._healthBar.setValue(health.getCurrentValue() / maxHealth.getCurrentValue());
+        this.sceneGame.events.on("onPlayerHealthChanged", (health: number, maxHealth: number)=> {
+            this._healthBar.setValue(health / maxHealth);
         }, this);
     }
 

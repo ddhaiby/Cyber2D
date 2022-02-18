@@ -1,5 +1,4 @@
 import { CYBR_Weapon } from "Weapons/CYBR_Weapon";
-import {Attribute} from "./Attribute";
 
 export class Pawn extends Phaser.Physics.Arcade.Sprite
 {
@@ -14,7 +13,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     protected isFiring: boolean;
 
     // Attributes
-    protected attributes: Phaser.Structs.Map<string, Attribute>;
+    public attributes: Phaser.Structs.Map<string, number>;
 
     // Physic
     private _overlapped: boolean;
@@ -22,7 +21,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture, frame?: string | number)
     {
-        super(scene, x, y, texture);
+        super(scene, x, y, texture, frame);
         this.init(scene);
     }
 
@@ -93,7 +92,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     private initAttributes()
     {
         this.attributes = new Phaser.Structs.Map([]);
-        this.attributes.set("maxHealth", new Attribute(100)).set("health", new Attribute(100));
+        this.attributes.set("maxHealth", 100).set("health", 100);
     }
 
     // Overlap
@@ -192,7 +191,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
     public setHealth(health: number)
     {
-        this.attributes.get("health").setBaseValue(Math.max(0, Math.min(health, this.attributes.get("maxHealth").getCurrentValue())));
+        this.attributes.set("health", Math.max(0, Math.min(health, this.attributes.get("maxHealth"))));
         this.emit("healthChanged", this.attributes.get("health"), this.attributes.get("maxHealth"));
 
         if (this.dead())
@@ -204,18 +203,18 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
     public getHealth()
     {
-        return this.attributes.get("health").getCurrentValue();
+        return this.attributes.get("health");
     }
 
     public getMaxHealth()
     {
-        return this.attributes.get("maxHealth").getCurrentValue();
+        return this.attributes.get("maxHealth");
     }
 
     // Called when the health reaches 0 or to kill instantly 
     public die()
     {
-        this.attributes.get("health").setBaseValue(0);
+        this.attributes.set("health", 0);
         this.stopMoving();
         this.emit("die");
     }
