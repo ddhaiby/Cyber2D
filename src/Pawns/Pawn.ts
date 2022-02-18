@@ -1,3 +1,4 @@
+import { CST } from "../CST";
 import { CYBR_Weapon } from "Weapons/CYBR_Weapon";
 
 export class Pawn extends Phaser.Physics.Arcade.Sprite
@@ -92,7 +93,10 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     private initAttributes()
     {
         this.attributes = new Phaser.Structs.Map([]);
-        this.attributes.set("maxHealth", 100).set("health", 100);
+        this.attributes.set(CST.PLAYER.ATTRIBUTES.MAX_HEALTH, 100);
+        this.attributes.set(CST.PLAYER.ATTRIBUTES.HEALTH, 100);
+        this.attributes.set(CST.PLAYER.ATTRIBUTES.WALK_SPEED, 200);
+        this.attributes.set(CST.PLAYER.ATTRIBUTES.CLIMB_SPEED, 150);
     }
 
     // Overlap
@@ -191,8 +195,8 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
     public setHealth(health: number)
     {
-        this.attributes.set("health", Math.max(0, Math.min(health, this.attributes.get("maxHealth"))));
-        this.emit("healthChanged", this.attributes.get("health"), this.attributes.get("maxHealth"));
+        this.attributes.set(CST.PLAYER.ATTRIBUTES.HEALTH, Math.max(0, Math.min(health, this.attributes.get(CST.PLAYER.ATTRIBUTES.MAX_HEALTH))));
+        this.emit("healthChanged", this.attributes.get(CST.PLAYER.ATTRIBUTES.HEALTH), this.attributes.get(CST.PLAYER.ATTRIBUTES.MAX_HEALTH));
 
         if (this.dead())
         {
@@ -201,20 +205,35 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         }
     }
 
+    public getAttribute(name: string)
+    {
+        return this.attributes.get(name);
+    }
+
     public getHealth()
     {
-        return this.attributes.get("health");
+        return this.getAttribute(CST.PLAYER.ATTRIBUTES.HEALTH);
     }
 
     public getMaxHealth()
     {
-        return this.attributes.get("maxHealth");
+        return this.getAttribute(CST.PLAYER.ATTRIBUTES.MAX_HEALTH);
+    }
+
+    public getWalkSpeed()
+    {
+        return this.getAttribute(CST.PLAYER.ATTRIBUTES.WALK_SPEED);
+    }
+
+    public getClimbSpeed()
+    {
+        return this.getAttribute(CST.PLAYER.ATTRIBUTES.CLIMB_SPEED);
     }
 
     // Called when the health reaches 0 or to kill instantly 
     public die()
     {
-        this.attributes.set("health", 0);
+        this.attributes.set(CST.PLAYER.ATTRIBUTES.HEALTH, 0);
         this.stopMoving();
         this.emit("die");
     }
