@@ -25,7 +25,7 @@ export class SceneGame_UI extends CYBR_Scene
     // Init
     ////////////////////////////////////////////////////////////////////////
    
-    init(sceneGame: SceneGame)
+    public init(sceneGame: SceneGame)
     { 
         this.sceneGame = sceneGame;
         this.player = sceneGame.player;
@@ -34,7 +34,7 @@ export class SceneGame_UI extends CYBR_Scene
     // Create
     ////////////////////////////////////////////////////////////////////////
 
-    create()
+    public create()
     {
         this.createHealthBar();
         this.createBulletBar();
@@ -43,7 +43,7 @@ export class SceneGame_UI extends CYBR_Scene
         this.createGameOverScreen();
     }
 
-    createHealthBar()
+    private createHealthBar()
     {
         this._healthBar = new CYBR_HealthBar(this, { x: 12, y: 12, width: 160, height: 16, color: 0x990000, value: 1});
 
@@ -52,7 +52,7 @@ export class SceneGame_UI extends CYBR_Scene
         }, this);
     }
 
-    createBulletBar()
+    private createBulletBar()
     {
         // Bar
         let bulletBarX = this._healthBar.x;
@@ -65,7 +65,7 @@ export class SceneGame_UI extends CYBR_Scene
         }, this);
     }
 
-    createTokenScoreItem()
+    private createTokenScoreItem()
     {
         // Image
         let tokenImageX = this._bulletBar.x;
@@ -91,7 +91,7 @@ export class SceneGame_UI extends CYBR_Scene
     }
 
     // TODO: Review position
-    createLifeItem()
+    private createLifeItem()
     {
         let tokenImage = this._tokenScoreItem.get("image") as Phaser.GameObjects.Image;
 
@@ -117,7 +117,7 @@ export class SceneGame_UI extends CYBR_Scene
         return new Map<string, Phaser.GameObjects.GameObject>().set("image", lifeImage).set("text", lifeText);
     }
 
-    createGameOverScreen()
+    private createGameOverScreen()
     {
         let gameOverText = this.add.text(0, 0, "GAME OVER", { font: '54px Arial', color: '#000000' });
         gameOverText.visible = false;
@@ -131,11 +131,8 @@ export class SceneGame_UI extends CYBR_Scene
     // Update
     ////////////////////////////////////////////////////////////////////////
 
-    update(time: number, delta: number)
+    public update(time: number, delta: number)
     {
         super.update(time, delta);
     }
-
-    // Player
-    ////////////////////////////////////////////////////////////////////////
 }

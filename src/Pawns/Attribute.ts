@@ -7,18 +7,18 @@ export class Attribute
         this._baseValue = baseValue;
     }
 
-    setBaseValue(baseValue: number)
+    public setBaseValue(baseValue: number)
     {
         this._baseValue = baseValue;
     }
 
-    getBaseValue()
+    public getBaseValue()
     {
         return this._baseValue;
     }
 
     // TODO: Update this function with modifiers
-    getCurrentValue()
+    public getCurrentValue()
     {
         return this._baseValue;
     }

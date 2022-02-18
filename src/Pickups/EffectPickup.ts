@@ -7,7 +7,7 @@ export class EffectPickup extends Phaser.Physics.Arcade.Image
        super(scene, x, y, texture, frame);
     }
 
-    applyEffect(pawn: Pawn)
+    public applyEffect(pawn: Pawn)
     {
     }
 }

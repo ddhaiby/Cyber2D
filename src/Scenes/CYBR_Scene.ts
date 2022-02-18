@@ -13,13 +13,13 @@ export class CYBR_Scene extends Phaser.Scene
         super(config);
     }
 
-    generateUniqueName(gameObject: Phaser.GameObjects.GameObject)
+    public generateUniqueName(gameObject: Phaser.GameObjects.GameObject)
     {
         ++CYBR_Scene._idCount;
         return (typeof gameObject) + CYBR_Scene._idCount.toString(); // typeof always return "object". Consider using the string directly, or fix it.
     }
 
-    centerItem(item: Phaser.GameObjects.Image | Phaser.GameObjects.Text | CYBR_Graphics, offsetX?: number, offsetY?: number)
+    public centerItem(item: Phaser.GameObjects.Image | Phaser.GameObjects.Text | CYBR_Graphics, offsetX?: number, offsetY?: number)
     {
         if (offsetX == undefined)
             offsetX = 0;
@@ -36,7 +36,7 @@ export class CYBR_Scene extends Phaser.Scene
         return item;
     }
     
-    centerVItem(item: Phaser.GameObjects.Image | CYBR_Graphics, offsetY?: number)
+    public centerVItem(item: Phaser.GameObjects.Image | CYBR_Graphics, offsetY?: number)
     {
         if (offsetY == undefined)
             offsetY = 0;
@@ -47,7 +47,7 @@ export class CYBR_Scene extends Phaser.Scene
         return item;
     }
 
-    centerHItem(item: Phaser.GameObjects.Image | CYBR_Graphics, offsetX?: number)
+    public centerHItem(item: Phaser.GameObjects.Image | CYBR_Graphics, offsetX?: number)
     {
         if (offsetX == undefined)
             offsetX = 0;

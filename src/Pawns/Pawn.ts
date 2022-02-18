@@ -29,7 +29,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     // Init
     ////////////////////////////////////////////////////////////////////////
 
-    init(scene: Phaser.Scene, textureKey?: string)
+    public init(scene: Phaser.Scene, textureKey?: string)
     {
         if (textureKey)
             this.setTexture(textureKey);
@@ -46,14 +46,14 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.initAttributes();
     }
 
-    initStates()
+    private initStates()
     {
         this.isLookingUp = false;
         this.isLookingDown = false;
     }
 
     // TODO: Use an object with all the data of sprite. So I can be free of the animation and do nothing if the object is empty
-    initAnimations()
+    private initAnimations()
     {
         // Don't do anything if there is no texture
         if (this.texture.key == "__DEFAULT" || this.texture.key == "")
@@ -72,7 +72,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
             frameRate: 10,
             repeat: -1
         });
-    
+
         this.anims.create({
             key: 'down',
             frames: this.anims.generateFrameNumbers(this.texture.key, { start: 6, end: 8 }),
@@ -90,7 +90,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.anims.play('right', true);
     }
 
-    initAttributes()
+    private initAttributes()
     {
         this.attributes = new Phaser.Structs.Map([]);
         this.attributes.set("maxHealth", new Attribute(100)).set("health", new Attribute(100));
@@ -99,18 +99,18 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     // Overlap
     ////////////////////////////////////////////////////////////////////////
 
-    onOverlapBegin(obj)
+    public onOverlapBegin(obj)
     {
         this.overlapped = true;
         this._overlapped = true;
     }
 
-    onOverlapContinue(obj)
+    public onOverlapContinue(obj)
     {
         this._overlapped = true;
     }
 
-    onOverlapEnd()
+    public onOverlapEnd()
     {
         this.overlapped = false;
     }
@@ -118,7 +118,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     // Update
     ////////////////////////////////////////////////////////////////////////
 
-    update(...args: any[])
+    public update(...args: any[])
     {
         super.update(args);
 
@@ -135,7 +135,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
             this.isJumping = false;
     }
 
-    move(speed: number)
+    public move(speed: number)
     {
         const anim = (speed < 0) ? 'left' : 'right';
         this.anims.play(anim, true);
@@ -143,32 +143,32 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.isMoving = true;
     }
 
-    stopMoving()
+    public stopMoving()
     {
         this.setVelocityX(0);
         this.anims.pause();
         this.isMoving = false;
     }
 
-    lookUp()
+    public lookUp()
     {
         this.isLookingUp = true;
         this.isLookingDown = false;
     }
 
-    lookDown()
+    public lookDown()
     {
         this.isLookingUp = false;
         this.isLookingDown = true;
     }
     
-    lookStraight()
+    public lookStraight()
     {
         this.isLookingUp = false;
         this.isLookingDown = false;
     }
 
-    jump()
+    public jump()
     {
         let body = this.body as Phaser.Physics.Arcade.Body;
 
@@ -180,17 +180,17 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         }
     }
 
-    hurt(health: number)
+    public hurt(health: number)
     {
         this.setHealth(this.getHealth() - health);
     }
 
-    heal(health: number)
+    public heal(health: number)
     {
         this.setHealth(this.getHealth() + health);
     }
 
-    setHealth(health: number)
+    public setHealth(health: number)
     {
         this.attributes.get("health").setBaseValue(Math.max(0, Math.min(health, this.attributes.get("maxHealth").getCurrentValue())));
         this.emit("healthChanged", this.attributes.get("health"), this.attributes.get("maxHealth"));
@@ -202,36 +202,36 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         }
     }
 
-    getHealth()
+    public getHealth()
     {
         return this.attributes.get("health").getCurrentValue();
     }
 
-    getMaxHealth()
+    public getMaxHealth()
     {
         return this.attributes.get("maxHealth").getCurrentValue();
     }
 
     // Called when the health reaches 0 or to kill instantly 
-    die()
+    public die()
     {
         this.attributes.get("health").setBaseValue(0);
         this.stopMoving();
         this.emit("die");
     }
 
-    dead()
+    public dead()
     {
         return this.getHealth() <= 0;
     }
 
-    equipWeapon(weapon: CYBR_Weapon)
+    public equipWeapon(weapon: CYBR_Weapon)
     {
         this.currentWeapon = weapon;
         this.currentWeapon.trackSprite(this, 0, 0, false);
     }
 
-    fire(fireAngle?: number)
+    public fire(fireAngle?: number)
     {
         if (this.currentWeapon)
         {
@@ -264,7 +264,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         }
     }
 
-    stopFiring()
+    public stopFiring()
     {
         this.isFiring = false;
         if (this.currentWeapon)

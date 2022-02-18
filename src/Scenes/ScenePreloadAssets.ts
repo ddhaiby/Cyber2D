@@ -12,19 +12,19 @@ export class ScenePreloadAssets extends CYBR_Scene
     // Init
     ////////////////////////////////////////////////////////////////////////
 
-    init() {}
+    public init() {}
 
     // Preload
     ////////////////////////////////////////////////////////////////////////
 
-    preload()
+    public preload()
     {
         this.loadImages();
         this.loadSprites();
         this.loadAudio();
     }
 
-    loadImages()
+    private loadImages()
     {
         // UI
         this.load.setPath("./assets/image/UI/GameMenu");
@@ -47,7 +47,7 @@ export class ScenePreloadAssets extends CYBR_Scene
         this.load.image("portal", "star.png");
     }
 
-    loadSprites()
+    private loadSprites()
     {
         this.load.setPath("./assets/sprite");
         this.load.spritesheet("eyeball", "eyeball.png", { frameWidth: 32, frameHeight: 38 });
@@ -58,7 +58,7 @@ export class ScenePreloadAssets extends CYBR_Scene
         //}
     }
 
-    loadAudio()
+    private loadAudio()
     {
         this.load.setPath("./assets/audio");
         //this.load.audio("shuinvy-childhood.mp3", "shuinvy-childhood.mp3");
@@ -67,7 +67,7 @@ export class ScenePreloadAssets extends CYBR_Scene
     // Create
     ////////////////////////////////////////////////////////////////////////
   
-    create()
+    public create()
     {
         this.scene.add(CST.SCENES.MAINMENU_UI, SceneMainMenu_UI, true, null);
         this.scene.remove(CST.SCENES.PRELOAD_ASSETS);
