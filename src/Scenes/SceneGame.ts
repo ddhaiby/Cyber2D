@@ -470,6 +470,9 @@ export class SceneGame extends CYBR_Scene
 
     private respawnPawn(pawn: Pawn)
     {
+        if (pawn.currentWeapon)
+            pawn.currentWeapon.bullets.getChildren().forEach((bullet: Bullet)=>{ bullet.kill(); });
+
         const pawnPosition = this.spawnPositions.get(pawn.name);
         pawn.enableBody(true, pawnPosition.x, pawnPosition.y, true, true);
         pawn.setHealth(pawn.getMaxHealth());
