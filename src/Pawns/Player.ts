@@ -56,11 +56,11 @@ export class Player extends Pawn
             this.lookStraight();
 
         if (this.keys.left.isDown)
-            this.move(-200);
+            this.walk(-this.getWalkSpeed());
         else if (this.keys.right.isDown)
-            this.move(200);
+            this.walk(this.getWalkSpeed());
         else
-            this.stopMoving();
+            this.stopWalking();
 
         if (this.keys.fire.isDown)
             this.fire();

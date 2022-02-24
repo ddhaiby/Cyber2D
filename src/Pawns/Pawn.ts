@@ -7,18 +7,25 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     public currentWeapon: CYBR_Weapon;
 
     // States
-    protected isLookingUp: boolean;
-    protected isLookingDown: boolean;
-    protected isMoving: boolean;
-    protected isJumping: boolean;
-    protected isFiring: boolean;
+    public isLookingUp: boolean = false;
+    public isLookingDown: boolean = false;
+    public isWalking: boolean = false;
+    public isJumping: boolean = false;
+    public isFiring: boolean = false;
+    public isOnLadder: boolean = false;
+    public wasOnLadder: boolean = false;
+    public isClimbing: boolean = false;
+    public wasClimbing: boolean = false;
 
     // Attributes
     public attributes: Phaser.Structs.Map<string, number>;
 
     // Physic
-    private _overlapped: boolean;
+    private wasOverlapped: boolean;
     public overlapped: boolean;
+
+    // Scene
+    private _scene: Phaser.Scene;
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture, frame?: string | number)
     {
@@ -31,15 +38,18 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
     public init(scene: Phaser.Scene, textureKey?: string)
     {
+        this._scene = scene;
+
         if (textureKey)
             this.setTexture(textureKey);
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
-        
+        this.setGravity(this._scene.physics.world.gravity.x, this._scene.physics.world.gravity.y);
+
         this.setCollideWorldBounds(false);
         this.overlapped = false;
-        this._overlapped = false;
+        this.wasOverlapped = false;
 
         this.initStates();
         this.initAnimations();
@@ -105,12 +115,12 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     public onOverlapBegin(obj)
     {
         this.overlapped = true;
-        this._overlapped = true;
+        this.wasOverlapped = true;
     }
 
     public onOverlapContinue(obj)
     {
-        this._overlapped = true;
+        this.wasOverlapped = true;
     }
 
     public onOverlapEnd()
@@ -127,45 +137,107 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
         if (this.overlapped)
         {
-            if (this._overlapped)
-                this._overlapped = false
+            if (this.wasOverlapped)
+                this.wasOverlapped = false;
             else
                 this.onOverlapEnd();
         }
 
-        let body = this.body as Phaser.Physics.Arcade.Body;
-        if (body.onFloor())
+        const body = this.body as Phaser.Physics.Arcade.Body;
+        const isOnFloor = body.onFloor();
+
+        if (isOnFloor)
             this.isJumping = false;
+
+        this.updateOnLadder();
     }
 
-    public move(speed: number)
+    protected updateOnLadder()
     {
+        if (!this.isOnLadder && this.wasOnLadder)
+        {
+            this.setGravity(this._scene.physics.world.gravity.x, this._scene.physics.world.gravity.y);
+            if (this.isClimbing)
+                this.stopClimbing();
+        }
+
+        if (this.isOnLadder)
+        {
+            if (this.isLookingUp)
+                this.climb(-this.getClimbSpeed());
+            else if (this.isLookingDown)
+                this.climb(this.getClimbSpeed());
+            else
+                this.stopClimbing();
+        }
+
+        this.wasClimbing = this.isClimbing;
+        this.wasOnLadder = this.isOnLadder;
+        this.isOnLadder = false;
+    }
+
+    public walk(speed: number) : void
+    {
+        if (!this.isWalking)
+            this.startWalking();
+
         const anim = (speed < 0) ? 'left' : 'right';
         this.anims.play(anim, true);
         this.setVelocityX(speed);
-        this.isMoving = true;
     }
 
-    public stopMoving()
+    private startWalking() : void
+    {
+        this.isWalking = true;
+    }
+
+    public stopWalking() : void
     {
         this.setVelocityX(0);
         this.anims.pause();
-        this.isMoving = false;
+        this.isWalking = false;
     }
 
-    public lookUp()
+    public setIsOnLadder(isOnLadder: boolean) : void
+    {
+        this.isOnLadder = isOnLadder;
+    }
+
+    public climb(speed: number)
+    {
+        if (!this.isClimbing)
+            this.startClimbing();
+
+        this.setVelocityY(speed);
+    }
+
+    private startClimbing() : void
+    {
+        this.setGravity(0, - this._scene.physics.world.gravity.y);
+        this.isClimbing = true;
+    }
+
+    private stopClimbing() : void
+    {
+        this.isClimbing = false;
+
+        if (this.wasClimbing)
+            this.setVelocityY(0);
+    }
+
+    protected lookUp()
     {
         this.isLookingUp = true;
         this.isLookingDown = false;
     }
 
-    public lookDown()
+    protected lookDown()
     {
         this.isLookingUp = false;
         this.isLookingDown = true;
     }
     
-    public lookStraight()
+    protected lookStraight()
     {
         this.isLookingUp = false;
         this.isLookingDown = false;
@@ -234,7 +306,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     public die()
     {
         this.attributes.set(CST.PLAYER.ATTRIBUTES.HEALTH, 0);
-        this.stopMoving();
+        this.stopWalking();
         this.emit("die");
     }
 

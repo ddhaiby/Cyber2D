@@ -14,13 +14,15 @@ import { Token } from "../Tokens/Token";
 import { EffectPickup } from "../Pickups/EffectPickup"
 import { HealPickup } from "../Pickups/HealPickup"
 import { WeaponBoostPickup } from "../Pickups/WeaponBoostPickup"
-import { Portal } from "../Portals/Portal";
+import { Portal } from "../Platforms/Portal";
+import { Ladder } from "../Platforms/Ladder";
 
 export class SceneGame extends CYBR_Scene
 {
     // Map
     private currentMap: Phaser.Tilemaps.Tilemap;
     private platforms: Phaser.Tilemaps.TilemapLayer;
+    private ladders: Phaser.Physics.Arcade.StaticGroup;
     private portals: Phaser.Physics.Arcade.StaticGroup;
     private backgrounds: Phaser.Physics.Arcade.StaticGroup;
     private tokens: Phaser.Physics.Arcade.StaticGroup;
@@ -105,6 +107,7 @@ export class SceneGame extends CYBR_Scene
         this.createMap();
         this.createBackground();
         this.createPlatforms();
+        this.createLadders();
         this.createPortals();
         this.createTokens();
         this.createPickupItems();
@@ -152,7 +155,7 @@ export class SceneGame extends CYBR_Scene
         this.backgrounds.add(this.add.image(0, 0, "sky").setScale(12));
 
         const terrain = this.currentMap.addTilesetImage("terrain_atlas", "terrain");
-        this.platforms = this.currentMap.createLayer("Background", [terrain], 0, 0);
+        this.currentMap.createLayer("Background", [terrain], 0, 0);
     }
 
     private createPlatforms()
@@ -163,6 +166,25 @@ export class SceneGame extends CYBR_Scene
         const platformsBounds = this.platforms.getBounds();
         this.physics.world.setBounds(0, 0, platformsBounds.width - platformsBounds.x, platformsBounds.height - platformsBounds.y);
         this.deadZoneY = platformsBounds.height - platformsBounds.y;
+    }
+
+    private createLadders()
+    {
+        this.ladders = this.physics.add.staticGroup();
+
+        // @ts-ignore - Problem with Phaser’s types. classType supports classes 
+        let portalObjects = this.currentMap.createFromObjects("Ladders", {name: "Ladder", classType: Ladder});
+        portalObjects.map((ladder: Phaser.Physics.Arcade.Image)=>{
+            ladder.setTexture("ladder");
+            this.ladders.add(ladder);
+        });
+
+        // No physic for the top of the ladder
+        portalObjects = this.currentMap.createFromObjects("Ladders", {name: "LadderTop"});
+        portalObjects.map((ladder: Phaser.Physics.Arcade.Image)=>{
+            ladder.setTexture("ladderTop");
+        });
+
     }
 
     private createPortals()
@@ -247,11 +269,21 @@ export class SceneGame extends CYBR_Scene
         }, this);
     }
 
+    // Create all the overlaps and the colldiers - The order is important!
     private createInteractions()
     {
+        this.physics.add.collider(this.player, this.ladders, null, (player: Player, ladder: Ladder) => {
+            return (player.y < ladder.y ) && !player.isLookingDown;
+        }, this);
+
+        this.physics.add.overlap(this.player, this.ladders, this.overlapLadder);
+
         this.platforms.setCollisionByProperty({collides:true});
         this.physics.add.collider(this.enemies, this.platforms);
-        this.physics.add.collider(this.player, this.platforms);
+        this.physics.add.collider(this.player, this.platforms, null, (player: Player, platform) => {
+            return !player.isClimbing;
+        }, this);
+
         this.physics.add.overlap(this.player, this.portals, this.completeLevel, null, this);
         this.physics.add.overlap(this.player, this.tokens, this.collectToken, null, this);
         this.physics.add.overlap(this.player, this.pickupItems, this.applyEffectOnPlayer, null, this);
@@ -340,6 +372,9 @@ export class SceneGame extends CYBR_Scene
     public update(time: number, delta: number)
     {
         super.update(time, delta);
+
+        this.ladders.getChildren().forEach((ladder: Ladder) => { ladder.update(); }, this);
+
         // TODO: Use WOLRD_BOUNDS callback: https://photonstorm.github.io/phaser3-docs/Phaser.Physics.Arcade.Events.html#event:WORLD_BOUNDS__anchor
         // It exists on js but I don't see it on ts...
         if (this.player.y > this.deadZoneY && !this.player.dead())
@@ -347,7 +382,7 @@ export class SceneGame extends CYBR_Scene
 
         this.player.update();
 
-        this.enemies.getChildren().forEach(ai => { ai.update(); }, this);
+        this.enemies.getChildren().forEach((ai: BasicAI) => { ai.update(); }, this);
     }
 
     // Enemies
@@ -464,12 +499,17 @@ export class SceneGame extends CYBR_Scene
         this.startNextLevel();
     }
 
+    private overlapLadder(player: Player, ladder: Ladder)
+    {
+        ladder.overlapPawnBegin(player);
+    }
+
     private getCollectedTokens()
     {
         return this.collectedTokens;
     }
 
-    private setCollectedTokens(tokens)
+    private setCollectedTokens(tokens: number)
     {
         this.collectedTokens = tokens;
         this.events.emit("onCollectedTokenChanged", this.collectedTokens);
