@@ -1,6 +1,6 @@
 import { CYBR_Graphics } from "../UI/CYBR_Graphics";
 
-export interface SceneData {
+export declare type SceneData = {
     level?: integer;
 }
 
