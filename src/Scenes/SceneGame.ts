@@ -89,6 +89,7 @@ export class SceneGame extends CYBR_Scene
         keyESC.on("down", function(event){
             this.showGameMenu(true);
             this.scene.setActive(false, CST.SCENES.GAME);
+            this.scene.setActive(false, CST.SCENES.GAME_UI);
         }, this)
 
         this.keysPlayer = this.input.keyboard.addKeys({
@@ -136,6 +137,7 @@ export class SceneGame extends CYBR_Scene
         else
         {
             this.scene.pause(CST.SCENES.GAME);
+            this.scene.pause(CST.SCENES.GAME_UI);
             this.showGameMenu(true);
         }
     }

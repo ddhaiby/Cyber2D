@@ -9,12 +9,14 @@ export class SceneGame_UI extends CYBR_Scene
 {
     private sceneGame: SceneGame;
     private player: Player;
+    private elapsedTime: number = 0;
 
     // UI Items
-    private _healthBar: CYBR_HealthBar;
-    private _bulletBar: CYBR_BulletBar;
-    private _tokenScoreItem: Map<string, Phaser.GameObjects.GameObject>;
-    private _lifeItem: Map<string, Phaser.GameObjects.GameObject>;
+    private healthBar: CYBR_HealthBar;
+    private bulletBar: CYBR_BulletBar;
+    private chronoText: Phaser.GameObjects.Text;
+    private tokenScoreItem: Map<string, Phaser.GameObjects.GameObject>;
+    private lifeItem: Map<string, Phaser.GameObjects.GameObject>;
 
     constructor()
     {
@@ -24,7 +26,7 @@ export class SceneGame_UI extends CYBR_Scene
     // Init
     ////////////////////////////////////////////////////////////////////////
    
-    public init(sceneGame: SceneGame)
+    public init(sceneGame: SceneGame) : void
     { 
         this.sceneGame = sceneGame;
         this.player = sceneGame.player;
@@ -33,42 +35,43 @@ export class SceneGame_UI extends CYBR_Scene
     // Create
     ////////////////////////////////////////////////////////////////////////
 
-    public create()
+    public create() : void
     {
         this.createHealthBar();
         this.createBulletBar();
-        this._tokenScoreItem = this.createTokenScoreItem();
-        this._lifeItem = this.createLifeItem();
+        this.tokenScoreItem = this.createTokenScoreItem();
+        this.lifeItem = this.createLifeItem();
+        this.chronoText = this.createChrono();
         this.createGameOverScreen();
     }
 
-    private createHealthBar()
+    private createHealthBar() : void
     {
-        this._healthBar = new CYBR_HealthBar(this, { x: 12, y: 12, width: 160, height: 16, color: 0x990000, value: 1});
+        this.healthBar = new CYBR_HealthBar(this, { x: 12, y: 12, width: 160, height: 16, color: 0x990000, value: 1});
 
         this.sceneGame.events.on("onPlayerHealthChanged", (health: number, maxHealth: number)=> {
-            this._healthBar.setValue(health / maxHealth);
+            this.healthBar.setValue(health / maxHealth);
         }, this);
     }
 
-    private createBulletBar()
+    private createBulletBar() : void
     {
         // Bar
-        let bulletBarX = this._healthBar.x;
-        let bulletBarY = this._healthBar.y + this._healthBar.height;
+        let bulletBarX = this.healthBar.x;
+        let bulletBarY = this.healthBar.y + this.healthBar.height;
 
-        this._bulletBar = new CYBR_BulletBar(this, { x: bulletBarX, y: bulletBarY, width: 160, height: 12, color: 0x005544, value: 0 });
+        this.bulletBar = new CYBR_BulletBar(this, { x: bulletBarX, y: bulletBarY, width: 160, height: 12, color: 0x005544, value: 0 });
 
         this.sceneGame.events.on("onShotsChanged", (shots: number, fireLimit: number)=> {
-            this._bulletBar.setValue(shots / fireLimit);
+            this.bulletBar.setValue(shots / fireLimit);
         }, this);
     }
 
-    private createTokenScoreItem()
+    private createTokenScoreItem() : Map<string, Phaser.GameObjects.GameObject>
     {
         // Image
-        let tokenImageX = this._bulletBar.x;
-        let tokenImageY = this._bulletBar.y + this._bulletBar.height + 8;
+        let tokenImageX = this.bulletBar.x;
+        let tokenImageY = this.bulletBar.y + this.bulletBar.height + 8;
 
         let tokenImage = this.add.image(tokenImageX, tokenImageY, "token_24");
         tokenImage.x += tokenImage.width / 2;
@@ -90,9 +93,9 @@ export class SceneGame_UI extends CYBR_Scene
     }
 
     // TODO: Review position
-    private createLifeItem()
+    private createLifeItem() : Map<string, Phaser.GameObjects.GameObject>
     {
-        let tokenImage = this._tokenScoreItem.get("image") as Phaser.GameObjects.Image;
+        let tokenImage = this.tokenScoreItem.get("image") as Phaser.GameObjects.Image;
 
         // Image
         let lifeImageX = tokenImage.x;
@@ -105,7 +108,7 @@ export class SceneGame_UI extends CYBR_Scene
         let textX = lifeImage.x + lifeImage.width;
         let textY = lifeImage.y + 1;
     
-        let lifeText = this.add.text(textX, textY, this.sceneGame.getRemainLife().toString(), { font: '18px Arial', color: '#000000' });
+        let lifeText = this.add.text(textX, textY, this.sceneGame.getRemainLife().toString(), { font: '18px Gemunu Libre', color: '#000000' });
         lifeText.x -= lifeText.width / 2;
         lifeText.y -= lifeText.height / 2;
         
@@ -116,7 +119,7 @@ export class SceneGame_UI extends CYBR_Scene
         return new Map<string, Phaser.GameObjects.GameObject>().set("image", lifeImage).set("text", lifeText);
     }
 
-    private createGameOverScreen()
+    private createGameOverScreen() : void
     {
         let gameOverText = this.add.text(0, 0, "GAME OVER", { font: '54px Arial', color: '#000000' });
         gameOverText.visible = false;
@@ -127,11 +130,20 @@ export class SceneGame_UI extends CYBR_Scene
         }, this);
     }
 
+    private createChrono() : Phaser.GameObjects.Text
+    {
+        let sceneWidth = this.scale.displaySize.width;
+        return this.add.text(sceneWidth - 100, 16, "00:00:00", { font: '20px Arial', color: '#000000' });
+    }
+
     // Update
     ////////////////////////////////////////////////////////////////////////
 
-    public update(time: number, delta: number)
+    public update(time: number, delta: number) : void
     {
         super.update(time, delta);
+
+        this.elapsedTime += delta;
+        this.chronoText.text = CYBR_Scene.formatTime(this.elapsedTime);
     }
 }

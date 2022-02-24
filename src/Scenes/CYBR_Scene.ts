@@ -57,4 +57,25 @@ export class CYBR_Scene extends Phaser.Scene
 
         return item;
     }
+
+    static formatTime(milliseconds: number) : string
+    {
+        // Minutes
+        const minutes = Math.floor(milliseconds / 60000);
+        const minutesString = (minutes >= 10) ? minutes.toString() : "0" + minutes.toString();
+        milliseconds = milliseconds - minutes * 60000;
+
+        // Seconds
+        const seconds = Math.floor(milliseconds / 1000);
+        const secondsString = (seconds >= 10) ? seconds.toString() : "0" + seconds.toString();
+        milliseconds = milliseconds - seconds * 1000;
+
+        // Milliseconds
+        milliseconds = Math.floor(milliseconds / 10);
+        let millisecondsString = milliseconds.toString();
+        millisecondsString = (milliseconds < 10) ? "0" + millisecondsString : millisecondsString;
+    
+        return minutesString + ":" + secondsString + ":" + millisecondsString;
+    }
+
 }
