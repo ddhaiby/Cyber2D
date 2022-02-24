@@ -36,7 +36,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     // Init
     ////////////////////////////////////////////////////////////////////////
 
-    public init(scene: Phaser.Scene, textureKey?: string)
+    public init(scene: Phaser.Scene, textureKey?: string) : void
     {
         this._scene = scene;
 
@@ -56,14 +56,14 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.initAttributes();
     }
 
-    private initStates()
+    private initStates() : void
     {
         this.isLookingUp = false;
         this.isLookingDown = false;
     }
 
     // TODO: Use an object with all the data of sprite. So I can be free of the animation and do nothing if the object is empty
-    private initAnimations()
+    private initAnimations() : void
     {
         // Don't do anything if there is no texture
         if (this.texture.key == "__DEFAULT" || this.texture.key == "")
@@ -100,7 +100,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.anims.play('right', true);
     }
 
-    private initAttributes()
+    private initAttributes() : void
     {
         this.attributes = new Phaser.Structs.Map([]);
         this.attributes.set(CST.PLAYER.ATTRIBUTES.MAX_HEALTH, 100);
@@ -112,18 +112,18 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     // Overlap
     ////////////////////////////////////////////////////////////////////////
 
-    public onOverlapBegin(obj)
+    public onOverlapBegin(obj) : void
     {
         this.overlapped = true;
         this.wasOverlapped = true;
     }
 
-    public onOverlapContinue(obj)
+    public onOverlapContinue(obj) : void
     {
         this.wasOverlapped = true;
     }
 
-    public onOverlapEnd()
+    public onOverlapEnd() : void
     {
         this.overlapped = false;
     }
@@ -131,7 +131,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     // Update
     ////////////////////////////////////////////////////////////////////////
 
-    public update(...args: any[])
+    public update(...args: any[]) : void
     {
         super.update(args);
 
@@ -143,16 +143,13 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
                 this.onOverlapEnd();
         }
 
-        const body = this.body as Phaser.Physics.Arcade.Body;
-        const isOnFloor = body.onFloor();
-
-        if (isOnFloor)
+        if (this.isOnFloor())
             this.isJumping = false;
 
         this.updateOnLadder();
     }
 
-    protected updateOnLadder()
+    protected updateOnLadder() : void
     {
         if (!this.isOnLadder && this.wasOnLadder)
         {
@@ -225,29 +222,38 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
             this.setVelocityY(0);
     }
 
-    protected lookUp()
+    protected lookUp() : void
     {
         this.isLookingUp = true;
         this.isLookingDown = false;
     }
 
-    protected lookDown()
+    protected lookDown() : void
     {
         this.isLookingUp = false;
         this.isLookingDown = true;
     }
     
-    protected lookStraight()
+    protected lookStraight() : void
     {
         this.isLookingUp = false;
         this.isLookingDown = false;
     }
 
-    public jump()
+    public isOnFloor() : boolean
     {
-        let body = this.body as Phaser.Physics.Arcade.Body;
+        const body = this.body as Phaser.Physics.Arcade.Body;
+        return body.onFloor();
+    }
 
-        if (!this.dead() && body.onFloor())
+    public canJump() : boolean
+    {
+        return !this.dead() && this.isOnFloor();
+    }
+
+    public jump() : void
+    {
+        if (this.canJump())
         {
             this.setVelocityY(-330);
             this.isJumping = true;
@@ -255,17 +261,17 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         }
     }
 
-    public hurt(health: number)
+    public hurt(health: number) : void
     {
         this.setHealth(this.getHealth() - health);
     }
 
-    public heal(health: number)
+    public heal(health: number) : void
     {
         this.setHealth(this.getHealth() + health);
     }
 
-    public setHealth(health: number)
+    public setHealth(health: number) : void
     {
         this.attributes.set(CST.PLAYER.ATTRIBUTES.HEALTH, Math.max(0, Math.min(health, this.attributes.get(CST.PLAYER.ATTRIBUTES.MAX_HEALTH))));
         this.emit("healthChanged", this.attributes.get(CST.PLAYER.ATTRIBUTES.HEALTH), this.attributes.get(CST.PLAYER.ATTRIBUTES.MAX_HEALTH));
@@ -277,51 +283,51 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         }
     }
 
-    public getAttribute(name: string)
+    public getAttribute(name: string) : number
     {
         return this.attributes.get(name);
     }
 
-    public getHealth()
+    public getHealth() : number
     {
         return this.getAttribute(CST.PLAYER.ATTRIBUTES.HEALTH);
     }
 
-    public getMaxHealth()
+    public getMaxHealth() : number
     {
         return this.getAttribute(CST.PLAYER.ATTRIBUTES.MAX_HEALTH);
     }
 
-    public getWalkSpeed()
+    public getWalkSpeed() : number
     {
         return this.getAttribute(CST.PLAYER.ATTRIBUTES.WALK_SPEED);
     }
 
-    public getClimbSpeed()
+    public getClimbSpeed() : number
     {
         return this.getAttribute(CST.PLAYER.ATTRIBUTES.CLIMB_SPEED);
     }
 
     // Called when the health reaches 0 or to kill instantly 
-    public die()
+    public die() : void
     {
         this.attributes.set(CST.PLAYER.ATTRIBUTES.HEALTH, 0);
         this.stopWalking();
         this.emit("die");
     }
 
-    public dead()
+    public dead() : boolean
     {
         return this.getHealth() <= 0;
     }
 
-    public equipWeapon(weapon: CYBR_Weapon)
+    public equipWeapon(weapon: CYBR_Weapon) : void
     {
         this.currentWeapon = weapon;
         this.currentWeapon.trackSprite(this, 0, 0, false);
     }
 
-    public fire(fireAngle?: number)
+    public fire(fireAngle?: number) : void
     {
         if (this.currentWeapon)
         {
@@ -354,7 +360,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         }
     }
 
-    public stopFiring()
+    public stopFiring() : void
     {
         this.isFiring = false;
         if (this.currentWeapon)
