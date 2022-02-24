@@ -120,10 +120,12 @@ export class SceneGame extends CYBR_Scene
 
     public restartLevel()
     {
+        this.time.removeAllEvents();
+
         this.restartTokens();
         this.restartPickupItems();
         this.restartAIs();
-        this.setRemainLife(0); // TODO: Call GameMode.restart() or something
+        this.setRemainLife(0);
         this.respawnPlayer();
     }
 
