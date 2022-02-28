@@ -170,6 +170,7 @@ export class SceneGame extends CYBR_Scene
         portalObjects.map((ladder: Phaser.Physics.Arcade.Image)=>{
             ladder.setTexture("ladder");
             this.ladders.add(ladder);
+            ladder.setName(this.generateUniqueName(ladder));
         });
 
         // No physic for the top of the ladder
@@ -265,16 +266,32 @@ export class SceneGame extends CYBR_Scene
     // Create all the overlaps and the colldiers - The order is important!
     private createInteractions() : void
     {
-        this.physics.add.collider(this.player, this.ladders, null, (player: Player, ladder: Ladder) => {
-            return (player.y < ladder.y ) && !player.isLookingDown;
+        // Player
+        let laddersOnPlayer = new Phaser.Structs.Map<string, Ladder>([]);
+
+        this.ladders.getChildren().forEach((ladder: Ladder) => {
+            ladder.on("onOverlapPawnBegin", () => {
+                laddersOnPlayer.set(ladder.name, ladder);
+            }, this);
+
+            ladder.on("onOverlapPawnEnd", (ladder: Ladder) => {
+                laddersOnPlayer.delete(ladder.name);
+            }, this);
         }, this);
 
-        this.physics.add.overlap(this.player, this.ladders, this.overlapLadder);
+        this.physics.add.overlap(this.player, this.ladders, this.overlapLadder, (player: Player, ladder: Ladder) => {
+            return Math.abs(player.x - ladder.x) <= 6;
+        }, this);
 
         this.platforms.setCollisionByProperty({collides:true});
-        this.physics.add.collider(this.enemies, this.platforms);
-        this.physics.add.collider(this.player, this.platforms, null, (player: Player, platform) => {
-            return !player.isClimbing;
+        this.physics.add.collider(this.player, this.platforms, null, (player: Player, platform: Phaser.Tile) => {
+            let ladderUnderPlayer = false
+
+            laddersOnPlayer.each((ladderName: string) => {
+                ladderUnderPlayer = ladderUnderPlayer || (laddersOnPlayer.get(ladderName).y >= platform.bottom - platform.width / 2);
+            });
+
+            return !player.isClimbing || (player.isLookingDown && !ladderUnderPlayer);
         }, this);
 
         this.physics.add.overlap(this.player, this.portals, this.completeLevel, null, this);
@@ -284,6 +301,8 @@ export class SceneGame extends CYBR_Scene
         if (this.player.currentWeapon)
             this.physics.add.collider(this.player.currentWeapon.bullets, this.platforms, this.onWeaponHitPlatforms.bind(this));
 
+        // Enemies
+        this.physics.add.collider(this.enemies, this.platforms);
         this.enemies.getChildren().forEach(function (ai: BasicAI) {
             this.physics.add.overlap(this.player, ai, this.onPlayerOverlapEnnemy.bind(this), this.canPlayerOverlapEnnemy.bind(this)); 
             this.physics.add.overlap(this.player.currentWeapon.bullets, ai, this.onWeaponHitEnnemy.bind(this), this.canHitEnemy.bind(this, ai)); 

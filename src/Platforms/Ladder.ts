@@ -14,8 +14,14 @@ export class Ladder extends Phaser.Physics.Arcade.Image
     {
         this.pawn = pawn;
 
-        this.pawn.setIsOnLadder(true);
-    }   
+        if (!this.pawnLastFrame || this.pawn != this.pawnLastFrame)
+        {
+            this.pawn.setIsOnLadder(true);
+            this.emit("onOverlapPawnBegin", this);
+        }
+        else
+            this.overlapContinue();
+    }
 
     private overlapContinue() : void
     {
@@ -24,15 +30,14 @@ export class Ladder extends Phaser.Physics.Arcade.Image
 
     private overlapPawnEnd() : void
     {
+        this.emit("onOverlapPawnEnd", this);
     }
 
     public update() : void
     {
         super.update();
 
-        if (this.pawn)
-            this.overlapContinue();
-        else if (this.pawnLastFrame)
+        if (!this.pawn && this.pawnLastFrame)
             this.overlapPawnEnd();
 
         this.pawnLastFrame = this.pawn;
