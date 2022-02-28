@@ -200,7 +200,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.isOnLadder = isOnLadder;
     }
 
-    public climb(speed: number)
+    public climb(speed: number) : void
     {
         if (!this.isClimbing)
             this.startClimbing();

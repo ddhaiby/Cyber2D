@@ -22,7 +22,7 @@ export class SceneMainMenu_UI extends CYBR_Scene
     // Create
     ////////////////////////////////////////////////////////////////////////
 
-    public create()
+    public create() : void
     {        
         // Background
         let background = new CYBR_Graphics(this);
@@ -69,7 +69,7 @@ export class SceneMainMenu_UI extends CYBR_Scene
     // Update
     ////////////////////////////////////////////////////////////////////////
 
-    public update(time: number, delta: number)
+    public update(time: number, delta: number) : void
     {
         super.update(time, delta);
     }

@@ -18,7 +18,7 @@ export class SceneGameMenu_UI extends CYBR_Scene
     // Init
     ////////////////////////////////////////////////////////////////////////
    
-    public init(sceneGame: SceneGame)
+    public init(sceneGame: SceneGame) : void
     { 
         this.sceneGame = sceneGame;
     }
@@ -27,7 +27,7 @@ export class SceneGameMenu_UI extends CYBR_Scene
     ////////////////////////////////////////////////////////////////////////
 
     // TODO: See how grid/columns work with phaser 3
-    public create()
+    public create() : void
     {
         // Background
         let background = new CYBR_Graphics(this);
@@ -66,7 +66,7 @@ export class SceneGameMenu_UI extends CYBR_Scene
     // Update
     ////////////////////////////////////////////////////////////////////////
 
-    public update(time: number, delta: number)
+    public update(time: number, delta: number) : void
     {
         super.update(time, delta);
     }

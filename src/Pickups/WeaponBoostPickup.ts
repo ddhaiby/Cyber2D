@@ -15,14 +15,14 @@ export class WeaponBoostPickup extends EffectPickup
         this.init(scene);
     }
 
-    public init(scene: Phaser.Scene)
+    public init(scene: Phaser.Scene) : void
     {
         this._time = scene.time;
         this._timerApplyBoost = this._time.delayedCall(0, () => {}); // Create an empty timer so I am sure it exists
         this._boostDuration = 3000;
     }
 
-    public applyEffect(pawn: Pawn)
+    public applyEffect(pawn: Pawn) : void
     {
         if (pawn.currentWeapon)
         {

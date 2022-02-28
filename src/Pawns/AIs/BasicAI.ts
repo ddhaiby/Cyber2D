@@ -22,7 +22,7 @@ export class BasicAI extends Pawn
     // Update
     ////////////////////////////////////////////////////////////////////////
 
-    public update(...args: any[])
+    public update(...args: any[]) : void
     {
         super.update(args);
 

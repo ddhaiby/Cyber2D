@@ -3,32 +3,32 @@ import { CYBR_Graphics } from "./CYBR_Graphics";
 export class CYBR_BulletBar extends CYBR_Graphics
 {
     /** Range value from 0 to 1 */
-    private _value: number;
-    private _color: number;
+    private value: number;
+    private color: number;
     
     constructor(scene: Phaser.Scene, options?: Phaser.Types.GameObjects.Graphics.Options & {width?: number, height?: number, value?: number, color?: number})
     {
         super(scene, options);
-        this._value = (options && options.value != undefined) ? options.value : 1;
-        this._color = (options && options.color != undefined) ? options.color : 0x000000;
+        this.value = (options && options.value != undefined) ? options.value : 1;
+        this.color = (options && options.color != undefined) ? options.color : 0x000000;
         this.redraw();
     }
 
-    setValue(value: number)
+    setValue(value: number) : void
     {
-        this._value = Math.max(0, Math.min(1, value));
+        this.value = Math.max(0, Math.min(1, value));
         this.redraw();
     }
 
-    getValue()
+    getValue() : number
     {
-        return this._value;
+        return this.value;
     }
 
-    redraw()
+    redraw() : void
     {
         this.clear();
-        this.fillStyle(this._color);
-        this.fillRoundedRect(0, 0, this._value * this.width, this.height, 2);
+        this.fillStyle(this.color);
+        this.fillRoundedRect(0, 0, this.value * this.width, this.height, 2);
     }
 }

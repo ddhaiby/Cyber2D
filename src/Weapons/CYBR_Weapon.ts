@@ -29,18 +29,18 @@ export class CYBR_Weapon extends Weapon
         }, this)
     }
 
-    public fire(from?: Phaser.Math.Vector2 | Phaser.GameObjects.Sprite | ObjectWithTransform, x?: number, y?: number, offsetX?: number, offsetY?: number)
+    public fire(from?: Phaser.Math.Vector2 | Phaser.GameObjects.Sprite | ObjectWithTransform, x?: number, y?: number, offsetX?: number, offsetY?: number) : Bullet
     {
         this.stopReloading();
         return super.fire(from, x, y, offsetX, offsetY);
     }
 
-    public stopReloading()
+    public stopReloading() : void
     {
         this._timerReloadWeapon.remove();
     }
 
-    public reload()
+    public reload() : void
     {
         if (this.getShots() == 0) // Full ammunition
         {
@@ -59,24 +59,24 @@ export class CYBR_Weapon extends Weapon
         }
     }
 
-    public decrementShots()
+    public decrementShots() : void
     {
         this.shots -= 1;
         this._events.emit("onShotsChanged", this.shots, this.fireLimit);
     }
 
-    public setShots(shots: number)
+    public setShots(shots: number) : void
     {
         this.shots = shots;
         this._events.emit("onShotsChanged", this.shots, this.fireLimit);
     }
 
-    public getShots()
+    public getShots() : number
     {
         return this.shots;
     }
 
-    public stopFiring()
+    public stopFiring() : void
     {
         this.reload();
     }

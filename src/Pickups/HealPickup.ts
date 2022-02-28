@@ -11,12 +11,12 @@ export class HealPickup extends EffectPickup
 
     }
 
-    public setValue(value: number)
+    public setValue(value: number) : void
     {
         this.value = value;
     }
 
-    public applyEffect(pawn: Pawn)
+    public applyEffect(pawn: Pawn) : void
     {
         pawn.heal(this.value);
     }

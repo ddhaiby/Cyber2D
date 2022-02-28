@@ -21,14 +21,7 @@ export class Player extends Pawn
         this.initKeys(keys);
     }
 
-    public destroy()
-    {
-        for (let k in this.keys)
-            this.keys[k].removeAllListeners(); // TODO: See if this is still necessary since I restqrt thesecene for eqch level
-        super.destroy();
-    }
-
-    public init(scene: Phaser.Scene, textureKey?: string, keys?: IPlayerKeys)
+    public init(scene: Phaser.Scene, textureKey?: string, keys?: IPlayerKeys) : void
     {
         super.init(scene, textureKey);
         if (keys)
@@ -41,7 +34,7 @@ export class Player extends Pawn
         keys.jump.on('down', function(event){ this.jump(); }, this);
     }
 
-    public update(...args: any[])
+    public update(...args: any[]) : void
     {
         super.update(args);
 
