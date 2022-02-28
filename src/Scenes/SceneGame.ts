@@ -6,7 +6,7 @@ import {SceneGameMenu_UI} from "./SceneGameMenu_UI";
 
 import { Pawn } from "../Pawns/Pawn";
 import {BasicAI} from "../Pawns/AIs/BasicAI";
-import {IPlayerKeys, Player} from "../Pawns/Player";
+import {Player} from "../Pawns/Player";
 
 import {CYBR_Weapon} from "../Weapons/CYBR_Weapon";
 import {Bullet} from "phaser3-weapon-plugin";
@@ -40,8 +40,6 @@ export class SceneGame extends CYBR_Scene
     private gameOver: boolean;
 
     public currentLevel: integer;
-
-    private keysPlayer: IPlayerKeys;
 
     constructor()
     {
@@ -91,15 +89,6 @@ export class SceneGame extends CYBR_Scene
             this.scene.setActive(false, CST.SCENES.GAME);
             this.scene.setActive(false, CST.SCENES.GAME_UI);
         }, this)
-
-        this.keysPlayer = this.input.keyboard.addKeys({
-            up: "Z",
-            down: "S",
-            left: "Q",
-            right: "D",
-            jump: "SPACE",
-            fire: "K"
-        }) as IPlayerKeys;
     }
 
     private startLevel() : void
@@ -243,7 +232,7 @@ export class SceneGame extends CYBR_Scene
 
         // For this game, there should be exactly one player.
         this.player = playerObjects[0] as Player;
-        this.player.init(this, "eyeball", this.keysPlayer);
+        this.player.init(this, "eyeball");
 
         this.player.on("healthChanged", this.onPlayerHealthChanged.bind(this));
         this.player.on("die", this.onPlayerDie.bind(this));
