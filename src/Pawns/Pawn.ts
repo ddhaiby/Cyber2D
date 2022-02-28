@@ -24,9 +24,6 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     private wasOverlapped: boolean;
     public overlapped: boolean;
 
-    // Scene
-    private _scene: Phaser.Scene;
-
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture, frame?: string | number)
     {
         super(scene, x, y, texture, frame);
@@ -38,14 +35,12 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
     public init(scene: Phaser.Scene, textureKey?: string) : void
     {
-        this._scene = scene;
-
         if (textureKey)
             this.setTexture(textureKey);
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
-        this.setGravity(this._scene.physics.world.gravity.x, this._scene.physics.world.gravity.y);
+        this.setGravity(this.scene.physics.world.gravity.x, this.scene.physics.world.gravity.y);
 
         this.setCollideWorldBounds(false);
         this.overlapped = false;
@@ -153,7 +148,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     {
         if (!this.isOnLadder && this.wasOnLadder)
         {
-            this.setGravity(this._scene.physics.world.gravity.x, this._scene.physics.world.gravity.y);
+            this.setGravity(this.scene.physics.world.gravity.x, this.scene.physics.world.gravity.y);
             if (this.isClimbing)
                 this.stopClimbing();
         }
@@ -210,7 +205,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
     private startClimbing() : void
     {
-        this.setGravity(0, - this._scene.physics.world.gravity.y);
+        this.setGravity(0, - this.scene.physics.world.gravity.y);
         this.isClimbing = true;
     }
 
