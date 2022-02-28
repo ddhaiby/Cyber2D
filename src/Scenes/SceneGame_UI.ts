@@ -1,6 +1,7 @@
 import { CST } from "../CST";
 import { CYBR_Scene } from "./CYBR_Scene";
 import { SceneGame } from "./SceneGame";
+import { CYBR_Graphics } from "../UI/CYBR_Graphics";
 import { CYBR_HealthBar } from "../UI/CYBR_HealthBar";
 import { CYBR_BulletBar } from "../UI/CYBR_BulletBar";
 import { Player } from "Pawns/Player";
@@ -43,6 +44,8 @@ export class SceneGame_UI extends CYBR_Scene
         this.lifeItem = this.createLifeItem();
         this.chronoText = this.createChrono();
         this.createGameOverScreen();
+
+        this.sceneGame.events.on("onLevelCompleted", this.startLevelTransition, this);
     }
 
     private createHealthBar() : void
@@ -136,6 +139,38 @@ export class SceneGame_UI extends CYBR_Scene
         return this.add.text(sceneWidth - 100, 16, "00:00:00", { font: '20px Arial', color: '#000000' });
     }
 
+    private startLevelTransition() : void
+    {
+        this.sceneGame.scene.pause();
+
+        const gameWidth = this.sys.game.canvas.width;
+        const gameHeight = this.sys.game.canvas.height;
+
+        let transitionGraphic = new CYBR_Graphics(this, {x: 0, y: 0, width: 0, height: gameHeight})
+        transitionGraphic.fillStyle(0x000000);
+        transitionGraphic.fillRect(transitionGraphic.x, transitionGraphic.y, transitionGraphic.width, transitionGraphic.height);
+
+        this.tweens.add({
+            targets: transitionGraphic,
+            width: gameWidth,
+            ease: Phaser.Math.Easing.Linear,
+            delay: 1000,
+            duration: 1100,
+            onUpdate: function(): void {
+                transitionGraphic.clear();
+                transitionGraphic.fillStyle(0x000000);
+                transitionGraphic.fillRect(transitionGraphic.x, transitionGraphic.y, transitionGraphic.width, transitionGraphic.height);
+            },
+            onComplete: function(): void {
+                this.time.delayedCall(900, () => {
+                    transitionGraphic.destroy();
+                    this.sceneGame.startNextLevel();
+                });
+            },
+            onCompleteScope: this
+        });
+    }
+
     // Update
     ////////////////////////////////////////////////////////////////////////
 
@@ -143,7 +178,10 @@ export class SceneGame_UI extends CYBR_Scene
     {
         super.update(time, delta);
 
-        this.elapsedTime += delta;
-        this.chronoText.text = CYBR_Scene.formatTime(this.elapsedTime);
+        if (!this.scene.isPaused(this.sceneGame))
+        {
+            this.elapsedTime += delta;
+            this.chronoText.text = CYBR_Scene.formatTime(this.elapsedTime);
+        }
     }
 }

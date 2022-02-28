@@ -492,7 +492,7 @@ export class SceneGame extends CYBR_Scene
 
     private completeLevel(player: Player, portal: Portal) : void
     {
-        this.startNextLevel();
+        this.events.emit("onLevelCompleted");
     }
 
     private overlapLadder(player: Player, ladder: Ladder) : void
