@@ -1,5 +1,5 @@
 import { Color } from "phaser";
-import { CYBR_Graphics } from "./CYBR_Graphics";
+import { CYBR_Graphics } from "../Utils/CYBR_Graphics";
 
 export class CYBR_HealthBar extends CYBR_Graphics
 {

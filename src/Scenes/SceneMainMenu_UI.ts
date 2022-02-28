@@ -3,7 +3,7 @@ import { CYBR_Scene } from "./CYBR_Scene";
 import { SceneData } from "./CYBR_Scene";
 import { SceneGame } from "./SceneGame";
 import { CYBR_Button } from "../UI/CYBR_Button";
-import { CYBR_Graphics } from "../UI/CYBR_Graphics";
+import { CYBR_Graphics } from "../Utils/CYBR_Graphics";
 
 export class SceneMainMenu_UI extends CYBR_Scene
 {

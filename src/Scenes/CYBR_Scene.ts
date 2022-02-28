@@ -1,4 +1,4 @@
-import { CYBR_Graphics } from "../UI/CYBR_Graphics";
+import { CYBR_Graphics } from "../Utils/CYBR_Graphics";
 
 export declare type SceneData = {
     level?: number;

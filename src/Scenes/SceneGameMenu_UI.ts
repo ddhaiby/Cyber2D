@@ -2,7 +2,7 @@ import { CST } from "../CST";
 import { CYBR_Scene } from "./CYBR_Scene";
 import { CYBR_Button } from "../UI/CYBR_Button";
 import { SceneGame } from "./SceneGame";
-import { CYBR_Graphics } from "../UI/CYBR_Graphics";
+import { CYBR_Graphics } from "../Utils/CYBR_Graphics";
 
 export class SceneGameMenu_UI extends CYBR_Scene
 {

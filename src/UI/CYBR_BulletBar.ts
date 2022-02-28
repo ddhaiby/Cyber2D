@@ -1,4 +1,4 @@
-import { CYBR_Graphics } from "./CYBR_Graphics";
+import { CYBR_Graphics } from "../Utils/CYBR_Graphics";
 
 export class CYBR_BulletBar extends CYBR_Graphics
 {

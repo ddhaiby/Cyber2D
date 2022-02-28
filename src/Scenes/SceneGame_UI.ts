@@ -1,7 +1,7 @@
 import { CST } from "../CST";
 import { CYBR_Scene } from "./CYBR_Scene";
 import { SceneGame } from "./SceneGame";
-import { CYBR_Graphics } from "../UI/CYBR_Graphics";
+import { CYBR_Graphics } from "../Utils/CYBR_Graphics";
 import { CYBR_HealthBar } from "../UI/CYBR_HealthBar";
 import { CYBR_BulletBar } from "../UI/CYBR_BulletBar";
 import { Player } from "Pawns/Player";
