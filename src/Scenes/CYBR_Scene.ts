@@ -1,7 +1,7 @@
 import { CYBR_Graphics } from "../UI/CYBR_Graphics";
 
 export declare type SceneData = {
-    level?: integer;
+    level?: number;
 }
 
 export class CYBR_Scene extends Phaser.Scene

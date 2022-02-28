@@ -34,12 +34,12 @@ export class SceneGame extends CYBR_Scene
 
     // GameMode
     private spawnPositions: Phaser.Structs.Map<string, Phaser.Math.Vector2>;
-    private collectedTokens: integer;
-    private remainLife: integer;
+    private collectedTokens: number;
+    private remainLife: number;
     private deadZoneY: number;
     private gameOver: boolean;
 
-    public currentLevel: integer;
+    public currentLevel: number;
 
     constructor()
     {
@@ -516,7 +516,7 @@ export class SceneGame extends CYBR_Scene
         return this.remainLife;
     }
 
-    private setRemainLife(remainLife: integer) : void
+    private setRemainLife(remainLife: number) : void
     {
         this.remainLife = remainLife;
         this.events.emit("onPlayerRemainLifeChanged", this.remainLife);
