@@ -146,13 +146,6 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
     protected updateOnLadder() : void
     {
-        if (!this.isOnLadder && this.wasOnLadder)
-        {
-            this.setGravity(this.scene.physics.world.gravity.x, this.scene.physics.world.gravity.y);
-            if (this.isClimbing)
-                this.stopClimbing();
-        }
-
         if (this.isOnLadder)
         {
             if (this.isLookingUp)
@@ -161,6 +154,11 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
                 this.climb(this.getClimbSpeed());
             else
                 this.stopClimbing();
+        }
+        else if (this.wasOnLadder)
+        {
+            this.setGravity(this.scene.physics.world.gravity.x, this.scene.physics.world.gravity.y);
+            this.stopClimbing();
         }
 
         this.wasClimbing = this.isClimbing;
