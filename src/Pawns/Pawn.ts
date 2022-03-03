@@ -152,8 +152,8 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
                 this.climb(-this.getClimbSpeed());
             else if (this.isLookingDown)
                 this.climb(this.getClimbSpeed());
-            else
-                this.stopClimbing();
+            else if (this.isClimbing)
+                this.climb(0);
         }
         else if (this.wasOnLadder)
         {
@@ -163,7 +163,8 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
         this.wasClimbing = this.isClimbing;
         this.wasOnLadder = this.isOnLadder;
-        this.isOnLadder = false;
+
+        console.log(this.isClimbing, this.isOnLadder)
     }
 
     public walk(speed: number) : void

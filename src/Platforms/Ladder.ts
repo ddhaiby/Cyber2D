@@ -15,17 +15,7 @@ export class Ladder extends Phaser.Physics.Arcade.Image
         this.pawn = pawn;
 
         if (!this.pawnLastFrame || this.pawn != this.pawnLastFrame)
-        {
-            this.pawn.setIsOnLadder(true);
             this.emit("onOverlapPawnBegin", this);
-        }
-        else
-            this.overlapContinue();
-    }
-
-    private overlapContinue() : void
-    {
-        this.pawn.setIsOnLadder(true);
     }
 
     private overlapPawnEnd() : void

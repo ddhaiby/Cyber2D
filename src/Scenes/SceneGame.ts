@@ -272,10 +272,12 @@ export class SceneGame extends CYBR_Scene
         this.ladders.getChildren().forEach((ladder: Ladder) => {
             ladder.on("onOverlapPawnBegin", () => {
                 laddersOnPlayer.set(ladder.name, ladder);
+                this.player.setIsOnLadder(true);
             }, this);
 
             ladder.on("onOverlapPawnEnd", (ladder: Ladder) => {
                 laddersOnPlayer.delete(ladder.name);
+                this.player.setIsOnLadder(laddersOnPlayer.size > 0);
             }, this);
         }, this);
 
