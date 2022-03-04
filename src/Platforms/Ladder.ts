@@ -1,36 +1,67 @@
-import { Pawn } from "../Pawns/Pawn";
+import { Player } from "../Pawns/Player";
 
 export class Ladder extends Phaser.Physics.Arcade.Image
 {
-    private pawn: Pawn = null;
-    private pawnLastFrame: Pawn = null;
+    private player: Player = null;
+    private playerLastFrame: Player = null;
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture, frame?: string | number)
     {
        super(scene, x, y, texture, frame);
     }
 
-    public overlapPawnBegin(pawn: Pawn) : void
+    public overlapPawnBegin(player: Player) : void
     {
-        this.pawn = pawn;
+        this.player = player;
 
-        if (!this.pawnLastFrame || this.pawn != this.pawnLastFrame)
-            this.emit("onOverlapPawnBegin", this);
+        if (!this.playerLastFrame || this.player != this.playerLastFrame)
+        {
+            this.emit("onOverlapPlayerBegin", this);
+        }
     }
 
     private overlapPawnEnd() : void
     {
-        this.emit("onOverlapPawnEnd", this);
+        this.emit("onOverlapPlayerEnd", this);
     }
 
     public update() : void
     {
         super.update();
 
-        if (!this.pawn && this.pawnLastFrame)
+        if (!this.player && this.playerLastFrame)
             this.overlapPawnEnd();
 
-        this.pawnLastFrame = this.pawn;
-        this.pawn = null;
+        this.playerLastFrame = this.player;
+        this.player = null;
+    }
+
+    public updatePawnInteraction() : void
+    {
+        if (this.player)
+        {
+            if (this.player.isClimbing)
+                this.player.x = this.x;
+
+            const offset = 4;
+
+            if (this.player.isLookingUp)
+            {
+                if (this.player.y + this.player.height / 2 > this.y - this.height / 2 + offset)
+                    this.player.climb(0, -this.player.getClimbSpeed());
+            }
+            else if (this.player.isLookingDown)
+            {
+                if (this.player.y - this.player.height / 2 < this.y + this.height / 2)
+                    this.player.climb(0, this.player.getClimbSpeed());
+            }
+            else if (this.player.isClimbing)
+            {
+                if (this.player.isOnFloor())
+                    this.player.stopClimbing();
+                else
+                    this.player.climb(0,0);
+            }
+        }
     }
 }

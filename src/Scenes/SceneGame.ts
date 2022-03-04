@@ -15,6 +15,8 @@ import { EffectPickup } from "../Pickups/EffectPickup"
 import { HealPickup } from "../Pickups/HealPickup"
 import { WeaponBoostPickup } from "../Pickups/WeaponBoostPickup"
 import { Portal } from "../Platforms/Portal";
+
+import { LadderManager } from "../Managers/LadderManager";
 import { Ladder } from "../Platforms/Ladder";
 
 export class SceneGame extends CYBR_Scene
@@ -22,11 +24,13 @@ export class SceneGame extends CYBR_Scene
     // Map
     private currentMap: Phaser.Tilemaps.Tilemap;
     private platforms: Phaser.Tilemaps.TilemapLayer;
-    private ladders: Phaser.Physics.Arcade.StaticGroup;
     private portals: Phaser.Physics.Arcade.StaticGroup;
     private backgrounds: Phaser.Physics.Arcade.StaticGroup;
     private tokens: Phaser.Physics.Arcade.StaticGroup;
     private pickupItems: Phaser.Physics.Arcade.StaticGroup;
+
+    // Managers
+    private ladderManager: LadderManager;
 
     // Pawns
     public player: Player;
@@ -163,13 +167,13 @@ export class SceneGame extends CYBR_Scene
 
     private createLadders() : void
     {
-        this.ladders = this.physics.add.staticGroup();
+        let ladders = this.physics.add.staticGroup();
 
         // @ts-ignore - Problem with Phaser’s types. classType supports classes 
         let portalObjects = this.currentMap.createFromObjects("Ladders", {name: "Ladder", classType: Ladder});
         portalObjects.map((ladder: Phaser.Physics.Arcade.Image)=>{
             ladder.setTexture("ladder");
-            this.ladders.add(ladder);
+            ladders.add(ladder);
             ladder.setName(this.generateUniqueName(ladder));
         });
 
@@ -179,6 +183,7 @@ export class SceneGame extends CYBR_Scene
             ladder.setTexture("ladderTop");
         });
 
+        this.ladderManager = new LadderManager(this, ladders);
     }
 
     private createPortals() : void
@@ -266,34 +271,16 @@ export class SceneGame extends CYBR_Scene
     // Create all the overlaps and the colldiers - The order is important!
     private createInteractions() : void
     {
+        this.ladderManager.init(this.player);
+
         // Player
-        let laddersOnPlayer = new Phaser.Structs.Map<string, Ladder>([]);
-
-        this.ladders.getChildren().forEach((ladder: Ladder) => {
-            ladder.on("onOverlapPawnBegin", () => {
-                laddersOnPlayer.set(ladder.name, ladder);
-                this.player.setIsOnLadder(true);
-            }, this);
-
-            ladder.on("onOverlapPawnEnd", (ladder: Ladder) => {
-                laddersOnPlayer.delete(ladder.name);
-                this.player.setIsOnLadder(laddersOnPlayer.size > 0);
-            }, this);
-        }, this);
-
-        this.physics.add.overlap(this.player, this.ladders, this.overlapLadder, (player: Player, ladder: Ladder) => {
-            return Math.abs(player.x - ladder.x) <= 6;
+        this.physics.add.overlap(this.player, this.ladderManager.ladders, this.overlapLadder, (player: Player, ladder: Ladder) => {
+            return Math.abs(player.x - ladder.x) <= 8;
         }, this);
 
         this.platforms.setCollisionByProperty({collides:true});
         this.physics.add.collider(this.player, this.platforms, null, (player: Player, platform: Phaser.Tile) => {
-            let ladderUnderPlayer = false
-
-            laddersOnPlayer.each((ladderName: string) => {
-                ladderUnderPlayer = ladderUnderPlayer || (laddersOnPlayer.get(ladderName).y >= platform.bottom - platform.width / 2);
-            });
-
-            return !player.isClimbing || (player.isLookingDown && !ladderUnderPlayer);
+            return !player.isClimbing || (!this.ladderManager.areLaddersOnPlayerUnderY(platform.bottom - platform.width / 2));
         }, this);
 
         this.physics.add.overlap(this.player, this.portals, this.completeLevel, null, this);
@@ -387,7 +374,7 @@ export class SceneGame extends CYBR_Scene
     {
         super.update(time, delta);
 
-        this.ladders.getChildren().forEach((ladder: Ladder) => { ladder.update(); }, this);
+        this.ladderManager.update();
 
         // TODO: Use WOLRD_BOUNDS callback: https://photonstorm.github.io/phaser3-docs/Phaser.Physics.Arcade.Events.html#event:WORLD_BOUNDS__anchor
         // It exists on js but I don't see it on ts...

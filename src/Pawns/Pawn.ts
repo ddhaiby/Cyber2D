@@ -9,11 +9,11 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     // States
     public isLookingUp: boolean = false;
     public isLookingDown: boolean = false;
+    public isLookingRight: boolean = false;
+    public isLookingLeft: boolean = false;
     public isWalking: boolean = false;
     public isJumping: boolean = false;
     public isFiring: boolean = false;
-    public isOnLadder: boolean = false;
-    public wasOnLadder: boolean = false;
     public isClimbing: boolean = false;
     public wasClimbing: boolean = false;
 
@@ -57,7 +57,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.isLookingDown = false;
     }
 
-    // TODO: Use an object with all the data of sprite. So I can be free of the animation and do nothing if the object is empty
+    // TODO: This should be later defined in the derived classes
     private initAnimations() : void
     {
         // Don't do anything if there is no texture
@@ -65,34 +65,34 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
             return;
 
         this.anims.create({
-            key: 'up',
+            key: "up",
             frames: this.anims.generateFrameNumbers(this.texture.key, { start: 0, end: 2 }),
             frameRate: 10,
             repeat: -1
         });
 
         this.anims.create({
-            key: 'left',
+            key: "left",
             frames: this.anims.generateFrameNumbers(this.texture.key, { start: 3, end: 5 }),
             frameRate: 10,
             repeat: -1
         });
 
         this.anims.create({
-            key: 'down',
+            key: "down",
             frames: this.anims.generateFrameNumbers(this.texture.key, { start: 6, end: 8 }),
             frameRate: 10,
             repeat: -1
         });
 
         this.anims.create({
-            key: 'right',
+            key: "right",
             frames: this.anims.generateFrameNumbers(this.texture.key, { start: 9, end: 11 }),
             frameRate: 10,
             repeat: -1
         });
         
-        this.anims.play('right', true);
+        this.anims.play("right", true);
     }
 
     private initAttributes() : void
@@ -141,40 +141,48 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         if (this.isOnFloor())
             this.isJumping = false;
 
-        this.updateOnLadder();
-    }
-
-    protected updateOnLadder() : void
-    {
-        if (this.isOnLadder)
-        {
-            if (this.isLookingUp)
-                this.climb(-this.getClimbSpeed());
-            else if (this.isLookingDown)
-                this.climb(this.getClimbSpeed());
-            else if (this.isClimbing)
-                this.climb(0);
-        }
-        else if (this.wasOnLadder)
-        {
-            this.setGravity(this.scene.physics.world.gravity.x, this.scene.physics.world.gravity.y);
-            this.stopClimbing();
-        }
-
         this.wasClimbing = this.isClimbing;
-        this.wasOnLadder = this.isOnLadder;
 
-        console.log(this.isClimbing, this.isOnLadder)
+        this.updateAnimations();
     }
 
-    public walk(speed: number) : void
+    // TODO: This should be later defined in the derived classes
+    /** Update the anims of this Pawn */
+    private updateAnimations() : void
     {
-        if (!this.isWalking)
-            this.startWalking();
+        if (this.isClimbing)
+        {
+            if (this.body.velocity.y != 0)
+                this.anims.play("up", true);
+            else
+                this.anims.pause();
+        }
+        else if (this.isWalking)
+        {
+            this.anims.play(this.isLookingRight ? "right" : "left", true);
+        }
+        else        
+        {
+            this.anims.pause();
+        }
+    }
 
-        const anim = (speed < 0) ? 'left' : 'right';
-        this.anims.play(anim, true);
-        this.setVelocityX(speed);
+    public canWalk() : boolean
+    {
+        return !this.dead() && (this.isOnFloor() || !this.isClimbing);
+    }
+
+    public walk() : void
+    {
+        if (this.canWalk())
+        {
+            const speed = this.getWalkSpeed();
+
+            if (!this.isWalking)
+                this.startWalking();
+
+            this.setVelocityX(this.isLookingRight ? speed : -speed);
+        }
     }
 
     private startWalking() : void
@@ -185,21 +193,15 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     public stopWalking() : void
     {
         this.setVelocityX(0);
-        this.anims.pause();
         this.isWalking = false;
     }
 
-    public setIsOnLadder(isOnLadder: boolean) : void
-    {
-        this.isOnLadder = isOnLadder;
-    }
-
-    public climb(speed: number) : void
+    public climb(speedX: number, speedY: number) : void
     {
         if (!this.isClimbing)
             this.startClimbing();
 
-        this.setVelocityY(speed);
+        this.setVelocity(speedX, speedY);
     }
 
     private startClimbing() : void
@@ -208,7 +210,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.isClimbing = true;
     }
 
-    private stopClimbing() : void
+    public stopClimbing() : void
     {
         this.isClimbing = false;
 
@@ -228,6 +230,18 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.isLookingDown = true;
     }
     
+    protected lookOnRight() : void
+    {
+        this.isLookingRight = true;
+        this.isLookingLeft = false;
+    }
+
+    protected lookOnLeft() : void
+    {
+        this.isLookingRight = false;
+        this.isLookingLeft = true;
+    }
+
     protected lookStraight() : void
     {
         this.isLookingUp = false;
@@ -251,7 +265,6 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         {
             this.setVelocityY(-330);
             this.isJumping = true;
-            //this.anims.play('up', true);
         }
     }
 
@@ -346,7 +359,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
                         fireAngle = 90;
                 }
                 else
-                    fireAngle = this.anims.currentAnim.key == "right" ? 0 : 180;
+                    fireAngle = this.isLookingRight ? 0 : 180;
             }
             this.currentWeapon.fireAngle = fireAngle;
             this.currentWeapon.fire();
