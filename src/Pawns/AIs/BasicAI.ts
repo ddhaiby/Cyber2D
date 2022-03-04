@@ -35,9 +35,15 @@ export class BasicAI extends Pawn
         if (this.test == 0) this.left = !this.left;
 
         if (this.left)
-            this.walk(-this.getWalkSpeed());
+        {
+            this.lookOnLeft();
+            this.walk();
+        }
         else
-            this.walk(this.getWalkSpeed());
+        {
+            this.lookOnRight();
+            this.walk();
+        }
 
         if (this.testFire == 0) this.fire();
     }
