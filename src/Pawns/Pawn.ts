@@ -215,7 +215,10 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.isClimbing = false;
 
         if (this.wasClimbing)
+        {
             this.setVelocityY(0);
+            this.setGravity(this.scene.physics.world.gravity.x, this.scene.physics.world.gravity.y);
+        }
     }
 
     protected lookUp() : void
@@ -256,13 +259,16 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
     public canJump() : boolean
     {
-        return !this.dead() && this.isOnFloor();
+        return !this.dead() && (this.isOnFloor() || this.isClimbing);
     }
 
     public jump() : void
     {
         if (this.canJump())
         {
+            if (this.isClimbing)
+                this.stopClimbing();
+
             this.setVelocityY(-330);
             this.isJumping = true;
         }

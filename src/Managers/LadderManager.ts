@@ -40,11 +40,8 @@ export class LadderManager {
     {
         this.laddersOnPlayer.delete(ladder.name);
         if (this.laddersOnPlayer.size == 0)
-        {
-            this.player.setGravity(this.scene.physics.world.gravity.x, this.scene.physics.world.gravity.y);
             this.player.stopClimbing();
-        }
-        
+
         this.bottomLadderOnPlayer = this.getBottomLadder(this.laddersOnPlayer.getArray() as Ladder[]);
     }
 
