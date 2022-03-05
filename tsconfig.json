@@ -1,10 +1,33 @@
 {
-	"compilerOptions":
-	{
-		"baseUrl": "./src",
+	"compilerOptions": {
+		"target": "ESNext",
 		"module": "commonjs",
-		"target": "ES2017"
+		"rootDir": "./src/",
+		"outDir": "./dist/",
+		"strict": false,
+		"moduleResolution": "node",
+		"importHelpers": true,
+		"experimentalDecorators": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"allowSyntheticDefaultImports": true,
+		"resolveJsonModule": true,
+		"forceConsistentCasingInFileNames": true,
+		"removeComments": true,
+		"typeRoots": [
+			"node_modules/@types"
+		],
+		"sourceMap": false,
+		"baseUrl": "./"
 	},
-	"include": ["./src/**/*", "./lib/**/*", "./typings/**/*"],
-	"typeRoots": ["./typings"],                       /* List of folders to include type definitions from. */
+	"files": [
+		"src/main.ts"
+	],
+	"include": [
+		"./**/*.ts",
+	],
+	"exclude": [
+		"node_modules",
+		"dist"
+	]
 }

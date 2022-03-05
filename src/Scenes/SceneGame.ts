@@ -279,6 +279,8 @@ export class SceneGame extends CYBR_Scene
         }, this);
 
         this.platforms.setCollisionByProperty({collides:true});
+
+        // @ts-ignore
         this.physics.add.collider(this.player, this.platforms, null, (player: Player, platform: Phaser.Tile) => {
             return !player.isClimbing || (!this.ladderManager.areLaddersOnPlayerUnderY(platform.bottom - platform.width / 2));
         }, this);

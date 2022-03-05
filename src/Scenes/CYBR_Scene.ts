@@ -6,7 +6,7 @@ export declare type SceneData = {
 
 export class CYBR_Scene extends Phaser.Scene
 {
-    private static _idCount = 0;
+    private static _idCount:number = 0;
 
     constructor(config: string | Phaser.Types.Scenes.SettingsConfig)
     {
@@ -27,8 +27,8 @@ export class CYBR_Scene extends Phaser.Scene
         if (offsetY == undefined)
             offsetY = 0;
 
-        let sceneWidth = this.scale.displaySize.width;
-        let sceneHeight = this.scale.displaySize.height;
+        let sceneWidth:number = this.scale.displaySize.width;
+        let sceneHeight:number = this.scale.displaySize.height;
 
         item.setX((sceneWidth - item.width) / 2 + offsetX); 
         item.setY((sceneHeight - item.height) / 2 + offsetY);
