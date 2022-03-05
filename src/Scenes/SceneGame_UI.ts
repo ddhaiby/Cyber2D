@@ -2,8 +2,8 @@ import { CST } from "../CST";
 import { CYBR_Scene } from "./CYBR_Scene";
 import { SceneGame } from "./SceneGame";
 import { CYBR_Graphics } from "../Utils/CYBR_Graphics";
-import { CYBR_HealthBar } from "../UI/CYBR_HealthBar";
-import { CYBR_BulletBar } from "../UI/CYBR_BulletBar";
+import { HealthBar } from "../UI/HealthBar";
+import { BulletBar } from "../UI/BulletBar";
 import { Player } from "Pawns/Player";
 
 export class SceneGame_UI extends CYBR_Scene
@@ -13,8 +13,8 @@ export class SceneGame_UI extends CYBR_Scene
     private elapsedTime: number = 0;
 
     // UI Items
-    private healthBar: CYBR_HealthBar;
-    private bulletBar: CYBR_BulletBar;
+    private healthBar: HealthBar;
+    private bulletBar: BulletBar;
     private chronoText: Phaser.GameObjects.Text;
     private tokenScoreItem: Map<string, Phaser.GameObjects.GameObject>;
     private lifeItem: Map<string, Phaser.GameObjects.GameObject>;
@@ -50,7 +50,7 @@ export class SceneGame_UI extends CYBR_Scene
 
     private createHealthBar() : void
     {
-        this.healthBar = new CYBR_HealthBar(this, { x: 12, y: 12, width: 160, height: 16, color: 0x990000, value: 1});
+        this.healthBar = new HealthBar(this, { x: 12, y: 12, width: 160, height: 16, color: 0x990000, value: 1});
 
         this.sceneGame.events.on("onPlayerHealthChanged", (health: number, maxHealth: number)=> {
             this.healthBar.setValue(health / maxHealth);
@@ -63,7 +63,7 @@ export class SceneGame_UI extends CYBR_Scene
         let bulletBarX = this.healthBar.x;
         let bulletBarY = this.healthBar.y + this.healthBar.height;
 
-        this.bulletBar = new CYBR_BulletBar(this, { x: bulletBarX, y: bulletBarY, width: 160, height: 12, color: 0x005544, value: 0 });
+        this.bulletBar = new BulletBar(this, { x: bulletBarX, y: bulletBarY, width: 160, height: 12, color: 0x005544, value: 0 });
 
         this.sceneGame.events.on("onShotsChanged", (shots: number, fireLimit: number)=> {
             this.bulletBar.setValue(shots / fireLimit);
