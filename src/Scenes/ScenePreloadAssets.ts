@@ -1,9 +1,12 @@
 import { CST } from "../CST";
 import { CYBR_Scene } from "./CYBR_Scene";
 import { SceneMainMenu_UI } from "./SceneMainMenu_UI";
+import { SplashScreen } from "../UI/SplashScreen";
 
 export class ScenePreloadAssets extends CYBR_Scene
 {
+    private splashScreen: SplashScreen;
+
     constructor()
     {
         super({key: CST.SCENES.PRELOAD_ASSETS});
@@ -69,7 +72,15 @@ export class ScenePreloadAssets extends CYBR_Scene
   
     public create() : void
     {
-        this.scene.add(CST.SCENES.MAINMENU_UI, SceneMainMenu_UI, true, null);
-        this.scene.remove(CST.SCENES.PRELOAD_ASSETS);
+        const sceneMainMenu = this.scene.add(CST.SCENES.MAINMENU_UI, SceneMainMenu_UI, false, null) as SceneMainMenu_UI; 
+
+        // Splash screen
+        this.splashScreen = new SplashScreen(this, 0, 0, this.sys.game.canvas.width, this.sys.game.canvas.height);
+        this.splashScreen.onAnimationCompleted(() => {
+            this.scene.remove(CST.SCENES.PRELOAD_ASSETS);
+            sceneMainMenu.scene.start();
+        }, this);
+
+        this.splashScreen.showAnimation();
     }
 }

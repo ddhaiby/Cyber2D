@@ -45,14 +45,14 @@ export class SceneGame_UI extends CYBR_Scene
         this.chronoText = this.createChrono();
         this.createGameOverScreen();
 
-        this.sceneGame.events.on("onLevelCompleted", this.startLevelTransition, this);
+        this.sceneGame.events.on("levelCompleted", this.startLevelTransition, this);
     }
 
     private createHealthBar() : void
     {
         this.healthBar = new HealthBar(this, { x: 12, y: 12, width: 160, height: 16, color: 0x990000, value: 1});
 
-        this.sceneGame.events.on("onPlayerHealthChanged", (health: number, maxHealth: number)=> {
+        this.sceneGame.events.on("playerHealthChanged", (health: number, maxHealth: number)=> {
             this.healthBar.setValue(health / maxHealth);
         }, this);
     }
@@ -65,7 +65,7 @@ export class SceneGame_UI extends CYBR_Scene
 
         this.bulletBar = new BulletBar(this, { x: bulletBarX, y: bulletBarY, width: 160, height: 12, color: 0x005544, value: 0 });
 
-        this.sceneGame.events.on("onShotsChanged", (shots: number, fireLimit: number)=> {
+        this.sceneGame.events.on("shotsChanged", (shots: number, fireLimit: number)=> {
             this.bulletBar.setValue(shots / fireLimit);
         }, this);
     }
@@ -88,7 +88,7 @@ export class SceneGame_UI extends CYBR_Scene
         tokenText.x -= tokenText.width / 2;
         tokenText.y -= tokenText.height / 2;
         
-        this.sceneGame.events.on("onCollectedTokenChanged", (collectedTokens)=> {
+        this.sceneGame.events.on("collectedTokenChanged", (collectedTokens)=> {
             tokenText.text = collectedTokens;
         }, this);
 
@@ -115,7 +115,7 @@ export class SceneGame_UI extends CYBR_Scene
         lifeText.x -= lifeText.width / 2;
         lifeText.y -= lifeText.height / 2;
         
-        this.sceneGame.events.on("onPlayerRemainLifeChanged", (remainLife: integer)=> {
+        this.sceneGame.events.on("playerRemainLifeChanged", (remainLife: integer)=> {
             lifeText.text = Math.max(0, remainLife).toString();
         }, this);
 
@@ -128,7 +128,7 @@ export class SceneGame_UI extends CYBR_Scene
         gameOverText.visible = false;
         this.centerItem(gameOverText);
 
-        this.sceneGame.events.on("onGameOverChanged", (gameOver: boolean)=> {
+        this.sceneGame.events.on("gameOverChanged", (gameOver: boolean)=> {
             gameOverText.visible = gameOver;
         }, this);
     }

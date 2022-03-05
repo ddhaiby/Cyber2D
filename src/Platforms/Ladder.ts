@@ -16,13 +16,13 @@ export class Ladder extends Phaser.Physics.Arcade.Image
 
         if (!this.playerLastFrame || this.player != this.playerLastFrame)
         {
-            this.emit("onOverlapPlayerBegin", this);
+            this.emit("overlapPlayerBegin", this);
         }
     }
 
     private overlapPawnEnd() : void
     {
-        this.emit("onOverlapPlayerEnd", this);
+        this.emit("overlapPlayerEnd", this);
     }
 
     public update() : void

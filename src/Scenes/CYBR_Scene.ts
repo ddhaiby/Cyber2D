@@ -6,17 +6,17 @@ export declare type SceneData = {
 
 export class CYBR_Scene extends Phaser.Scene
 {
-    private static _idCount:number = 0;
+    private static _idCount: number = 0;
 
     constructor(config: string | Phaser.Types.Scenes.SettingsConfig)
     {
         super(config);
     }
 
-    public generateUniqueName(gameObject: Phaser.GameObjects.GameObject) : string
+    public generateUniqueName(gameObject: Phaser.GameObjects.GameObject) : string // TODO rendre static
     {
         ++CYBR_Scene._idCount;
-        return (typeof gameObject) + CYBR_Scene._idCount.toString(); // typeof always return "object". Consider using the string directly, or fix it.
+        return (typeof gameObject) + CYBR_Scene._idCount.toString(); // TODO typeof always return "object". Consider using the string directly, or fix it.
     }
 
     public centerItem(item: Phaser.GameObjects.Image | Phaser.GameObjects.Text | CYBR_Graphics, offsetX?: number, offsetY?: number)

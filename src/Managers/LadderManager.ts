@@ -22,8 +22,8 @@ export class LadderManager {
         this.player = player;
 
         this.ladders.getChildren().forEach((ladder: Ladder) => {
-            ladder.on("onOverlapPlayerBegin", () => { this.addLadderOnPlayer(ladder); }, this);
-            ladder.on("onOverlapPlayerEnd", () => { this.removeLadderOnPlayer(ladder); }, this);
+            ladder.on("overlapPlayerBegin", () => { this.addLadderOnPlayer(ladder); }, this);
+            ladder.on("overlapPlayerEnd", () => { this.removeLadderOnPlayer(ladder); }, this);
         }, this);
     }
 

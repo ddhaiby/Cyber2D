@@ -435,7 +435,7 @@ export class SceneGame extends CYBR_Scene
 
     private onPlayerHealthChanged(health: number, maxHealth: number) : void
     {
-        this.events.emit("onPlayerHealthChanged", health, maxHealth);
+        this.events.emit("playerHealthChanged", health, maxHealth);
     }
 
     private onPlayerDie() : void
@@ -497,12 +497,12 @@ export class SceneGame extends CYBR_Scene
             }, null, this);
         }
 
-        this.events.emit("onGameOverChanged", gameOver);
+        this.events.emit("gameOverChanged", gameOver);
     }
 
     private completeLevel(player: Player, portal: Portal) : void
     {
-        this.events.emit("onLevelCompleted");
+        this.events.emit("levelCompleted");
     }
 
     private overlapLadder(player: Player, ladder: Ladder) : void
@@ -518,7 +518,7 @@ export class SceneGame extends CYBR_Scene
     private setCollectedTokens(tokens: number) : void
     {
         this.collectedTokens = tokens;
-        this.events.emit("onCollectedTokenChanged", this.collectedTokens);
+        this.events.emit("collectedTokenChanged", this.collectedTokens);
     }
 
     public getRemainLife() : number
@@ -529,7 +529,7 @@ export class SceneGame extends CYBR_Scene
     private setRemainLife(remainLife: number) : void
     {
         this.remainLife = remainLife;
-        this.events.emit("onPlayerRemainLifeChanged", this.remainLife);
+        this.events.emit("playerRemainLifeChanged", this.remainLife);
         this.setGameOver(remainLife < 0); // TODO game over tests should be part of a game mode
     }
 }

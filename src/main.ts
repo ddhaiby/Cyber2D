@@ -1,5 +1,3 @@
-///** @type {import("../typings/phaser")} */
-
 import {ScenePreloadAssets} from "./Scenes/ScenePreloadAssets";
 
 
