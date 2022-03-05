@@ -31,6 +31,10 @@ export class ScenePreloadAssets extends CYBR_Scene
 
     private loadImages() : void
     {
+        // Videos
+        this.load.setPath("./assets/video");
+        this.load.video("cyberIntro", "./cyberIntro.mp4");
+
         // UI
         this.load.setPath("./assets/image/UI");
         this.load.image("btn_background", "./btn_background.png");
