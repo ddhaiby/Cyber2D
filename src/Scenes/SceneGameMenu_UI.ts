@@ -32,35 +32,23 @@ export class SceneGameMenu_UI extends CYBR_Scene
         // Background
         let background = new CYBR_Graphics(this);
         background.width = 500;
-        background.height = 320;
+        background.height = 350;
         background.fillStyle(0x171822);
         background.fillRect(0, 0, background.width, background.height);
         this.centerItem(background);
 
         // Buttons
-        let buttonResume = new CYBR_Button(this, 0, background.y + 28, "buttonResume");
+        let buttonResume = new CYBR_Button(this, 0, background.y + 28, "Resume", "btn_background");
+        buttonResume.onClicked(this.onResumeClicked, this);
         this.centerHItem(buttonResume);
 
-        let buttonRestart = new CYBR_Button(this, 0, buttonResume.y + buttonResume.height + 24, "buttonRestart");
+        let buttonRestart = new CYBR_Button(this, 0, buttonResume.y + buttonResume.height + 24, "Restart", "btn_background");
+        buttonRestart.onClicked(this.onRestartClicked, this);
         this.centerHItem(buttonRestart);
 
-        let buttonMainMenu = new CYBR_Button(this, 0, buttonRestart.y + buttonRestart.height + 24, "buttonMainMenu");
+        let buttonMainMenu = new CYBR_Button(this, 0, buttonRestart.y + buttonRestart.height + 24, "Main menu", "btn_background");
+        buttonMainMenu.onClicked(this.onMainMenuClicked, this);
         this.centerHItem(buttonMainMenu);
-
-        buttonResume.on("pointerup", (pointer) => {
-            this.sceneGame.showGameMenu(false);
-            this.sceneGame.showGame(true);
-        });
-
-        buttonRestart.on("pointerup", (pointer) => {
-            this.sceneGame.showGameMenu(false);
-            this.sceneGame.showGame(true);
-            this.sceneGame.restartLevel();
-        });
-
-        buttonMainMenu.on("pointerup", (pointer) => {
-            this.sceneGame.showMainMenu(true);
-        });
     }
 
     // Update
@@ -69,5 +57,23 @@ export class SceneGameMenu_UI extends CYBR_Scene
     public update(time: number, delta: number) : void
     {
         super.update(time, delta);
+    }
+
+    private onResumeClicked() : void
+    {
+        this.sceneGame.showGameMenu(false);
+        this.sceneGame.showGame(true);
+    }
+
+    private onRestartClicked() : void
+    {
+        this.sceneGame.showGameMenu(false);
+        this.sceneGame.showGame(true);
+        this.sceneGame.restartLevel();
+    }
+
+    private onMainMenuClicked() : void
+    {
+        this.sceneGame.showMainMenu(true);
     }
 }

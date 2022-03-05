@@ -14,7 +14,6 @@ export class ScenePreloadAssets extends CYBR_Scene
 
     public init() : void
     {
-
     }
 
     // Preload
@@ -30,13 +29,8 @@ export class ScenePreloadAssets extends CYBR_Scene
     private loadImages() : void
     {
         // UI
-        this.load.setPath("./assets/image/UI/GameMenu");
-        this.load.image("buttonPlay", "buttonPlay.png");
-        this.load.image("buttonSettings", "buttonSettings.png");
-        this.load.image("buttonLoginMetaMask", "buttonLoginMetaMask.png");
-        this.load.image("buttonMainMenu", "buttonMainMenu.png");
-        this.load.image("buttonRestart", "buttonRestart.png");
-        this.load.image("buttonResume", "buttonResume.png");
+        this.load.setPath("./assets/image/UI");
+        this.load.image("btn_background", "./btn_background.png");
 
         // In game
         this.load.setPath("./assets/image");

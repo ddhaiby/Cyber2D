@@ -30,8 +30,8 @@ export class CYBR_Scene extends Phaser.Scene
         let sceneWidth = this.scale.displaySize.width;
         let sceneHeight = this.scale.displaySize.height;
 
-        item.x = (sceneWidth - item.width) / 2 + offsetX; 
-        item.y = (sceneHeight - item.height) / 2 + offsetY;
+        item.setX((sceneWidth - item.width) / 2 + offsetX); 
+        item.setY((sceneHeight - item.height) / 2 + offsetY);
 
         return item;
     }
@@ -42,7 +42,7 @@ export class CYBR_Scene extends Phaser.Scene
             offsetY = 0;
 
         let sceneHeight = this.scale.displaySize.height;
-        item.y = (sceneHeight - item.height) / 2 + offsetY;
+        item.setY((sceneHeight - item.height) / 2 + offsetY);
 
         return item;
     }
@@ -53,7 +53,7 @@ export class CYBR_Scene extends Phaser.Scene
             offsetX = 0;
 
         let sceneWidth = this.scale.displaySize.width;    
-        item.x = (sceneWidth - item.width) / 2 + offsetX;
+        item.setX((sceneWidth - item.width) / 2 + offsetX);
 
         return item;
     }
