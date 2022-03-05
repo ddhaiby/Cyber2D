@@ -1,13 +1,17 @@
-/** @type {import("../typings/phaser")} */
+///** @type {import("../typings/phaser")} */
 
-import { CST } from "./CST";
-import { SceneMainMenu_UI } from "./Scenes/SceneMainMenu_UI";
-import { ScenePreloadAssets } from "./Scenes/ScenePreloadAssets";
+import {ScenePreloadAssets} from "./Scenes/ScenePreloadAssets";
+
+
+document.body.style.margin = String(0);
+document.body.style.padding = String(0);
+document.body.style.overflow = "hidden";
 
 let game = new Phaser.Game({
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    width: document.body.clientWidth,
+    height: window.innerHeight,
+    parent: document.body,
 
     scene: [ScenePreloadAssets],
 
@@ -18,7 +22,7 @@ let game = new Phaser.Game({
     physics: {
         default: "arcade",
         arcade: {
-            gravity: { y: 275 },
+            gravity: {y: 275},
             debug: false
         }
     }
