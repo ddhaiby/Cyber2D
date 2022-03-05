@@ -4,7 +4,7 @@ import { SceneData } from "./CYBR_Scene";
 import { SceneGame } from "./SceneGame";
 import { CYBR_Button } from "../UI/CYBR_Button";
 import { CYBR_Graphics } from "../Utils/CYBR_Graphics";
-import GridTable from 'phaser3-rex-plugins/plugins/gridtable.js';
+//import GridTable from 'phaser3-rex-plugins/plugins/gridtable.js';
 
 export class SceneMainMenu_UI extends CYBR_Scene
 {

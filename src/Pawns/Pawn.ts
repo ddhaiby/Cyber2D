@@ -1,5 +1,5 @@
 import { CST } from "../CST";
-import { CYBR_Weapon } from "Weapons/CYBR_Weapon";
+import { CYBR_Weapon } from "../Weapons/CYBR_Weapon";
 
 export class Pawn extends Phaser.Physics.Arcade.Sprite
 {

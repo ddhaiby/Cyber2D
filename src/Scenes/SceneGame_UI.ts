@@ -4,7 +4,7 @@ import { SceneGame } from "./SceneGame";
 import { CYBR_Graphics } from "../Utils/CYBR_Graphics";
 import { HealthBar } from "../UI/HealthBar";
 import { BulletBar } from "../UI/BulletBar";
-import { Player } from "Pawns/Player";
+import { Player } from "src/Pawns/Player";
 
 export class SceneGame_UI extends CYBR_Scene
 {
