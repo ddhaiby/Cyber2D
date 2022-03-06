@@ -4,6 +4,7 @@ import { SceneGame } from "./SceneGame";
 import { CYBR_Graphics } from "../Utils/CYBR_Graphics";
 import { HealthBar } from "../UI/HealthBar";
 import { BulletBar } from "../UI/BulletBar";
+import { LevelTransition } from "../UI/LevelTransition";
 
 export class SceneGame_UI extends CYBR_Scene
 {
@@ -18,10 +19,7 @@ export class SceneGame_UI extends CYBR_Scene
     private lifeItem: Map<string, Phaser.GameObjects.GameObject>;
 
     // Level
-    private levelTitle: Phaser.GameObjects.Text;
-    private levelSubTitle: Phaser.GameObjects.Text;
-    private levelDescription: Phaser.GameObjects.Text;
-    private levelBackground: CYBR_Graphics;
+    private levelTransition: LevelTransition;
 
     constructor()
     {
@@ -41,6 +39,9 @@ export class SceneGame_UI extends CYBR_Scene
 
     public create() : void
     {
+        const gameWidth = this.sys.game.canvas.width;
+        const gameHeight = this.sys.game.canvas.height;
+
         this.createHealthBar();
         this.createBulletBar();
         this.tokenScoreItem = this.createTokenScoreItem();
@@ -48,19 +49,7 @@ export class SceneGame_UI extends CYBR_Scene
         this.chronoText = this.createChrono();
         this.createGameOverScreen();
 
-        // Title
-        this.levelBackground = new CYBR_Graphics(this, {x: 0, y: 0 , width: 0, height: 0});
-        this.levelTitle = this.add.text(0, 240, "", { font: '82px Gemunu Libre', color: '#ffbc32', align: "center" });
-        this.levelTitle.setOrigin(0.5);
-        this.levelTitle.setSize(600, 0);
-
-        this.levelSubTitle = this.add.text(0, 400, "", { font: '40px Gemunu Libre', color: '#ffedc9', align: "center" });
-        this.levelSubTitle.setOrigin(0.5);
-        this.levelSubTitle.setSize(600, 0);
-
-        this.levelDescription = this.add.text(0, 600, "", { font: '21px Gemunu Libre', color: '#ffedc9', align: "center" });
-        this.levelDescription.setOrigin(0.5);
-        this.levelDescription.setSize(600, 0);
+        this.levelTransition = new LevelTransition(this, 0, 0, gameWidth, gameHeight);
 
         this.sceneGame.events.on("levelStarted", this.startLevelStartedTransition, this);
         this.sceneGame.events.on("levelCompleted", this.startLevelCompletedTransition, this);
@@ -161,88 +150,21 @@ export class SceneGame_UI extends CYBR_Scene
     {
         this.sceneGame.scene.pause();
 
-        const gameWidth = this.sys.game.canvas.width;
-        const gameHeight = this.sys.game.canvas.height;
-
-        this.levelBackground.x = 0;
-        this.levelBackground.width = 0;
-        this.levelBackground.height = gameHeight;
-        this.levelBackground.clear();
-        this.levelBackground.fillStyle(0x171822);
-        this.levelBackground.fillRect(this.levelBackground.x, this.levelBackground.y, this.levelBackground.width, this.levelBackground.height);
-
-        this.tweens.add({
-            targets: this.levelBackground,
-            width: gameWidth,
-            ease: Phaser.Math.Easing.Linear,
-            delay: 1000,
-            duration: 800,
-            onUpdate: function(): void {
-                this.levelBackground.clear();
-                this.levelBackground.fillStyle(0x171822);
-                this.levelBackground.fillRect(this.levelBackground.x, this.levelBackground.y, this.levelBackground.width, this.levelBackground.height);
-            },
-            onComplete: function(): void {
-                this.time.delayedCall(900, () => {
-                    this.sceneGame.startNextLevel();
-                });
-            },
-            onUpdateScope: this,
-            onCompleteScope: this
-        });
+        this.levelTransition.showLevelCompletedAnimation();
+        this.levelTransition.onAnimationCompleted("levelCompletedAnimationCompleted", () => {
+            this.sceneGame.startNextLevel();
+        }, this);
     }
 
     private startLevelStartedTransition() : void
     {
         this.sceneGame.scene.pause();
 
-        const gameWidth = this.sys.game.canvas.width;
-        const gameHeight = this.sys.game.canvas.height;
-
-        this.levelBackground.x = 0;
-        this.levelBackground.width = gameWidth;
-        this.levelBackground.height = gameHeight;
-        this.levelBackground.clear();
-        this.levelBackground.fillStyle(0x171822);
-        this.levelBackground.fillRect(this.levelBackground.x, this.levelBackground.y, this.levelBackground.width, this.levelBackground.height);
-
-        this.levelTitle.setX(this.levelBackground.width / 2);
-        this.levelTitle.text = "Level " + this.sceneGame.currentLevel;
-
-        this.levelSubTitle.setX(this.levelBackground.width / 2);
-        this.levelSubTitle.text = CST.LEVELS[this.sceneGame.currentLevel - 1].TITLE;
-
-        this.levelDescription.setX(this.levelBackground.width / 2);
-        this.levelDescription.text = CST.LEVELS[this.sceneGame.currentLevel - 1].DESCRIPTION;
-
-        this.levelBackground.setVisible(true);
-        this.levelTitle.setVisible(true);
-        this.levelSubTitle.setVisible(true);
-        this.levelDescription.setVisible(true);
-
-        this.tweens.add({
-            targets: this.levelBackground,
-            width: 0,
-            ease: Phaser.Math.Easing.Linear,
-            delay: 2200,
-            duration: 1100,
-            onUpdate: function(): void {
-                this.levelBackground.x = gameWidth - this.levelBackground.width,
-                this.levelBackground.clear();
-                this.levelBackground.fillStyle(0x171822);
-                this.levelBackground.fillRect(this.levelBackground.x, this.levelBackground.y, this.levelBackground.width, this.levelBackground.height);
-
-                this.levelTitle.setX(this.levelBackground.x + gameWidth -this.levelBackground.width / 2);
-                this.levelSubTitle.setX(this.levelBackground.x + gameWidth -this.levelBackground.width / 2);
-                this.levelDescription.setX(this.levelBackground.x + gameWidth -this.levelBackground.width / 2);
-            },
-            onComplete: function(): void {
-                this.elapsedTime = 0;
-                this.sceneGame.scene.resume();
-            },
-            onUpdateScope: this,
-            onCompleteScope: this
-        });
+        this.levelTransition.showLevelStartedAnimation(this.sceneGame.currentLevel);
+        this.levelTransition.onAnimationCompleted("levelStartedAnimationCompleted", () => {
+            this.elapsedTime = 0;
+            this.sceneGame.scene.resume();
+        }, this);
     }
 
     // Update
