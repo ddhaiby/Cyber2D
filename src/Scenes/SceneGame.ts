@@ -82,13 +82,13 @@ export class SceneGame extends CYBR_Scene
     {
         this.spawnPositions = new Phaser.Structs.Map([]);
         this.startLevel();
-        this.createUI();
+        this.events.emit("levelStarted", data.level);
     }
 
     private createKeyboardMap() : void
     {
         let keyESC = this.input.keyboard.addKey("ESC");
-        keyESC.on("down", function(event){
+        keyESC.on("down", function(){
             this.showGameMenu(true);
             this.scene.setActive(false, CST.SCENES.GAME);
             this.scene.setActive(false, CST.SCENES.GAME_UI);
@@ -97,6 +97,7 @@ export class SceneGame extends CYBR_Scene
 
     private startLevel() : void
     {
+        this.createUI();
         this.createGameMode();
         this.createMap();
         this.createBackground();
@@ -125,7 +126,7 @@ export class SceneGame extends CYBR_Scene
 
     public startNextLevel() : void
     {
-        if (this.currentLevel < CST.LEVELS.LEVEL_COUNT)
+        if (this.currentLevel < CST.LEVELS.length)
             this.scene.restart({level: this.currentLevel + 1});
         else
         {

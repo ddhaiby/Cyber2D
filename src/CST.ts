@@ -7,9 +7,16 @@ export const CST = {
         MAINMENU_UI: "MAINMENU_UI",
     },
 
-    LEVELS: {
-        LEVEL_COUNT: 2
-    },
+    LEVELS: [
+        {
+            TITLE: "Welcome to the Cyber World",
+            DESCRIPTION: "The future of the crypto"
+        },
+        {
+            TITLE: "The Cyber Creditors",
+            DESCRIPTION: "Join us on TheCyberCreditors.com"
+        }
+    ],
 
     PLAYER: {
         ATTRIBUTES: {
