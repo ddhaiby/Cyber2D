@@ -116,6 +116,7 @@ export class SceneGame extends CYBR_Scene
     public restartLevel() : void
     {
         this.time.removeAllEvents();
+        this.tweens.killAll();
 
         this.restartTokens();
         this.restartPickupItems();
@@ -296,8 +297,8 @@ export class SceneGame extends CYBR_Scene
         // Enemies
         this.physics.add.collider(this.enemies, this.platforms);
         this.enemies.getChildren().forEach(function (ai: BasicAI) {
-            this.physics.add.overlap(this.player, ai, this.onPlayerOverlapEnnemy.bind(this), this.canPlayerOverlapEnnemy.bind(this)); 
-            this.physics.add.overlap(this.player.currentWeapon.bullets, ai, this.onWeaponHitEnnemy.bind(this), this.canHitEnemy.bind(this, ai)); 
+            this.physics.add.overlap(this.player, ai, this.onPlayerOverlapEnnemy, this.canPlayerOverlapEnnemy, this); 
+            this.physics.add.overlap(this.player.currentWeapon.bullets, ai, this.onWeaponHitEnnemy, this.canHitEnemy.bind(this, ai), this); 
         }, this);
     }
 
@@ -420,18 +421,12 @@ export class SceneGame extends CYBR_Scene
 
     private canPlayerOverlapEnnemy(player: Player, enemy: Pawn) : boolean
     {
-        return !player.dead() && !enemy.dead();
+        return !player.dead() && !player.isRecovering && !enemy.dead();
     }
 
     private onPlayerOverlapEnnemy(player: Player, enemy: Pawn) : void
     {
-        if (!player.overlapped)
-        {
-            this.player.onOverlapBegin(enemy);
-            this.player.hurt(35);
-        }
-        else
-            this.player.onOverlapContinue(enemy);
+        this.player.hurt(35, this.player.body.touching.right);
     }
 
     private onPlayerHealthChanged(health: number, maxHealth: number) : void
@@ -476,9 +471,7 @@ export class SceneGame extends CYBR_Scene
             pawn.currentWeapon.bullets.getChildren().forEach((bullet: Bullet)=>{ bullet.kill(); });
 
         const pawnPosition = this.spawnPositions.get(pawn.name);
-        pawn.enableBody(true, pawnPosition.x, pawnPosition.y, true, true);
-        pawn.setHealth(pawn.getMaxHealth());
-        pawn.setVelocity(0,0);
+        pawn.reset(pawnPosition.x, pawnPosition.y);
     }
 
     private IsGameOver() : boolean

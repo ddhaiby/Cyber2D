@@ -20,10 +20,6 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     // Attributes
     public attributes: Phaser.Structs.Map<string, number>;
 
-    // Physic
-    private wasOverlapped: boolean;
-    public overlapped: boolean;
-
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture, frame?: string | number)
     {
         super(scene, x, y, texture, frame);
@@ -43,8 +39,6 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.setGravity(this.scene.physics.world.gravity.x, this.scene.physics.world.gravity.y);
 
         this.setCollideWorldBounds(false);
-        this.overlapped = false;
-        this.wasOverlapped = false;
 
         this.initStates();
         this.initAnimations();
@@ -104,23 +98,12 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.attributes.set(CST.PLAYER.ATTRIBUTES.CLIMB_SPEED, 150);
     }
 
-    // Overlap
-    ////////////////////////////////////////////////////////////////////////
-
-    public onOverlapBegin(obj) : void
+    public reset(x: number, y: number) : void
     {
-        this.overlapped = true;
-        this.wasOverlapped = true;
-    }
-
-    public onOverlapContinue(obj) : void
-    {
-        this.wasOverlapped = true;
-    }
-
-    public onOverlapEnd() : void
-    {
-        this.overlapped = false;
+        this.enableBody(true, x, y, true, true);
+        this.setHealth(this.getMaxHealth());
+        this.setVelocity(0,0);
+        this.setAlpha(1);
     }
 
     // Update
@@ -130,14 +113,6 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     {
         super.update(args);
 
-        if (this.overlapped)
-        {
-            if (this.wasOverlapped)
-                this.wasOverlapped = false;
-            else
-                this.onOverlapEnd();
-        }
-
         if (this.isOnFloor())
             this.isJumping = false;
 
@@ -146,25 +121,9 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.updateAnimations();
     }
 
-    // TODO: This should be later defined in the derived classes
     /** Update the anims of this Pawn */
-    private updateAnimations() : void
+    protected updateAnimations() : void
     {
-        if (this.isClimbing)
-        {
-            if (this.body.velocity.y != 0)
-                this.anims.play("up", true);
-            else
-                this.anims.pause();
-        }
-        else if (this.isWalking)
-        {
-            this.anims.play(this.isLookingRight ? "right" : "left", true);
-        }
-        else        
-        {
-            this.anims.pause();
-        }
     }
 
     public canWalk() : boolean
@@ -192,8 +151,11 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
     public stopWalking() : void
     {
-        this.setVelocityX(0);
-        this.isWalking = false;
+        if (this.isWalking)
+        {
+            this.setVelocityX(0);
+            this.isWalking = false;
+        }
     }
 
     public climb(speedX: number, speedY: number) : void

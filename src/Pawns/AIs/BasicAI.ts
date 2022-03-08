@@ -47,4 +47,16 @@ export class BasicAI extends Pawn
 
         if (this.testFire == 0) this.fire();
     }
+
+    protected updateAnimations() : void
+    {
+        if (this.isWalking)
+        {
+            this.anims.play(this.isLookingRight ? "right" : "left", true);
+        }
+        else
+        {
+            this.anims.pause();
+        }
+    }
 }
