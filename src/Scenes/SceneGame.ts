@@ -18,6 +18,7 @@ import { Portal } from "../Platforms/Portal";
 
 import { LadderManager } from "../Managers/LadderManager";
 import { Ladder } from "../Platforms/Ladder";
+import { AudioManager } from "../Managers/AudioManager";
 
 export class SceneGame extends CYBR_Scene
 {
@@ -83,6 +84,8 @@ export class SceneGame extends CYBR_Scene
         this.spawnPositions = new Phaser.Structs.Map([]);
         this.startLevel();
         this.events.emit("levelStarted", data.level);
+
+        AudioManager.playMusic(CST.LEVELS[this.currentLevel - 1].MUSIC);
     }
 
     private createKeyboardMap() : void
@@ -362,13 +365,14 @@ export class SceneGame extends CYBR_Scene
         this.scene.setVisible(value, CST.SCENES.GAMEMENU_UI);
     }
 
-    public showMainMenu(value: boolean) : void
+    public showMainMenu() : void
     {
         this.showGame(false);
         this.showGameMenu(false);
 
-        this.scene.setActive(value, CST.SCENES.MAINMENU_UI);
-        this.scene.setVisible(value, CST.SCENES.MAINMENU_UI);
+        this.scene.setActive(true, CST.SCENES.MAINMENU_UI);
+        this.scene.setVisible(true, CST.SCENES.MAINMENU_UI);
+        AudioManager.playMusic(CST.MAIN_MENU.MUSIC);
     }
 
     // Update

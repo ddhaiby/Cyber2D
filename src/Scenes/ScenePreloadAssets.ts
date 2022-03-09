@@ -2,6 +2,7 @@ import { CST } from "../CST";
 import { CYBR_Scene } from "./CYBR_Scene";
 import { SceneMainMenu_UI } from "./SceneMainMenu_UI";
 import { SplashScreen } from "../UI/SplashScreen";
+import { AudioManager } from "../Managers/AudioManager";
 
 export class ScenePreloadAssets extends CYBR_Scene
 {
@@ -34,6 +35,12 @@ export class ScenePreloadAssets extends CYBR_Scene
         // Videos
         this.load.setPath("./assets/video");
         this.load.video("cyberIntro", "./cyberIntro.mp4");
+
+        // Music
+        this.load.setPath("./assets/audio/music");
+        this.load.audio("8-bit-samba", "./8-bit-samba20by20ian-post20Artlist.mp3");
+        this.load.audio("breaking-point", "./breaking-point20by20ian-post20Artlist.mp3");
+        this.load.audio("super-duper", "./super-duper20by20ian-post20Artlist.mp3");
 
         // UI
         this.load.setPath("./assets/image/UI");
@@ -77,6 +84,7 @@ export class ScenePreloadAssets extends CYBR_Scene
     public create() : void
     {
         const sceneMainMenu = this.scene.add(CST.SCENES.MAINMENU_UI, SceneMainMenu_UI, false, null) as SceneMainMenu_UI; 
+        AudioManager.init(sceneMainMenu);
 
         // Splash screen
         this.splashScreen = new SplashScreen(this, 0, 0, this.sys.game.canvas.width, this.sys.game.canvas.height);

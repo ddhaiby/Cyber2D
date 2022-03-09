@@ -7,14 +7,25 @@ export const CST = {
         MAINMENU_UI: "MAINMENU_UI",
     },
 
+    MAIN_MENU: {
+        MUSIC: "breaking-point"
+    },
+
     LEVELS: [
         {
             TITLE: "Welcome to the Cyber World",
-            DESCRIPTION: "The future of the crypto"
+            DESCRIPTION: "",
+            MUSIC: "8-bit-samba"
         },
         {
-            TITLE: "The Cyber Creditors",
-            DESCRIPTION: "Join us on TheCyberCreditors.com"
+            TITLE: "",
+            DESCRIPTION: "",
+            MUSIC: "super-duper"
+        },
+        {
+            TITLE: "Cyber reach the moon",
+            DESCRIPTION: "",
+            MUSIC: "breaking-point"
         }
     ],
 

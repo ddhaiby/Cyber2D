@@ -4,6 +4,7 @@ import { SceneData } from "./CYBR_Scene";
 import { SceneGame } from "./SceneGame";
 import { CYBR_Button } from "../UI/CYBR_Button";
 import { CYBR_Graphics } from "../Utils/CYBR_Graphics";
+import { AudioManager } from "../Managers/AudioManager";
 import {HttpServices} from "../Core/Http.Services";
 
 export class SceneMainMenu_UI extends CYBR_Scene
@@ -25,7 +26,9 @@ export class SceneMainMenu_UI extends CYBR_Scene
     ////////////////////////////////////////////////////////////////////////
 
     public create() : void
-    {        
+    {
+        AudioManager.playMusic(CST.MAIN_MENU.MUSIC);
+
         // Background
         let background = new CYBR_Graphics(this);
         background.width = 500;
@@ -62,9 +65,9 @@ export class SceneMainMenu_UI extends CYBR_Scene
 
     private onPlayClicked() : void
     {
-        this.sceneGame.scene.restart({level: 1} as SceneData);
         this.scene.setActive(false);
         this.scene.setVisible(false);
+        this.sceneGame.scene.restart({level: 1} as SceneData);
         this.sceneGame.showGame(true);
     }
 

@@ -74,6 +74,6 @@ export class SceneGameMenu_UI extends CYBR_Scene
 
     private onMainMenuClicked() : void
     {
-        this.sceneGame.showMainMenu(true);
+        this.sceneGame.showMainMenu();
     }
 }
