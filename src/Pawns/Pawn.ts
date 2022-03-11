@@ -304,7 +304,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
     public fire(fireAngle?: number) : void
     {
-        if (this.currentWeapon)
+        if (this.currentWeapon && !this.isClimbing)
         {
             if (!fireAngle)
             {
