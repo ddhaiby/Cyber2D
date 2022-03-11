@@ -4,8 +4,8 @@ import {IResponse, IResponseLogin, IResponsePlayer, IResponseRegister} from "../
 
 export class HttpServices {
     private readonly axiosService: Axios;
-    //private baseUrl: string = "http://41.125.207.77.rev.sfr.net";
-  private baseUrl: string = "http://localhost:8072";
+        private baseUrl: string = "https://api-cyber-server.pierrelucmillet.ovh";//
+  //private baseUrl: string = "http://localhost:8072";
     private authToken:string="";
     constructor() {
         this.axiosService = new Axios({

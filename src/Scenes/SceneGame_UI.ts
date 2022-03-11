@@ -174,19 +174,17 @@ export class SceneGame_UI extends CYBR_Scene
                 best_time: this.elapsedTime,
             }
             let result = await this.httpServices.createPlayerData(playerData);
-
               if(result.status==403){
+                  console.log(result.data.message);//
                   let res = await this.httpServices.patchPlayerData(playerData);
                       if(res.status==404){
                           console.log(res.data.message);
                       }
                       else{
                           this.sceneGame.startNextLevel();
-                          console.log(res);
                       }
               }else{
                   this.sceneGame.startNextLevel();
-                  console.log(result);
               }
         }, this);
     }
