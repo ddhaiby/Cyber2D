@@ -1,28 +1,36 @@
 import 'regenerator-runtime/runtime'
-import {ScenePreloadAssets} from "./Scenes/ScenePreloadAssets";
-
+import BBCodeTextPlugin from 'phaser3-rex-plugins/plugins/bbcodetext-plugin.js';
+import TextEditPlugin from 'phaser3-rex-plugins/plugins/textedit-plugin.js';import {ScenePreloadAssets} from "./Scenes/ScenePreloadAssets";
 
 document.body.style.margin = String(0);
 document.body.style.padding = String(0);
 document.body.style.overflow = "hidden";
 
-let game = new Phaser.Game({
+new Phaser.Game({
     type: Phaser.AUTO,
     width: document.body.clientWidth,
     height: window.innerHeight,
     parent: document.body,
-
+    dom: { createContainer: true },
     scene: [ScenePreloadAssets],
-
-    render: {
-        pixelArt: true
-    },
-
+    render: { pixelArt: true },
     physics: {
         default: "arcade",
         arcade: {
             gravity: {y: 275},
             debug: false
         }
+    },
+    plugins: {
+        global: [{
+            key: "rexBBCodeTextPlugin",
+            plugin: BBCodeTextPlugin,
+            start: true
+        },
+        {
+            key: "rexTextEditPlugin",
+            plugin: TextEditPlugin,
+            start: true
+        }]
     }
 });

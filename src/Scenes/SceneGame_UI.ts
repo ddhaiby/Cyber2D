@@ -51,8 +51,8 @@ export class SceneGame_UI extends CYBR_Scene
 
     public create() : void
     {
-        const gameWidth = this.sys.game.canvas.width;
-        const gameHeight = this.sys.game.canvas.height;
+        const gameWidth = this.scale.displaySize.width;
+        const gameHeight = this.scale.displaySize.height;
 
         this.createHealthBar();
         this.createBulletBar();

@@ -1,9 +1,9 @@
+import { CYBR_TextField } from "src/UI/CYBR_TextField";
 import { CYBR_Button } from "../UI/CYBR_Button";
 import { CYBR_Graphics } from "../Utils/CYBR_Graphics";
 
-export declare type SceneData = {
-    level: number;
-}
+/** Any object you may want to center with CenterItem, CenterVItem or CenterHItem. They must have a height and a width. */
+declare type CenterableObject = Phaser.GameObjects.Text | Phaser.GameObjects.Image | CYBR_Button | CYBR_Graphics | CYBR_TextField;
 
 export class CYBR_Scene extends Phaser.Scene
 {
@@ -20,7 +20,7 @@ export class CYBR_Scene extends Phaser.Scene
         return (typeof gameObject) + CYBR_Scene._idCount.toString(); // TODO typeof always return "object". Consider using the string directly, or fix it.
     }
 
-    public centerItem(item: CYBR_Button | Phaser.GameObjects.Image | CYBR_Graphics, offsetX?: number, offsetY?: number) : CYBR_Button | Phaser.GameObjects.Image | CYBR_Graphics
+    public centerItem(item: CenterableObject, offsetX?: number, offsetY?: number) : CenterableObject
     {
         if (offsetX == undefined)
             offsetX = 0;
@@ -37,7 +37,7 @@ export class CYBR_Scene extends Phaser.Scene
         return item;
     }
     
-    public centerVItem(item: CYBR_Button | Phaser.GameObjects.Image | CYBR_Graphics, offsetY?: number) : CYBR_Button | Phaser.GameObjects.Image | CYBR_Graphics
+    public centerVItem(item: CenterableObject, offsetY?: number) : CenterableObject
     {
         if (offsetY == undefined)
             offsetY = 0;
@@ -48,7 +48,7 @@ export class CYBR_Scene extends Phaser.Scene
         return item;
     }
 
-    public centerHItem(item: CYBR_Button | Phaser.GameObjects.Image | CYBR_Graphics, offsetX?: number) : CYBR_Button | Phaser.GameObjects.Image | CYBR_Graphics
+    public centerHItem(item: CenterableObject, offsetX?: number) : CenterableObject
     {
         if (offsetX == undefined)
             offsetX = 0;

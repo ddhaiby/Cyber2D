@@ -1,5 +1,5 @@
 import { CYBR_Button } from "../CYBR_Button";
-import { TextBox } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
+import { CYBR_TextField } from "../CYBR_TextField";
 import { CYBR_Scene } from "../../Scenes/CYBR_Scene";
 import { HttpServices } from "../../Core/Http.Services";
 import {ShareData} from "../../Shared/SharedData";
@@ -8,6 +8,10 @@ export class RegisterContainer extends Phaser.GameObjects.Container
 {
     private readonly httpService: HttpServices;
     private sharedData: ShareData;
+    private textFieldUsername: CYBR_TextField;
+    private textFieldEmail: CYBR_TextField;
+    private textFieldPassword: CYBR_TextField;
+
     constructor(scene: CYBR_Scene, x?: number, y?: number)
     {
         super(scene, x, y);
@@ -15,90 +19,98 @@ export class RegisterContainer extends Phaser.GameObjects.Container
         this.width = scene.scale.displaySize.width;
         this.height = scene.scale.displaySize.height;
 
-        const textObject = scene.add.text(0, 0, "Petit test", { fontFamily: "Gemunu Libre", fontSize: "48px", fontStyle: "bold", color: "#171822", align: "center" });
-        const textBox = new TextBox(scene, {text: textObject});
-        scene.add.existing(textBox);
-        this.add(textBox);
-
-        const buttonCancel = new CYBR_Button(scene, 0, 520, "Cancel", "btn_background");
-        buttonCancel.onClicked(this.cancelClicked, this);
-        scene.centerHItem(buttonCancel, -200);
-        this.add(buttonCancel);
-    
-        const buttonRegister = new CYBR_Button(scene, 0, buttonCancel.y, "Login", "btn_background");
-        buttonRegister.onClicked(this.confirmLoginClicked, this);
-        scene.centerHItem(buttonRegister, 200);
-        this.add(buttonRegister);
+        this.createButtons();
+        this.createTextFields();
 
         this.httpService = new HttpServices();
         this.sharedData = new ShareData();
     }
 
+    private createButtons() : void
+    {
+        const buttonCancel = new CYBR_Button(this.scene, 100, 520, "Cancel", "btn_background");
+        buttonCancel.onClicked(this.cancelClicked, this);
+        (this.scene as CYBR_Scene).centerHItem(buttonCancel, -320);
+        this.add(buttonCancel);
+
+        const buttonLogin = new CYBR_Button(this.scene, 440, buttonCancel.y, "Login", "btn_background");
+        buttonLogin.onClicked(this.confirmLoginClicked, this);
+        (this.scene as CYBR_Scene).centerHItem(buttonLogin);
+        this.add(buttonLogin);
+
+        const buttonSignUp = new CYBR_Button(this.scene, 680, buttonCancel.y, "Sign Up", "btn_background");
+        buttonSignUp.onClicked(this.signUpClicked, this);
+        (this.scene as CYBR_Scene).centerHItem(buttonSignUp, 320);
+        this.add(buttonSignUp);
+    }
+
+    private createTextFields() : void
+    {
+        // Username
+        this.textFieldUsername = new CYBR_TextField(this.scene, 0, 160, "");
+        (this.scene as CYBR_Scene).centerHItem(this.textFieldUsername);
+        this.add(this.textFieldUsername);
+
+        const labelUsername = this.scene.add.text(0, 0, "Username", {fontFamily: "Gemunu Libre", fontSize: "20px", color: "yellow" });
+        labelUsername.setPosition(this.textFieldUsername.x, this.textFieldUsername.y - labelUsername.height - 8);
+        this.add(labelUsername);
+
+        // Email
+        this.textFieldEmail = new CYBR_TextField(this.scene, 0, this.textFieldUsername.y + this.textFieldUsername.height + 64, "");
+        Phaser.Display.Align.To.BottomCenter(this.textFieldEmail, this.textFieldUsername, 0, 60);
+        this.add(this.textFieldEmail);
+
+        const labelEmail = this.scene.add.text(0, 0, "Email", {fontFamily: "Gemunu Libre", fontSize: "20px", color: "yellow" });
+        labelEmail.setPosition(this.textFieldEmail.x, this.textFieldEmail.y - labelEmail.height - 8);
+        this.add(labelEmail);
+
+        // Password
+        this.textFieldPassword = new CYBR_TextField(this.scene, 0, this.textFieldEmail.y + this.textFieldEmail.height + 64, "");
+        Phaser.Display.Align.To.BottomCenter(this.textFieldPassword, this.textFieldEmail, 0, 60);
+        this.add(this.textFieldPassword);
+
+        const labelPassword = this.scene.add.text(0, 0, "Password", {fontFamily: "Gemunu Libre", fontSize: "20px", color: "yellow" });
+        labelPassword.setPosition(this.textFieldPassword.x, this.textFieldPassword.y - labelPassword.height - 8);
+        this.add(labelPassword);
+    }
+
+    public setVisible(value: boolean) : this
+    {
+        super.setVisible(value);
+
+        if (value)
+        {
+            this.textFieldUsername.setText("");
+            this.textFieldEmail.setText("");
+            this.textFieldPassword.setText("");
+        }
+        return this;
+    }
+
     private confirmLoginClicked() : void
     {
-        this.httpService.register({mail:"pierrelucmillet24@gmail.com",password:"A1azerty*",name:"Pldu78"}).then(res=>{console.log(JSON.parse(res.data as unknown as string));this.sharedData.setToken(JSON.parse(res.data as unknown as string).message.token).then(res=>console.log(res))});
+        // this.httpService.register({mail:"pierreluucmillet@gmail.com",password:"A1azerty*",name:"Pldu78"}).then(res=>console.log(res));
+
+        console.log("textFieldUsername:", this.textFieldUsername.text)
+        console.log("textFieldEmail:", this.textFieldEmail.text)
+        console.log("textFieldPassword:", this.textFieldPassword.text)
+
         this.emit("playerConnected");
-        //maybe hide button if player already connected
+    }
+
+    private signUpClicked() : void
+    {
+        // this.httpService.register({mail:"pierreluucmillet@gmail.com",password:"A1azerty*",name:"Pldu78"}).then(res=>console.log(res));
+
+        console.log("textFieldUsername:", this.textFieldUsername.text)
+        console.log("textFieldEmail:", this.textFieldEmail.text)
+        console.log("textFieldPassword:", this.textFieldPassword.text)
+
+        this.emit("playerConnected");
     }
 
     private cancelClicked() : void
     {
         this.emit("playerCancelledConnection");
     }
-
-    /*//create html form file and preload it, and use the following function that need to be updated to fit with our use
-    private createForms () : void
-    {
-        this.scene.add.image(400, 300, 'pic');
-
-        var text = this.scene.add.text(10, 10, 'Please login to play', { color: 'white', fontFamily: 'Arial', fontSize: '32px '});
-
-        var element = this.scene.add.dom(400, 600).createFromCache('nameform');
-
-        element.setPerspective(800);
-
-        element.addListener('click');
-
-        element.on('click', function (event) {
-
-            if (event.target.name === 'loginButton')
-            {
-                var inputUsername = this.getChildByName('username');
-                var inputPassword = this.getChildByName('password');
-
-                //  Have they entered anything?
-                if (inputUsername.value !== '' && inputPassword.value !== '')
-                {
-                    //  Turn off the click events
-                    this.removeListener('click');
-
-                    //  Tween the login form out
-                    this.scene.tweens.add({ targets: element.rotate3d, x: 1, w: 90, duration: 3000, ease: 'Power3' });
-
-                    this.scene.tweens.add({ targets: element, scaleX: 2, scaleY: 2, y: 700, duration: 3000, ease: 'Power3',
-                        onComplete: function ()
-                        {
-                            element.setVisible(false);
-                        }
-                    });
-
-                    //  Populate the text with whatever they typed in as the username!
-                    text.setText('Welcome ' + inputUsername.value);
-                }
-                else
-                {
-                    //  Flash the prompt
-                    this.scene.tweens.add({ targets: text, alpha: 0.1, duration: 200, ease: 'Power3', yoyo: true });
-                }
-            }
-
-        });
-
-        this.scene.tweens.add({
-            targets: element,
-            y: 300,
-            duration: 3000,
-            ease: 'Power3'
-        });
-    }*/
 }

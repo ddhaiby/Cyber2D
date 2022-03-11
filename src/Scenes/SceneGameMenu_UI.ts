@@ -44,11 +44,11 @@ export class SceneGameMenu_UI extends CYBR_Scene
 
         let buttonRestart = new CYBR_Button(this, 0, buttonResume.y + buttonResume.height + 24, "Restart", "btn_background");
         buttonRestart.onClicked(this.onRestartClicked, this);
-        this.centerHItem(buttonRestart);
+        Phaser.Display.Align.To.BottomCenter(buttonRestart, buttonResume, 0, 24);
 
         let buttonMainMenu = new CYBR_Button(this, 0, buttonRestart.y + buttonRestart.height + 24, "Main menu", "btn_background");
         buttonMainMenu.onClicked(this.onMainMenuClicked, this);
-        this.centerHItem(buttonMainMenu);
+        Phaser.Display.Align.To.BottomCenter(buttonMainMenu, buttonRestart, 0, 24);
     }
 
     // Update

@@ -10,16 +10,18 @@ export class CYBR_Button extends Phaser.GameObjects.Container
 
         // Background
         this.backgroundObject = scene.add.image(x, y, texture, frame);
+        this.setSize(this.backgroundObject.width, this.backgroundObject.height)
         this.backgroundObject.setOrigin(0);
         this.backgroundObject.setInteractive({ pixelPerfect: true });
         this.add(this.backgroundObject);
-
-        this.setSize(this.backgroundObject.width, this.backgroundObject.height)
-
+        this.backgroundObject.setX((this.width - this.backgroundObject.width) / 2);
+        this.backgroundObject.setY((this.height - this.backgroundObject.height) / 2);
+    
         // Text
         this.textObject = scene.add.text(0, 0, text, { fontFamily: "Gemunu Libre", fontSize: "48px", fontStyle: "bold", color: "#171822", align: "center" });
         this.textObject.setFixedSize(this.width, 0);
         this.textObject.setOrigin(0);
+        this.textObject.setX((this.width - this.textObject.width) / 2);
         this.textObject.setY((this.height - this.textObject.height) / 2);
         this.add(this.textObject);
     }
@@ -27,6 +29,14 @@ export class CYBR_Button extends Phaser.GameObjects.Container
     public setX(value?: number) : this
     {
         super.setX(value);
+        this.backgroundObject.setX((this.width - this.backgroundObject.width) / 2);
+        this.textObject.setX((this.width - this.textObject.width) / 2);
+        return this;
+    }
+
+    public setY(value?: number) : this
+    {
+        super.setY(value);
         this.backgroundObject.setY((this.height - this.backgroundObject.height) / 2);
         this.textObject.setY((this.height - this.textObject.height) / 2);
         return this;

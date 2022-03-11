@@ -87,7 +87,7 @@ export class ScenePreloadAssets extends CYBR_Scene
         AudioManager.init(sceneMainMenu);
 
         // Splash screen
-        this.splashScreen = new SplashScreen(this, 0, 0, this.sys.game.canvas.width, this.sys.game.canvas.height);
+        this.splashScreen = new SplashScreen(this, 0, 0, this.scale.displaySize.width, this.scale.displaySize.height);
         this.splashScreen.onAnimationCompleted(() => {
             this.scene.remove(CST.SCENES.PRELOAD_ASSETS);
             sceneMainMenu.scene.start();
