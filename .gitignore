@@ -5,3 +5,4 @@ dist/*.html
 
 # Dependency directories
 node_modules/
+.idea/

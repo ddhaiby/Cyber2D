@@ -1,3 +1,5 @@
+import Clock = Phaser.Time.Clock;
+
 export interface IRequestRegister{
     mail:string,
     password:string,
@@ -9,9 +11,9 @@ export interface IRequestLogin{
 }
 export interface IRequestPlayer{
     playerId: string,
-    level: string,
-    score: string,
-    cybr_coin_amount: string,
-    cybr_coin_per_level: Object,
-    best_time: string
+    level: number,
+    score: number,
+    cybr_coin_amount: number,
+    cybr_coin_per_level:number,
+    best_time: number,
 }
