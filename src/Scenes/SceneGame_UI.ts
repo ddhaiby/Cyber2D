@@ -5,11 +5,21 @@ import { CYBR_Graphics } from "../Utils/CYBR_Graphics";
 import { HealthBar } from "../UI/HealthBar";
 import { BulletBar } from "../UI/BulletBar";
 import { LevelTransition } from "../UI/LevelTransition";
+import {IRequestPlayer} from "../Interface/InterfaceRequest";
 
+import {StorageService} from "../Shared/StorageService";
+
+import {HttpServices} from "../Core/Http.Services";
 export class SceneGame_UI extends CYBR_Scene
 {
     private sceneGame: SceneGame;
     private elapsedTime: number = 0;
+
+    //http service
+    private readonly httpServices: HttpServices;
+
+    //storageService
+    private readonly storageService: StorageService;
 
     // UI Items
     private healthBar: HealthBar;
@@ -24,6 +34,8 @@ export class SceneGame_UI extends CYBR_Scene
     constructor()
     {
         super({key: CST.SCENES.GAME_UI});
+        this.storageService = new StorageService();
+        this.httpServices = new HttpServices();
     }
 
     // Init
@@ -148,11 +160,34 @@ export class SceneGame_UI extends CYBR_Scene
 
     private startLevelCompletedTransition() : void
     {
+        console.log("zebi");
         this.sceneGame.scene.pause();
 
         this.levelTransition.showLevelCompletedAnimation();
-        this.levelTransition.onAnimationCompleted("levelCompletedAnimationCompleted", () => {
-            this.sceneGame.startNextLevel();
+        this.levelTransition.onAnimationCompleted("levelCompletedAnimationCompleted", async () => {
+            const playerData: IRequestPlayer = {
+                playerId: await this.storageService.getToken(),
+                level: this.sceneGame.currentLevel,
+                score: this.sceneGame.getCollectedTokens() * 4,
+                cybr_coin_amount: this.sceneGame.getCollectedTokens(),
+                cybr_coin_per_level: this.sceneGame.getCollectedTokens(),
+                best_time: this.elapsedTime,
+            }
+            let result = await this.httpServices.createPlayerData(playerData);
+
+              if(result.status==403){
+                  let res = await this.httpServices.patchPlayerData(playerData);
+                      if(res.status==404){
+                          console.log(res.data.message);
+                      }
+                      else{
+                          this.sceneGame.startNextLevel();
+                          console.log(res);
+                      }
+              }else{
+                  this.sceneGame.startNextLevel();
+                  console.log(result);
+              }
         }, this);
     }
 
@@ -180,4 +215,5 @@ export class SceneGame_UI extends CYBR_Scene
             this.chronoText.text = CYBR_Scene.formatTime(this.elapsedTime);
         }
     }
+
 }

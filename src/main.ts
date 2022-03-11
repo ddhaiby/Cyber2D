@@ -1,3 +1,4 @@
+import 'regenerator-runtime/runtime'
 import {ScenePreloadAssets} from "./Scenes/ScenePreloadAssets";
 
 

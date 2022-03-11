@@ -4,9 +4,9 @@ import {IResponse, IResponseLogin, IResponsePlayer, IResponseRegister} from "../
 
 export class HttpServices {
     private readonly axiosService: Axios;
-    private baseUrl: string = "http://41.125.207.77.rev.sfr.net";
-  //private baseUrl: string = "http://localhost:8072";
-
+    //private baseUrl: string = "http://41.125.207.77.rev.sfr.net";
+  private baseUrl: string = "http://localhost:8072";
+    private authToken:string="";
     constructor() {
         this.axiosService = new Axios({
             headers: {
@@ -15,7 +15,9 @@ export class HttpServices {
             }
         })
     }
-
+    public setAuthToken(token: string): void {
+        this.authToken = token;
+    }
     register(data: IRequestRegister): Promise<AxiosResponse<IResponseRegister>> {
         console.log(data);
         return this.axiosService.post<IResponseRegister>(this.baseUrl + "/auth/register", JSON.stringify(data),{method:"POST",headers:{'Access-Allow-Control-Origin':'*'
@@ -39,7 +41,7 @@ export class HttpServices {
     }
 
     patchPlayerData(data: IRequestPlayer): Promise<AxiosResponse<IResponsePlayer>> {
-        return this.axiosService.patch<IResponsePlayer>(this.baseUrl + '/player/patch', data);
+        return this.axiosService.patch<IResponsePlayer>(this.baseUrl + '/player/patch', JSON.stringify(data));
     }
 
     deletePlayerData(data: string): Promise<AxiosResponse<IResponse>> {

@@ -2,11 +2,12 @@ import { CYBR_Button } from "../CYBR_Button";
 import { TextBox } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
 import { CYBR_Scene } from "../../Scenes/CYBR_Scene";
 import { HttpServices } from "../../Core/Http.Services";
+import {ShareData} from "../../Shared/SharedData";
 
 export class RegisterContainer extends Phaser.GameObjects.Container
 {
     private readonly httpService: HttpServices;
-
+    private sharedData: ShareData;
     constructor(scene: CYBR_Scene, x?: number, y?: number)
     {
         super(scene, x, y);
@@ -30,11 +31,12 @@ export class RegisterContainer extends Phaser.GameObjects.Container
         this.add(buttonRegister);
 
         this.httpService = new HttpServices();
+        this.sharedData = new ShareData();
     }
 
     private confirmLoginClicked() : void
     {
-        this.httpService.register({mail:"pierreluucmillet@gmail.com",password:"A1azerty*",name:"Pldu78"}).then(res=>console.log(res));
+        this.httpService.register({mail:"pierrelucmillet24@gmail.com",password:"A1azerty*",name:"Pldu78"}).then(res=>{console.log(JSON.parse(res.data as unknown as string));this.sharedData.setToken(JSON.parse(res.data as unknown as string).message.token).then(res=>console.log(res))});
         this.emit("playerConnected");
         //maybe hide button if player already connected
     }
