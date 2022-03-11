@@ -166,7 +166,7 @@ export class SceneGame extends CYBR_Scene
         this.platforms = this.currentMap.createLayer("Platforms", [terrain], 0, 0);
 
         const platformsBounds = this.platforms.getBounds();
-        this.physics.world.setBounds(0, 0, platformsBounds.width - platformsBounds.x, platformsBounds.height - platformsBounds.y);
+        this.physics.world.setBounds(0, 0, platformsBounds.width, platformsBounds.height - platformsBounds.y);
         this.deadZoneY = platformsBounds.height - platformsBounds.y;
     }
 
@@ -308,7 +308,7 @@ export class SceneGame extends CYBR_Scene
     private createCameras() : void
     {
         const platformsBounds = this.platforms.getBounds();
-        this.cameras.main.setBounds(0, 0, platformsBounds.width - platformsBounds.x, platformsBounds.height - platformsBounds.y);
+        this.cameras.main.setBounds(0, 0, this.physics.world.bounds.width, this.physics.world.bounds.height);
         this.cameras.main.startFollow(this.player);
     }
 
