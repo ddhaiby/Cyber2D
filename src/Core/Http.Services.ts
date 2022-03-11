@@ -4,23 +4,26 @@ import {IResponse, IResponseLogin, IResponsePlayer, IResponseRegister} from "../
 
 export class HttpServices {
     private readonly axiosService: Axios;
-    private baseUrl: string = "http://localhost:3000";
+    private baseUrl: string = "http://41.125.207.77.rev.sfr.net";
+  //private baseUrl: string = "http://localhost:8072";
 
     constructor() {
         this.axiosService = new Axios({
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Allow-Control-Origin':'*'
             }
         })
     }
 
     register(data: IRequestRegister): Promise<AxiosResponse<IResponseRegister>> {
         console.log(data);
-        return this.axiosService.post<IResponseRegister>(this.baseUrl + "/auth/register", JSON.stringify(data),{method:"POST"});
+        return this.axiosService.post<IResponseRegister>(this.baseUrl + "/auth/register", JSON.stringify(data),{method:"POST",headers:{'Access-Allow-Control-Origin':'*'
+            }});
     }
 
     login(data: IRequestLogin): Promise<AxiosResponse<IResponseLogin>> {
-        return this.axiosService.post<IResponseLogin>(this.baseUrl + "/auth/login", data);
+        return this.axiosService.post<IResponseLogin>(this.baseUrl + "/auth/login",JSON.stringify(data));
     }
 
     logout():Promise<AxiosResponse<IResponse>> {
@@ -28,7 +31,7 @@ export class HttpServices {
     }
 
     createPlayerData(data: IRequestPlayer): Promise<AxiosResponse<IResponsePlayer>> {
-        return this.axiosService.put<IResponsePlayer>(this.baseUrl + "/player/add", data);
+        return this.axiosService.put<IResponsePlayer>(this.baseUrl + "/player/add",JSON.stringify(data));
     }
 
     getPlayerData(token: string): Promise<AxiosResponse<IResponsePlayer>> {
@@ -42,5 +45,4 @@ export class HttpServices {
     deletePlayerData(data: string): Promise<AxiosResponse<IResponse>> {
         return this.axiosService.delete(this.baseUrl + '/player/delete', {data: data});
     }
-
 }
