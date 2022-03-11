@@ -1,3 +1,4 @@
+import { CYBR_Button } from "../UI/CYBR_Button";
 import { CYBR_Graphics } from "../Utils/CYBR_Graphics";
 
 export declare type SceneData = {
@@ -19,7 +20,7 @@ export class CYBR_Scene extends Phaser.Scene
         return (typeof gameObject) + CYBR_Scene._idCount.toString(); // TODO typeof always return "object". Consider using the string directly, or fix it.
     }
 
-    public centerItem(item: Phaser.GameObjects.Image | Phaser.GameObjects.Text | CYBR_Graphics, offsetX?: number, offsetY?: number)
+    public centerItem(item: CYBR_Button | Phaser.GameObjects.Image | CYBR_Graphics, offsetX?: number, offsetY?: number) : CYBR_Button | Phaser.GameObjects.Image | CYBR_Graphics
     {
         if (offsetX == undefined)
             offsetX = 0;
@@ -36,7 +37,7 @@ export class CYBR_Scene extends Phaser.Scene
         return item;
     }
     
-    public centerVItem(item: Phaser.GameObjects.Image | CYBR_Graphics, offsetY?: number) : Phaser.GameObjects.Image | CYBR_Graphics
+    public centerVItem(item: CYBR_Button | Phaser.GameObjects.Image | CYBR_Graphics, offsetY?: number) : CYBR_Button | Phaser.GameObjects.Image | CYBR_Graphics
     {
         if (offsetY == undefined)
             offsetY = 0;
@@ -47,7 +48,7 @@ export class CYBR_Scene extends Phaser.Scene
         return item;
     }
 
-    public centerHItem(item: Phaser.GameObjects.Image | CYBR_Graphics, offsetX?: number) : Phaser.GameObjects.Image | CYBR_Graphics
+    public centerHItem(item: CYBR_Button | Phaser.GameObjects.Image | CYBR_Graphics, offsetX?: number) : CYBR_Button | Phaser.GameObjects.Image | CYBR_Graphics
     {
         if (offsetX == undefined)
             offsetX = 0;

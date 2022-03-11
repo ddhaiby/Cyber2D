@@ -25,7 +25,7 @@ export class SplashScreen extends Phaser.GameObjects.Container {
         this.on("animationCompleted", fn, context);
     }
 
-    public showAnimation(): void 
+    public showAnimation() : void 
     {
         this.background.setVisible(false);
 

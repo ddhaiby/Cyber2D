@@ -41,7 +41,7 @@ export class LevelTransition extends Phaser.GameObjects.Container {
         this.on(key, fn, context);
     }
 
-    public showLevelCompletedAnimation(): void 
+    public showLevelCompletedAnimation() : void 
     {
         this.levelBackground.x = 0;
         this.levelBackground.width = 0;
@@ -56,12 +56,12 @@ export class LevelTransition extends Phaser.GameObjects.Container {
             ease: Phaser.Math.Easing.Linear,
             delay: 1000,
             duration: 800,
-            onUpdate: function(): void {
+            onUpdate: function() : void {
                 this.levelBackground.clear();
                 this.levelBackground.fillStyle(0x171822);
                 this.levelBackground.fillRect(this.levelBackground.x, this.levelBackground.y, this.levelBackground.width, this.levelBackground.height);
             },
-            onComplete: function(): void {
+            onComplete: function() : void {
                 this.scene.time.delayedCall(400, () => {
                     this.emit("levelCompletedAnimationCompleted");
                 });
@@ -71,7 +71,7 @@ export class LevelTransition extends Phaser.GameObjects.Container {
         });
     }
 
-    public showLevelStartedAnimation(level: number): void
+    public showLevelStartedAnimation(level: number) : void
     {
         this.levelBackground.x = 0;
         this.levelBackground.width = this.width;
@@ -100,7 +100,7 @@ export class LevelTransition extends Phaser.GameObjects.Container {
             ease: Phaser.Math.Easing.Linear,
             delay: 2200,
             duration: 1000,
-            onUpdate: function(): void {
+            onUpdate: function() : void {
                 this.levelBackground.x = (this.width - this.levelBackground.width) / 1.5,
                 this.levelBackground.clear();
                 this.levelBackground.fillStyle(0x171822);
@@ -110,7 +110,7 @@ export class LevelTransition extends Phaser.GameObjects.Container {
                 this.levelSubTitle.setX(this.levelBackground.x + this.width -this.levelBackground.width / 2);
                 this.levelDescription.setX(this.levelBackground.x + this.width -this.levelBackground.width / 2);
             },
-            onComplete: function(): void { this.emit("levelStartedAnimationCompleted"); },
+            onComplete: function() : void { this.emit("levelStartedAnimationCompleted"); },
             onUpdateScope: this,
             onCompleteScope: this
         });
