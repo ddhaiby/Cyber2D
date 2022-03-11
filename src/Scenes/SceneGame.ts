@@ -500,6 +500,7 @@ export class SceneGame extends CYBR_Scene
 
     private completeLevel(player: Player, portal: Portal) : void
     {
+        portal.disableBody(true);
         this.events.emit("levelCompleted");
     }
 
@@ -508,7 +509,7 @@ export class SceneGame extends CYBR_Scene
         ladder.overlapPawnBegin(player);
     }
 
-    private getCollectedTokens() : number
+    public getCollectedTokens() : number
     {
         return this.collectedTokens;
     }
