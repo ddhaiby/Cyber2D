@@ -10,7 +10,10 @@ new Phaser.Game({
     type: Phaser.AUTO,
     width: 1000,//document.body.clientWidth,
     height: 600,//window.innerHeight,
-    parent: document.body,
+    scale: {
+        parent: document.body,
+        autoCenter: Phaser.Scale.CENTER_BOTH
+    },
     dom: { createContainer: true },
     scene: [ScenePreloadAssets],
     render: { pixelArt: true },
