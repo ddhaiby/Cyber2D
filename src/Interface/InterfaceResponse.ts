@@ -17,7 +17,7 @@ export interface IResponsePlayer extends IResponse{
 }
 export interface IResponse{
     status:number,
-    message?:string,
+    message?:string|IResponsePlayer,
     error?:string,
     data?:Array<Object>
 }

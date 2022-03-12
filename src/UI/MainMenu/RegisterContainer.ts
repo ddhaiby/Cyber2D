@@ -1,19 +1,18 @@
-import { CYBR_Button } from "../CYBR_Button";
-import { CYBR_TextField } from "../CYBR_TextField";
-import { CYBR_Scene } from "../../Scenes/CYBR_Scene";
-import { HttpServices } from "../../Core/Http.Services";
+import {CYBR_Button} from "../CYBR_Button";
+import {CYBR_TextField} from "../CYBR_TextField";
+import {CYBR_Scene} from "../../Scenes/CYBR_Scene";
+import {HttpServices} from "../../Core/Http.Services";
 import {ShareData} from "../../Shared/SharedData";
+import {IResponsePlayer} from "../../Interface/InterfaceResponse";
 
-export class RegisterContainer extends Phaser.GameObjects.Container
-{
+export class RegisterContainer extends Phaser.GameObjects.Container {
     private readonly httpService: HttpServices;
     private sharedData: ShareData;
     private textFieldUsername: CYBR_TextField;
     private textFieldEmail: CYBR_TextField;
     private textFieldPassword: CYBR_TextField;
 
-    constructor(scene: CYBR_Scene, x?: number, y?: number)
-    {
+    constructor(scene: CYBR_Scene, x?: number, y?: number) {
         super(scene, x, y);
         scene.add.existing(this);
         this.width = scene.scale.displaySize.width;
@@ -26,9 +25,14 @@ export class RegisterContainer extends Phaser.GameObjects.Container
         this.sharedData = new ShareData();
     }
 
+<<<<<<< HEAD
     private createButtons() : void
     {
         const buttonCancel = new CYBR_Button(this.scene, 100, 470, "Cancel", "btn_background");
+=======
+    private createButtons(): void {
+        const buttonCancel = new CYBR_Button(this.scene, 100, 520, "Cancel", "btn_background");
+>>>>>>> cafb3bb (adding local storage for token to use on all pages)
         buttonCancel.onClicked(this.cancelClicked, this);
         (this.scene as CYBR_Scene).centerHItem(buttonCancel, -320);
         this.add(buttonCancel);
@@ -44,14 +48,17 @@ export class RegisterContainer extends Phaser.GameObjects.Container
         this.add(buttonSignUp);
     }
 
-    private createTextFields() : void
-    {
+    private createTextFields(): void {
         // Username
         this.textFieldUsername = new CYBR_TextField(this.scene, 0, 110, "");
         (this.scene as CYBR_Scene).centerHItem(this.textFieldUsername);
         this.add(this.textFieldUsername);
 
-        const labelUsername = this.scene.add.text(0, 0, "Username", {fontFamily: "Gemunu Libre", fontSize: "20px", color: "yellow" });
+        const labelUsername = this.scene.add.text(0, 0, "Username", {
+            fontFamily: "Gemunu Libre",
+            fontSize: "20px",
+            color: "yellow"
+        });
         labelUsername.setPosition(this.textFieldUsername.x, this.textFieldUsername.y - labelUsername.height - 8);
         this.add(labelUsername);
 
@@ -60,7 +67,11 @@ export class RegisterContainer extends Phaser.GameObjects.Container
         Phaser.Display.Align.To.BottomCenter(this.textFieldEmail, this.textFieldUsername, 0, 60);
         this.add(this.textFieldEmail);
 
-        const labelEmail = this.scene.add.text(0, 0, "Email", {fontFamily: "Gemunu Libre", fontSize: "20px", color: "yellow" });
+        const labelEmail = this.scene.add.text(0, 0, "Email", {
+            fontFamily: "Gemunu Libre",
+            fontSize: "20px",
+            color: "yellow"
+        });
         labelEmail.setPosition(this.textFieldEmail.x, this.textFieldEmail.y - labelEmail.height - 8);
         this.add(labelEmail);
 
@@ -69,17 +80,19 @@ export class RegisterContainer extends Phaser.GameObjects.Container
         Phaser.Display.Align.To.BottomCenter(this.textFieldPassword, this.textFieldEmail, 0, 60);
         this.add(this.textFieldPassword);
 
-        const labelPassword = this.scene.add.text(0, 0, "Password", {fontFamily: "Gemunu Libre", fontSize: "20px", color: "yellow" });
+        const labelPassword = this.scene.add.text(0, 0, "Password", {
+            fontFamily: "Gemunu Libre",
+            fontSize: "20px",
+            color: "yellow"
+        });
         labelPassword.setPosition(this.textFieldPassword.x, this.textFieldPassword.y - labelPassword.height - 8);
         this.add(labelPassword);
     }
 
-    public setVisible(value: boolean) : this
-    {
+    public setVisible(value: boolean): this {
         super.setVisible(value);
 
-        if (value)
-        {
+        if (value) {
             this.textFieldUsername.setText("");
             this.textFieldEmail.setText("");
             this.textFieldPassword.setText("");
@@ -87,21 +100,27 @@ export class RegisterContainer extends Phaser.GameObjects.Container
         return this;
     }
 
-    private confirmLoginClicked() : void
-    {
+    private confirmLoginClicked(): void {
         // this.httpService.register({mail:"pierreluucmillet@gmail.com",password:"A1azerty*",name:"Pldu78"}).then(res=>console.log(res));
 
         console.log("textFieldUsername:", this.textFieldUsername.text)
         console.log("textFieldEmail:", this.textFieldEmail.text)
         console.log("textFieldPassword:", this.textFieldPassword.text)
+        this.httpService.register({
+            mail: this.textFieldEmail.text,
+            password: this.textFieldPassword.text,
+            name: this.textFieldUsername.text
+        }).then(async res => {
+            console.log(JSON.parse(res.data as unknown as string).message.token);
+            await this.sharedData.setToken(JSON.parse(res.data as unknown as string).message.token);
+        });
 
         this.httpService.register({mail: this.textFieldEmail.text,password: this.textFieldPassword.text,name: this.textFieldUsername.text}).then(res=>console.log(res))
 
         this.emit("playerConnected");
     }
 
-    private signUpClicked() : void
-    {
+    private signUpClicked(): void {
         // this.httpService.register({mail:"pierreluucmillet@gmail.com",password:"A1azerty*",name:"Pldu78"}).then(res=>console.log(res));
 
         console.log("textFieldUsername:", this.textFieldUsername.text)
@@ -111,8 +130,7 @@ export class RegisterContainer extends Phaser.GameObjects.Container
         this.emit("playerConnected");
     }
 
-    private cancelClicked() : void
-    {
+    private cancelClicked(): void {
         this.emit("playerCancelledConnection");
     }
 }
