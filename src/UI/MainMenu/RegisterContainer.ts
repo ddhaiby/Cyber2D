@@ -28,7 +28,7 @@ export class RegisterContainer extends Phaser.GameObjects.Container
 
     private createButtons() : void
     {
-        const buttonCancel = new CYBR_Button(this.scene, 100, 520, "Cancel", "btn_background");
+        const buttonCancel = new CYBR_Button(this.scene, 100, 470, "Cancel", "btn_background");
         buttonCancel.onClicked(this.cancelClicked, this);
         (this.scene as CYBR_Scene).centerHItem(buttonCancel, -320);
         this.add(buttonCancel);
@@ -47,7 +47,7 @@ export class RegisterContainer extends Phaser.GameObjects.Container
     private createTextFields() : void
     {
         // Username
-        this.textFieldUsername = new CYBR_TextField(this.scene, 0, 160, "");
+        this.textFieldUsername = new CYBR_TextField(this.scene, 0, 110, "");
         (this.scene as CYBR_Scene).centerHItem(this.textFieldUsername);
         this.add(this.textFieldUsername);
 
@@ -94,6 +94,8 @@ export class RegisterContainer extends Phaser.GameObjects.Container
         console.log("textFieldUsername:", this.textFieldUsername.text)
         console.log("textFieldEmail:", this.textFieldEmail.text)
         console.log("textFieldPassword:", this.textFieldPassword.text)
+
+        this.httpService.register({mail: this.textFieldEmail.text,password: this.textFieldPassword.text,name: this.textFieldUsername.text}).then(res=>console.log(res))
 
         this.emit("playerConnected");
     }

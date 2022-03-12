@@ -11,15 +11,15 @@ export class MainMenuContainer extends Phaser.GameObjects.Container
         this.width = scene.scale.displaySize.width;
         this.height = scene.scale.displaySize.height;
 
-        let buttonPlay = new CYBR_Button(scene, 0, 200, "Play", "btn_background");
-        buttonPlay.onClicked(this.onPlayClicked, this);
-        scene.centerHItem(buttonPlay);
-        this.add(buttonPlay);
-
         let buttonRegister = new CYBR_Button(scene, 0, 0, "Register", "btn_background");
         buttonRegister.onClicked(this.onRegisterClicked, this);
-        Phaser.Display.Align.To.BottomCenter(buttonRegister, buttonPlay, 0, 40);
+        scene.centerItem(buttonRegister);
         this.add(buttonRegister);
+
+        let buttonPlay = new CYBR_Button(scene, 0, 200, "Play", "btn_background");
+        buttonPlay.onClicked(this.onPlayClicked, this);
+        Phaser.Display.Align.To.TopCenter(buttonPlay, buttonRegister, 0, 40);
+        this.add(buttonPlay);
 
         let buttonSettings = new CYBR_Button(scene, 0, 0, "Settings", "btn_background");
         buttonSettings.onClicked(this.onSettingsClicked, this);
