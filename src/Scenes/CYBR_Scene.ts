@@ -28,10 +28,10 @@ export class CYBR_Scene extends Phaser.Scene
         if (offsetY == undefined)
             offsetY = 0;
 
-        let sceneWidth:number = this.scale.displaySize.width;
-        let sceneHeight:number = this.scale.displaySize.height;
+        let sceneWidth: number = this.scale.displaySize.width;
+        let sceneHeight: number = this.scale.displaySize.height;
 
-        item.setX((sceneWidth - item.width) / 2 + offsetX); 
+        item.setX((sceneWidth - item.width) / 2 + offsetX);
         item.setY((sceneHeight - item.height) / 2 + offsetY);
 
         return item;
@@ -53,7 +53,7 @@ export class CYBR_Scene extends Phaser.Scene
         if (offsetX == undefined)
             offsetX = 0;
 
-        let sceneWidth = this.scale.displaySize.width;    
+        let sceneWidth = this.scale.displaySize.width;
         item.setX((sceneWidth - item.width) / 2 + offsetX);
 
         return item;
@@ -75,7 +75,7 @@ export class CYBR_Scene extends Phaser.Scene
         milliseconds = Math.floor(milliseconds / 10);
         let millisecondsString = milliseconds.toString();
         millisecondsString = (milliseconds < 10) ? "0" + millisecondsString : millisecondsString;
-    
+
         return minutesString + ":" + secondsString + ":" + millisecondsString;
     }
 

@@ -73,7 +73,7 @@ export class SceneGame extends CYBR_Scene
         this.load.image("terrain", "./terrain_atlas.png");
 
         const levelName = "level" + this.currentLevel.toString();
-        this.load.tilemapTiledJSON(levelName, "./" + levelName + "/" + levelName + ".json");
+        this.load.tilemapTiledJSON(levelName, "./levels" + "/" + levelName + ".json");
     }
 
     // Create
