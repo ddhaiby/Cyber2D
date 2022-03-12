@@ -25,14 +25,9 @@ export class RegisterContainer extends Phaser.GameObjects.Container {
         this.sharedData = new ShareData();
     }
 
-<<<<<<< HEAD
     private createButtons() : void
     {
-        const buttonCancel = new CYBR_Button(this.scene, 100, 470, "Cancel", "btn_background");
-=======
-    private createButtons(): void {
         const buttonCancel = new CYBR_Button(this.scene, 100, 520, "Cancel", "btn_background");
->>>>>>> cafb3bb (adding local storage for token to use on all pages)
         buttonCancel.onClicked(this.cancelClicked, this);
         (this.scene as CYBR_Scene).centerHItem(buttonCancel, -320);
         this.add(buttonCancel);
@@ -115,7 +110,7 @@ export class RegisterContainer extends Phaser.GameObjects.Container {
             await this.sharedData.setToken(JSON.parse(res.data as unknown as string).message.token);
         });
 
-        this.httpService.register({mail: this.textFieldEmail.text,password: this.textFieldPassword.text,name: this.textFieldUsername.text}).then(res=>console.log(res))
+        //this.httpService.register({mail: this.textFieldEmail.text,password: this.textFieldPassword.text,name: this.textFieldUsername.text}).then(res=>console.log(res))
 
         this.emit("playerConnected");
     }
