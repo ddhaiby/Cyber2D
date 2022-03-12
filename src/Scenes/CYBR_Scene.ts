@@ -5,6 +5,10 @@ import { CYBR_Graphics } from "../Utils/CYBR_Graphics";
 /** Any object you may want to center with CenterItem, CenterVItem or CenterHItem. They must have a height and a width. */
 declare type CenterableObject = Phaser.GameObjects.Text | Phaser.GameObjects.Image | CYBR_Button | CYBR_Graphics | CYBR_TextField;
 
+export declare type SceneData = {
+    level: number;
+}
+
 export class CYBR_Scene extends Phaser.Scene
 {
     private static _idCount: number = 0;

@@ -4,6 +4,7 @@ import {CYBR_Scene} from "../../Scenes/CYBR_Scene";
 import {HttpServices} from "../../Core/Http.Services";
 import {ShareData} from "../../Shared/SharedData";
 import {IResponsePlayer} from "../../Interface/InterfaceResponse";
+import {IRequestPlayer} from "../../Interface/InterfaceRequest";
 
 export class RegisterContainer extends Phaser.GameObjects.Container {
     private readonly httpService: HttpServices;
@@ -108,6 +109,20 @@ export class RegisterContainer extends Phaser.GameObjects.Container {
         }).then(async res => {
             console.log(JSON.parse(res.data as unknown as string).message.token);
             await this.sharedData.setToken(JSON.parse(res.data as unknown as string).message.token);
+            const playerData: IRequestPlayer = {
+                playerId:JSON.parse(res.data as unknown as string).message.token ,
+                level: 0,
+                score: 0,
+                cybr_coin_amount: 0,
+                cybr_coin_per_level: 0,
+                best_time: 9*3600000,
+            }
+            let result = await this.httpService.createPlayerData(playerData);
+            console.log(JSON.parse(result.data as unknown as string).playerData);
+            await this.sharedData.setUser(JSON.parse(result.data as unknown as string).playerData);
+            if(result.status==403) {
+                console.log(result.data.message);//
+            }
         });
 
         //this.httpService.register({mail: this.textFieldEmail.text,password: this.textFieldPassword.text,name: this.textFieldUsername.text}).then(res=>console.log(res))

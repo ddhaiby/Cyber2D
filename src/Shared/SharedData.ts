@@ -1,12 +1,12 @@
 
 import {HttpServices} from '../Core/Http.Services';
 import {StorageService} from './StorageService';
-import {IResponseLogin} from "../Interface/InterfaceResponse";
+import {IResponseLogin, IResponsePlayer} from "../Interface/InterfaceResponse";
 
 
 
 
-type UserDataField = Partial<IResponseLogin> & { loggedIn?: boolean };
+type UserDataField = Partial<IResponsePlayer> & { loggedIn?: boolean };
 
 const DEFAULT_USER_DATA = {
     loggedIn: false,
@@ -39,7 +39,7 @@ export class ShareData {
 
     setUser(userData: UserDataField) {
         this.userData = userData;
-        this.userData.loggedIn = true;
+        //this.userData.loggedIn = true;
         return this.storageService.setUserData(userData);
     }
 
@@ -63,6 +63,6 @@ export class ShareData {
 
     isLoggedIn(): boolean {
         // eslint-disable-next-line no-underscore-dangle
-        return this.jwtToken && this.userData?.loggedIn && typeof this.userData?._id === 'string';
+        return this.jwtToken && this.userData?.loggedIn && typeof this.userData?.playerId === 'string';
     }
 }
