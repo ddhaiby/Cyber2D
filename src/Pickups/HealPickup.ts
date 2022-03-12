@@ -3,7 +3,7 @@ import { Pawn } from "../Pawns/Pawn";
 
 export class HealPickup extends EffectPickup
 {
-    public value: number;
+    public value: number = 0;
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture, frame?: string | number)
     {

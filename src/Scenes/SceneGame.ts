@@ -5,7 +5,7 @@ import {SceneGame_UI} from "./SceneGame_UI";
 import {SceneGameMenu_UI} from "./SceneGameMenu_UI";
 
 import { Pawn } from "../Pawns/Pawn";
-import {BasicAI} from "../Pawns/AIs/BasicAI";
+import {PatrolAI} from "../Pawns/AIs/PatrolAI";
 import {Player} from "../Pawns/Player";
 
 import {CYBR_Weapon} from "../Weapons/CYBR_Weapon";
@@ -166,8 +166,8 @@ export class SceneGame extends CYBR_Scene
         this.platforms = this.currentMap.createLayer("Platforms", [terrain], 0, 0);
 
         const platformsBounds = this.platforms.getBounds();
-        this.physics.world.setBounds(0, 0, platformsBounds.width, platformsBounds.height - platformsBounds.y);
-        this.deadZoneY = platformsBounds.height - platformsBounds.y;
+        this.physics.world.setBounds(0, 0, platformsBounds.width, platformsBounds.height);
+        this.deadZoneY = platformsBounds.height;
     }
 
     private createLadders() : void
@@ -223,7 +223,6 @@ export class SceneGame extends CYBR_Scene
         const healObjects = this.currentMap.createFromObjects("Pickups", {name: "Heal", classType: HealPickup});
         healObjects.map((pickup: HealPickup)=>{
             pickup.setTexture("healItem_48");
-            pickup.setValue(Number(pickup.data.list["value"]));
             this.pickupItems.add(pickup);
         });
 
@@ -260,15 +259,14 @@ export class SceneGame extends CYBR_Scene
         this.enemies = this.physics.add.staticGroup();
 
         // @ts-ignore - Problem with Phaser’s types. classType supports classes 
-        const enemyObjects = this.currentMap.createFromObjects("Enemies", {name: "BasicAI", classType: BasicAI});
+        const enemyObjects = this.currentMap.createFromObjects("Enemies", {name: "PatrolAI", classType: PatrolAI});
 
-        enemyObjects.map((ai: BasicAI)=>{ this.enemies.add(ai); });
+        enemyObjects.map((ai: PatrolAI)=>{ this.enemies.add(ai); });
 
-        this.enemies.getChildren().forEach(function (ai: BasicAI) {
+        this.enemies.getChildren().forEach((ai: PatrolAI) => {
             ai.init(this, "eyeball");
             ai.on("die", this.onEnemyDie.bind(this, ai));
             ai.setName(this.generateUniqueName(ai));
-
             this.spawnPositions.set(ai.name, new Phaser.Math.Vector2(ai.x, ai.y));
         }, this);
     }
@@ -299,7 +297,7 @@ export class SceneGame extends CYBR_Scene
 
         // Enemies
         this.physics.add.collider(this.enemies, this.platforms);
-        this.enemies.getChildren().forEach(function (ai: BasicAI) {
+        this.enemies.getChildren().forEach(function (ai: PatrolAI) {
             this.physics.add.overlap(this.player, ai, this.onPlayerOverlapEnnemy, this.canPlayerOverlapEnnemy, this); 
             this.physics.add.overlap(this.player.currentWeapon.bullets, ai, this.onWeaponHitEnnemy, this.canHitEnemy.bind(this, ai), this); 
         }, this);
@@ -330,7 +328,7 @@ export class SceneGame extends CYBR_Scene
 
     private restartAIs() : void
     {
-        this.enemies.getChildren().forEach(function (ai: BasicAI) {
+        this.enemies.getChildren().forEach(function (ai: PatrolAI) {
             this.respawnPawn(ai);
         }, this);
     }
@@ -391,7 +389,7 @@ export class SceneGame extends CYBR_Scene
 
         this.player.update();
 
-        this.enemies.getChildren().forEach((ai: BasicAI) => { ai.update(); }, this);
+        this.enemies.getChildren().forEach((ai: PatrolAI) => { ai.update(); }, this);
     }
 
     // Enemies

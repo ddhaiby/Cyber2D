@@ -600,8 +600,8 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":50.3030303030305,
-                 "y":540.636363636363
+                 "x":32,
+                 "y":544
                 }],
          "opacity":1,
          "type":"objectgroup",
