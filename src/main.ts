@@ -8,8 +8,8 @@ document.body.style.overflow = "hidden";
 
 new Phaser.Game({
     type: Phaser.AUTO,
-    width: document.body.clientWidth,
-    height: window.innerHeight,
+    width: 1000,//document.body.clientWidth,
+    height: 600,//window.innerHeight,
     parent: document.body,
     dom: { createContainer: true },
     scene: [ScenePreloadAssets],
