@@ -307,28 +307,8 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         if (this.currentWeapon && !this.isClimbing)
         {
             if (!fireAngle)
-            {
-                if (this.isLookingUp)
-                {
-                    if (this.body.velocity.x > 0)
-                        fireAngle = -40;
-                    else if (this.body.velocity.x < 0)
-                        fireAngle = -140;
-                    else
-                        fireAngle = -90;
-                }
-                else if (this.isLookingDown)
-                {
-                    if (this.body.velocity.x > 0)
-                        fireAngle = 40;
-                    else if (this.body.velocity.x < 0)
-                        fireAngle = 140;
-                    else
-                        fireAngle = 90;
-                }
-                else
-                    fireAngle = this.isLookingRight ? 0 : 180;
-            }
+                fireAngle = this.isLookingRight ? 0 : 180;
+
             this.currentWeapon.fireAngle = fireAngle;
             this.currentWeapon.fire();
             this.isFiring = true;
