@@ -3,6 +3,7 @@ import { CYBR_Scene } from "./CYBR_Scene";
 import { SceneData } from "./CYBR_Scene";
 import {SceneGame_UI} from "./SceneGame_UI";
 import {SceneGameMenu_UI} from "./SceneGameMenu_UI";
+import {SceneMainMenu_UI} from "./SceneMainMenu_UI";
 
 import { Pawn } from "../Pawns/Pawn";
 import {PatrolAI} from "../Pawns/AIs/PatrolAI";
@@ -22,6 +23,10 @@ import { AudioManager } from "../Managers/AudioManager";
 
 export class SceneGame extends CYBR_Scene
 {
+    // Scene
+    private sceneGame_UI: SceneGame_UI = null;
+    private sceneGameMenu_UI: SceneGameMenu_UI = null;
+
     // Map
     private currentMap: Phaser.Tilemaps.Tilemap;
     private platforms: Phaser.Tilemaps.TilemapLayer;
@@ -39,10 +44,11 @@ export class SceneGame extends CYBR_Scene
 
     // GameMode
     private spawnPositions: Phaser.Structs.Map<string, Phaser.Math.Vector2>;
-    private collectedTokens: number;
+    private collectedTokens: number = 0;
     private remainLife: number;
     private deadZoneY: number;
-    private gameOver: boolean;
+    private gameOver: boolean = false;
+    private gameCompleted: boolean = false;
 
     public currentLevel: number;
 
@@ -56,6 +62,7 @@ export class SceneGame extends CYBR_Scene
 
     public init(data?: SceneData) : void
     {
+        this.gameCompleted = false;
         this.currentLevel = data && data.level ? data.level : 1;
     }
 
@@ -93,8 +100,8 @@ export class SceneGame extends CYBR_Scene
         let keyESC = this.input.keyboard.addKey("ESC");
         keyESC.on("down", function(){
             this.showGameMenu(true);
-            this.scene.setActive(false, CST.SCENES.GAME);
-            this.scene.setActive(false, CST.SCENES.GAME_UI);
+            this.scene.setActive(false);
+            this.sceneGame_UI.scene.setActive(false);
         }, this)
     }
 
@@ -118,14 +125,7 @@ export class SceneGame extends CYBR_Scene
 
     public restartLevel() : void
     {
-        this.time.removeAllEvents();
-        this.tweens.killAll();
-
-        this.restartTokens();
-        this.restartPickupItems();
-        this.restartAIs();
-        this.setRemainLife(0);
-        this.respawnPlayer();
+        this.scene.restart({level: this.currentLevel});
     }
 
     public startNextLevel() : void
@@ -134,9 +134,9 @@ export class SceneGame extends CYBR_Scene
             this.scene.restart({level: this.currentLevel + 1});
         else
         {
-            this.scene.pause(CST.SCENES.GAME);
-            this.scene.pause(CST.SCENES.GAME_UI);
+            this.completeGame();
             this.showGameMenu(true);
+            this.showGame(false);
         }
     }
 
@@ -335,32 +335,35 @@ export class SceneGame extends CYBR_Scene
 
     private createUI() : void
     {
-        if (!this.scene.get(CST.SCENES.GAME_UI))
-            this.scene.add(CST.SCENES.GAME_UI, SceneGame_UI, true, this);
+        if (!this.sceneGame_UI)
+            this.sceneGame_UI = this.scene.add(CST.SCENES.GAME_UI, SceneGame_UI, true, this) as SceneGame_UI;
 
-        if (!this.scene.get(CST.SCENES.GAMEMENU_UI))
-            this.scene.add(CST.SCENES.GAMEMENU_UI, SceneGameMenu_UI, true, this);
-        
+        if (!this.sceneGameMenu_UI)
+            this.sceneGameMenu_UI = this.scene.add(CST.SCENES.GAMEMENU_UI, SceneGameMenu_UI, true, this) as SceneGameMenu_UI;
+
         this.showGameMenu(false);
     }
 
     public showGameUI(value: boolean) : void
     {
-        this.scene.setActive(value, CST.SCENES.GAME_UI);
-        this.scene.setVisible(value, CST.SCENES.GAME_UI);
+        if (this.sceneGame_UI)
+        {
+            this.sceneGame_UI.scene.setActive(value);
+            this.sceneGame_UI.scene.setVisible(value);
+        }
     }
 
     public showGame(value: boolean) : void
     {
-        this.scene.setActive(value, CST.SCENES.GAME);
-        this.scene.setVisible(value, CST.SCENES.GAME);
+        this.scene.setActive(value);
+        this.scene.setVisible(value);
         this.showGameUI(value);
     }
 
     public showGameMenu(value: boolean)
     {
-        this.scene.setActive(value, CST.SCENES.GAMEMENU_UI);
-        this.scene.setVisible(value, CST.SCENES.GAMEMENU_UI);
+        this.sceneGameMenu_UI.scene.setActive(value);
+        this.sceneGameMenu_UI.setVisible(value, !this.isGameOver() && !this.isGameCompleted());
     }
 
     public showMainMenu() : void
@@ -368,8 +371,9 @@ export class SceneGame extends CYBR_Scene
         this.showGame(false);
         this.showGameMenu(false);
 
-        this.scene.setActive(true, CST.SCENES.MAINMENU_UI);
-        this.scene.setVisible(true, CST.SCENES.MAINMENU_UI);
+        const sceneMainMenu_UI = this.scene.get(CST.SCENES.MAINMENU_UI) as SceneMainMenu_UI;
+        sceneMainMenu_UI.scene.setActive(true);
+        sceneMainMenu_UI.scene.setVisible(true);
         AudioManager.playMusic(CST.MAIN_MENU.MUSIC);
     }
 
@@ -441,7 +445,7 @@ export class SceneGame extends CYBR_Scene
         // TODO: should a gameMode handle all of this ?
         this.setRemainLife(this.getRemainLife() - 1);
 
-        if (!this.IsGameOver())
+        if (!this.isGameOver())
         {
             this.time.delayedCall(2000, () => {
                 this.respawnPlayer();
@@ -476,7 +480,7 @@ export class SceneGame extends CYBR_Scene
         pawn.reset(pawnPosition.x, pawnPosition.y);
     }
 
-    private IsGameOver() : boolean
+    private isGameOver() : boolean
     {
         return this.gameOver;
     }
@@ -494,6 +498,16 @@ export class SceneGame extends CYBR_Scene
         }
 
         this.events.emit("gameOverChanged", gameOver);
+    }
+
+    private isGameCompleted() : boolean
+    {
+        return this.gameCompleted
+    }
+
+    private completeGame() : void
+    {
+        this.gameCompleted = true;
     }
 
     private completeLevel(player: Player, portal: Portal) : void

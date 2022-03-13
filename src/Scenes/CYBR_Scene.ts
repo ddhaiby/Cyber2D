@@ -24,14 +24,8 @@ export class CYBR_Scene extends Phaser.Scene
         return (typeof gameObject) + CYBR_Scene._idCount.toString(); // TODO typeof always return "object". Consider using the string directly, or fix it.
     }
 
-    public centerItem(item: CenterableObject, offsetX?: number, offsetY?: number) : CenterableObject
+    public centerItem(item: CenterableObject, offsetX: number = 0, offsetY: number = 0) : CenterableObject
     {
-        if (offsetX == undefined)
-            offsetX = 0;
-
-        if (offsetY == undefined)
-            offsetY = 0;
-
         let sceneWidth: number = this.scale.displaySize.width;
         let sceneHeight: number = this.scale.displaySize.height;
 
@@ -41,22 +35,16 @@ export class CYBR_Scene extends Phaser.Scene
         return item;
     }
     
-    public centerVItem(item: CenterableObject, offsetY?: number) : CenterableObject
+    public centerVItem(item: CenterableObject, offsetY: number = 0) : CenterableObject
     {
-        if (offsetY == undefined)
-            offsetY = 0;
-
         let sceneHeight = this.scale.displaySize.height;
         item.setY((sceneHeight - item.height) / 2 + offsetY);
 
         return item;
     }
 
-    public centerHItem(item: CenterableObject, offsetX?: number) : CenterableObject
+    public centerHItem(item: CenterableObject, offsetX: number = 0) : CenterableObject
     {
-        if (offsetX == undefined)
-            offsetX = 0;
-
         let sceneWidth = this.scale.displaySize.width;
         item.setX((sceneWidth - item.width) / 2 + offsetX);
 

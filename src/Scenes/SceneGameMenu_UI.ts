@@ -6,7 +6,13 @@ import { CYBR_Graphics } from "../Utils/CYBR_Graphics";
 
 export class SceneGameMenu_UI extends CYBR_Scene
 {
+    private width: number = 500;
+    private height: number = 350;
+
     private sceneGame: SceneGame;
+    private buttonResume: CYBR_Button;
+    private buttonRestart: CYBR_Button;
+    private buttonMainMenu: CYBR_Button;
 
     constructor()
     {
@@ -26,37 +32,46 @@ export class SceneGameMenu_UI extends CYBR_Scene
     // Create
     ////////////////////////////////////////////////////////////////////////
 
-    // TODO: See how grid/columns work with phaser 3
     public create() : void
     {
         // Background
         let background = new CYBR_Graphics(this);
-        background.width = 500;
-        background.height = 350;
+        background.width = this.width;
+        background.height = this.height;
         background.fillStyle(0x171822);
         background.fillRect(0, 0, background.width, background.height);
         this.centerItem(background);
 
         // Buttons
-        let buttonResume = new CYBR_Button(this, 0, background.y + 28, "Resume", "btn_background");
-        buttonResume.onClicked(this.onResumeClicked, this);
-        this.centerHItem(buttonResume);
+        this.buttonResume = new CYBR_Button(this, 0, 0, "Resume", "btn_background");
+        this.buttonResume.onClicked(this.onResumeClicked, this);
 
-        let buttonRestart = new CYBR_Button(this, 0, buttonResume.y + buttonResume.height + 24, "Restart", "btn_background");
-        buttonRestart.onClicked(this.onRestartClicked, this);
-        Phaser.Display.Align.To.BottomCenter(buttonRestart, buttonResume, 0, 24);
+        this.buttonRestart = new CYBR_Button(this, 0, 0, "Restart", "btn_background");
+        this.buttonRestart.onClicked(this.onRestartClicked, this);
 
-        let buttonMainMenu = new CYBR_Button(this, 0, buttonRestart.y + buttonRestart.height + 24, "Main menu", "btn_background");
-        buttonMainMenu.onClicked(this.onMainMenuClicked, this);
-        Phaser.Display.Align.To.BottomCenter(buttonMainMenu, buttonRestart, 0, 24);
+        this.buttonMainMenu = new CYBR_Button(this, 0, 0, "Main menu", "btn_background");
+        this.buttonMainMenu.onClicked(this.onMainMenuClicked, this);
+
+        this.updateButtonsAlignment();
     }
 
-    // Update
-    ////////////////////////////////////////////////////////////////////////
-
-    public update(time: number, delta: number) : void
+    private updateButtonsAlignment() : void
     {
-        super.update(time, delta);
+        const buttons = [this.buttonResume, this.buttonRestart, this.buttonMainMenu];
+        const visibleButtons = [];
+
+        for (let button of buttons)
+        {
+            if (button.visible)
+                visibleButtons.push(button);
+        }
+
+        const spacing = 24;
+        const totalHeight = visibleButtons[0].height * visibleButtons.length + spacing * (visibleButtons.length - 1);
+        this.centerItem(visibleButtons[0], 0, (visibleButtons[0].height -totalHeight) * 0.5);
+
+        for (let i = 1; i < visibleButtons.length; ++i)
+            Phaser.Display.Align.To.BottomCenter(visibleButtons[i], visibleButtons[0], 0, spacing * i + visibleButtons[0].height * (i - 1));
     }
 
     private onResumeClicked() : void
@@ -75,5 +90,16 @@ export class SceneGameMenu_UI extends CYBR_Scene
     private onMainMenuClicked() : void
     {
         this.sceneGame.showMainMenu();
+    }
+
+    public setVisible(value: boolean, showResumeButton: boolean = true) : void
+    {
+        this.scene.setVisible(value);
+
+        if (value)
+        {
+            this.buttonResume.setVisible(showResumeButton);
+            this.updateButtonsAlignment();
+        }
     }
 }
