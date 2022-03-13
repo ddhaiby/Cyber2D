@@ -25,7 +25,7 @@ export class CYBR_Weapon extends Weapon
         this._timerReloadWeapon = this._time.delayedCall(0, () => {}); // Create an empty timer so I am sure it exists
 
         this.on("fire", function (bullet: Bullet, weapon: Weapon, speed: number){
-            this._events.emit("onShotsChanged", this.shots, this.fireLimit);
+            this._events.emit("shotsChanged", this.shots, this.fireLimit);
         }, this)
     }
 
@@ -62,13 +62,13 @@ export class CYBR_Weapon extends Weapon
     public decrementShots() : void
     {
         this.shots -= 1;
-        this._events.emit("onShotsChanged", this.shots, this.fireLimit);
+        this._events.emit("shotsChanged", this.shots, this.fireLimit);
     }
 
     public setShots(shots: number) : void
     {
         this.shots = shots;
-        this._events.emit("onShotsChanged", this.shots, this.fireLimit);
+        this._events.emit("shotsChanged", this.shots, this.fireLimit);
     }
 
     public getShots() : number
