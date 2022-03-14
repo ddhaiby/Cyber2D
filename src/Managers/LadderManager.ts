@@ -39,9 +39,6 @@ export class LadderManager {
     private removeLadderOnPlayer(ladder: Ladder) : void
     {
         this.laddersOnPlayer.delete(ladder.name);
-        if (this.laddersOnPlayer.size == 0)
-            this.player.stopClimbing();
-
         this.bottomLadderOnPlayer = this.getBottomLadder(this.laddersOnPlayer.getArray() as Ladder[]);
     }
 
@@ -77,5 +74,8 @@ export class LadderManager {
             this.bottomLadderOnPlayer.updatePawnInteraction();
 
         this.ladders.getChildren().forEach((ladder: Ladder) => { ladder.update();  }, this);
+
+        if (this.laddersOnPlayer.size == 0)
+            this.player.stopClimbing();
     }
 }
