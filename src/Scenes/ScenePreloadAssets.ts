@@ -45,6 +45,7 @@ export class ScenePreloadAssets extends CYBR_Scene
         // UI
         this.load.setPath("./assets/image/UI");
         this.load.image("btn_background", "./btn_background.png");
+        this.load.image("btn_background_hovered", "./btn_background_hovered.png");
         this.load.image("cyberSplashScreen", "./cyberSplashScreen.png");
 
         // In game

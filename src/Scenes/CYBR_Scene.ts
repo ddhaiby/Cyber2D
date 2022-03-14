@@ -70,5 +70,4 @@ export class CYBR_Scene extends Phaser.Scene
 
         return minutesString + ":" + secondsString + ":" + millisecondsString;
     }
-
 }

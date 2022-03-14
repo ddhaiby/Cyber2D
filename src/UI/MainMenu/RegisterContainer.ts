@@ -28,17 +28,17 @@ export class RegisterContainer extends Phaser.GameObjects.Container {
 
     private createButtons() : void
     {
-        const buttonCancel = new CYBR_Button(this.scene, 100, 520, "Cancel", "btn_background");
+        const buttonCancel = new CYBR_Button(this.scene, 100, 520, "Cancel");
         buttonCancel.onClicked(this.cancelClicked, this);
         (this.scene as CYBR_Scene).centerHItem(buttonCancel, -320);
         this.add(buttonCancel);
 
-        const buttonLogin = new CYBR_Button(this.scene, 440, buttonCancel.y, "Login", "btn_background");
+        const buttonLogin = new CYBR_Button(this.scene, 440, buttonCancel.y, "Login");
         buttonLogin.onClicked(this.confirmLoginClicked, this);
         (this.scene as CYBR_Scene).centerHItem(buttonLogin);
         this.add(buttonLogin);
 
-        const buttonSignUp = new CYBR_Button(this.scene, 680, buttonCancel.y, "Sign Up", "btn_background");
+        const buttonSignUp = new CYBR_Button(this.scene, 680, buttonCancel.y, "Sign Up");
         buttonSignUp.onClicked(this.signUpClicked, this);
         (this.scene as CYBR_Scene).centerHItem(buttonSignUp, 320);
         this.add(buttonSignUp);

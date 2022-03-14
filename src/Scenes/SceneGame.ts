@@ -142,7 +142,7 @@ export class SceneGame extends CYBR_Scene
 
     private createGameMode() : void
     {
-        this.setRemainLife(0);
+        this.setRemainLife(1);
         this.setCollectedTokens(0);
     }
 

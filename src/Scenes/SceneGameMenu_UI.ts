@@ -43,13 +43,13 @@ export class SceneGameMenu_UI extends CYBR_Scene
         this.centerItem(background);
 
         // Buttons
-        this.buttonResume = new CYBR_Button(this, 0, 0, "Resume", "btn_background");
+        this.buttonResume = new CYBR_Button(this, 0, 0, "Resume");
         this.buttonResume.onClicked(this.onResumeClicked, this);
 
-        this.buttonRestart = new CYBR_Button(this, 0, 0, "Restart", "btn_background");
+        this.buttonRestart = new CYBR_Button(this, 0, 0, "Restart");
         this.buttonRestart.onClicked(this.onRestartClicked, this);
 
-        this.buttonMainMenu = new CYBR_Button(this, 0, 0, "Main menu", "btn_background");
+        this.buttonMainMenu = new CYBR_Button(this, 0, 0, "Main menu");
         this.buttonMainMenu.onClicked(this.onMainMenuClicked, this);
 
         this.updateButtonsAlignment();
