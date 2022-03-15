@@ -131,12 +131,18 @@ export class RegisterContainer extends Phaser.GameObjects.Container {
     }
 
     private signUpClicked(): void {
-        // this.httpService.register({mail:"pierreluucmillet@gmail.com",password:"A1azerty*",name:"Pldu78"}).then(res=>console.log(res));
 
         console.log("textFieldUsername:", this.textFieldUsername.text)
         console.log("textFieldEmail:", this.textFieldEmail.text)
         console.log("textFieldPassword:", this.textFieldPassword.text)
-
+        this.httpService.login({mail:this.textFieldEmail.text, password:this.textFieldPassword.text}).then(async result=>{
+            let parsedResult = JSON.parse(result.data as unknown as string);
+            await this.sharedData.setToken(JSON.parse(result.data as unknown as string).message.token);
+            this.httpService.getPlayerData(parsedResult.message.token).then(async result=>{
+                let playerParsed = JSON.parse(result.data as unknown as string);
+                await this.sharedData.setUser(playerParsed.playerData);
+            });
+        });
         this.emit("playerConnected");
     }
 
