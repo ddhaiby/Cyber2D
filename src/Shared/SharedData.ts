@@ -23,6 +23,7 @@ export class ShareData {
     ) {
     this.storageService= new StorageService();
     this.httpService = new HttpServices();
+    this.userData.loggedIn = false;
     }
 
     async loadData() {
@@ -39,7 +40,7 @@ export class ShareData {
 
     setUser(userData: UserDataField) {
         this.userData = userData;
-        //this.userData.loggedIn = true;
+        this.userData.loggedIn = true;
         return this.storageService.setUserData(userData);
     }
 
