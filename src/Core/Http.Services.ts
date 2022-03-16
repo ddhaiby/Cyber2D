@@ -47,4 +47,7 @@ export class HttpServices {
     deletePlayerData(data: string): Promise<AxiosResponse<IResponse>> {
         return this.axiosService.delete(this.baseUrl + '/player/delete', {data: data});
     }
+    getLevel(level:string){
+        return this.baseUrl+"/levels/"+level+".json";
+    }
 }
