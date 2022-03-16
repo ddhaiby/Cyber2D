@@ -21,6 +21,8 @@ import { LadderManager } from "../Managers/LadderManager";
 import { Ladder } from "../Platforms/Ladder";
 import { AudioManager } from "../Managers/AudioManager";
 
+import {HttpServices} from "../Core/Http.Services";
+
 export class SceneGame extends CYBR_Scene
 {
     // Scene
@@ -52,9 +54,11 @@ export class SceneGame extends CYBR_Scene
 
     public currentLevel: number;
 
+    private readonly httpService:HttpServices;
     constructor()
     {
         super({key: CST.SCENES.GAME});
+        this.httpService = new HttpServices();
     }
 
     // Init
@@ -74,13 +78,15 @@ export class SceneGame extends CYBR_Scene
         this.loadMap();
     }
 
-    private loadMap() : void
+    private  loadMap() : void
     {
         this.load.setPath("./assets/maps");
         this.load.image("terrain", "./terrain_atlas.png");
 
         const levelName = "level" + this.currentLevel.toString();
-        this.load.tilemapTiledJSON(levelName, "./levels" + "/" + levelName + ".json");
+       // console.log(await this.httpService.getLevel(levelName));
+      // this.load.tilemapTiledJSON(levelName, "./levels" + "/" + levelName + ".json");
+        this.load.tilemapTiledJSON(levelName,this.httpService.getLevel(levelName));
     }
 
     // Create
