@@ -2,8 +2,8 @@ import {Pawn} from "../Pawn";
 
 export class PatrolAI extends Pawn
 {
-    private pathMinX: number = 0;
-    private pathMaxX: number = 0;
+    private pathStartX: number = 0;
+    private pathEndX: number = 0;
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture, frame?: string | number)
     {
@@ -21,9 +21,9 @@ export class PatrolAI extends Pawn
         if (this.dead())
             return;
 
-        if (this.x <= this.pathMinX)
+        if (this.x <= this.pathStartX)
             this.lookOnRight();
-        else if (this.x >= this.pathMaxX)
+        else if (this.x >= this.pathEndX)
             this.lookOnLeft();
 
         this.walk();
@@ -37,14 +37,14 @@ export class PatrolAI extends Pawn
             this.anims.pause();
     }
 
-    public setPath(pathMinX: number, pathMaxX: number) : void
+    public setPath(pathStartX: number, pathEndX: number) : void
     {
-        if (pathMinX < pathMaxX)
+        if (pathStartX < pathEndX)
         {
-            this.pathMinX = pathMinX;
-            this.pathMaxX = pathMaxX;
+            this.pathStartX = pathStartX;
+            this.pathEndX = pathEndX;
         }
         else
-            console.error("pathMinX can't be higher than pathMaxX!");
+            console.error("pathStartX can't be higher than pathEndX!");
     }
 }

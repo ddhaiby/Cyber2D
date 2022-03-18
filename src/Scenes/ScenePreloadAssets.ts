@@ -58,6 +58,7 @@ export class ScenePreloadAssets extends CYBR_Scene
         this.load.image("healItem_48", "healItem_48.png");
         this.load.image("weaponBoost_48", "weaponBoost_48.png");
         this.load.image("portal", "star.png");
+        this.load.image("movingPlatform", "movingPlatform.png");
         this.load.image("ladder", "ladder.png");
         this.load.image("ladderTop", "ladderTop.png");
     }

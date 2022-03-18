@@ -1,4 +1,5 @@
 import { CST } from "../CST";
+
 import { CYBR_Scene } from "./CYBR_Scene";
 import { SceneData } from "./CYBR_Scene";
 import {SceneGame_UI} from "./SceneGame_UI";
@@ -11,14 +12,17 @@ import {Player} from "../Pawns/Player";
 
 import {CYBR_Weapon} from "../Weapons/CYBR_Weapon";
 import {Bullet} from "phaser3-weapon-plugin";
+
 import { Token } from "../Tokens/Token";
 import { EffectPickup } from "../Pickups/EffectPickup"
 import { HealPickup } from "../Pickups/HealPickup"
 import { WeaponBoostPickup } from "../Pickups/WeaponBoostPickup"
+
+import { Ladder } from "../Platforms/Ladder";
 import { Portal } from "../Platforms/Portal";
+import { MovingPlatform } from "../Platforms/MovingPlatform";
 
 import { LadderManager } from "../Managers/LadderManager";
-import { Ladder } from "../Platforms/Ladder";
 import { AudioManager } from "../Managers/AudioManager";
 
 import {HttpServices} from "../Core/Http.Services";
@@ -32,6 +36,7 @@ export class SceneGame extends CYBR_Scene
     // Map
     private currentMap: Phaser.Tilemaps.Tilemap;
     private platforms: Phaser.Tilemaps.TilemapLayer;
+    private movingPlatforms: Phaser.Physics.Arcade.StaticGroup;
     private portals: Phaser.Physics.Arcade.StaticGroup;
     private backgrounds: Phaser.Physics.Arcade.StaticGroup;
     private tokens: Phaser.Physics.Arcade.StaticGroup;
@@ -169,11 +174,24 @@ export class SceneGame extends CYBR_Scene
     private createPlatforms() : void
     {
         const terrain = this.currentMap.addTilesetImage("terrain_atlas", "terrain");
+
+        // Static platforms
         this.platforms = this.currentMap.createLayer("Platforms", [terrain], 0, 0);
 
         const platformsBounds = this.platforms.getBounds();
         this.physics.world.setBounds(0, 0, platformsBounds.width, platformsBounds.height);
         this.deadZoneY = platformsBounds.height;
+
+        // Dynamic platforms
+        this.movingPlatforms = this.physics.add.staticGroup();
+
+        // @ts-ignore - Problem with Phaser’s types. classType supports classes 
+        const movingPlatformObjects = this.currentMap.createFromObjects("MovingPlatforms", {name: "MovingPlatform", classType: MovingPlatform});
+        movingPlatformObjects.map((platform: MovingPlatform)=>{
+            platform.setTexture("movingPlatform");
+            platform.init();
+            this.movingPlatforms.add(platform);
+        });
     }
 
     private createLadders() : void
@@ -181,16 +199,16 @@ export class SceneGame extends CYBR_Scene
         let ladders = this.physics.add.staticGroup();
 
         // @ts-ignore - Problem with Phaser’s types. classType supports classes 
-        let portalObjects = this.currentMap.createFromObjects("Ladders", {name: "Ladder", classType: Ladder});
-        portalObjects.map((ladder: Phaser.Physics.Arcade.Image)=>{
+        let ladderObjects = this.currentMap.createFromObjects("Ladders", {name: "Ladder", classType: Ladder});
+        ladderObjects.map((ladder: Ladder)=>{
             ladder.setTexture("ladder");
             ladders.add(ladder);
             ladder.setName(this.generateUniqueName(ladder));
         });
 
         // No physic for the top of the ladder
-        portalObjects = this.currentMap.createFromObjects("Ladders", {name: "LadderTop"});
-        portalObjects.map((ladder: Phaser.Physics.Arcade.Image)=>{
+        ladderObjects = this.currentMap.createFromObjects("Ladders", {name: "LadderTop"});
+        ladderObjects.map((ladder: Phaser.Physics.Arcade.Image)=>{
             ladder.setTexture("ladderTop");
         });
 
@@ -282,12 +300,14 @@ export class SceneGame extends CYBR_Scene
     {
         this.ladderManager.init(this.player);
 
-        // Player
+        /////// Player
         this.physics.add.overlap(this.player, this.ladderManager.ladders, this.overlapLadder, (player: Player, ladder: Ladder) => {
             return Math.abs(player.x - ladder.x) <= 8;
         }, this);
 
         this.platforms.setCollisionByProperty({collides:true});
+
+        this.physics.add.collider(this.player, this.movingPlatforms, this.collideMovingPlatforms);
 
         // @ts-ignore
         this.physics.add.collider(this.player, this.platforms, null, (player: Player, platform: Phaser.Tile) => {
@@ -301,9 +321,10 @@ export class SceneGame extends CYBR_Scene
         if (this.player.currentWeapon)
             this.physics.add.collider(this.player.currentWeapon.bullets, this.platforms, this.onWeaponHitPlatforms.bind(this));
 
-        // Enemies
+        /////// Enemies
         this.physics.add.collider(this.enemies, this.platforms);
         this.enemies.getChildren().forEach(function (ai: PatrolAI) {
+            this.physics.add.collider(ai, this.movingPlatforms, this.collideMovingPlatforms);
             this.physics.add.overlap(this.player, ai, this.onPlayerOverlapEnnemy, this.canPlayerOverlapEnnemy, this); 
             this.physics.add.overlap(this.player.currentWeapon.bullets, ai, this.onWeaponHitEnnemy, this.canHitEnemy.bind(this, ai), this); 
         }, this);
@@ -391,6 +412,7 @@ export class SceneGame extends CYBR_Scene
         super.update(time, delta);
 
         this.ladderManager.update();
+        this.movingPlatforms.getChildren().forEach((movingPlatform: MovingPlatform) => { movingPlatform.update(); }, this);
 
         // TODO: Use WOLRD_BOUNDS callback: https://photonstorm.github.io/phaser3-docs/Phaser.Physics.Arcade.Events.html#event:WORLD_BOUNDS__anchor
         // It exists on js but I don't see it on ts...
@@ -398,7 +420,6 @@ export class SceneGame extends CYBR_Scene
             this.player.setHealth(0);
 
         this.player.update();
-
         this.enemies.getChildren().forEach((ai: PatrolAI) => { ai.update(); }, this);
     }
 
@@ -525,6 +546,11 @@ export class SceneGame extends CYBR_Scene
     private overlapLadder(player: Player, ladder: Ladder) : void
     {
         ladder.overlapPawnBegin(player);
+    }
+
+    private collideMovingPlatforms(pawn: Pawn, movingPlatform: MovingPlatform)
+    {
+        movingPlatform.addCollidedObject(pawn);
     }
 
     public getCollectedTokens() : number
