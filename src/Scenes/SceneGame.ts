@@ -53,7 +53,6 @@ export class SceneGame extends CYBR_Scene
     private spawnPositions: Phaser.Structs.Map<string, Phaser.Math.Vector2>;
     private collectedTokens: number = 0;
     private remainLife: number;
-    private deadZoneY: number;
     private gameOver: boolean = false;
     private gameCompleted: boolean = false;
 
@@ -180,7 +179,6 @@ export class SceneGame extends CYBR_Scene
 
         const platformsBounds = this.platforms.getBounds();
         this.physics.world.setBounds(0, 0, platformsBounds.width, platformsBounds.height);
-        this.deadZoneY = platformsBounds.height;
 
         // Dynamic platforms
         this.movingPlatforms = this.physics.add.staticGroup();
@@ -414,9 +412,7 @@ export class SceneGame extends CYBR_Scene
         this.ladderManager.update();
         this.movingPlatforms.getChildren().forEach((movingPlatform: MovingPlatform) => { movingPlatform.update(); }, this);
 
-        // TODO: Use WOLRD_BOUNDS callback: https://photonstorm.github.io/phaser3-docs/Phaser.Physics.Arcade.Events.html#event:WORLD_BOUNDS__anchor
-        // It exists on js but I don't see it on ts...
-        if (this.player.y > this.deadZoneY && !this.player.dead())
+        if (this.playerReachedDeadZone() && !this.player.dead())
             this.player.setHealth(0);
 
         this.player.update();
@@ -451,6 +447,11 @@ export class SceneGame extends CYBR_Scene
 
     // Player
     ////////////////////////////////////////////////////////////////////////
+
+    private playerReachedDeadZone() : boolean
+    {
+        return this.player.y > this.physics.world.bounds.height;
+    }
 
     private canPlayerOverlapEnnemy(player: Player, enemy: Pawn) : boolean
     {

@@ -1,6 +1,7 @@
 import 'regenerator-runtime/runtime'
 import BBCodeTextPlugin from 'phaser3-rex-plugins/plugins/bbcodetext-plugin.js';
-import TextEditPlugin from 'phaser3-rex-plugins/plugins/textedit-plugin.js';import {ScenePreloadAssets} from "./Scenes/ScenePreloadAssets";
+import TextEditPlugin from 'phaser3-rex-plugins/plugins/textedit-plugin.js';
+import {ScenePreloadAssets} from "./Scenes/ScenePreloadAssets";
 
 document.body.style.margin = String(0);
 document.body.style.padding = String(0);
