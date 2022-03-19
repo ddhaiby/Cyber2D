@@ -96,6 +96,8 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.attributes.set(CST.PLAYER.ATTRIBUTES.HEALTH, 100);
         this.attributes.set(CST.PLAYER.ATTRIBUTES.WALK_SPEED, 200);
         this.attributes.set(CST.PLAYER.ATTRIBUTES.CLIMB_SPEED, 150);
+
+        this.setHealth(this.getMaxHealth());
     }
 
     public reset(x: number, y: number) : void

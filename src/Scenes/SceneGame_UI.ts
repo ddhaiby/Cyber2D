@@ -133,7 +133,7 @@ export class SceneGame_UI extends CYBR_Scene {
         lifeText.x -= lifeText.width / 2;
         lifeText.y -= lifeText.height / 2;
 
-        this.sceneGame.events.on("playerRemainLifeChanged", (remainLife: integer) => {
+        this.sceneGame.events.on("playerRemainLifeChanged", (remainLife: number) => {
             lifeText.text = Math.max(0, remainLife).toString();
         }, this);
 

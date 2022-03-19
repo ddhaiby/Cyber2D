@@ -82,7 +82,7 @@ export class SceneGame extends CYBR_Scene
         this.loadMap();
     }
 
-    private  loadMap() : void
+    private loadMap() : void
     {
         this.load.setPath("./assets/maps");
         this.load.image("terrain", "./terrain_atlas.png");
@@ -264,10 +264,9 @@ export class SceneGame extends CYBR_Scene
 
         // For this game, there should be exactly one player.
         this.player = playerObjects[0] as Player;
-        this.player.init(this, "eyeball");
-
         this.player.on("healthChanged", this.onPlayerHealthChanged.bind(this));
         this.player.on("die", this.onPlayerDie.bind(this));
+        this.player.init(this, "eyeball");
 
         let weapon = new CYBR_Weapon(this, 30, "bullet");
         this.player.equipWeapon(weapon);
