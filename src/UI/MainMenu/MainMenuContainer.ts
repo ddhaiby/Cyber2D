@@ -1,5 +1,6 @@
 import { CYBR_Button } from "../CYBR_Button";
 import { SceneMainMenu_UI } from "../../Scenes/SceneMainMenu_UI";
+import {PlayerManager} from "../../Managers/PlayerManager";
 
 export class MainMenuContainer extends Phaser.GameObjects.Container
 {
@@ -10,7 +11,7 @@ export class MainMenuContainer extends Phaser.GameObjects.Container
     
         this.width = scene.scale.displaySize.width;
         this.height = scene.scale.displaySize.height;
-
+        PlayerManager.Instance.initKeys = scene;
         let buttonRegister = new CYBR_Button(scene, 0, 0, "Register");
         buttonRegister.onClicked(this.onRegisterClicked, this);
         scene.centerItem(buttonRegister);
