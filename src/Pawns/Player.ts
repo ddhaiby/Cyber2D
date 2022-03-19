@@ -46,11 +46,9 @@ export class Player extends Pawn {
             this.lookStraight();
 
         if (this.keys.left.isDown) {
-            console.log(String.fromCharCode((this.keys.left).keyCode))
             this.lookOnLeft();
             this.walk();
         } else if (this.keys.right.isDown) {
-            console.log(String.fromCharCode((this.keys.left).keyCode))
             this.lookOnRight();
             this.walk();
         } else
