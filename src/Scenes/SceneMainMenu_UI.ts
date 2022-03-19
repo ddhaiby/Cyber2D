@@ -6,13 +6,16 @@ import { CYBR_Graphics } from "../Utils/CYBR_Graphics";
 import { AudioManager } from "../Managers/AudioManager";
 import { RegisterContainer } from "../UI/MainMenu/RegisterContainer";
 import { MainMenuContainer } from "../UI/MainMenu/MainMenuContainer";
+import { SettingsContainer } from "../UI/MainMenu/SettingsContainer";
+import {PlayerManager} from "../Managers/PlayerManager";
+import Key = Phaser.Input.Keyboard.Key;
 
 export class SceneMainMenu_UI extends CYBR_Scene
 {
     private sceneGame: SceneGame;
     private registerContainer: RegisterContainer;
     private mainMenuContainer: MainMenuContainer;
-
+    private settingsContainer: SettingsContainer;
     constructor()
     {
         super({key: CST.SCENES.MAINMENU_UI});
@@ -32,6 +35,7 @@ export class SceneMainMenu_UI extends CYBR_Scene
     {
         AudioManager.playMusic(CST.MAIN_MENU.MUSIC);
 
+
         // Background
         let background = new CYBR_Graphics(this);
         background.width = this.scale.displaySize.width;
@@ -42,8 +46,8 @@ export class SceneMainMenu_UI extends CYBR_Scene
 
         this.registerContainer = new RegisterContainer(this, 0, 0);
         this.registerContainer.setVisible(false);
-        this.registerContainer.on("playerConnected", this.onPlayerConnected, this);
-        this.registerContainer.on("playerCancelledConnection", this.onPlayerCancelledConnection, this);
+        this.registerContainer.on("playerSaveSettings", this.onPlayerConnected, this);
+        this.registerContainer.on("playerCancelledSettings", this.onPlayerCancelledConnection, this);
 
         // Containers
         this.mainMenuContainer = new MainMenuContainer(this, 0, 0);
@@ -52,12 +56,14 @@ export class SceneMainMenu_UI extends CYBR_Scene
         this.mainMenuContainer.on("settings", this.onSettings, this);
         this.mainMenuContainer.on("connect", this.onConnect, this);
 
-        //this.settingsContainer = new SettingsContainer(this, 0, 0);
-        //this.settingsContainer.setVisible(false);
-
+        this.settingsContainer = new SettingsContainer(this, 0, 0);
+        this.settingsContainer.setVisible(false);
+        this.settingsContainer.on("playerSaveSettings", this.onSaveChanges, this);
+        this.settingsContainer.on("playerCancelledSettings", this.onPlayerCancelledSettings, this);
         // Game Scene
         const sceneData = {level: 1} as SceneData;
         this.sceneGame = this.scene.add(CST.SCENES.GAME, SceneGame, false, sceneData) as SceneGame;
+
     }
 
     // Update
@@ -79,6 +85,9 @@ export class SceneMainMenu_UI extends CYBR_Scene
     private onSettings() : void
     {
         console.log("Settings requested");
+        this.mainMenuContainer.setVisible(false);
+        this.settingsContainer.setVisible(true);
+
     }
 
     private onConnect() : void
@@ -96,6 +105,17 @@ export class SceneMainMenu_UI extends CYBR_Scene
     private onPlayerCancelledConnection() : void
     {
         this.registerContainer.setVisible(false);
+        this.mainMenuContainer.setVisible(true);
+    }
+    private onSaveChanges() : void
+    {
+        this.settingsContainer.setVisible(false);
+        this.mainMenuContainer.setVisible(true);
+    }
+
+    private onPlayerCancelledSettings() : void
+    {
+        this.settingsContainer.setVisible(false);
         this.mainMenuContainer.setVisible(true);
     }
 }
