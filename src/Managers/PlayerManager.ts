@@ -38,19 +38,18 @@ export class PlayerManager {
             right: "D",
             jump: "SPACE",
             fire: "K"
-        }) as IPlayerKeys;
+        },false) as IPlayerKeys;
     }
 
     set newKeys(playerKeys: ISetPlayerKeys) {
-        playerKeys.scene.input.keyboard.removeAllKeys(true);
         this.keys = playerKeys.scene.input.keyboard.addKeys({
             up: playerKeys.up == undefined ? this.keyBinding.up : playerKeys.up,
             down: playerKeys.down == undefined ? this.keyBinding.down : playerKeys.down,
             left: playerKeys.left == undefined ? this.keyBinding.left : playerKeys.left,
             right: playerKeys.right == undefined ? this.keyBinding.right : playerKeys.right,
             jump: playerKeys.jump == undefined ? this.keyBinding.jump : playerKeys.jump,
-            fire: playerKeys.fire == undefined ? this.keyBinding.fire : playerKeys.jump
-        }) as IPlayerKeys;
+            fire: playerKeys.fire == undefined ? this.keyBinding.fire : playerKeys.fire
+        },false) as IPlayerKeys;
     }
 
     reloadKeys(scene: Phaser.Scene) {
@@ -61,6 +60,6 @@ export class PlayerManager {
             right: this.keyBinding.right,
             jump: this.keyBinding.jump,
             fire: this.keyBinding.fire
-        }) as IPlayerKeys
+        },true) as IPlayerKeys
     }
 }
