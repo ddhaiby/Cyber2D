@@ -12,7 +12,7 @@ import {Player} from "../Pawns/Player";
 
 import {Bullet} from "phaser3-weapon-plugin";
 
-import { Token } from "../Tokens/Token";
+import { Token } from "../Pickups/Token";
 import { EffectPickup } from "../Pickups/EffectPickup"
 import { HealPickup } from "../Pickups/HealPickup"
 import { WeaponBoostPickup } from "../Pickups/WeaponBoostPickup"
