@@ -321,6 +321,9 @@ export class SceneGame extends CYBR_Scene
             this.physics.add.collider(ai, this.movingPlatforms, this.collideMovingPlatforms);
             this.physics.add.overlap(this.player, ai, this.onPlayerOverlapEnnemy, this.canPlayerOverlapEnnemy, this); 
             this.physics.add.overlap(this.player.currentWeapon.bullets, ai, this.onWeaponHitEnnemy, this.canHitEnemy.bind(this, ai), this); 
+
+            if (ai.currentWeapon)
+                this.physics.add.collider(ai.currentWeapon.bullets, this.platforms, this.onWeaponHitPlatforms);
         }, this);
     }
 
