@@ -10,7 +10,6 @@ import { Pawn } from "../Pawns/Pawn";
 import {PatrolAI} from "../Pawns/AIs/PatrolAI";
 import {Player} from "../Pawns/Player";
 
-import {CYBR_Weapon} from "../Weapons/CYBR_Weapon";
 import {Bullet} from "phaser3-weapon-plugin";
 
 import { Token } from "../Tokens/Token";
@@ -117,7 +116,6 @@ export class SceneGame extends CYBR_Scene
 
     private startLevel() : void
     {
-        this.createUI();
         this.createGameMode();
         this.createMap();
         this.createBackground();
@@ -131,6 +129,7 @@ export class SceneGame extends CYBR_Scene
         this.createEnemies();
         this.createInteractions();
         this.createCameras();
+        this.createUI();
     }
 
     public restartLevel() : void
@@ -268,9 +267,6 @@ export class SceneGame extends CYBR_Scene
         this.player.on("die", this.onPlayerDie.bind(this));
         this.player.init(this, "eyeball");
 
-        let weapon = new CYBR_Weapon(this, 30, "bullet");
-        this.player.equipWeapon(weapon);
-
         this.player.setName(this.generateUniqueName(this.player));
         this.spawnPositions.set(this.player.name, new Phaser.Math.Vector2(this.player.x, this.player.y));
     }
@@ -285,8 +281,9 @@ export class SceneGame extends CYBR_Scene
         enemyObjects.map((ai: PatrolAI)=>{ this.enemies.add(ai); });
 
         this.enemies.getChildren().forEach((ai: PatrolAI) => {
-            ai.init(this, "eyeball");
             ai.on("die", this.onEnemyDie.bind(this, ai));
+            ai.init(this, "eyeball");
+
             ai.setName(this.generateUniqueName(ai));
             this.spawnPositions.set(ai.name, new Phaser.Math.Vector2(ai.x, ai.y));
         }, this);

@@ -85,7 +85,7 @@ export class SceneGame_UI extends CYBR_Scene {
             value: 0
         });
 
-        this.sceneGame.events.on("shotsChanged", (shots: number, fireLimit: number) => {
+        this.sceneGame.player.on("shotsChanged", (shots: number, fireLimit: number) => {
             this.bulletBar.setValue(shots / fireLimit);
         }, this);
     }

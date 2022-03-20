@@ -1,6 +1,6 @@
 import {Pawn} from "./Pawn";
 import {IPlayerKeys, PlayerManager} from "../Managers/PlayerManager";
-
+import { CYBR_Weapon } from "../Weapons/CYBR_Weapon";
 
 export class Player extends Pawn {
 
@@ -16,12 +16,15 @@ export class Player extends Pawn {
 
     public init(scene: Phaser.Scene, textureKey?: string): void {
         super.init(scene, textureKey);
-     PlayerManager.Instance.reloadKeys(scene);
-     this.keys = PlayerManager.Instance.keyBinding;
-     this.keys.jump.on('down', function (event) {
-                this.jump();
-            }, this);
-            console.log(this.keys)
+        let weapon = new CYBR_Weapon(scene, 30, "bullet");
+        this.equipWeapon(weapon);
+
+        PlayerManager.Instance.reloadKeys(scene);
+        this.keys = PlayerManager.Instance.keyBinding;
+        this.keys.jump.on('down', function (event) {
+            this.jump();
+        }, this);
+        console.log(this.keys)
     }
 
     public reset(x: number, y: number): void {

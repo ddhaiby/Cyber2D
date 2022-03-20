@@ -1,10 +1,10 @@
 import { Weapon, consts, Bullet, ObjectWithTransform } from "phaser3-weapon-plugin";
+import { Pawn } from "../Pawns/Pawn";
 
 export class CYBR_Weapon extends Weapon
 {
-    private _time: Phaser.Time.Clock;
-    private _timerReloadWeapon: Phaser.Time.TimerEvent;
-    private _events: Phaser.Events.EventEmitter;
+    private timerReloadWeapon: Phaser.Time.TimerEvent;
+    public owner: Pawn = null;
 
     constructor(scene: Phaser.Scene, bulletLimit: number, key: string, frame?: string, group?: Phaser.GameObjects.Group)
     {
@@ -20,12 +20,10 @@ export class CYBR_Weapon extends Weapon
         this.bulletKillType = consts.KillType.KILL_WORLD_BOUNDS;
         this.fireLimit = 10;
 
-        this._time = scene.time;
-        this._events = scene.events;
-        this._timerReloadWeapon = this._time.delayedCall(0, () => {}); // Create an empty timer so I am sure it exists
+        this.timerReloadWeapon = scene.time.delayedCall(0, () => {}); // Create an empty timer so I am sure it exists
 
         this.on("fire", function (bullet: Bullet, weapon: Weapon, speed: number){
-            this._events.emit("shotsChanged", this.shots, this.fireLimit);
+            this.owner.emit("shotsChanged", this.shots, this.fireLimit);
         }, this)
     }
 
@@ -37,22 +35,22 @@ export class CYBR_Weapon extends Weapon
 
     public stopReloading() : void
     {
-        this._timerReloadWeapon.remove();
+        this.timerReloadWeapon.remove();
     }
 
     public reload() : void
     {
         if (this.getShots() == 0) // Full ammunition
         {
-            this._timerReloadWeapon.remove();
+            this.timerReloadWeapon.remove();
             return;
         }
-        else if (this._timerReloadWeapon.getRemaining() == 0) // The timer is inactive or it has been triggered 
+        else if (this.timerReloadWeapon.getRemaining() == 0) // The timer is inactive or it has been triggered 
         {
-            this._timerReloadWeapon = this._time.delayedCall(100, () => {
+            this.timerReloadWeapon = this.scene.time.delayedCall(100, () => {
                 this.decrementShots();
                 if (this.getShots() > 0)
-                    this._timerReloadWeapon = this._timerReloadWeapon.reset({delay: this._timerReloadWeapon.delay, repeat: 1, callbackScope: this, callback: this.reload });
+                    this.timerReloadWeapon = this.timerReloadWeapon.reset({delay: this.timerReloadWeapon.delay, repeat: 1, callbackScope: this, callback: this.reload });
                 else
                     this.stopReloading();
             }, null, this);
@@ -62,13 +60,13 @@ export class CYBR_Weapon extends Weapon
     public decrementShots() : void
     {
         this.shots -= 1;
-        this._events.emit("shotsChanged", this.shots, this.fireLimit);
+        this.owner.emit("shotsChanged", this.shots, this.fireLimit);
     }
 
     public setShots(shots: number) : void
     {
         this.shots = shots;
-        this._events.emit("shotsChanged", this.shots, this.fireLimit);
+        this.owner.emit("shotsChanged", this.shots, this.fireLimit);
     }
 
     public getShots() : number
@@ -79,5 +77,10 @@ export class CYBR_Weapon extends Weapon
     public stopFiring() : void
     {
         this.reload();
+    }
+
+    public setOwner(owner: Pawn) : void
+    {
+        this.owner = owner;
     }
 }
