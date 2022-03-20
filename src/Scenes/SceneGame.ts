@@ -200,7 +200,7 @@ export class SceneGame extends CYBR_Scene
         ladderObjects.map((ladder: Ladder)=>{
             ladder.setTexture("ladder");
             ladders.add(ladder);
-            ladder.setName(this.generateUniqueName(ladder));
+            ladder.setName(CYBR_Scene.generateUniqueName(ladder));
         });
 
         // No physic for the top of the ladder
@@ -267,7 +267,7 @@ export class SceneGame extends CYBR_Scene
         this.player.on("die", this.onPlayerDie.bind(this));
         this.player.init(this, "eyeball");
 
-        this.player.setName(this.generateUniqueName(this.player));
+        this.player.setName(CYBR_Scene.generateUniqueName(this.player));
         this.spawnPositions.set(this.player.name, new Phaser.Math.Vector2(this.player.x, this.player.y));
     }
 
@@ -284,7 +284,7 @@ export class SceneGame extends CYBR_Scene
             ai.on("die", this.onEnemyDie.bind(this, ai));
             ai.init(this, "eyeball");
 
-            ai.setName(this.generateUniqueName(ai));
+            ai.setName(CYBR_Scene.generateUniqueName(ai));
             this.spawnPositions.set(ai.name, new Phaser.Math.Vector2(ai.x, ai.y));
         }, this);
     }

@@ -18,7 +18,7 @@ export class CYBR_Scene extends Phaser.Scene
         super(config);
     }
 
-    public generateUniqueName(gameObject: Phaser.GameObjects.GameObject) : string // TODO rendre static
+    public static generateUniqueName(gameObject: Phaser.GameObjects.GameObject) : string
     {
         ++CYBR_Scene._idCount;
         return (typeof gameObject) + CYBR_Scene._idCount.toString(); // TODO typeof always return "object". Consider using the string directly, or fix it.
