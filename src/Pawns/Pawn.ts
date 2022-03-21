@@ -3,6 +3,8 @@ import { CYBR_Weapon } from "../Weapons/CYBR_Weapon";
 
 export class Pawn extends Phaser.Physics.Arcade.Sprite
 {
+    protected startOnRight: boolean = false;
+
     // Weapons
     public currentWeapon: CYBR_Weapon;
 
@@ -24,7 +26,11 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture, frame?: string | number)
     {
         super(scene, x, y, texture, frame);
-        this.init(scene);
+
+        scene.add.existing(this);
+        scene.physics.add.existing(this);
+        this.setGravity(this.scene.physics.world.gravity.x, this.scene.physics.world.gravity.y);
+        this.setCollideWorldBounds(false);
     }
 
     // Init
@@ -35,12 +41,6 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         if (textureKey)
             this.setTexture(textureKey);
 
-        scene.add.existing(this);
-        scene.physics.add.existing(this);
-        this.setGravity(this.scene.physics.world.gravity.x, this.scene.physics.world.gravity.y);
-
-        this.setCollideWorldBounds(false);
-
         this.initStates();
         this.initAnimations();
         this.initAttributes();
@@ -50,6 +50,11 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     {
         this.isLookingUp = false;
         this.isLookingDown = false;
+
+        if (this.startOnRight)
+            this.lookOnRight();
+        else
+            this.lookOnLeft();
     }
 
     // TODO: This should be later defined in the derived classes
@@ -86,8 +91,9 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
             frameRate: 10,
             repeat: -1
         });
-        
-        this.anims.play("right", true);
+
+        const keyIdle = this.isLookingRight ? "right" : "left";
+        this.anims.play(keyIdle, true);
     }
 
     private initAttributes() : void

@@ -16,7 +16,6 @@ export class PatrolAI extends Pawn
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture, frame?: string | number)
     {
         super(scene, x, y, texture, frame);
-        this.lookOnRight();
         this.fireWeaponTimer = scene.time.addEvent({}); // Create an empty timer to avoid null error
         this.on("die", () => { this.fireWeaponTimer.remove(); }, this);
     }
