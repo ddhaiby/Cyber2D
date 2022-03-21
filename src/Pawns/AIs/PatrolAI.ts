@@ -1,5 +1,5 @@
 import {Pawn} from "../Pawn";
-import { CYBR_Weapon } from "../../Weapons/CYBR_Weapon";
+import { GuardWeapon } from "../../Weapons/GuardWeapon";
 
 export class PatrolAI extends Pawn
 {
@@ -27,7 +27,7 @@ export class PatrolAI extends Pawn
 
         if (this.fireWeapon)
         {
-            let weapon = new CYBR_Weapon(scene, 30, "bullet");
+            let weapon = new GuardWeapon(scene, 30, "bullet");
             this.equipWeapon(weapon);
             this.prepareNextFire();
         }

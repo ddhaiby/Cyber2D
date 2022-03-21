@@ -16,6 +16,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     public isFiring: boolean = false;
     public isClimbing: boolean = false;
     public wasClimbing: boolean = false;
+    public isRecovering: boolean = false
 
     // Attributes
     public attributes: Phaser.Structs.Map<string, number>;
@@ -320,8 +321,9 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
     public stopFiring() : void
     {
-        this.isFiring = false;
-        if (this.currentWeapon)
+        if (this.isFiring && this.currentWeapon)
             this.currentWeapon.stopFiring();
+
+        this.isFiring = false;
     }
 }

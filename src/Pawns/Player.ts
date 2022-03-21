@@ -1,12 +1,12 @@
 import {Pawn} from "./Pawn";
 import {IPlayerKeys, PlayerManager} from "../Managers/PlayerManager";
-import { CYBR_Weapon } from "../Weapons/CYBR_Weapon";
+import { PlayerWeapon } from "../Weapons/PlayerWeapon";
 
 export class Player extends Pawn {
 
-    public isRecovering: boolean = false;
     public isTakingDmg: boolean = false
-    private keys:IPlayerKeys;
+    private keys: IPlayerKeys;
+
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture) {
         super(scene, x, y, texture);
     }
@@ -16,7 +16,7 @@ export class Player extends Pawn {
 
     public init(scene: Phaser.Scene, textureKey?: string): void {
         super.init(scene, textureKey);
-        let weapon = new CYBR_Weapon(scene, 30, "bullet");
+        let weapon = new PlayerWeapon(scene, 30, "bullet");
         this.equipWeapon(weapon);
 
         PlayerManager.Instance.reloadKeys(scene);
@@ -24,7 +24,6 @@ export class Player extends Pawn {
         this.keys.jump.on('down', function (event) {
             this.jump();
         }, this);
-        console.log(this.keys)
     }
 
     public reset(x: number, y: number): void {

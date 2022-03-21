@@ -320,10 +320,13 @@ export class SceneGame extends CYBR_Scene
         this.enemies.getChildren().forEach(function (ai: PatrolAI) {
             this.physics.add.collider(ai, this.movingPlatforms, this.collideMovingPlatforms);
             this.physics.add.overlap(this.player, ai, this.onPlayerOverlapEnnemy, this.canPlayerOverlapEnnemy, this); 
-            this.physics.add.overlap(this.player.currentWeapon.bullets, ai, this.onWeaponHitEnnemy, this.canHitEnemy.bind(this, ai), this); 
+            this.physics.add.overlap(this.player.currentWeapon.bullets, ai, this.onWeaponHitPawn, this.canHitPawn, this);
 
             if (ai.currentWeapon)
+            {
                 this.physics.add.collider(ai.currentWeapon.bullets, this.platforms, this.onWeaponHitPlatforms);
+                this.physics.add.overlap(ai.currentWeapon.bullets, this.player, this.onWeaponHitPawn, this.canHitPawn, this);
+            }
         }, this);
     }
 
@@ -421,14 +424,14 @@ export class SceneGame extends CYBR_Scene
     // Enemies
     ////////////////////////////////////////////////////////////////////////
 
-    private canHitEnemy(enemy: Pawn) : boolean
+    private canHitPawn(bullet: Bullet, pawn: Pawn) : boolean
     {
-        return !enemy.dead();
+        return !pawn.dead() && !pawn.isRecovering;
     }
 
-    private onWeaponHitEnnemy(bullet: Bullet, enemy: Pawn) : void
+    private onWeaponHitPawn(bullet: Bullet, pawn: Pawn) : void
     {
-        enemy.hurt(35);
+        pawn.hurt(35);
         bullet.kill();
     }
 
