@@ -12,7 +12,7 @@ export class CYBR_Weapon extends Weapon
 
         this.bulletGravity = new Phaser.Math.Vector2(0, -scene.physics.world.gravity.y); // So the bullets ignore the gravity
 
-        this.timerReloadWeapon = scene.time.delayedCall(0, () => {}); // Create an empty timer to avoid null error
+        this.timerReloadWeapon = scene.time.addEvent({}); // Create an empty timer to avoid null error
 
         this.on("fire", function (/*bullet: Bullet, weapon: Weapon, speed: number*/){
             this.owner.emit("shotsChanged", this.shots, this.fireLimit);
