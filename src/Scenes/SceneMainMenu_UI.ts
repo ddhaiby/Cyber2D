@@ -47,7 +47,7 @@ export class SceneMainMenu_UI extends CYBR_Scene
         this.registerContainer = new RegisterContainer(this, 0, 0);
         this.registerContainer.setVisible(false);
         this.registerContainer.on("playerSaveSettings", this.onPlayerConnected, this);
-        this.registerContainer.on("playerCancelledSettings", this.onPlayerCancelledConnection, this);
+        this.registerContainer.on("playerCancelledConnection", this.onPlayerCancelledConnection, this);
 
         // Containers
         this.mainMenuContainer = new MainMenuContainer(this, 0, 0);
