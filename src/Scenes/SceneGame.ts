@@ -282,7 +282,7 @@ export class SceneGame extends CYBR_Scene
         enemyObjects.map((ai: PatrolAI)=>{ this.enemies.add(ai); });
 
         this.enemies.getChildren().forEach((ai: PatrolAI) => {
-            ai.init("robotPatrolPistol");
+            ai.init(ai.patrol ? "robotPatrolPistol" : "robotPatrolRifle");
             ai.setScale(1);
 
             ai.setName(CYBR_Scene.generateUniqueName(ai));

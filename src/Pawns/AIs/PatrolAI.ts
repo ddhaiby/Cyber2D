@@ -5,7 +5,7 @@ import { CST } from "../../CST";
 export class PatrolAI extends Pawn
 {
     // Patrol
-    private patrol: boolean = false;
+    public patrol: boolean = false;
     private pathStartX: number = 0;
     private pathEndX: number = 0;
 

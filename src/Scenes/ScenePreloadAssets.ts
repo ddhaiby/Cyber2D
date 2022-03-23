@@ -59,6 +59,7 @@ export class ScenePreloadAssets extends CYBR_Scene
         this.load.setPath("./assets/sprite");
         this.load.spritesheet("player", "Player.png", { frameWidth: 32, frameHeight: 38 });
         this.load.spritesheet("robotPatrolPistol", "RobotPatrolPistol.png", { frameWidth: 32, frameHeight: 38 });
+        this.load.spritesheet("robotPatrolRifle", "RobotPatrolRifle.png", { frameWidth: 32, frameHeight: 38 });
     }
 
     private loadAudios() : void
@@ -73,7 +74,7 @@ export class ScenePreloadAssets extends CYBR_Scene
     private loadVideos() : void
     {
         this.load.setPath("./assets/video");
-        this.load.video("cyberIntro", "./cyberIntro.mp4");
+        //this.load.video("cyberIntro", "./cyberIntro.mp4");
     }
 
     // Create
