@@ -105,14 +105,6 @@ export class Player extends Pawn
         const keyIdle = this.isLookingRight ? "idleRight" : "idleLeft";
         this.anims.play(keyIdle, true);
 
-        this.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function (anim: Phaser.Animations.Animation, frame: Phaser.Animations.AnimationFrame) {
-            this.emit("animationcomplete_" + anim.key, anim, frame);
-        }, this);
-
-        this.on(Phaser.Animations.Events.ANIMATION_START, function (anim: Phaser.Animations.Animation, frame: Phaser.Animations.AnimationFrame) {
-            this.emit("animationstart_" + anim.key, anim, frame);
-        }, this);
-
         this.on("animationcomplete_jumpRight", function (anim: Phaser.Animations.Animation, frame: Phaser.Animations.AnimationFrame) {
             this.jump();
         }, this);

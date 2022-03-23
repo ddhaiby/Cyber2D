@@ -56,6 +56,17 @@ export class PatrolAI extends Pawn
             frameRate: 10,
             repeat: -1
         });
+
+        this.anims.create({
+            key: "die",
+            frames: this.anims.generateFrameNumbers(this.texture.key, { start: 5, end: 9 }),
+            frameRate: 5,
+            repeat: 0
+        });
+
+        this.on("animationcomplete_die", function (anim: Phaser.Animations.Animation, frame: Phaser.Animations.AnimationFrame) {
+            this.scene.time.delayedCall(500, () => { this.disableBody(true, true); }, null, this);
+        }, this);
     }
 
     protected initAttributes() : void
@@ -74,10 +85,8 @@ export class PatrolAI extends Pawn
     {
         super.update(args);
 
-        if (this.dead())
-            return;
-
-        this.updateControl();
+        if (!this.dead())
+            this.updateControl();
     }
 
     protected updateControl() : void
@@ -95,8 +104,16 @@ export class PatrolAI extends Pawn
 
     protected updateAnimations() : void
     {
-        this.anims.play(this.isWalking ? "walk" : "idle", true);
-        this.setFlipX(this.isLookingLeft);
+        if (this.dead())
+        {
+            if (this.anims.currentAnim.key != "die")
+                this.anims.play("die");
+        }
+        else
+        {
+            this.anims.play(this.isWalking ? "walk" : "idle", true);
+            this.setFlipX(this.isLookingLeft);
+        }
     }
 
     public prepareNextFire() : void

@@ -88,8 +88,8 @@ export class SceneGame extends CYBR_Scene
 
         const levelName = "level" + this.currentLevel.toString();
        // console.log(await this.httpService.getLevel(levelName));
-      // this.load.tilemapTiledJSON(levelName, "./levels" + "/" + levelName + ".json");
-        this.load.tilemapTiledJSON(levelName,this.httpService.getLevel(levelName));
+       this.load.tilemapTiledJSON(levelName, "./levels" + "/" + levelName + ".json");
+        //this.load.tilemapTiledJSON(levelName,this.httpService.getLevel(levelName));
     }
 
     // Create
@@ -282,7 +282,6 @@ export class SceneGame extends CYBR_Scene
         enemyObjects.map((ai: PatrolAI)=>{ this.enemies.add(ai); });
 
         this.enemies.getChildren().forEach((ai: PatrolAI) => {
-            ai.on("die", this.onEnemyDie.bind(this, ai));
             ai.init("robotPatrolPistol");
             ai.setScale(1);
 
@@ -442,11 +441,6 @@ export class SceneGame extends CYBR_Scene
         bullet.active = false;
         bullet.visible = false;
         bullet.kill();
-    }
-
-    private onEnemyDie(enemy: Pawn) : void
-    {
-        this.time.delayedCall(800, ()=>{ enemy.disableBody(true, true); }, null, this);
     }
 
     // Player

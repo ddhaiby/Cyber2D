@@ -33,6 +33,14 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         scene.physics.add.existing(this);
         this.setGravity(this.scene.physics.world.gravity.x, this.scene.physics.world.gravity.y);
         this.setCollideWorldBounds(false);
+
+        this.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function (anim: Phaser.Animations.Animation, frame: Phaser.Animations.AnimationFrame) {
+            this.emit("animationcomplete_" + anim.key, anim, frame);
+        }, this);
+
+        this.on(Phaser.Animations.Events.ANIMATION_START, function (anim: Phaser.Animations.Animation, frame: Phaser.Animations.AnimationFrame) {
+            this.emit("animationstart_" + anim.key, anim, frame);
+        }, this);
     }
 
     // Init
