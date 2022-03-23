@@ -27,21 +27,12 @@ export class ScenePreloadAssets extends CYBR_Scene
     {
         this.loadImages();
         this.loadSprites();
-        this.loadAudio();
+        this.loadAudios();
+        this.loadVideos();
     }
 
     private loadImages() : void
     {
-        // Videos
-        this.load.setPath("./assets/video");
-        this.load.video("cyberIntro", "./cyberIntro.mp4");
-
-        // Music
-        this.load.setPath("./assets/audio/music");
-        this.load.audio("8-bit-samba", "./8-bit-samba20by20ian-post20Artlist.mp3");
-        this.load.audio("breaking-point", "./breaking-point20by20ian-post20Artlist.mp3");
-        this.load.audio("super-duper", "./super-duper20by20ian-post20Artlist.mp3");
-
         // UI
         this.load.setPath("./assets/image/UI");
         this.load.image("btn_background", "./btn_background.png");
@@ -66,18 +57,23 @@ export class ScenePreloadAssets extends CYBR_Scene
     private loadSprites() : void
     {
         this.load.setPath("./assets/sprite");
-        this.load.spritesheet("eyeball", "eyeball.png", { frameWidth: 32, frameHeight: 38 });
-        this.load.spritesheet("anna", "anna.png", { frameWidth: 40, frameHeight: 60 });
-
-        //for (let prop in CST.SPRITE) {
-        //    this.load.spritesheet(CST.SPRITE[prop], CST.SPRITE[prop], frameConfig);
-        //}
+        this.load.spritesheet("player", "Player.png", { frameWidth: 32, frameHeight: 38 });
+        this.load.spritesheet("robotPatrolPistol", "RobotPatrolPistol.png", { frameWidth: 32, frameHeight: 38 });
     }
 
-    private loadAudio() : void
+    private loadAudios() : void
     {
-        this.load.setPath("./assets/audio");
-        //this.load.audio("shuinvy-childhood.mp3", "shuinvy-childhood.mp3");
+        // Music
+        this.load.setPath("./assets/audio/music");
+        this.load.audio("8-bit-samba", "./8-bit-samba20by20ian-post20Artlist.mp3");
+        this.load.audio("breaking-point", "./breaking-point20by20ian-post20Artlist.mp3");
+        this.load.audio("super-duper", "./super-duper20by20ian-post20Artlist.mp3");
+    }
+
+    private loadVideos() : void
+    {
+        this.load.setPath("./assets/video");
+        this.load.video("cyberIntro", "./cyberIntro.mp4");
     }
 
     // Create

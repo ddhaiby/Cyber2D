@@ -1,5 +1,6 @@
 import {Pawn} from "../Pawn";
 import { GuardWeapon } from "../../Weapons/GuardWeapon";
+import { CST } from "../../CST";
 
 export class PatrolAI extends Pawn
 {
@@ -23,16 +24,47 @@ export class PatrolAI extends Pawn
     // Init
     ////////////////////////////////////////////////////////////////////////
 
-    public init(scene: Phaser.Scene, textureKey?: string) : void
+    public init(textureKey?: string) : this
     {
-        super.init(scene, textureKey);
+        super.init(textureKey);
 
         if (this.fireWeapon)
         {
-            let weapon = new GuardWeapon(scene, 30, "bullet");
+            let weapon = new GuardWeapon(this.scene, 30, "bullet");
             this.equipWeapon(weapon);
             this.prepareNextFire();
         }
+
+        return this;
+    }
+
+    protected initAnimations(textureKey: string) : void
+    {
+        super.initAnimations(textureKey);
+        this.body.setSize(this.width, this.height - 4);
+
+        this.anims.create({
+            key: "idle",
+            frames: this.anims.generateFrameNumbers(this.texture.key, { start: 5, end: 5 }),
+            frameRate: 10,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: "walk",
+            frames: this.anims.generateFrameNumbers(this.texture.key, { start: 0, end: 4 }),
+            frameRate: 10,
+            repeat: -1
+        });
+    }
+
+    protected initAttributes() : void
+    {
+        this.attributes = new Phaser.Structs.Map([]);
+        this.attributes.set(CST.PLAYER.ATTRIBUTES.MAX_HEALTH, 100);
+        this.attributes.set(CST.PLAYER.ATTRIBUTES.HEALTH, 100);
+        this.attributes.set(CST.PLAYER.ATTRIBUTES.WALK_SPEED, 100);
+        this.setHealth(this.getMaxHealth());
     }
 
     // Update
@@ -45,6 +77,11 @@ export class PatrolAI extends Pawn
         if (this.dead())
             return;
 
+        this.updateControl();
+    }
+
+    protected updateControl() : void
+    {
         if (this.patrol)
         {
             if (this.x <= this.pathStartX)
@@ -58,10 +95,8 @@ export class PatrolAI extends Pawn
 
     protected updateAnimations() : void
     {
-        if (this.isWalking)
-            this.anims.play(this.isLookingRight ? "right" : "left", true);
-        else
-            this.anims.pause();
+        this.anims.play(this.isWalking ? "walk" : "idle", true);
+        this.setFlipX(this.isLookingLeft);
     }
 
     public prepareNextFire() : void

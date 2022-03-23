@@ -265,7 +265,8 @@ export class SceneGame extends CYBR_Scene
         this.player = playerObjects[0] as Player;
         this.player.on("healthChanged", this.onPlayerHealthChanged.bind(this));
         this.player.on("die", this.onPlayerDie.bind(this));
-        this.player.init(this, "eyeball");
+        this.player.init("player");
+        this.player.setScale(1);
 
         this.player.setName(CYBR_Scene.generateUniqueName(this.player));
         this.spawnPositions.set(this.player.name, new Phaser.Math.Vector2(this.player.x, this.player.y));
@@ -282,7 +283,8 @@ export class SceneGame extends CYBR_Scene
 
         this.enemies.getChildren().forEach((ai: PatrolAI) => {
             ai.on("die", this.onEnemyDie.bind(this, ai));
-            ai.init(this, "eyeball");
+            ai.init("robotPatrolPistol");
+            ai.setScale(1);
 
             ai.setName(CYBR_Scene.generateUniqueName(ai));
             this.spawnPositions.set(ai.name, new Phaser.Math.Vector2(ai.x, ai.y));

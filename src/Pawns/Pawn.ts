@@ -15,6 +15,8 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     public isLookingLeft: boolean = false;
     public isWalking: boolean = false;
     public isJumping: boolean = false;
+    public wasJumping: boolean = false;
+    protected wasOnFloor: boolean = true;
     public isFiring: boolean = false;
     public isClimbing: boolean = false;
     public wasClimbing: boolean = false;
@@ -36,14 +38,14 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     // Init
     ////////////////////////////////////////////////////////////////////////
 
-    public init(scene: Phaser.Scene, textureKey?: string) : void
+    public init(textureKey?: string) : this
     {
-        if (textureKey)
-            this.setTexture(textureKey);
-
         this.initStates();
-        this.initAnimations();
         this.initAttributes();
+        if (textureKey)
+            this.initAnimations(textureKey);
+
+        return this;
     }
 
     private initStates() : void
@@ -57,53 +59,17 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
             this.lookOnLeft();
     }
 
-    // TODO: This should be later defined in the derived classes
-    private initAnimations() : void
+    protected initAnimations(textureKey: string) : void
     {
-        // Don't do anything if there is no texture
-        if (this.texture.key == "__DEFAULT" || this.texture.key == "")
-            return;
-
-        this.anims.create({
-            key: "up",
-            frames: this.anims.generateFrameNumbers(this.texture.key, { start: 0, end: 2 }),
-            frameRate: 10,
-            repeat: -1
-        });
-
-        this.anims.create({
-            key: "left",
-            frames: this.anims.generateFrameNumbers(this.texture.key, { start: 3, end: 5 }),
-            frameRate: 10,
-            repeat: -1
-        });
-
-        this.anims.create({
-            key: "down",
-            frames: this.anims.generateFrameNumbers(this.texture.key, { start: 6, end: 8 }),
-            frameRate: 10,
-            repeat: -1
-        });
-
-        this.anims.create({
-            key: "right",
-            frames: this.anims.generateFrameNumbers(this.texture.key, { start: 9, end: 11 }),
-            frameRate: 10,
-            repeat: -1
-        });
-
-        const keyIdle = this.isLookingRight ? "right" : "left";
-        this.anims.play(keyIdle, true);
+        this.setTexture(textureKey);
     }
 
-    private initAttributes() : void
+    protected initAttributes() : void
     {
         this.attributes = new Phaser.Structs.Map([]);
         this.attributes.set(CST.PLAYER.ATTRIBUTES.MAX_HEALTH, 100);
         this.attributes.set(CST.PLAYER.ATTRIBUTES.HEALTH, 100);
         this.attributes.set(CST.PLAYER.ATTRIBUTES.WALK_SPEED, 200);
-        this.attributes.set(CST.PLAYER.ATTRIBUTES.CLIMB_SPEED, 150);
-
         this.setHealth(this.getMaxHealth());
     }
 
@@ -121,12 +87,6 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     public update(...args: any[]) : void
     {
         super.update(args);
-
-        if (this.isOnFloor())
-            this.isJumping = false;
-
-        this.wasClimbing = this.isClimbing;
-
         this.updateAnimations();
     }
 
