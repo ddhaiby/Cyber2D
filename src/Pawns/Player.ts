@@ -70,14 +70,14 @@ export class Player extends Pawn
         this.anims.create({
             key: "jumpRight",
             frames: this.anims.generateFrameNumbers(this.texture.key, { start: 10, end: 13 }),
-            frameRate: 36,
+            frameRate: 40,
             repeat: 0
         });
 
         this.anims.create({
             key: "jumpLeft",
             frames: this.anims.generateFrameNumbers(this.texture.key, { start: 15, end: 18 }),
-            frameRate: 36,
+            frameRate: 40,
             repeat: 0
         });
 
