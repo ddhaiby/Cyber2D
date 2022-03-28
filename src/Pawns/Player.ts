@@ -5,7 +5,6 @@ import { CST } from "../CST";
 
 export class Player extends Pawn
 {
-    private isStartingJumping: boolean = false;
     public isTakingDmg: boolean = false
     private keys: IPlayerKeys;
 
@@ -26,7 +25,7 @@ export class Player extends Pawn
         PlayerManager.Instance.reloadKeys(this.scene);
         this.keys = PlayerManager.Instance.keyBinding;
         this.keys.jump.on("down", function (event) {
-            this.startJumping();
+            this.jump();
         }, this);
 
         return this;
@@ -68,20 +67,6 @@ export class Player extends Pawn
         });
 
         this.anims.create({
-            key: "jumpRight",
-            frames: this.anims.generateFrameNumbers(this.texture.key, { start: 10, end: 13 }),
-            frameRate: 40,
-            repeat: 0
-        });
-
-        this.anims.create({
-            key: "jumpLeft",
-            frames: this.anims.generateFrameNumbers(this.texture.key, { start: 15, end: 18 }),
-            frameRate: 40,
-            repeat: 0
-        });
-
-        this.anims.create({
             key: "inAirRight",
             frames: this.anims.generateFrameNumbers(this.texture.key, { start: 13, end: 13 }),
             frameRate: 10,
@@ -104,14 +89,6 @@ export class Player extends Pawn
 
         const keyIdle = this.isLookingRight ? "idleRight" : "idleLeft";
         this.anims.play(keyIdle, true);
-
-        this.on("animationcomplete_jumpRight", function (anim: Phaser.Animations.Animation, frame: Phaser.Animations.AnimationFrame) {
-            this.jump();
-        }, this);
-
-        this.on("animationcomplete_jumpLeft", function (anim: Phaser.Animations.Animation, frame: Phaser.Animations.AnimationFrame) {
-            this.jump();
-        }, this);
     }
 
     protected initAttributes() : void
@@ -189,10 +166,6 @@ export class Player extends Pawn
             else
                 this.anims.pause();
         }
-        else if (this.isStartingJumping)
-        {
-            this.anims.play(this.isLookingRight ? "jumpRight" : "jumpLeft", true);
-        }
         else if (!this.isOnFloor())
         {
             this.anims.play(this.isLookingRight ? "inAirRight" : "inAirLeft", true);
@@ -205,23 +178,6 @@ export class Player extends Pawn
         {
             this.anims.play(this.isLookingRight ? "idleRight" : "idleLeft", true);
         }
-    }
-
-    public startJumping() : void
-    {
-        if (this.canJump())
-        {
-            if (this.isClimbing)
-                this.jump();
-            else
-                this.isStartingJumping = true;
-        }
-    }
-
-    public jump() : void
-    {
-        super.jump();
-        this.isStartingJumping = false;
     }
 
     public recover() : void

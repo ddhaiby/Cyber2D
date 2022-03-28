@@ -208,7 +208,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
             if (this.isClimbing)
                 this.stopClimbing();
 
-            this.setVelocityY(-330);
+            this.setVelocityY(-420);
             this.isJumping = true;
         }
     }
