@@ -8,9 +8,9 @@ export class GuardWeapon extends CYBR_Weapon
         super(scene, bulletLimit, key, frame, group);
 
         this.bulletLifespan = 100;
-        this.bulletSpeed = 700;
+        this.bulletSpeed = 650;
         this.bulletKillType = consts.KillType.KILL_WORLD_BOUNDS;
-        this.fireLimit = 0;
+        this.fireLimit = 300;
         this.fireRate = 50;
         this.fireAngle = 0;
     }

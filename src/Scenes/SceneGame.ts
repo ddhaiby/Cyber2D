@@ -250,7 +250,6 @@ export class SceneGame extends CYBR_Scene
         // @ts-ignore - Problem with Phaser’s types. classType supports classes 
         const weaponBoostObjects = this.currentMap.createFromObjects("Pickups", {name: "WeaponBoost", classType: WeaponBoostPickup});
         weaponBoostObjects.map((boost: WeaponBoostPickup)=>{
-            boost.init();
             boost.setTexture("weaponBoost_48");
             this.pickupItems.add(boost);
         });
@@ -266,7 +265,7 @@ export class SceneGame extends CYBR_Scene
         this.player.on("healthChanged", this.onPlayerHealthChanged.bind(this));
         this.player.on("die", this.onPlayerDie.bind(this));
         this.player.init("player");
-        this.player.setScale(1);
+        this.player.setScale(this.player.scaleX, this.player.scaleY);
 
         this.player.setName(CYBR_Scene.generateUniqueName(this.player));
         this.spawnPositions.set(this.player.name, new Phaser.Math.Vector2(this.player.x, this.player.y));
@@ -283,7 +282,7 @@ export class SceneGame extends CYBR_Scene
 
         this.enemies.getChildren().forEach((ai: PatrolAI) => {
             ai.init(ai.patrol ? "robotPatrolPistol" : "robotPatrolRifle");
-            ai.setScale(1);
+            ai.setScale(ai.scaleX, ai.scaleY);
 
             ai.setName(CYBR_Scene.generateUniqueName(ai));
             this.spawnPositions.set(ai.name, new Phaser.Math.Vector2(ai.x, ai.y));
@@ -297,7 +296,7 @@ export class SceneGame extends CYBR_Scene
 
         /////// Player
         this.physics.add.overlap(this.player, this.ladderManager.ladders, this.overlapLadder, (player: Player, ladder: Ladder) => {
-            return Math.abs(player.x - ladder.x) <= 8;
+            return Math.abs(player.x - ladder.x) <= 16;
         }, this);
 
         this.platforms.setCollisionByProperty({collides:true});

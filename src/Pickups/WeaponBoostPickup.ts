@@ -3,18 +3,11 @@ import { Pawn } from "../Pawns/Pawn";
 
 export class WeaponBoostPickup extends EffectPickup
 {
-    private boostDuration: number;
+    private boostDuration: number = 0;
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture, frame?: string | number)
     {
         super(scene, x, y, texture, frame);
-
-        this.init();
-    }
-
-    public init() : void
-    {
-        this.boostDuration = 3000;
     }
 
     public applyEffect(pawn: Pawn) : void
