@@ -36,6 +36,7 @@ export class SceneGame extends CYBR_Scene
     private currentMap: Phaser.Tilemaps.Tilemap;
     private platforms: Phaser.Tilemaps.TilemapLayer;
     private movingPlatforms: Phaser.Physics.Arcade.StaticGroup;
+    private checkpoints: Phaser.Physics.Arcade.StaticGroup;
     private portals: Phaser.Physics.Arcade.StaticGroup;
     private backgrounds: Phaser.Physics.Arcade.StaticGroup;
     private tokens: Phaser.Physics.Arcade.StaticGroup;
@@ -120,6 +121,7 @@ export class SceneGame extends CYBR_Scene
         this.createMap();
         this.createBackground();
         this.createPlatforms();
+        this.createCheckpoints();
         this.createLadders();
         this.createPortals();
         this.createTokens();
@@ -151,7 +153,7 @@ export class SceneGame extends CYBR_Scene
 
     private createGameMode() : void
     {
-        this.setRemainLife(1);
+        this.setRemainLife(3);
         this.setCollectedTokens(0);
     }
 
@@ -188,6 +190,19 @@ export class SceneGame extends CYBR_Scene
             platform.setTexture("movingPlatform");
             platform.init();
             this.movingPlatforms.add(platform);
+        });
+    }
+
+    private createCheckpoints() : void 
+    {
+        this.checkpoints = this.physics.add.staticGroup();
+
+        // @ts-ignore - Problem with Phaser’s types. classType supports classes 
+        let checkpointObjects = this.currentMap.createFromObjects("Portals", {name: "Checkpoint", classType: Phaser.Physics.Arcade.Image});
+        checkpointObjects.map((checkPoint: Phaser.Physics.Arcade.Image)=>{
+            checkPoint.setTexture("checkpoint_off");
+            this.checkpoints.add(checkPoint);
+            checkPoint.setName(CYBR_Scene.generateUniqueName(checkPoint));
         });
     }
 
@@ -311,6 +326,7 @@ export class SceneGame extends CYBR_Scene
         this.physics.add.overlap(this.player, this.portals, this.completeLevel, null, this);
         this.physics.add.overlap(this.player, this.tokens, this.collectToken, null, this);
         this.physics.add.overlap(this.player, this.pickupItems, this.applyEffectOnPlayer, null, this);
+        this.physics.add.overlap(this.player, this.checkpoints, this.reachCheckpoint, null, this);
 
         if (this.player.currentWeapon)
             this.physics.add.collider(this.player.currentWeapon.bullets, this.platforms, this.onWeaponHitPlatforms.bind(this));
@@ -489,6 +505,12 @@ export class SceneGame extends CYBR_Scene
     {
         pickup.disableBody(true, true);
         pickup.applyEffect(this.player);
+    }
+
+    private reachCheckpoint(player: Player, checkpoint: Phaser.Physics.Arcade.Image) : void
+    {
+        checkpoint.setTexture("checkpoint_on");
+        this.spawnPositions.set(this.player.name, new Phaser.Math.Vector2(checkpoint.x, checkpoint.y));
     }
 
     private respawnPlayer() : void

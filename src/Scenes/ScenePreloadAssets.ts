@@ -51,6 +51,8 @@ export class ScenePreloadAssets extends CYBR_Scene
         this.load.image("movingPlatform", "movingPlatform.png");
         this.load.image("ladder", "ladder.png");
         this.load.image("ladderTop", "ladderTop.png");
+        this.load.image("checkpoint_off", "checkpoint_off.png");
+        this.load.image("checkpoint_on", "checkpoint_on.png");
     }
 
     private loadSprites() : void
