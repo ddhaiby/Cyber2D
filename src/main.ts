@@ -10,15 +10,15 @@ document.body.style.overflow = "hidden";
 
 new Phaser.Game({
     type: Phaser.AUTO,
-    width: 1000,//document.body.clientWidth,
-    height: 600,//window.innerHeight,
+    width: 992,//document.body.clientWidth,
+    height: 576,//window.innerHeight,
     scale: {
         parent: document.body,
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
     dom: { createContainer: true },
     scene: [ScenePreloadAssets],
-    render: { pixelArt: true },
+    render: { pixelArt: false },
     physics: {
         default: "arcade",
         arcade: {

@@ -45,14 +45,21 @@ export class ScenePreloadAssets extends CYBR_Scene
         this.load.image("ground", "platform.png");
         this.load.image("bullet", "bullet.png");
         this.load.image("token_24", "token_24.png");
-        this.load.image("healItem_48", "healItem_48.png");
+        this.load.image("healthPackage", "healthPackage.png");
         this.load.image("weaponBoost_48", "weaponBoost_48.png");
-        this.load.image("portal", "star.png");
+        this.load.image("portal", "portal.png");
         this.load.image("movingPlatform", "movingPlatform.png");
-        this.load.image("ladder", "ladder.png");
-        this.load.image("ladderTop", "ladderTop.png");
-        this.load.image("checkpoint_off", "checkpoint_off.png");
-        this.load.image("checkpoint_on", "checkpoint_on.png");
+        this.load.image("checkpointOff", "checkpointOff.png");
+        this.load.image("checkpointOn", "checkpointOn.png");
+
+        this.load.image("ladder", "ladders/ladder.png");
+        this.load.image("ladderTop", "ladders/ladderTop.png");
+        this.load.image("ladderBottom", "ladders/ladderBottom.png");
+
+        this.load.image("tokenCopper", "tokens/tokenCopper.png");
+        this.load.image("tokenSilver", "tokens/tokenSilver.png");
+        this.load.image("tokenGold", "tokens/tokenGold.png");
+        this.load.image("tokenCyber", "tokens/tokenCyber.png");
     }
 
     private loadSprites() : void

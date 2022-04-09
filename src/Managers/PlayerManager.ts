@@ -27,7 +27,7 @@ export class PlayerManager {
         if (this.instance == null) {
             this.instance = new PlayerManager();
         }
-        return this.instance
+        return this.instance;
     }
 
     set initKeys(scene: Phaser.Scene) {
