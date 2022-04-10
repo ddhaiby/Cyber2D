@@ -35,8 +35,6 @@ export class Player extends Pawn
     {
         super.initAnimations(textureKey);
 
-        this.body.setSize(this.width, this.height - 4);
-
         this.anims.create({
             key: "idleRight",
             frames: this.anims.generateFrameNumbers(this.texture.key, { start: 10, end: 10 }),

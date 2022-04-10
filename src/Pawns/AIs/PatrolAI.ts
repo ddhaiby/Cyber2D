@@ -41,7 +41,6 @@ export class PatrolAI extends Pawn
     protected initAnimations(textureKey: string) : void
     {
         super.initAnimations(textureKey);
-        this.body.setSize(this.width, this.height - 4);
 
         this.anims.create({
             key: "idle",
