@@ -95,15 +95,15 @@ export class SceneGame_UI extends CYBR_Scene {
         let tokenImageX = this.bulletBar.x;
         let tokenImageY = this.bulletBar.y + this.bulletBar.height + 8;
 
-        let tokenImage = this.add.image(tokenImageX, tokenImageY, "token_24");
+        let tokenImage = this.add.image(tokenImageX, tokenImageY, "tokenSilver");
         tokenImage.x += tokenImage.width / 2;
         tokenImage.y += tokenImage.height / 2;
 
         // Text
-        let textX = tokenImage.x + tokenImage.width;
+        let textX = tokenImage.x + tokenImage.width + 12;
         let textY = tokenImage.y + 1;
 
-        let tokenText = this.add.text(textX, textY, "0", {font: '18px Gemunu Libre', color: '#000000'});
+        let tokenText = this.add.text(textX, textY, "0", {font: '24px Gemunu Libre', color: '#FFBC32', stroke: '#000000', strokeThickness: 3});
         tokenText.x -= tokenText.width / 2;
         tokenText.y -= tokenText.height / 2;
 
@@ -122,14 +122,14 @@ export class SceneGame_UI extends CYBR_Scene {
         let lifeImageX = tokenImage.x;
         let lifeImageY = tokenImage.y + tokenImage.height;
 
-        let lifeImage = this.add.image(lifeImageX, lifeImageY, "eyeball", 9).setScale(1);
+        let lifeImage = this.add.image(lifeImageX, lifeImageY, "player", 9).setScale(1);
         lifeImage.y += lifeImage.height / 2;
 
         // Text
-        let textX = lifeImage.x + lifeImage.width;
+        let textX = lifeImage.x + lifeImage.width - 5;
         let textY = lifeImage.y + 1;
 
-        let lifeText = this.add.text(textX, textY, "", {font: '18px Gemunu Libre', color: '#000000'});
+        let lifeText = this.add.text(textX, textY, "3", {font: '24px Gemunu Libre', color: '#FFBC32', stroke: '#000000', strokeThickness: 3});
         lifeText.x -= lifeText.width / 2;
         lifeText.y -= lifeText.height / 2;
 
@@ -152,7 +152,7 @@ export class SceneGame_UI extends CYBR_Scene {
 
     private createChrono(): Phaser.GameObjects.Text {
         let sceneWidth = this.scale.displaySize.width;
-        return this.add.text(sceneWidth - 100, 16, "00:00:00", {font: '20px Gemunu Libre', color: '#000000'});
+        return this.add.text(sceneWidth - 100, 16, "00:00:00", {font: '24px Gemunu Libre', color: '#FFBC32', stroke: '#000000', strokeThickness: 3});
     }
 
     private startLevelCompletedTransition(): void {
