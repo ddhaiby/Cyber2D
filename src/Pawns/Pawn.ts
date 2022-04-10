@@ -23,7 +23,8 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     public isRecovering: boolean = false
 
     // Attributes
-    public attributes: Phaser.Structs.Map<string, number>;
+    protected attributes: Phaser.Structs.Map<string, number>;
+    private maxHealth: number = 100;
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture, frame?: string | number)
     {
@@ -76,9 +77,8 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     protected initAttributes() : void
     {
         this.attributes = new Phaser.Structs.Map([]);
-        this.attributes.set(CST.PLAYER.ATTRIBUTES.MAX_HEALTH, 100);
-        this.attributes.set(CST.PLAYER.ATTRIBUTES.HEALTH, 100);
-        this.attributes.set(CST.PLAYER.ATTRIBUTES.WALK_SPEED, 200);
+        this.attributes.set(CST.PLAYER.ATTRIBUTES.MAX_HEALTH, this.maxHealth);
+        this.attributes.set(CST.PLAYER.ATTRIBUTES.HEALTH, this.maxHealth);
         this.setHealth(this.getMaxHealth());
     }
 

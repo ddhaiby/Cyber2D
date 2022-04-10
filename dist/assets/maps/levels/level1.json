@@ -1489,6 +1489,11 @@
                          "value":false
                         }, 
                         {
+                         "name":"maxHealth",
+                         "type":"float",
+                         "value":100
+                        }, 
+                        {
                          "name":"pathEndX",
                          "type":"float",
                          "value":1455
@@ -1520,6 +1525,11 @@
                          "name":"fireWeapon",
                          "type":"bool",
                          "value":false
+                        }, 
+                        {
+                         "name":"maxHealth",
+                         "type":"float",
+                         "value":100
                         }, 
                         {
                          "name":"pathEndX",
@@ -1555,6 +1565,11 @@
                          "value":false
                         }, 
                         {
+                         "name":"maxHealth",
+                         "type":"float",
+                         "value":100
+                        }, 
+                        {
                          "name":"pathEndX",
                          "type":"float",
                          "value":3115
@@ -1586,6 +1601,11 @@
                          "name":"fireWeapon",
                          "type":"bool",
                          "value":false
+                        }, 
+                        {
+                         "name":"maxHealth",
+                         "type":"float",
+                         "value":100
                         }, 
                         {
                          "name":"pathEndX",
@@ -1621,6 +1641,11 @@
                          "value":false
                         }, 
                         {
+                         "name":"maxHealth",
+                         "type":"float",
+                         "value":100
+                        }, 
+                        {
                          "name":"pathEndX",
                          "type":"float",
                          "value":3535
@@ -1654,6 +1679,11 @@
                          "value":false
                         }, 
                         {
+                         "name":"maxHealth",
+                         "type":"float",
+                         "value":100
+                        }, 
+                        {
                          "name":"pathEndX",
                          "type":"float",
                          "value":1165
@@ -1685,6 +1715,11 @@
                          "name":"fireWeapon",
                          "type":"bool",
                          "value":false
+                        }, 
+                        {
+                         "name":"maxHealth",
+                         "type":"float",
+                         "value":100
                         }, 
                         {
                          "name":"pathEndX",

@@ -957,6 +957,11 @@
                          "value":false
                         }, 
                         {
+                         "name":"maxHealth",
+                         "type":"float",
+                         "value":100
+                        }, 
+                        {
                          "name":"pathEndX",
                          "type":"float",
                          "value":335
@@ -995,6 +1000,11 @@
                          "value":2000
                         }, 
                         {
+                         "name":"maxHealth",
+                         "type":"float",
+                         "value":100
+                        }, 
+                        {
                          "name":"patrol",
                          "type":"bool",
                          "value":false
@@ -1026,6 +1036,11 @@
                          "name":"fireWeaponDelay",
                          "type":"float",
                          "value":2000
+                        }, 
+                        {
+                         "name":"maxHealth",
+                         "type":"float",
+                         "value":100
                         }, 
                         {
                          "name":"patrol",
@@ -1061,6 +1076,11 @@
                          "value":2000
                         }, 
                         {
+                         "name":"maxHealth",
+                         "type":"float",
+                         "value":100
+                        }, 
+                        {
                          "name":"patrol",
                          "type":"bool",
                          "value":false
@@ -1094,6 +1114,11 @@
                          "value":2000
                         }, 
                         {
+                         "name":"maxHealth",
+                         "type":"float",
+                         "value":100
+                        }, 
+                        {
                          "name":"patrol",
                          "type":"bool",
                          "value":false
@@ -1120,6 +1145,11 @@
                          "name":"fireWeapon",
                          "type":"bool",
                          "value":false
+                        }, 
+                        {
+                         "name":"maxHealth",
+                         "type":"float",
+                         "value":100
                         }, 
                         {
                          "name":"pathEndX",
@@ -1160,6 +1190,11 @@
                          "value":2000
                         }, 
                         {
+                         "name":"maxHealth",
+                         "type":"float",
+                         "value":100
+                        }, 
+                        {
                          "name":"patrol",
                          "type":"bool",
                          "value":false
@@ -1186,6 +1221,11 @@
                          "name":"fireWeapon",
                          "type":"bool",
                          "value":false
+                        }, 
+                        {
+                         "name":"maxHealth",
+                         "type":"float",
+                         "value":100
                         }, 
                         {
                          "name":"pathEndX",
@@ -1221,6 +1261,11 @@
                          "value":false
                         }, 
                         {
+                         "name":"maxHealth",
+                         "type":"float",
+                         "value":100
+                        }, 
+                        {
                          "name":"pathEndX",
                          "type":"float",
                          "value":335
@@ -1254,6 +1299,11 @@
                          "value":false
                         }, 
                         {
+                         "name":"maxHealth",
+                         "type":"float",
+                         "value":100
+                        }, 
+                        {
                          "name":"pathEndX",
                          "type":"float",
                          "value":845
@@ -1285,6 +1335,11 @@
                          "name":"fireWeapon",
                          "type":"bool",
                          "value":false
+                        }, 
+                        {
+                         "name":"maxHealth",
+                         "type":"float",
+                         "value":100
                         }, 
                         {
                          "name":"pathEndX",
@@ -1325,6 +1380,11 @@
                          "value":2000
                         }, 
                         {
+                         "name":"maxHealth",
+                         "type":"float",
+                         "value":100
+                        }, 
+                        {
                          "name":"patrol",
                          "type":"bool",
                          "value":false
@@ -1356,6 +1416,11 @@
                          "name":"fireWeaponDelay",
                          "type":"float",
                          "value":2000
+                        }, 
+                        {
+                         "name":"maxHealth",
+                         "type":"float",
+                         "value":100
                         }, 
                         {
                          "name":"patrol",
@@ -1391,6 +1456,11 @@
                          "value":2000
                         }, 
                         {
+                         "name":"maxHealth",
+                         "type":"float",
+                         "value":100
+                        }, 
+                        {
                          "name":"patrol",
                          "type":"bool",
                          "value":false
@@ -1422,6 +1492,11 @@
                          "name":"fireWeaponDelay",
                          "type":"float",
                          "value":2000
+                        }, 
+                        {
+                         "name":"maxHealth",
+                         "type":"float",
+                         "value":100
                         }, 
                         {
                          "name":"patrol",

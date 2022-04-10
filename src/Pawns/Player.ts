@@ -91,13 +91,9 @@ export class Player extends Pawn
 
     protected initAttributes() : void
     {
-        this.attributes = new Phaser.Structs.Map([]);
-        this.attributes.set(CST.PLAYER.ATTRIBUTES.MAX_HEALTH, 100);
-        this.attributes.set(CST.PLAYER.ATTRIBUTES.HEALTH, 100);
+        super.initAttributes();
         this.attributes.set(CST.PLAYER.ATTRIBUTES.WALK_SPEED, 180);
         this.attributes.set(CST.PLAYER.ATTRIBUTES.CLIMB_SPEED, 150);
-
-        this.setHealth(this.getMaxHealth());
     }
 
     public reset(x: number, y: number) : void

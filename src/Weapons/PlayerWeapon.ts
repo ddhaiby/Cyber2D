@@ -12,6 +12,6 @@ export class PlayerWeapon extends CYBR_Weapon
         this.fireRate = 220;
         this.fireAngle = 0;
         this.bulletKillType = consts.KillType.KILL_WORLD_BOUNDS;
-        this.fireLimit = 10;
+        this.fireLimit = 5;
     }
 }
