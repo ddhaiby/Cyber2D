@@ -18,7 +18,7 @@ export class PatrolAI extends Pawn
     {
         super(scene, x, y, texture, frame);
         this.fireWeaponTimer = scene.time.addEvent({}); // Create an empty timer to avoid null error
-        this.on("die", () => { this.fireWeaponTimer.remove(); }, this);
+        this.on("die", () => { this.fireWeaponTimer.remove(false); }, this);
     }
 
     // Init
@@ -75,6 +75,13 @@ export class PatrolAI extends Pawn
         this.attributes.set(CST.PLAYER.ATTRIBUTES.HEALTH, 100);
         this.attributes.set(CST.PLAYER.ATTRIBUTES.WALK_SPEED, 100);
         this.setHealth(this.getMaxHealth());
+    }
+
+    public reset(x: number, y: number) : void
+    {
+        super.reset(x,y);
+        this.fireWeaponTimer.remove(false);
+        this.prepareNextFire();
     }
 
     // Update
