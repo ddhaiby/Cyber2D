@@ -8,7 +8,6 @@ export class LadderManager {
 
     public ladders: Phaser.Physics.Arcade.StaticGroup;
     public laddersOnPlayer: Phaser.Structs.Map<string, Ladder>;
-    public bottomLadderOnPlayer: Ladder;
 
     constructor(scene: Phaser.Scene, ladders: Phaser.Physics.Arcade.StaticGroup)
     {
@@ -22,38 +21,9 @@ export class LadderManager {
         this.player = player;
 
         this.ladders.getChildren().forEach((ladder: Ladder) => {
-            ladder.on("overlapPlayerBegin", () => { this.addLadderOnPlayer(ladder); }, this);
-            ladder.on("overlapPlayerEnd", () => { this.removeLadderOnPlayer(ladder); }, this);
+            ladder.on("overlapPlayerBegin", () => { this.laddersOnPlayer.set(ladder.name, ladder); }, this);
+            ladder.on("overlapPlayerEnd", () => { this.laddersOnPlayer.delete(ladder.name); }, this);
         }, this);
-    }
-
-    private addLadderOnPlayer(ladder: Ladder) : void
-    {
-        if (!this.laddersOnPlayer.has(ladder.name))
-        {
-            this.laddersOnPlayer.set(ladder.name, ladder);
-            this.bottomLadderOnPlayer = this.getBottomLadder(this.laddersOnPlayer.getArray() as Ladder[]);
-        }
-    }
-
-    private removeLadderOnPlayer(ladder: Ladder) : void
-    {
-        this.laddersOnPlayer.delete(ladder.name);
-        this.bottomLadderOnPlayer = this.getBottomLadder(this.laddersOnPlayer.getArray() as Ladder[]);
-    }
-
-    private getBottomLadder(ladders: Ladder[]) : Ladder
-    {
-        if (ladders.length == 0)
-            return null;
-        else if (ladders.length == 1)
-            return ladders[0];
-        else
-        {
-            return ladders.reduce(function(ladder1 : Ladder, ladder2 : Ladder) {
-                return ladder1.y > ladder2.y ? ladder1 : ladder2;
-            });
-        }
     }
 
     /** Return true if at least one ladder is under the given y position. */
@@ -70,10 +40,10 @@ export class LadderManager {
 
     public update() : void 
     {
-        if (this.bottomLadderOnPlayer)
-            this.bottomLadderOnPlayer.updatePawnInteraction();
-
-        this.ladders.getChildren().forEach((ladder: Ladder) => { ladder.update();  }, this);
+        this.ladders.getChildren().forEach((ladder: Ladder) => {
+            ladder.updatePawnInteraction();
+            ladder.update();
+        }, this);
 
         if (this.laddersOnPlayer.size == 0)
             this.player.stopClimbing();
