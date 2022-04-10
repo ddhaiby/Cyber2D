@@ -10,7 +10,7 @@ document.body.style.overflow = "hidden";
 
 new Phaser.Game({
     type: Phaser.AUTO,
-    width: 992,//document.body.clientWidth,
+    width: 960,//document.body.clientWidth,
     height: 576,//window.innerHeight,
     scale: {
         parent: document.body,

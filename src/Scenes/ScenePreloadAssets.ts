@@ -41,14 +41,13 @@ export class ScenePreloadAssets extends CYBR_Scene
 
         // In game
         this.load.setPath("./assets/image");
-        this.load.image("sky", "sky.png");
-        this.load.image("ground", "platform.png");
+        this.load.image("background", "background.png");
         this.load.image("bullet", "bullet.png");
-        this.load.image("token_24", "token_24.png");
         this.load.image("healthPackage", "healthPackage.png");
         this.load.image("weaponBoost_48", "weaponBoost_48.png");
         this.load.image("portal", "portal.png");
         this.load.image("movingPlatform", "movingPlatform.png");
+
         this.load.image("checkpointOff", "checkpointOff.png");
         this.load.image("checkpointOn", "checkpointOn.png");
 

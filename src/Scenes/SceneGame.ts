@@ -165,7 +165,7 @@ export class SceneGame extends CYBR_Scene
     private createBackground() : void
     {
         this.backgrounds = this.physics.add.staticGroup();
-        this.backgrounds.add(this.add.image(0, 0, "sky").setScale(12));
+        this.backgrounds.add(this.add.image(0, 0, "background").setScale(4,4).setScrollFactor(0));
 
         const terrain = this.currentMap.addTilesetImage("cyber_plateforms_atlas", "terrain");
         this.currentMap.createLayer("Background", [terrain], 0, 0);
