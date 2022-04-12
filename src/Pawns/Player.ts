@@ -19,7 +19,7 @@ export class Player extends Pawn
     {
         super.init(textureKey);
 
-        let weapon = new PlayerWeapon(this.scene, 30, "bullet");
+        let weapon = new PlayerWeapon(this.scene, 30, "platform_atlas", "bullet");
         this.equipWeapon(weapon);
 
         PlayerManager.Instance.reloadKeys(this.scene);
@@ -37,14 +37,14 @@ export class Player extends Pawn
 
         this.anims.create({
             key: "idleRight",
-            frames: this.anims.generateFrameNumbers(this.texture.key, { start: 10, end: 10 }),
+            frames: this.anims.generateFrameNames(this.texture.key, { prefix: "idleRight_", suffix: ".png", start: 1, end: 1, zeroPad: 3 }),
             frameRate: 1,
             repeat: -1
         });
 
         this.anims.create({
             key: "idleLeft",
-            frames: this.anims.generateFrameNumbers(this.texture.key, { start: 15, end: 15 }),
+            frames: this.anims.generateFrameNames(this.texture.key, { prefix: "idleLeft_", suffix: ".png", start: 1, end: 1, zeroPad: 3 }),
             frameRate: 1,
             repeat: -1
         });
@@ -52,41 +52,57 @@ export class Player extends Pawn
         const frameRateWalk = 10;
         this.anims.create({
             key: "walkRight",
-            frames: this.anims.generateFrameNumbers(this.texture.key, { start: 0, end: 4 }),
+            frames: this.anims.generateFrameNames(this.texture.key, { prefix:  "walkRight_", suffix: ".png", start: 1, end: 5, zeroPad: 3 }),
             frameRate: frameRateWalk,
             repeat: -1
         });
 
         this.anims.create({
             key: "walkLeft",
-            frames: this.anims.generateFrameNumbers(this.texture.key, { start: 5, end: 9 }),
+            frames: this.anims.generateFrameNames(this.texture.key, { prefix: "walkLeft_", suffix: ".png", start: 1, end: 5, zeroPad: 3 }),
             frameRate: frameRateWalk,
             repeat: -1
         });
 
         this.anims.create({
             key: "inAirRight",
-            frames: this.anims.generateFrameNumbers(this.texture.key, { start: 13, end: 13 }),
+            frames: this.anims.generateFrameNames(this.texture.key, { prefix: "jumpRight_", suffix: ".png", start: 3, end: 3, zeroPad: 3 }),
             frameRate: 10,
             repeat: -1
         });
 
         this.anims.create({
             key: "inAirLeft",
-            frames: this.anims.generateFrameNumbers(this.texture.key, { start: 18, end: 18 }),
+            frames: this.anims.generateFrameNames(this.texture.key, { prefix: "jumpLeft_", suffix: ".png", start: 3, end: 3, zeroPad: 3 }),
             frameRate: 10,
             repeat: -1
         });
 
         this.anims.create({
+            key: "deathRight",
+            frames: this.anims.generateFrameNames(this.texture.key, { prefix: "deathRight_", suffix: ".png", start: 1, end: 4, zeroPad: 3 }),
+            frameRate: 7,
+            repeat: 0
+        });
+
+        this.anims.create({
+            key: "deathLeft",
+            frames: this.anims.generateFrameNames(this.texture.key, { prefix: "deathLeft_", suffix: ".png", start: 1, end: 4, zeroPad: 3 }),
+            frameRate: 7,
+            repeat: 0
+        });
+
+        this.anims.create({
             key: "climb",
-            frames: this.anims.generateFrameNumbers(this.texture.key, { start: 20, end: 23 }),
+            frames: this.anims.generateFrameNames(this.texture.key, {prefix: "climb_", suffix: ".png", start: 1, end: 4, zeroPad: 3 }),
             frameRate: 10,
             repeat: -1
         });
 
         const keyIdle = this.isLookingRight ? "idleRight" : "idleLeft";
         this.anims.play(keyIdle, true);
+        this.body.setSize(this.anims.currentAnim.frames[0].frame.realWidth, this.anims.currentAnim.frames[0].frame.realHeight);
+        this.body.setOffset(0,0);
     }
 
     protected initAttributes() : void
@@ -152,8 +168,14 @@ export class Player extends Pawn
     protected updateAnimations() : void
     {
         const currentAnim = this.anims.currentAnim.key;
+        const side = this.isLookingRight ? "Right" : "Left";
 
-        if (this.isClimbing)
+        if (this.dead())
+        {
+            if (this.anims.currentAnim.key != "deathRight" && this.anims.currentAnim.key != "deathLeft")
+                this.anims.play("death" + side, true);
+        }
+        else if (this.isClimbing)
         {
             if (this.body.velocity.y != 0)
                 this.anims.play("climb", true);
@@ -162,15 +184,15 @@ export class Player extends Pawn
         }
         else if (!this.isOnFloor())
         {
-            this.anims.play(this.isLookingRight ? "inAirRight" : "inAirLeft", true);
+            this.anims.play("inAir" + side, true);
         }
         else if (this.isWalking || this.isTakingDmg)
         {
-            this.anims.play(this.isLookingRight ? "walkRight" : "walkLeft", true);
+            this.anims.play("walk" + side, true);
         }
         else
         {
-            this.anims.play(this.isLookingRight ? "idleRight" : "idleLeft", true);
+            this.anims.play("idle" + side, true);
         }
     }
 

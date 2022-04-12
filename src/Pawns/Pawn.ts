@@ -71,7 +71,6 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     protected initAnimations(textureKey: string) : void
     {
         this.setTexture(textureKey);
-        this.body.setSize(this.width, this.height); // Because of Tiled, make sure the physic and the graphic have the same sizes
     }
 
     protected initAttributes() : void
@@ -88,6 +87,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.setHealth(this.getMaxHealth());
         this.setVelocity(0,0);
         this.setAlpha(1);
+        this.initStates();
     }
 
     // Update
@@ -266,6 +266,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     {
         this.attributes.set(CST.PLAYER.ATTRIBUTES.HEALTH, 0);
         this.stopWalking();
+        this.stopClimbing();
         this.emit("die");
     }
 

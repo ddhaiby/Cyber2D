@@ -95,7 +95,7 @@ export class SceneGame_UI extends CYBR_Scene {
         let tokenImageX = this.bulletBar.x;
         let tokenImageY = this.bulletBar.y + this.bulletBar.height + 8;
 
-        let tokenImage = this.add.image(tokenImageX, tokenImageY, "tokenSilver");
+        let tokenImage = this.add.image(tokenImageX, tokenImageY, "platform_atlas", "tokenSilver");
         tokenImage.x += tokenImage.width / 2;
         tokenImage.y += tokenImage.height / 2;
 
@@ -122,7 +122,7 @@ export class SceneGame_UI extends CYBR_Scene {
         let lifeImageX = tokenImage.x;
         let lifeImageY = tokenImage.y + tokenImage.height;
 
-        let lifeImage = this.add.image(lifeImageX, lifeImageY, "player", 9).setScale(1);
+        let lifeImage = this.add.image(lifeImageX, lifeImageY, "player", "idleLeft_001.png");
         lifeImage.y += lifeImage.height / 2;
 
         // Text
@@ -141,7 +141,7 @@ export class SceneGame_UI extends CYBR_Scene {
     }
 
     private createGameOverScreen(): void {
-        let gameOverText = this.add.text(0, 0, "GAME OVER", {font: '54px Arial', color: '#000000'});
+        let gameOverText = this.add.text(0, 0, "GAME OVER", {font: '54px Arial', color: '#FFBC32', stroke: '#000000', strokeThickness: 3});
         gameOverText.visible = false;
         this.centerItem(gameOverText);
 

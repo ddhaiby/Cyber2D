@@ -25,48 +25,15 @@ export class ScenePreloadAssets extends CYBR_Scene
 
     public preload() : void
     {
-        this.loadImages();
-        this.loadSprites();
         this.loadAudios();
         this.loadVideos();
-    }
+        this.loadPawns();
 
-    private loadImages() : void
-    {
-        // UI
-        this.load.setPath("./assets/image/UI");
-        this.load.image("btn_background", "./btn_background.png");
-        this.load.image("btn_background_hovered", "./btn_background_hovered.png");
-        this.load.image("cyberSplashScreen", "./cyberSplashScreen.png");
+        this.load.setPath("./assets");
 
-        // In game
-        this.load.setPath("./assets/image");
-        this.load.image("background", "background.png");
-        this.load.image("bullet", "bullet.png");
-        this.load.image("healthPackage", "healthPackage.png");
-        this.load.image("weaponBoost_48", "weaponBoost_48.png");
-        this.load.image("portal", "portal.png");
-        this.load.image("movingPlatform", "movingPlatform.png");
-
-        this.load.image("checkpointOff", "checkpointOff.png");
-        this.load.image("checkpointOn", "checkpointOn.png");
-
-        this.load.image("ladder", "ladders/ladder.png");
-        this.load.image("ladderTop", "ladders/ladderTop.png");
-        this.load.image("ladderBottom", "ladders/ladderBottom.png");
-
-        this.load.image("tokenCopper", "tokens/tokenCopper.png");
-        this.load.image("tokenSilver", "tokens/tokenSilver.png");
-        this.load.image("tokenGold", "tokens/tokenGold.png");
-        this.load.image("tokenCyber", "tokens/tokenCyber.png");
-    }
-
-    private loadSprites() : void
-    {
-        this.load.setPath("./assets/sprite");
-        this.load.spritesheet("player", "Player.png", { frameWidth: 32, frameHeight: 38 });
-        this.load.spritesheet("robotPatrolPistol", "RobotPatrolPistol.png", { frameWidth: 32, frameHeight: 38 });
-        this.load.spritesheet("robotPatrolRifle", "RobotPatrolRifle.png", { frameWidth: 32, frameHeight: 38 });
+        this.load.image("background", "./background.png");
+        this.load.atlas("UI_atlas", "UI_atlas.png", "UI_atlas.json");
+        this.load.atlas("platform_atlas", "platform_atlas.png", "platform_atlas.json");
     }
 
     private loadAudios() : void
@@ -82,6 +49,13 @@ export class ScenePreloadAssets extends CYBR_Scene
     {
         this.load.setPath("./assets/video");
         //this.load.video("cyberIntro", "./cyberIntro.mp4");
+    }
+
+    private loadPawns() : void
+    {
+        this.load.setPath("./assets/pawns");
+        this.load.atlas("player", "player.png", "player.json");
+        this.load.atlas("patrol", "patrol.png", "patrol.json");
     }
 
     // Create

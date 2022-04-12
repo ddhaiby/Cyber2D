@@ -1,0 +1,482 @@
+{
+	"textures": [
+		{
+			"image": "patrol.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 122,
+				"h": 184
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "pistolDeath_005.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 23,
+						"w": 31,
+						"h": 15
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 31,
+						"h": 15
+					}
+				},
+				{
+					"filename": "rifleDeath_005.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 23,
+						"w": 26,
+						"h": 15
+					},
+					"frame": {
+						"x": 34,
+						"y": 1,
+						"w": 26,
+						"h": 15
+					}
+				},
+				{
+					"filename": "pistolDeath_004.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 15,
+						"w": 31,
+						"h": 23
+					},
+					"frame": {
+						"x": 62,
+						"y": 1,
+						"w": 31,
+						"h": 23
+					}
+				},
+				{
+					"filename": "rifleDeath_004.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 15,
+						"w": 26,
+						"h": 23
+					},
+					"frame": {
+						"x": 95,
+						"y": 1,
+						"w": 26,
+						"h": 23
+					}
+				},
+				{
+					"filename": "pistolDeath_003.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 7,
+						"w": 30,
+						"h": 31
+					},
+					"frame": {
+						"x": 1,
+						"y": 18,
+						"w": 30,
+						"h": 31
+					}
+				},
+				{
+					"filename": "rifleDeath_003.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 7,
+						"w": 26,
+						"h": 31
+					},
+					"frame": {
+						"x": 33,
+						"y": 18,
+						"w": 26,
+						"h": 31
+					}
+				},
+				{
+					"filename": "pistolWalk_003.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 1,
+						"w": 29,
+						"h": 37
+					},
+					"frame": {
+						"x": 61,
+						"y": 26,
+						"w": 29,
+						"h": 37
+					}
+				},
+				{
+					"filename": "rifleWalk_003.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 1,
+						"w": 26,
+						"h": 37
+					},
+					"frame": {
+						"x": 92,
+						"y": 26,
+						"w": 26,
+						"h": 37
+					}
+				},
+				{
+					"filename": "pistolDeath_001.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 0,
+						"w": 28,
+						"h": 38
+					},
+					"frame": {
+						"x": 1,
+						"y": 51,
+						"w": 28,
+						"h": 38
+					}
+				},
+				{
+					"filename": "pistolIdle_001.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 0,
+						"w": 28,
+						"h": 38
+					},
+					"frame": {
+						"x": 1,
+						"y": 51,
+						"w": 28,
+						"h": 38
+					}
+				},
+				{
+					"filename": "pistolDeath_002.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 0,
+						"w": 28,
+						"h": 38
+					},
+					"frame": {
+						"x": 31,
+						"y": 51,
+						"w": 28,
+						"h": 38
+					}
+				},
+				{
+					"filename": "pistolWalk_001.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 0,
+						"w": 29,
+						"h": 38
+					},
+					"frame": {
+						"x": 61,
+						"y": 65,
+						"w": 29,
+						"h": 38
+					}
+				},
+				{
+					"filename": "pistolWalk_002.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 0,
+						"w": 28,
+						"h": 38
+					},
+					"frame": {
+						"x": 92,
+						"y": 65,
+						"w": 28,
+						"h": 38
+					}
+				},
+				{
+					"filename": "pistolWalk_004.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 0,
+						"w": 30,
+						"h": 38
+					},
+					"frame": {
+						"x": 1,
+						"y": 91,
+						"w": 30,
+						"h": 38
+					}
+				},
+				{
+					"filename": "rifleDeath_001.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 0,
+						"w": 26,
+						"h": 38
+					},
+					"frame": {
+						"x": 33,
+						"y": 91,
+						"w": 26,
+						"h": 38
+					}
+				},
+				{
+					"filename": "rifleIdle_001.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 0,
+						"w": 26,
+						"h": 38
+					},
+					"frame": {
+						"x": 33,
+						"y": 91,
+						"w": 26,
+						"h": 38
+					}
+				},
+				{
+					"filename": "pistolWalk_005.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 0,
+						"w": 30,
+						"h": 38
+					},
+					"frame": {
+						"x": 61,
+						"y": 105,
+						"w": 30,
+						"h": 38
+					}
+				},
+				{
+					"filename": "rifleDeath_002.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 0,
+						"w": 26,
+						"h": 38
+					},
+					"frame": {
+						"x": 93,
+						"y": 105,
+						"w": 26,
+						"h": 38
+					}
+				},
+				{
+					"filename": "rifleWalk_001.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 0,
+						"w": 26,
+						"h": 38
+					},
+					"frame": {
+						"x": 1,
+						"y": 131,
+						"w": 26,
+						"h": 38
+					}
+				},
+				{
+					"filename": "rifleWalk_002.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 0,
+						"w": 26,
+						"h": 38
+					},
+					"frame": {
+						"x": 29,
+						"y": 131,
+						"w": 26,
+						"h": 38
+					}
+				},
+				{
+					"filename": "rifleWalk_004.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 0,
+						"w": 26,
+						"h": 38
+					},
+					"frame": {
+						"x": 57,
+						"y": 145,
+						"w": 26,
+						"h": 38
+					}
+				},
+				{
+					"filename": "rifleWalk_005.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 0,
+						"w": 26,
+						"h": 38
+					},
+					"frame": {
+						"x": 85,
+						"y": 145,
+						"w": 26,
+						"h": 38
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:073d3c9177c81af9288f909efe8d8154:72a4a55946d1ed58816acafd43d841bb:350936d5dc64ec5e7c2a5c66f2eb433e$"
+	}
+}

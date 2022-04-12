@@ -9,7 +9,7 @@ export class CYBR_Button extends Phaser.GameObjects.Container
         scene.add.existing(this);
 
         // Background
-        this.backgroundObject = scene.add.image(x, y, "btn_background");
+        this.backgroundObject = scene.add.image(x, y, "UI_atlas", "btn_background");
         this.setSize(this.backgroundObject.width, this.backgroundObject.height)
         this.backgroundObject.setOrigin(0);
         this.backgroundObject.setInteractive({ pixelPerfect: true });
@@ -26,15 +26,15 @@ export class CYBR_Button extends Phaser.GameObjects.Container
         this.add(this.textObject);
 
         // Behaviors
-        this.backgroundObject.on("pointerover", () => { this.backgroundObject.setTexture("btn_background_hovered"); }, this);
+        this.backgroundObject.on("pointerover", () => { this.backgroundObject.setTexture("UI_atlas", "btn_background_hovered"); }, this);
 
-        this.backgroundObject.on("pointerout", () => { this.backgroundObject.setTexture("btn_background"); }, this);
+        this.backgroundObject.on("pointerout", () => { this.backgroundObject.setTexture("UI_atlas", "btn_background"); }, this);
 
-        this.backgroundObject.on("pointerdown", () => { this.backgroundObject.setTexture("btn_background_hovered"); }, this);
+        this.backgroundObject.on("pointerdown", () => { this.backgroundObject.setTexture("UI_atlas", "btn_background_hovered"); }, this);
 
-        this.backgroundObject.on("pointerup", () => { this.backgroundObject.setTexture("btn_background"); }, this);
+        this.backgroundObject.on("pointerup", () => { this.backgroundObject.setTexture("UI_atlas", "btn_background"); }, this);
 
-        this.backgroundObject.on("pointermove", () => { this.backgroundObject.setTexture("btn_background_hovered"); }, this);
+        this.backgroundObject.on("pointermove", () => { this.backgroundObject.setTexture("UI_atlas", "btn_background_hovered"); }, this);
     }
 
     public setX(value?: number) : this

@@ -30,7 +30,7 @@ export class PatrolAI extends Pawn
 
         if (this.fireWeapon)
         {
-            let weapon = new GuardWeapon(this.scene, 30, "bullet");
+            let weapon = new GuardWeapon(this.scene, 30, "platform_atlas", "bullet");
             this.equipWeapon(weapon);
             this.prepareNextFire();
         }
@@ -42,30 +42,36 @@ export class PatrolAI extends Pawn
     {
         super.initAnimations(textureKey);
 
+        const fireWeaponKeyAnim = this.fireWeapon ? "rifle" : "pistol";
+
         this.anims.create({
             key: "idle",
-            frames: this.anims.generateFrameNumbers(this.texture.key, { start: 5, end: 5 }),
+            frames: this.anims.generateFrameNames(this.texture.key, { prefix: fireWeaponKeyAnim + "Idle_", suffix: ".png", start: 1, end: 1, zeroPad: 3 }),
             frameRate: 10,
             repeat: -1
         });
 
         this.anims.create({
             key: "walk",
-            frames: this.anims.generateFrameNumbers(this.texture.key, { start: 0, end: 4 }),
+            frames: this.anims.generateFrameNames(this.texture.key, { prefix: fireWeaponKeyAnim +  "Walk_", suffix: ".png", start: 1, end: 5, zeroPad: 3 }),
             frameRate: 10,
             repeat: -1
         });
 
         this.anims.create({
-            key: "die",
-            frames: this.anims.generateFrameNumbers(this.texture.key, { start: 5, end: 9 }),
+            key: "death",
+            frames: this.anims.generateFrameNames(this.texture.key, { prefix: fireWeaponKeyAnim + "Death_", suffix: ".png", start: 1, end: 5, zeroPad: 3 }),
             frameRate: 5,
             repeat: 0
         });
 
-        this.on("animationcomplete_die", function (anim: Phaser.Animations.Animation, frame: Phaser.Animations.AnimationFrame) {
+        this.on("animationcomplete_death", function (anim: Phaser.Animations.Animation, frame: Phaser.Animations.AnimationFrame) {
             this.scene.time.delayedCall(500, () => { this.disableBody(true, true); }, null, this);
         }, this);
+
+        this.anims.play("idle", true);
+        this.body.setSize(this.anims.currentAnim.frames[0].frame.realWidth, this.anims.currentAnim.frames[0].frame.realHeight);
+        this.body.setOffset(0,0);
     }
 
     protected initAttributes() : void
@@ -109,8 +115,8 @@ export class PatrolAI extends Pawn
     {
         if (this.dead())
         {
-            if (this.anims.currentAnim.key != "die")
-                this.anims.play("die");
+            if (this.anims.currentAnim.key != "death")
+                this.anims.play("death");
         }
         else
         {

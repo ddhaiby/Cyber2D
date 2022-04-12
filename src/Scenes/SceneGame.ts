@@ -187,7 +187,7 @@ export class SceneGame extends CYBR_Scene
         // @ts-ignore - Problem with Phaser’s types. classType supports classes 
         const movingPlatformObjects = this.currentMap.createFromObjects("MovingPlatforms", {name: "movingPlatform", classType: MovingPlatform});
         movingPlatformObjects.map((platform: MovingPlatform)=>{
-            platform.setTexture("movingPlatform");
+            platform.setTexture("platform_atlas","movingPlatform");
             platform.init();
             this.movingPlatforms.add(platform);
         });
@@ -200,7 +200,7 @@ export class SceneGame extends CYBR_Scene
         // @ts-ignore - Problem with Phaser’s types. classType supports classes 
         let checkpointObjects = this.currentMap.createFromObjects("Portals", {name: "checkpoint", classType: Phaser.Physics.Arcade.Image});
         checkpointObjects.map((checkPoint: Phaser.Physics.Arcade.Image)=>{
-            checkPoint.setTexture("checkpointOff");
+            checkPoint.setTexture("platform_atlas", "checkpointOff");
             this.checkpoints.add(checkPoint);
             checkPoint.setName(CYBR_Scene.generateUniqueName(checkPoint));
         });
@@ -213,7 +213,7 @@ export class SceneGame extends CYBR_Scene
         // @ts-ignore - Problem with Phaser’s types. classType supports classes 
         let ladderObjects = this.currentMap.createFromObjects("Ladders", {name: "ladder", classType: Ladder});
         ladderObjects.map((ladder: Ladder)=>{
-            ladder.setTexture("ladder");
+            ladder.setTexture("platform_atlas", "ladder");
             ladders.add(ladder);
             ladder.setName(CYBR_Scene.generateUniqueName(ladder));
         });
@@ -221,7 +221,7 @@ export class SceneGame extends CYBR_Scene
         // @ts-ignore - Problem with Phaser’s types. classType supports classes 
         ladderObjects = this.currentMap.createFromObjects("Ladders", {name: "ladderBottom", classType: Ladder});
         ladderObjects.map((ladder: Ladder)=>{
-            ladder.setTexture("ladderBottom");
+            ladder.setTexture("platform_atlas", "ladderBottom");
             ladders.add(ladder);
             ladder.setName(CYBR_Scene.generateUniqueName(ladder));
         });
@@ -229,7 +229,7 @@ export class SceneGame extends CYBR_Scene
         // No physic for the top of the ladder
         ladderObjects = this.currentMap.createFromObjects("Ladders", {name: "ladderTop"});
         ladderObjects.map((ladder: Phaser.Physics.Arcade.Image)=>{
-            ladder.setTexture("ladderTop");
+            ladder.setTexture("platform_atlas", "ladderTop");
             ladder.setName(CYBR_Scene.generateUniqueName(ladder));
         });
 
@@ -243,7 +243,7 @@ export class SceneGame extends CYBR_Scene
         // @ts-ignore - Problem with Phaser’s types. classType supports classes 
         const portalObjects = this.currentMap.createFromObjects("Portals", {name: "Portal", classType: Portal});
         portalObjects.map((portal: Portal)=>{
-            portal.setTexture("portal");
+            portal.setTexture("platform_atlas", "portal");
             this.portals.add(portal);
         });
     }
@@ -259,7 +259,7 @@ export class SceneGame extends CYBR_Scene
              // @ts-ignore - Problem with Phaser’s types. classType supports classes 
             const tokenObjects = this.currentMap.createFromObjects("Tokens", {name: tokenName, classType: Token});
             tokenObjects.map((token: Token)=>{
-                token.setTexture(tokenName);
+                token.setTexture("platform_atlas", tokenName);
                 this.tokens.add(token);
             });
         }
@@ -272,14 +272,14 @@ export class SceneGame extends CYBR_Scene
         // @ts-ignore - Problem with Phaser’s types. classType supports classes 
         const healObjects = this.currentMap.createFromObjects("Pickups", {name: "healthPackage", classType: HealPickup});
         healObjects.map((pickup: HealPickup)=>{
-            pickup.setTexture("healthPackage");
+            pickup.setTexture("platform_atlas", "healthPackage");
             this.pickupItems.add(pickup);
         });
 
         // @ts-ignore - Problem with Phaser’s types. classType supports classes 
         const weaponBoostObjects = this.currentMap.createFromObjects("Pickups", {name: "weaponBoost", classType: WeaponBoostPickup});
         weaponBoostObjects.map((boost: WeaponBoostPickup)=>{
-            boost.setTexture("weaponBoost_48");
+            boost.setTexture("platform_atlas", "weaponBoost_48");
             this.pickupItems.add(boost);
         });
     }
@@ -310,7 +310,7 @@ export class SceneGame extends CYBR_Scene
         enemyObjects.map((ai: PatrolAI)=>{ this.enemies.add(ai); });
 
         this.enemies.getChildren().forEach((ai: PatrolAI) => {
-            ai.init(ai.patrol ? "robotPatrolPistol" : "robotPatrolRifle");
+            ai.init("patrol");
             ai.setScale(ai.scaleX, ai.scaleY);
 
             ai.setName(CYBR_Scene.generateUniqueName(ai));
@@ -523,7 +523,7 @@ export class SceneGame extends CYBR_Scene
 
     private reachCheckpoint(player: Player, checkpoint: Phaser.Physics.Arcade.Image) : void
     {
-        checkpoint.setTexture("checkpointOn");
+        checkpoint.setTexture("platform_atlas", "checkpointOn");
         this.spawnPositions.set(this.player.name, new Phaser.Math.Vector2(checkpoint.x, checkpoint.y));
     }
 
