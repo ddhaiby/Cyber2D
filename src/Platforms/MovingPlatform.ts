@@ -16,6 +16,8 @@ export class MovingPlatform extends Phaser.Physics.Arcade.Image
 
     public init() : void
     {
+        this.setTexture("platform_atlas", (this.pathEndX !== null) ? "movingPlatformHorizontal.png" : "movingPlatformVertical.png");
+
         let previousX = 0;
         let previousY = 0;
 

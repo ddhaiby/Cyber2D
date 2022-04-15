@@ -7,8 +7,6 @@ import { AudioManager } from "../Managers/AudioManager";
 import { RegisterContainer } from "../UI/MainMenu/RegisterContainer";
 import { MainMenuContainer } from "../UI/MainMenu/MainMenuContainer";
 import { SettingsContainer } from "../UI/MainMenu/SettingsContainer";
-import {PlayerManager} from "../Managers/PlayerManager";
-import Key = Phaser.Input.Keyboard.Key;
 
 export class SceneMainMenu_UI extends CYBR_Scene
 {

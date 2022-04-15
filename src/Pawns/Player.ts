@@ -19,7 +19,7 @@ export class Player extends Pawn
     {
         super.init(textureKey);
 
-        let weapon = new PlayerWeapon(this.scene, 30, "platform_atlas", "bullet");
+        let weapon = new PlayerWeapon(this.scene, 30, "platform_atlas", "bullet.png");
         this.equipWeapon(weapon);
 
         PlayerManager.Instance.reloadKeys(this.scene);

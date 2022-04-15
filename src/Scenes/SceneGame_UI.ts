@@ -95,7 +95,7 @@ export class SceneGame_UI extends CYBR_Scene {
         let tokenImageX = this.bulletBar.x;
         let tokenImageY = this.bulletBar.y + this.bulletBar.height + 8;
 
-        let tokenImage = this.add.image(tokenImageX, tokenImageY, "platform_atlas", "tokenSilver");
+        let tokenImage = this.add.image(tokenImageX, tokenImageY, "platform_atlas", "tokenSilver.png");
         tokenImage.x += tokenImage.width / 2;
         tokenImage.y += tokenImage.height / 2;
 

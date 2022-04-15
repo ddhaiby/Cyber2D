@@ -4,34 +4,160 @@
 			"image": "platform_atlas.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 196,
-				"h": 63
+				"w": 124,
+				"h": 138
 			},
 			"scale": 1,
 			"frames": [
 				{
-					"filename": "weaponBoost_48",
+					"filename": "tokenCyber.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 48,
-						"h": 48
+						"w": 36,
+						"h": 36
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 48,
-						"h": 48
+						"w": 36,
+						"h": 36
 					},
 					"frame": {
 						"x": 1,
 						"y": 1,
-						"w": 48,
-						"h": 48
+						"w": 36,
+						"h": 36
 					}
 				},
 				{
-					"filename": "portal",
+					"filename": "ladder.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 1,
+						"y": 39,
+						"w": 32,
+						"h": 32
+					}
+				},
+				{
+					"filename": "ladderBottom.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 39,
+						"y": 1,
+						"w": 32,
+						"h": 32
+					}
+				},
+				{
+					"filename": "ladderTop.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 1,
+						"y": 73,
+						"w": 32,
+						"h": 32
+					}
+				},
+				{
+					"filename": "portalOff.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 73,
+						"y": 1,
+						"w": 32,
+						"h": 32
+					}
+				},
+				{
+					"filename": "boxClosed.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 20
+					},
+					"frame": {
+						"x": 1,
+						"y": 107,
+						"w": 32,
+						"h": 20
+					}
+				},
+				{
+					"filename": "tokenGold.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 16
+					},
+					"frame": {
+						"x": 107,
+						"y": 1,
+						"w": 16,
+						"h": 16
+					}
+				},
+				{
+					"filename": "checkpointOff.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -39,41 +165,251 @@
 						"h": 32
 					},
 					"spriteSourceSize": {
-						"x": 0,
-						"y": 21,
-						"w": 32,
-						"h": 11
-					},
-					"frame": {
-						"x": 1,
-						"y": 51,
-						"w": 32,
-						"h": 11
-					}
-				},
-				{
-					"filename": "tokenCopper",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 9,
-						"h": 9
-					},
-					"spriteSourceSize": {
-						"x": 0,
+						"x": 6,
 						"y": 0,
-						"w": 9,
-						"h": 9
+						"w": 20,
+						"h": 32
 					},
 					"frame": {
 						"x": 35,
-						"y": 51,
+						"y": 39,
+						"w": 20,
+						"h": 32
+					}
+				},
+				{
+					"filename": "portalOn_001.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 57,
+						"y": 35,
+						"w": 32,
+						"h": 32
+					}
+				},
+				{
+					"filename": "portalOn_002.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 91,
+						"y": 35,
+						"w": 32,
+						"h": 32
+					}
+				},
+				{
+					"filename": "checkpointOn.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 0,
+						"w": 20,
+						"h": 32
+					},
+					"frame": {
+						"x": 35,
+						"y": 73,
+						"w": 20,
+						"h": 32
+					}
+				},
+				{
+					"filename": "portalOn_003.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 57,
+						"y": 69,
+						"w": 32,
+						"h": 32
+					}
+				},
+				{
+					"filename": "weaponBoost_48.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 91,
+						"y": 69,
+						"w": 32,
+						"h": 32
+					}
+				},
+				{
+					"filename": "boxOpened.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 30,
+						"h": 21
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 30,
+						"h": 21
+					},
+					"frame": {
+						"x": 35,
+						"y": 107,
+						"w": 30,
+						"h": 21
+					}
+				},
+				{
+					"filename": "movingPlatformHorizontal.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 16
+					},
+					"frame": {
+						"x": 67,
+						"y": 103,
+						"w": 32,
+						"h": 16
+					}
+				},
+				{
+					"filename": "movingPlatformVertical.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 16
+					},
+					"frame": {
+						"x": 67,
+						"y": 121,
+						"w": 32,
+						"h": 16
+					}
+				},
+				{
+					"filename": "healthPackage.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 22,
+						"h": 22
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 22,
+						"h": 22
+					},
+					"frame": {
+						"x": 101,
+						"y": 103,
+						"w": 22,
+						"h": 22
+					}
+				},
+				{
+					"filename": "tokenSilver.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 12,
+						"h": 12
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 12,
+						"h": 12
+					},
+					"frame": {
+						"x": 107,
+						"y": 19,
+						"w": 12,
+						"h": 12
+					}
+				},
+				{
+					"filename": "tokenCopper.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 9,
+						"h": 9
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 9,
+						"h": 9
+					},
+					"frame": {
+						"x": 101,
+						"y": 127,
 						"w": 9,
 						"h": 9
 					}
 				},
 				{
-					"filename": "bullet",
+					"filename": "bullet.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -87,220 +423,10 @@
 						"h": 5
 					},
 					"frame": {
-						"x": 46,
-						"y": 51,
+						"x": 1,
+						"y": 129,
 						"w": 12,
 						"h": 5
-					}
-				},
-				{
-					"filename": "ladder",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 32,
-						"h": 32
-					},
-					"frame": {
-						"x": 51,
-						"y": 1,
-						"w": 32,
-						"h": 32
-					}
-				},
-				{
-					"filename": "tokenSilver",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 14,
-						"h": 14
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 14,
-						"h": 14
-					},
-					"frame": {
-						"x": 51,
-						"y": 35,
-						"w": 14,
-						"h": 14
-					}
-				},
-				{
-					"filename": "tokenCyber",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 27,
-						"h": 27
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 27,
-						"h": 27
-					},
-					"frame": {
-						"x": 67,
-						"y": 35,
-						"w": 27,
-						"h": 27
-					}
-				},
-				{
-					"filename": "ladderBottom",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 32,
-						"h": 32
-					},
-					"frame": {
-						"x": 85,
-						"y": 1,
-						"w": 32,
-						"h": 32
-					}
-				},
-				{
-					"filename": "healthPackage",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 22,
-						"h": 22
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 22,
-						"h": 22
-					},
-					"frame": {
-						"x": 96,
-						"y": 35,
-						"w": 22,
-						"h": 22
-					}
-				},
-				{
-					"filename": "ladderTop",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 32,
-						"h": 32
-					},
-					"frame": {
-						"x": 119,
-						"y": 1,
-						"w": 32,
-						"h": 32
-					}
-				},
-				{
-					"filename": "tokenGold",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 18,
-						"h": 18
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 18,
-						"h": 18
-					},
-					"frame": {
-						"x": 120,
-						"y": 35,
-						"w": 18,
-						"h": 18
-					}
-				},
-				{
-					"filename": "movingPlatform",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 32,
-						"h": 16
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 32,
-						"h": 16
-					},
-					"frame": {
-						"x": 140,
-						"y": 35,
-						"w": 32,
-						"h": 16
-					}
-				},
-				{
-					"filename": "checkpointOff",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 6,
-						"y": 0,
-						"w": 20,
-						"h": 32
-					},
-					"frame": {
-						"x": 153,
-						"y": 1,
-						"w": 20,
-						"h": 32
-					}
-				},
-				{
-					"filename": "checkpointOn",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 6,
-						"y": 0,
-						"w": 20,
-						"h": 32
-					},
-					"frame": {
-						"x": 175,
-						"y": 1,
-						"w": 20,
-						"h": 32
 					}
 				}
 			]
@@ -309,6 +435,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:2bc7edbd5a65572f3af767696d42efcf:fb86fef66a61ffc5f94f8d6a1e1b9fb1:e0b2e34388d1fe0258fcee2f0a850454$"
+		"smartupdate": "$TexturePacker:SmartUpdate:375f5aa61bbb6c55000559bbde29df15:5860f019284ad24a99ba18ed79c53512:e0b2e34388d1fe0258fcee2f0a850454$"
 	}
 }
