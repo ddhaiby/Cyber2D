@@ -242,7 +242,8 @@ export class SceneGame extends CYBR_Scene
         // @ts-ignore - Problem with Phaser’s types. classType supports classes 
         const portalObjects = this.currentMap.createFromObjects("Portals", {name: "Portal", classType: Portal});
         portalObjects.map((portal: Portal)=>{
-            portal.setTexture("platform_atlas", "portalOff.png");
+            portal.init();
+            portal.onActivated(this.completeLevel, this);
             this.portals.add(portal);
         });
     }
@@ -336,7 +337,7 @@ export class SceneGame extends CYBR_Scene
             return !player.isClimbing || (!this.ladderManager.areLaddersOnPlayerUnderY(platform.bottom - platform.width / 2));
         }, this);
 
-        this.physics.add.overlap(this.player, this.portals, this.completeLevel, null, this);
+        this.physics.add.overlap(this.player, this.portals, this.activatePortal, null, this);
         this.physics.add.overlap(this.player, this.tokens, this.collectToken, null, this);
         this.physics.add.overlap(this.player, this.pickupItems, this.applyEffectOnPlayer, null, this);
         this.physics.add.overlap(this.player, this.checkpoints, this.reachCheckpoint, null, this);
@@ -368,8 +369,6 @@ export class SceneGame extends CYBR_Scene
 
     private restartTokens() : void
     {
-        this.setCollectedTokens(0); // TODO: For gameMode
-
         this.tokens.getChildren().forEach(function (token: Token) {
             token.enableBody(true, token.x, token.y, true, true);
         }, this);
@@ -379,6 +378,13 @@ export class SceneGame extends CYBR_Scene
     {
         this.pickupItems.getChildren().forEach(function (pickup: EffectPickup) {
             pickup.enableBody(true, pickup.x, pickup.y, true, true);
+        }, this);
+    }
+
+    private restartPortals() : void
+    {
+        this.portals.getChildren().forEach(function (portal: Portal) {
+            portal.reset();
         }, this);
     }
 
@@ -504,6 +510,7 @@ export class SceneGame extends CYBR_Scene
             this.time.delayedCall(2000, () => {
                 this.respawnPlayer();
                 this.restartAIs();
+                this.restartPortals();
             }, null, this);
         }
     }
@@ -570,10 +577,15 @@ export class SceneGame extends CYBR_Scene
         this.gameCompleted = true;
     }
 
-    private completeLevel(player: Player, portal: Portal) : void
+    private activatePortal(player: Player, portal: Portal)
     {
-        portal.disableBody(true);
-        this.events.emit("levelCompleted");
+        portal.activate(player);
+    }
+
+    private completeLevel() : void
+    {
+        if (!this.player.dead())
+            this.events.emit("levelCompleted");
     }
 
     private overlapLadder(player: Player, ladder: Ladder) : void

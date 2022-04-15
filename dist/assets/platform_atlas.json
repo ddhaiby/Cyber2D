@@ -4,11 +4,32 @@
 			"image": "platform_atlas.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 124,
-				"h": 138
+				"w": 134,
+				"h": 124
 			},
 			"scale": 1,
 			"frames": [
+				{
+					"filename": "portal.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 128,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 128,
+						"h": 32
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 128,
+						"h": 32
+					}
+				},
 				{
 					"filename": "tokenCyber.png",
 					"rotated": false,
@@ -25,7 +46,7 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 1,
+						"y": 35,
 						"w": 36,
 						"h": 36
 					}
@@ -46,9 +67,30 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 39,
+						"y": 73,
 						"w": 32,
 						"h": 32
+					}
+				},
+				{
+					"filename": "movingPlatformHorizontal.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 16
+					},
+					"frame": {
+						"x": 1,
+						"y": 107,
+						"w": 32,
+						"h": 16
 					}
 				},
 				{
@@ -66,10 +108,31 @@
 						"h": 32
 					},
 					"frame": {
-						"x": 39,
-						"y": 1,
+						"x": 35,
+						"y": 73,
 						"w": 32,
 						"h": 32
+					}
+				},
+				{
+					"filename": "movingPlatformVertical.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 16
+					},
+					"frame": {
+						"x": 35,
+						"y": 107,
+						"w": 32,
+						"h": 16
 					}
 				},
 				{
@@ -87,176 +150,8 @@
 						"h": 32
 					},
 					"frame": {
-						"x": 1,
-						"y": 73,
-						"w": 32,
-						"h": 32
-					}
-				},
-				{
-					"filename": "portalOff.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 32,
-						"h": 32
-					},
-					"frame": {
-						"x": 73,
-						"y": 1,
-						"w": 32,
-						"h": 32
-					}
-				},
-				{
-					"filename": "boxClosed.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 32,
-						"h": 20
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 32,
-						"h": 20
-					},
-					"frame": {
-						"x": 1,
-						"y": 107,
-						"w": 32,
-						"h": 20
-					}
-				},
-				{
-					"filename": "tokenGold.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 16,
-						"h": 16
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 16,
-						"h": 16
-					},
-					"frame": {
-						"x": 107,
-						"y": 1,
-						"w": 16,
-						"h": 16
-					}
-				},
-				{
-					"filename": "checkpointOff.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 6,
-						"y": 0,
-						"w": 20,
-						"h": 32
-					},
-					"frame": {
-						"x": 35,
-						"y": 39,
-						"w": 20,
-						"h": 32
-					}
-				},
-				{
-					"filename": "portalOn_001.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 32,
-						"h": 32
-					},
-					"frame": {
-						"x": 57,
+						"x": 39,
 						"y": 35,
-						"w": 32,
-						"h": 32
-					}
-				},
-				{
-					"filename": "portalOn_002.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 32,
-						"h": 32
-					},
-					"frame": {
-						"x": 91,
-						"y": 35,
-						"w": 32,
-						"h": 32
-					}
-				},
-				{
-					"filename": "checkpointOn.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 6,
-						"y": 0,
-						"w": 20,
-						"h": 32
-					},
-					"frame": {
-						"x": 35,
-						"y": 73,
-						"w": 20,
-						"h": 32
-					}
-				},
-				{
-					"filename": "portalOn_003.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 32,
-						"h": 32
-					},
-					"frame": {
-						"x": 57,
-						"y": 69,
 						"w": 32,
 						"h": 32
 					}
@@ -276,9 +171,72 @@
 						"h": 32
 					},
 					"frame": {
-						"x": 91,
+						"x": 69,
 						"y": 69,
 						"w": 32,
+						"h": 32
+					}
+				},
+				{
+					"filename": "boxClosed.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 20
+					},
+					"frame": {
+						"x": 69,
+						"y": 103,
+						"w": 32,
+						"h": 20
+					}
+				},
+				{
+					"filename": "checkpointOff.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 0,
+						"w": 20,
+						"h": 32
+					},
+					"frame": {
+						"x": 73,
+						"y": 35,
+						"w": 20,
+						"h": 32
+					}
+				},
+				{
+					"filename": "checkpointOn.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 0,
+						"w": 20,
+						"h": 32
+					},
+					"frame": {
+						"x": 95,
+						"y": 35,
+						"w": 20,
 						"h": 32
 					}
 				},
@@ -297,73 +255,31 @@
 						"h": 21
 					},
 					"frame": {
-						"x": 35,
-						"y": 107,
+						"x": 103,
+						"y": 69,
 						"w": 30,
 						"h": 21
 					}
 				},
 				{
-					"filename": "movingPlatformHorizontal.png",
+					"filename": "tokenGold.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 32,
+						"w": 16,
 						"h": 16
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 32,
+						"w": 16,
 						"h": 16
 					},
 					"frame": {
-						"x": 67,
-						"y": 103,
-						"w": 32,
+						"x": 117,
+						"y": 35,
+						"w": 16,
 						"h": 16
-					}
-				},
-				{
-					"filename": "movingPlatformVertical.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 32,
-						"h": 16
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 32,
-						"h": 16
-					},
-					"frame": {
-						"x": 67,
-						"y": 121,
-						"w": 32,
-						"h": 16
-					}
-				},
-				{
-					"filename": "healthPackage.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 22,
-						"h": 22
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 22,
-						"h": 22
-					},
-					"frame": {
-						"x": 101,
-						"y": 103,
-						"w": 22,
-						"h": 22
 					}
 				},
 				{
@@ -381,10 +297,31 @@
 						"h": 12
 					},
 					"frame": {
-						"x": 107,
-						"y": 19,
+						"x": 117,
+						"y": 53,
 						"w": 12,
 						"h": 12
+					}
+				},
+				{
+					"filename": "healthPackage.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 20,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 20,
+						"h": 20
+					},
+					"frame": {
+						"x": 103,
+						"y": 92,
+						"w": 20,
+						"h": 20
 					}
 				},
 				{
@@ -402,8 +339,8 @@
 						"h": 9
 					},
 					"frame": {
-						"x": 101,
-						"y": 127,
+						"x": 103,
+						"y": 114,
 						"w": 9,
 						"h": 9
 					}
@@ -423,8 +360,8 @@
 						"h": 5
 					},
 					"frame": {
-						"x": 1,
-						"y": 129,
+						"x": 114,
+						"y": 114,
 						"w": 12,
 						"h": 5
 					}
@@ -435,6 +372,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:375f5aa61bbb6c55000559bbde29df15:5860f019284ad24a99ba18ed79c53512:e0b2e34388d1fe0258fcee2f0a850454$"
+		"smartupdate": "$TexturePacker:SmartUpdate:556b0fc6a6f67be396ae627c440f81e0:624e9587cf767a7f497368c75aa28caa:e0b2e34388d1fe0258fcee2f0a850454$"
 	}
 }

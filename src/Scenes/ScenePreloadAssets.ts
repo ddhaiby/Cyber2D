@@ -63,6 +63,8 @@ export class ScenePreloadAssets extends CYBR_Scene
   
     public create() : void
     {
+        this.textures.addSpriteSheetFromAtlas("portal", { atlas: "platform_atlas", frame: "portal.png", frameWidth: 32, frameHeight: 32 });
+
         const sceneMainMenu = this.scene.add(CST.SCENES.MAINMENU_UI, SceneMainMenu_UI, false, null) as SceneMainMenu_UI; 
         AudioManager.init(sceneMainMenu);
 
