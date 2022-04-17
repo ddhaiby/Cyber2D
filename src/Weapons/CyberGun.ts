@@ -1,7 +1,7 @@
 import { consts, Bullet } from "phaser3-weapon-plugin";
 import { CYBR_Weapon } from "./CYBR_Weapon";
 
-export class PlayerWeapon extends CYBR_Weapon
+export class CyberGun extends CYBR_Weapon
 {
     constructor(scene: Phaser.Scene, bulletLimit: number, key: string, frame?: string, group?: Phaser.GameObjects.Group)
     {
