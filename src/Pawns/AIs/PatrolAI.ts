@@ -30,7 +30,7 @@ export class PatrolAI extends Pawn
 
         if (this.fireWeapon)
         {
-            let weapon = new GuardWeapon(this.scene, 30, "platform_atlas", "bullet.png");
+            let weapon = new GuardWeapon(this.scene, this.x, this.y);
             this.equipWeapon(weapon);
             this.prepareNextFire();
         }

@@ -1,28 +1,73 @@
 import { Weapon, consts, Bullet, ObjectWithTransform } from "phaser3-weapon-plugin";
 import { Pawn } from "../Pawns/Pawn";
 
-export class CYBR_Weapon extends Weapon
+export class CYBR_Weapon extends Phaser.GameObjects.Sprite
 {
     protected timerReloadWeapon: Phaser.Time.TimerEvent;
+    protected weapon: Weapon;
+    protected muzzleX: number = 0;
+    protected muzzleY: number = 0;
+
     private owner: Pawn = null;
 
-    constructor(scene: Phaser.Scene, bulletLimit: number, key: string, frame?: string, group?: Phaser.GameObjects.Group)
+    constructor(scene: Phaser.Scene, x: number, y: number, texture?: string | Phaser.Textures.Texture, frame?: string | number)
     {
-        super(scene, bulletLimit, key, frame, group);
+        super(scene, x, y, texture, frame);
+        scene.add.existing(this);
+
+        if (!texture)
+            this.setVisible(false);
+
+        this.weapon = new Weapon(scene, -1, "weapon_atlas", "bullet.png");
 
         this.bulletGravity = new Phaser.Math.Vector2(0, -scene.physics.world.gravity.y); // So the bullets ignore the gravity
-
         this.timerReloadWeapon = scene.time.addEvent({}); // Create an empty timer to avoid null error
 
         this.on("fire", function (/*bullet: Bullet, weapon: Weapon, speed: number*/){
             this.owner.emit("shotsChanged", this.shots, this.fireLimit);
-        }, this)
+        }, this);
     }
+
+    // Init
+    ////////////////////////////////////////////////////////////////////////
+
+    public init(): void
+    {
+        this.initAnimations(this.texture.key);
+        this.weapon.trackSprite(this, this.muzzleX, this.muzzleY, false);
+    }
+
+    protected initAnimations(key: string): void
+    {
+        this.anims.create({
+            key: "idle",
+            frames: this.anims.generateFrameNumbers(key, { start: 0, end: 0 }),
+            frameRate: 1,
+            repeat: 0
+        });
+
+        this.anims.create({
+            key: "firing",
+            frames: this.anims.generateFrameNumbers(key, { start: 0, end: 2 }),
+            frameRate: 10,
+            repeat: 0
+        });
+
+        this.play("idle");
+    }
+
+    // Update
+    ////////////////////////////////////////////////////////////////////////
 
     public fire(from?: Phaser.Math.Vector2 | Phaser.GameObjects.Sprite | ObjectWithTransform, x?: number, y?: number, offsetX?: number, offsetY?: number) : Bullet
     {
         this.stopReloading();
-        return super.fire(from, x, y, offsetX, offsetY);
+        const fireResult = this.weapon.fire(from, x, y, offsetX, offsetY);
+
+        if (fireResult)
+            this.play("firing");
+
+        return fireResult;
     }
 
     public stopReloading() : void
@@ -32,7 +77,7 @@ export class CYBR_Weapon extends Weapon
 
     public reload() : void
     {
-        if (this.getShots() == 0) // Full ammunition
+        if (this.shots == 0) // Full ammunition
         {
             this.timerReloadWeapon.remove();
             return;
@@ -41,7 +86,7 @@ export class CYBR_Weapon extends Weapon
         {
             this.timerReloadWeapon = this.scene.time.delayedCall(100, () => {
                 this.decrementShots();
-                if (this.getShots() > 0)
+                if (this.shots > 0)
                     this.timerReloadWeapon = this.timerReloadWeapon.reset({delay: this.timerReloadWeapon.delay, repeat: 1, callbackScope: this, callback: this.reload });
                 else
                     this.stopReloading();
@@ -51,19 +96,24 @@ export class CYBR_Weapon extends Weapon
 
     public decrementShots() : void
     {
-        this.shots -= 1;
-        this.owner.emit("shotsChanged", this.shots, this.fireLimit);
+        this.weapon.shots -= 1;
+        this.owner.emit("shotsChanged", this.weapon.shots, this.weapon.fireLimit);
     }
 
     public setShots(shots: number) : void
     {
-        this.shots = shots;
-        this.owner.emit("shotsChanged", this.shots, this.fireLimit);
+        this.weapon.shots = shots;
+        this.owner.emit("shotsChanged", this.weapon.shots, this.weapon.fireLimit);
     }
 
-    public getShots() : number
+    public get shots() : number
     {
-        return this.shots;
+        return this.weapon.shots;
+    }
+
+    public get bullets(): Phaser.GameObjects.Group
+    {
+        return this.weapon.bullets;
     }
 
     public stopFiring() : void
@@ -74,5 +124,52 @@ export class CYBR_Weapon extends Weapon
     public setOwner(owner: Pawn) : void
     {
         this.owner = owner;
+    }
+
+    public setFlipX(value: boolean): this
+    {
+        this.weapon.trackSprite(this, value ? -this.muzzleX : this.muzzleX, this.muzzleY, false);
+        return super.setFlipX(value);
+    }
+
+    public trackSprite(sprite: Phaser.GameObjects.Sprite | ObjectWithTransform, offsetX?: number, offsetY?: number, trackRotation?: boolean) : void
+    {
+        this.setPosition(sprite.x, sprite.y);
+        this.weapon.trackSprite(sprite, offsetX, offsetY, trackRotation);
+    }
+
+    public set bulletGravity(gravity: Phaser.Math.Vector2)
+    {
+        this.weapon.bulletGravity = gravity;
+    }
+
+    public set fireAngle(fireAngle: number)
+    {
+        this.weapon.fireAngle = fireAngle;
+    }
+
+    public set fireRate(fireRate: number)
+    {
+        this.weapon.fireRate = fireRate;
+    }
+
+    public set bulletLifespan(bulletLifespan: number)
+    {
+        this.weapon.bulletLifespan = bulletLifespan;
+    }
+
+    public set bulletSpeed(bulletSpeed: number)
+    {
+        this.weapon.bulletSpeed = bulletSpeed;
+    }
+
+    public set bulletKillType(bulletKillType: number)
+    {
+        this.weapon.bulletKillType = bulletKillType;
+    }
+
+    public set fireLimit(fireLimit: number)
+    {
+        this.weapon.fireLimit = fireLimit;
     }
 }

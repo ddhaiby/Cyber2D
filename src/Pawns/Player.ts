@@ -1,12 +1,15 @@
 import {Pawn} from "./Pawn";
 import {IPlayerKeys, PlayerManager} from "../Managers/PlayerManager";
-import { CyberGun } from "../Weapons/CyberGun";
+import { CyberPistol } from "../Weapons/CyberPistol";
 import { CST } from "../CST";
 
 export class Player extends Pawn
 {
     public isTakingDmg: boolean = false
     private keys: IPlayerKeys;
+
+    private armPosX: number;
+    private armPosY: number;
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture?: string | Phaser.Textures.Texture) {
         super(scene, x, y, texture);
@@ -19,7 +22,8 @@ export class Player extends Pawn
     {
         super.init(textureKey);
 
-        let weapon = new CyberGun(this.scene, 30, "platform_atlas", "bullet.png");
+        let weapon = new CyberPistol(this.scene, this.x, this.y);
+        weapon.init();
         this.equipWeapon(weapon);
 
         PlayerManager.Instance.reloadKeys(this.scene);
@@ -134,13 +138,20 @@ export class Player extends Pawn
         this.wasJumping = this.isJumping;
         this.wasClimbing = this.isClimbing;
 
+        if (this.currentWeapon)
+        {
+            this.armPosX = this.isLookingRight ? 17 : -17;
+            this.armPosY = -3;
+
+            this.currentWeapon.setFlipX(this.isLookingRight);
+            this.currentWeapon.setPosition(this.x + this.armPosX, this.y + this.armPosY);
+        }
+
         if (this.isOnFloor())
             this.isJumping = false;
 
-        if (this.dead() || this.isTakingDmg)
-            return;
-
-        this.updateControl();
+        if (!this.dead() && !this.isTakingDmg)
+            this.updateControl();
     }
 
     protected updateControl() : void
@@ -173,34 +184,45 @@ export class Player extends Pawn
 
     protected updateAnimations() : void
     {
-        const currentAnim = this.anims.currentAnim.key;
         const side = this.isLookingRight ? "Right" : "Left";
         const mode = this.currentWeapon ? "HoldingWeapon" : "";
+        const currentAnim = this.anims.currentAnim.key;
+        let nextAnim = "";
 
         if (this.dead())
         {
             if (this.anims.currentAnim.key != "deathRight" && this.anims.currentAnim.key != "deathLeft")
-                this.anims.play("death" + side, true);
+            nextAnim = "death" + side;
         }
         else if (this.isClimbing)
         {
             if (this.body.velocity.y != 0)
-                this.anims.play("climb", true);
+                nextAnim = "climb";
             else
-                this.anims.pause();
+                nextAnim = "";
         }
         else if (!this.isOnFloor())
         {
-            this.anims.play("inAir" + side + mode, true);
+            nextAnim = "inAir" + side + mode;
         }
         else if (this.isWalking || this.isTakingDmg)
         {
-            this.anims.play("walk" + side + mode, true);
+            nextAnim = "walk" + side + mode;
         }
         else
         {
-            this.anims.play("idle" + side + mode, true);
+            nextAnim = "idle" + side + mode;
         }
+
+        this.playAnimations(nextAnim);
+    }
+
+    private playAnimations(key: string): void
+    {
+        if (key === "")
+            this.anims.pause();
+        else
+            this.anims.play(key, true);
     }
 
     public recover() : void

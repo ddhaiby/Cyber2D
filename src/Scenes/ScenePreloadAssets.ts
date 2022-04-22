@@ -34,6 +34,7 @@ export class ScenePreloadAssets extends CYBR_Scene
         this.load.image("background", "./background.png");
         this.load.atlas("UI_atlas", "UI_atlas.png", "UI_atlas.json");
         this.load.atlas("platform_atlas", "platform_atlas.png", "platform_atlas.json");
+        this.load.atlas("weapon_atlas", "weapon_atlas.png", "weapon_atlas.json");
     }
 
     private loadAudios() : void
@@ -64,7 +65,18 @@ export class ScenePreloadAssets extends CYBR_Scene
     public create() : void
     {
         this.textures.addSpriteSheetFromAtlas("portal", { atlas: "platform_atlas", frame: "portal.png", frameWidth: 32, frameHeight: 32 });
+        this.createWeaponAtlas();
+        this.createMainMenu();
+    }
 
+    private createWeaponAtlas(): void
+    {
+        this.textures.addSpriteSheetFromAtlas("pistol", { atlas: "weapon_atlas", frame: "pistol.png", frameWidth: 22, frameHeight: 13 });
+        this.textures.addSpriteSheetFromAtlas("shotgun", { atlas: "weapon_atlas", frame: "shotgun.png", frameWidth: 22, frameHeight: 13 });
+    }
+
+    private createMainMenu(): void
+    {
         const sceneMainMenu = this.scene.add(CST.SCENES.MAINMENU_UI, SceneMainMenu_UI, false, null) as SceneMainMenu_UI; 
         AudioManager.init(sceneMainMenu);
 

@@ -278,7 +278,6 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     public equipWeapon(weapon: CYBR_Weapon) : void
     {
         this.currentWeapon = weapon;
-        this.currentWeapon.trackSprite(this, 0, 0, false);
         this.currentWeapon.setOwner(this);
     }
 
