@@ -344,27 +344,6 @@
 						"w": 9,
 						"h": 9
 					}
-				},
-				{
-					"filename": "bullet.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 12,
-						"h": 5
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 12,
-						"h": 5
-					},
-					"frame": {
-						"x": 114,
-						"y": 114,
-						"w": 12,
-						"h": 5
-					}
 				}
 			]
 		}
@@ -372,6 +351,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:556b0fc6a6f67be396ae627c440f81e0:624e9587cf767a7f497368c75aa28caa:e0b2e34388d1fe0258fcee2f0a850454$"
+		"smartupdate": "$TexturePacker:SmartUpdate:c7f094206e760dddeb8fc68be14d6106:0f5e768887eacc460604b5886ad78f27:e0b2e34388d1fe0258fcee2f0a850454$"
 	}
 }
