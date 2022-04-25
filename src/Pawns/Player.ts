@@ -1,18 +1,19 @@
 import {Pawn} from "./Pawn";
 import {IPlayerKeys, PlayerManager} from "../Managers/PlayerManager";
 import { CyberPistol } from "../Weapons/CyberPistol";
+import { CyberShotgun } from "../Weapons/CyberShotgun";
 import { CST } from "../CST";
 
 export class Player extends Pawn
 {
     public isTakingDmg: boolean = false
     private keys: IPlayerKeys;
-
-    private armPosX: number;
-    private armPosY: number;
+    private currentHandPosition: Phaser.Math.Vector2;
+    private handPositions: Phaser.Math.Vector2[];
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture?: string | Phaser.Textures.Texture) {
         super(scene, x, y, texture);
+        this.setDepth(1);
     }
 
     // Init
@@ -22,15 +23,14 @@ export class Player extends Pawn
     {
         super.init(textureKey);
 
-        let weapon = new CyberPistol(this.scene, this.x, this.y);
+        const weaponClass = (Math.random() < 0.5) ? CyberPistol : CyberShotgun;
+        let weapon = new weaponClass(this.scene, this.x, this.y);
         weapon.init();
         this.equipWeapon(weapon);
 
         PlayerManager.Instance.reloadKeys(this.scene);
         this.keys = PlayerManager.Instance.keyBinding;
-        this.keys.jump.on("down", function (event) {
-            this.jump();
-        }, this);
+        this.keys.jump.on("down", this.jump, this);
 
         return this;
     }
@@ -108,8 +108,9 @@ export class Player extends Pawn
             repeat: -1
         });
 
-        const keyIdle = this.isLookingRight ? "idleRight" : "idleLeft";
+        const keyIdle = this.isLookingRight ? "idleRightHoldingWeapon" : "idleLeftHoldingWeapon";
         this.anims.play(keyIdle, true);
+        this.handPositions = this.scene.cache.json.get("handPositions");
         this.body.setSize(this.anims.currentAnim.frames[0].frame.realWidth, this.anims.currentAnim.frames[0].frame.realHeight);
         this.body.setOffset(0,0);
     }
@@ -138,20 +139,30 @@ export class Player extends Pawn
         this.wasJumping = this.isJumping;
         this.wasClimbing = this.isClimbing;
 
-        if (this.currentWeapon)
-        {
-            this.armPosX = this.isLookingRight ? 17 : -17;
-            this.armPosY = -3;
-
-            this.currentWeapon.setFlipX(this.isLookingRight);
-            this.currentWeapon.setPosition(this.x + this.armPosX, this.y + this.armPosY);
-        }
-
         if (this.isOnFloor())
             this.isJumping = false;
 
         if (!this.dead() && !this.isTakingDmg)
             this.updateControl();
+    }
+
+    public postUpdate(): void
+    {
+        const handPosition = this.getHandPosition();
+
+        if (this.currentWeapon)
+        {
+            this.currentWeapon.setVisible(!!handPosition);
+            this.currentWeapon.setDepth(0.9);
+
+            if (this.currentWeapon.visible)
+            {
+                this.currentHandPosition = handPosition;
+            
+                this.currentWeapon.setFlipX(this.isLookingRight);
+                this.currentWeapon.setPosition(this.x - this.width * this.originX + this.currentHandPosition.x, this.y - this.height * this.originY + this.currentHandPosition.y);
+            }
+        }
     }
 
     protected updateControl() : void
@@ -187,42 +198,36 @@ export class Player extends Pawn
         const side = this.isLookingRight ? "Right" : "Left";
         const mode = this.currentWeapon ? "HoldingWeapon" : "";
         const currentAnim = this.anims.currentAnim.key;
-        let nextAnim = "";
 
         if (this.dead())
         {
-            if (this.anims.currentAnim.key != "deathRight" && this.anims.currentAnim.key != "deathLeft")
-            nextAnim = "death" + side;
+            if (currentAnim != "deathRight" && currentAnim != "deathLeft")
+                this.anims.play("death" + side, true);
         }
         else if (this.isClimbing)
         {
             if (this.body.velocity.y != 0)
-                nextAnim = "climb";
+                this.anims.play("climb", true);
             else
-                nextAnim = "";
+                this.anims.pause();
         }
         else if (!this.isOnFloor())
         {
-            nextAnim = "inAir" + side + mode;
+            this.anims.play("inAir" + side + mode, true);
         }
         else if (this.isWalking || this.isTakingDmg)
         {
-            nextAnim = "walk" + side + mode;
+            this.anims.play("walk" + side + mode, true);
         }
         else
         {
-            nextAnim = "idle" + side + mode;
+            this.anims.play("idle" + side + mode, true);
         }
-
-        this.playAnimations(nextAnim);
     }
 
-    private playAnimations(key: string): void
+    private getHandPosition(): Phaser.Math.Vector2
     {
-        if (key === "")
-            this.anims.pause();
-        else
-            this.anims.play(key, true);
+        return this.handPositions[this.anims.currentAnim.key] ? this.handPositions[this.anims.currentAnim.key][this.anims.currentFrame.index - 1] as Phaser.Math.Vector2 : null;
     }
 
     public recover() : void

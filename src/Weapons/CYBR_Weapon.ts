@@ -1,13 +1,26 @@
 import { Weapon, consts, Bullet, ObjectWithTransform } from "phaser3-weapon-plugin";
 import { Pawn } from "../Pawns/Pawn";
+import { CYBR_Bullet } from "./CYBR_Bullet";
 
 export class CYBR_Weapon extends Phaser.GameObjects.Sprite
 {
     protected timerReloadWeapon: Phaser.Time.TimerEvent;
     protected weapon: Weapon;
+
+    /** X-position from where the bullets will spawn */
     protected muzzleX: number = 0;
+
+    /** Y-position from where the bullets will spawn */
     protected muzzleY: number = 0;
 
+    /** X-position of the grip. It defines the origin of the weapon */
+    protected gripX: number = 0;
+
+    /** Y-position of the grip. It defines the origin of the weapon */
+    protected gripY: number = 0;
+
+    protected damage: number = 0;
+    
     private owner: Pawn = null;
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture?: string | Phaser.Textures.Texture, frame?: string | number)
@@ -19,7 +32,9 @@ export class CYBR_Weapon extends Phaser.GameObjects.Sprite
             this.setVisible(false);
 
         this.weapon = new Weapon(scene, -1, "weapon_atlas", "bullet.png");
-
+        this.weapon.bulletClass = CYBR_Bullet;
+        this.fireAngle = 0;
+        this.bulletKillType = consts.KillType.KILL_WORLD_BOUNDS;
         this.bulletGravity = new Phaser.Math.Vector2(0, -scene.physics.world.gravity.y); // So the bullets ignore the gravity
         this.timerReloadWeapon = scene.time.addEvent({}); // Create an empty timer to avoid null error
 
@@ -39,21 +54,24 @@ export class CYBR_Weapon extends Phaser.GameObjects.Sprite
 
     protected initAnimations(key: string): void
     {
-        this.anims.create({
-            key: "idle",
-            frames: this.anims.generateFrameNumbers(key, { start: 0, end: 0 }),
-            frameRate: 1,
-            repeat: 0
-        });
+        if (this.visible)
+        {
+            this.anims.create({
+                key: "idle",
+                frames: this.anims.generateFrameNumbers(key, { start: 0, end: 0 }),
+                frameRate: 1,
+                repeat: 0
+            });
 
-        this.anims.create({
-            key: "firing",
-            frames: this.anims.generateFrameNumbers(key, { start: 0, end: 2 }),
-            frameRate: 10,
-            repeat: 0
-        });
+            this.anims.create({
+                key: "firing",
+                frames: this.anims.generateFrameNumbers(key, { start: 0, end: 2 }),
+                frameRate: 10,
+                repeat: 0
+            });
 
-        this.play("idle");
+            this.play("idle");
+        }
     }
 
     // Update
@@ -62,12 +80,15 @@ export class CYBR_Weapon extends Phaser.GameObjects.Sprite
     public fire(from?: Phaser.Math.Vector2 | Phaser.GameObjects.Sprite | ObjectWithTransform, x?: number, y?: number, offsetX?: number, offsetY?: number) : Bullet
     {
         this.stopReloading();
-        const fireResult = this.weapon.fire(from, x, y, offsetX, offsetY);
+        const bullet = this.weapon.fire(from, x, y, offsetX, offsetY) as CYBR_Bullet;
 
-        if (fireResult)
+        if (bullet)
+        {
+            bullet.damage = this.damage;
             this.play("firing");
+        }
 
-        return fireResult;
+        return bullet;
     }
 
     public stopReloading() : void
@@ -130,6 +151,24 @@ export class CYBR_Weapon extends Phaser.GameObjects.Sprite
     {
         this.weapon.trackSprite(this, value ? -this.muzzleX : this.muzzleX, this.muzzleY, false);
         return super.setFlipX(value);
+    }
+
+    public setGripPosition(x: number, y: number): void
+    {
+        this.gripX = x;
+        this.gripY = y;
+    }
+
+    public setPosition(x?: number, y?: number, z?: number, w?: number): this
+    {
+        const finalGripX = !this.flipX ? this.width-this.gripX : this.gripX;
+        return super.setPosition(x - finalGripX, y - this.gripY, z, w);
+    }
+
+    public setMuzzlePosition(x: number, y: number): void
+    {
+        this.muzzleX = x;
+        this.muzzleY = y;
     }
 
     public trackSprite(sprite: Phaser.GameObjects.Sprite | ObjectWithTransform, offsetX?: number, offsetY?: number, trackRotation?: boolean) : void

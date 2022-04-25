@@ -28,13 +28,13 @@ export class ScenePreloadAssets extends CYBR_Scene
         this.loadAudios();
         this.loadVideos();
         this.loadPawns();
+        this.loadWeapons();
 
         this.load.setPath("./assets");
 
         this.load.image("background", "./background.png");
         this.load.atlas("UI_atlas", "UI_atlas.png", "UI_atlas.json");
         this.load.atlas("platform_atlas", "platform_atlas.png", "platform_atlas.json");
-        this.load.atlas("weapon_atlas", "weapon_atlas.png", "weapon_atlas.json");
     }
 
     private loadAudios() : void
@@ -57,6 +57,13 @@ export class ScenePreloadAssets extends CYBR_Scene
         this.load.setPath("./assets/pawns");
         this.load.atlas("player", "player.png", "player.json");
         this.load.atlas("patrol", "patrol.png", "patrol.json");
+    }
+
+    private loadWeapons() : void
+    {
+        this.load.setPath("./assets/weapons");
+        this.load.atlas("weapon_atlas", "weapon_atlas.png", "weapon_atlas.json");
+        this.load.json("handPositions", "handPositions.json");
     }
 
     // Create
