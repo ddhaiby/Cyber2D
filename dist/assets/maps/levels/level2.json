@@ -40,19 +40,19 @@
                         {
                          "name":"pathEndY",
                          "type":"float",
-                         "value":2350
+                         "value":2940
                         }, 
                         {
                          "name":"time",
                          "type":"float",
-                         "value":2000
+                         "value":1500
                         }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
                  "x":816,
-                 "y":3264
+                 "y":3290
                 }, 
                 {
                  "gid":1035,
@@ -777,8 +777,8 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":800,
-                 "y":2976
+                 "x":816,
+                 "y":2912
                 }, 
                 {
                  "gid":1057,
@@ -789,8 +789,8 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":800,
-                 "y":2912
+                 "x":816,
+                 "y":2848
                 }, 
                 {
                  "gid":1057,
@@ -801,8 +801,8 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":800,
-                 "y":2944
+                 "x":816,
+                 "y":2880
                 }, 
                 {
                  "gid":1057,
@@ -813,8 +813,8 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":800,
-                 "y":3008
+                 "x":816,
+                 "y":2944
                 }, 
                 {
                  "gid":1057,
@@ -863,18 +863,6 @@
                  "width":32,
                  "x":160,
                  "y":3072
-                }, 
-                {
-                 "gid":1057,
-                 "height":32,
-                 "id":193,
-                 "name":"tokenSilver",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":800,
-                 "y":2880
                 }, 
                 {
                  "gid":1059,
