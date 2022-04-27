@@ -467,6 +467,7 @@ export class SceneGame extends CYBR_Scene
     private postUpdate(): void 
     {
         this.player.postUpdate();
+        this.enemies.getChildren().forEach((ai: PatrolAI) => { ai.postUpdate(); }, this);
     }
 
     // Enemies
@@ -503,7 +504,7 @@ export class SceneGame extends CYBR_Scene
 
     private onPlayerOverlapEnnemy(player: Player, enemy: Pawn): void
     {
-        this.player.hurt(35, this.player.body.touching.right);
+        this.player.hurt(enemy.getBodyDamage(), this.player.body.touching.right);
     }
 
     private onPlayerHealthChanged(health: number, maxHealth: number): void

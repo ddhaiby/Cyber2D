@@ -24,7 +24,8 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
     // Attributes
     protected attributes: Phaser.Structs.Map<string, number>;
-    private maxHealth: number = 100;
+    private maxHealth: number = 10;
+    private bodyDamage: number = 5;
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture, frame?: string | number)
     {
@@ -47,7 +48,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     // Init
     ////////////////////////////////////////////////////////////////////////
 
-    public init(textureKey?: string) : this
+    public init(textureKey?: string): this
     {
         this.initStates();
         this.initAttributes();
@@ -57,7 +58,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         return this;
     }
 
-    private initStates() : void
+    private initStates(): void
     {
         this.isLookingUp = false;
         this.isLookingDown = false;
@@ -68,20 +69,21 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
             this.lookOnLeft();
     }
 
-    protected initAnimations(textureKey: string) : void
+    protected initAnimations(textureKey: string): void
     {
         this.setTexture(textureKey);
     }
 
-    protected initAttributes() : void
+    protected initAttributes(): void
     {
         this.attributes = new Phaser.Structs.Map([]);
-        this.attributes.set(CST.PLAYER.ATTRIBUTES.MAX_HEALTH, this.maxHealth);
-        this.attributes.set(CST.PLAYER.ATTRIBUTES.HEALTH, this.maxHealth);
+        this.attributes.set(CST.PAWN.ATTRIBUTES.MAX_HEALTH, this.maxHealth);
+        this.attributes.set(CST.PAWN.ATTRIBUTES.HEALTH, this.maxHealth);
+        this.attributes.set(CST.PAWN.ATTRIBUTES.BODY_DAMAGE, this.bodyDamage);
         this.setHealth(this.getMaxHealth());
     }
 
-    public reset(x: number, y: number) : void
+    public reset(x: number, y: number): void
     {
         this.enableBody(true, x, y, true, true);
         this.setHealth(this.getMaxHealth());
@@ -93,23 +95,27 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     // Update
     ////////////////////////////////////////////////////////////////////////
 
-    public update(...args: any[]) : void
+    public update(...args: any[]): void
     {
         super.update(args);
         this.updateAnimations();
     }
 
     /** Update the anims of this Pawn */
-    protected updateAnimations() : void
+    protected updateAnimations(): void
     {
     }
 
-    public canWalk() : boolean
+    public postUpdate(): void
+    {
+    }
+
+    public canWalk(): boolean
     {
         return !this.dead() && (this.isOnFloor() || !this.isClimbing);
     }
 
-    public walk() : void
+    public walk(): void
     {
         if (this.canWalk())
         {
@@ -122,12 +128,12 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         }
     }
 
-    private startWalking() : void
+    private startWalking(): void
     {
         this.isWalking = true;
     }
 
-    public stopWalking() : void
+    public stopWalking(): void
     {
         if (this.isWalking)
         {
@@ -136,7 +142,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         }
     }
 
-    public climb(speedX: number, speedY: number) : void
+    public climb(speedX: number, speedY: number): void
     {
         if (!this.isClimbing)
             this.startClimbing();
@@ -144,13 +150,13 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.setVelocity(speedX, speedY);
     }
 
-    private startClimbing() : void
+    private startClimbing(): void
     {
         this.setGravity(0, - this.scene.physics.world.gravity.y);
         this.isClimbing = true;
     }
 
-    public stopClimbing() : void
+    public stopClimbing(): void
     {
         this.isClimbing = false;
 
@@ -161,48 +167,48 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         }
     }
 
-    protected lookUp() : void
+    protected lookUp(): void
     {
         this.isLookingUp = true;
         this.isLookingDown = false;
     }
 
-    protected lookDown() : void
+    protected lookDown(): void
     {
         this.isLookingUp = false;
         this.isLookingDown = true;
     }
     
-    protected lookOnRight() : void
+    protected lookOnRight(): void
     {
         this.isLookingRight = true;
         this.isLookingLeft = false;
     }
 
-    protected lookOnLeft() : void
+    protected lookOnLeft(): void
     {
         this.isLookingRight = false;
         this.isLookingLeft = true;
     }
 
-    protected lookStraight() : void
+    protected lookStraight(): void
     {
         this.isLookingUp = false;
         this.isLookingDown = false;
     }
 
-    public isOnFloor() : boolean
+    public isOnFloor(): boolean
     {
         const body = this.body as Phaser.Physics.Arcade.Body;
         return body.onFloor();
     }
 
-    public canJump() : boolean
+    public canJump(): boolean
     {
         return !this.dead() && (this.isOnFloor() || this.isClimbing);
     }
 
-    public jump() : void
+    public jump(): void
     {
         if (this.canJump())
         {
@@ -214,20 +220,20 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         }
     }
 
-    public hurt(health: number) : void
+    public hurt(health: number): void
     {
         this.setHealth(this.getHealth() - health);
     }
 
-    public heal(health: number) : void
+    public heal(health: number): void
     {
         this.setHealth(this.getHealth() + health);
     }
 
-    public setHealth(health: number) : void
+    public setHealth(health: number): void
     {
-        this.attributes.set(CST.PLAYER.ATTRIBUTES.HEALTH, Math.max(0, Math.min(health, this.attributes.get(CST.PLAYER.ATTRIBUTES.MAX_HEALTH))));
-        this.emit("healthChanged", this.attributes.get(CST.PLAYER.ATTRIBUTES.HEALTH), this.attributes.get(CST.PLAYER.ATTRIBUTES.MAX_HEALTH));
+        this.attributes.set(CST.PAWN.ATTRIBUTES.HEALTH, Math.max(0, Math.min(health, this.attributes.get(CST.PAWN.ATTRIBUTES.MAX_HEALTH))));
+        this.emit("healthChanged", this.attributes.get(CST.PAWN.ATTRIBUTES.HEALTH), this.attributes.get(CST.PAWN.ATTRIBUTES.MAX_HEALTH));
 
         if (this.dead())
         {
@@ -236,52 +242,57 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         }
     }
 
-    public getAttribute(name: string) : number
+    public getAttribute(name: string): number
     {
         return this.attributes.get(name);
     }
 
-    public getHealth() : number
+    public getHealth(): number
     {
-        return this.getAttribute(CST.PLAYER.ATTRIBUTES.HEALTH);
+        return this.getAttribute(CST.PAWN.ATTRIBUTES.HEALTH);
     }
 
-    public getMaxHealth() : number
+    public getMaxHealth(): number
     {
-        return this.getAttribute(CST.PLAYER.ATTRIBUTES.MAX_HEALTH);
+        return this.getAttribute(CST.PAWN.ATTRIBUTES.MAX_HEALTH);
     }
 
-    public getWalkSpeed() : number
+    public getWalkSpeed(): number
     {
-        return this.getAttribute(CST.PLAYER.ATTRIBUTES.WALK_SPEED);
+        return this.getAttribute(CST.PAWN.ATTRIBUTES.WALK_SPEED);
     }
 
-    public getClimbSpeed() : number
+    public getClimbSpeed(): number
     {
-        return this.getAttribute(CST.PLAYER.ATTRIBUTES.CLIMB_SPEED);
+        return this.getAttribute(CST.PAWN.ATTRIBUTES.CLIMB_SPEED);
+    }
+
+    public getBodyDamage(): number
+    {
+        return this.getAttribute(CST.PAWN.ATTRIBUTES.BODY_DAMAGE);
     }
 
     // Called when the health reaches 0 or to kill instantly 
-    public die() : void
+    public die(): void
     {
-        this.attributes.set(CST.PLAYER.ATTRIBUTES.HEALTH, 0);
+        this.attributes.set(CST.PAWN.ATTRIBUTES.HEALTH, 0);
         this.stopWalking();
         this.stopClimbing();
         this.emit("die");
     }
 
-    public dead() : boolean
+    public dead(): boolean
     {
         return this.getHealth() <= 0;
     }
 
-    public equipWeapon(weapon: CYBR_Weapon) : void
+    public equipWeapon(weapon: CYBR_Weapon): void
     {
         this.currentWeapon = weapon;
         this.currentWeapon.setOwner(this);
     }
 
-    public fire(fireAngle?: number) : void
+    public fire(fireAngle?: number): void
     {
         if (this.currentWeapon && !this.isClimbing)
         {
@@ -294,7 +305,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         }
     }
 
-    public stopFiring() : void
+    public stopFiring(): void
     {
         if (this.isFiring && this.currentWeapon)
             this.currentWeapon.stopFiring();

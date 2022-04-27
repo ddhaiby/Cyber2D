@@ -29,12 +29,13 @@ export const CST = {
         }
     ],
 
-    PLAYER: {
+    PAWN: {
         ATTRIBUTES: {
             HEALTH: "health",
             MAX_HEALTH: "maxHealth",
             WALK_SPEED: "walkSpeed",
             CLIMB_SPEED: "climbSpeed",
+            BODY_DAMAGE: "bodyDamage"
         }
     }
 }

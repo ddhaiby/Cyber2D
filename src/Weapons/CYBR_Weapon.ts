@@ -21,36 +21,35 @@ export class CYBR_Weapon extends Phaser.GameObjects.Sprite
 
     protected damage: number = 0;
     
+    protected bulletPerFire: number = 1;
+
     private owner: Pawn = null;
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture?: string | Phaser.Textures.Texture, frame?: string | number)
     {
         super(scene, x, y, texture, frame);
         scene.add.existing(this);
-
-        if (!texture)
-            this.setVisible(false);
+        this.setVisible(!!texture);
 
         this.weapon = new Weapon(scene, -1, "weapon_atlas", "bullet.png");
-        this.weapon.bulletClass = CYBR_Bullet;
+        this.weapon.trackSprite(this, this.muzzleX, this.muzzleY, false);
+        this.bulletClass = CYBR_Bullet;
         this.fireAngle = 0;
         this.bulletKillType = consts.KillType.KILL_WORLD_BOUNDS;
         this.bulletGravity = new Phaser.Math.Vector2(0, -scene.physics.world.gravity.y); // So the bullets ignore the gravity
         this.timerReloadWeapon = scene.time.addEvent({}); // Create an empty timer to avoid null error
 
-        this.on("fire", function (/*bullet: Bullet, weapon: Weapon, speed: number*/){
+        this.on("fire", function (bullet: CYBR_Bullet/*, weapon: Weapon, speed: number*/){
+            this.play("firing");
             this.owner.emit("shotsChanged", this.shots, this.fireLimit);
+            this.owner.emit("fire", bullet);
         }, this);
+
+        this.initAnimations(this.texture.key);
     }
 
     // Init
     ////////////////////////////////////////////////////////////////////////
-
-    public init(): void
-    {
-        this.initAnimations(this.texture.key);
-        this.weapon.trackSprite(this, this.muzzleX, this.muzzleY, false);
-    }
 
     protected initAnimations(key: string): void
     {
@@ -77,18 +76,23 @@ export class CYBR_Weapon extends Phaser.GameObjects.Sprite
     // Update
     ////////////////////////////////////////////////////////////////////////
 
-    public fire(from?: Phaser.Math.Vector2 | Phaser.GameObjects.Sprite | ObjectWithTransform, x?: number, y?: number, offsetX?: number, offsetY?: number) : Bullet
+    public fire(from?: Phaser.Math.Vector2 | Phaser.GameObjects.Sprite | ObjectWithTransform, x?: number, y?: number, offsetX?: number, offsetY?: number) : Bullet[]
     {
         this.stopReloading();
-        const bullet = this.weapon.fire(from, x, y, offsetX, offsetY) as CYBR_Bullet;
 
-        if (bullet)
+        let bullets = [];
+
+        for (let i = 0; i < this.bulletPerFire; ++i)
         {
-            bullet.damage = this.damage;
-            this.play("firing");
-        }
+            this.scene.time.delayedCall(i * 300, ()=> {
+                const bullet = this.weapon.fire(from, x, y, offsetX, offsetY) as CYBR_Bullet;
+                bullets.push(bullet);
 
-        return bullet;
+                if (bullet)
+                    bullet.damage = this.damage;
+            }, null, this);
+        }
+        return bullets;
     }
 
     public stopReloading() : void
@@ -153,8 +157,9 @@ export class CYBR_Weapon extends Phaser.GameObjects.Sprite
         return super.setFlipX(value);
     }
 
-    public setGripPosition(x: number, y: number): void
+    public setGripPosition(x: number, y?: number): void
     {
+        y = y || x;
         this.gripX = x;
         this.gripY = y;
     }
@@ -165,10 +170,16 @@ export class CYBR_Weapon extends Phaser.GameObjects.Sprite
         return super.setPosition(x - finalGripX, y - this.gripY, z, w);
     }
 
-    public setMuzzlePosition(x: number, y: number): void
+    public setMuzzlePosition(x: number, y?: number): void
     {
+        y = y || x;
         this.muzzleX = x;
         this.muzzleY = y;
+    }
+
+    public setBulletPerFire(bulletPerFire: number): void
+    {
+        this.bulletPerFire = Math.max(bulletPerFire, 1);
     }
 
     public trackSprite(sprite: Phaser.GameObjects.Sprite | ObjectWithTransform, offsetX?: number, offsetY?: number, trackRotation?: boolean) : void
@@ -177,9 +188,14 @@ export class CYBR_Weapon extends Phaser.GameObjects.Sprite
         this.weapon.trackSprite(sprite, offsetX, offsetY, trackRotation);
     }
 
-    public set bulletGravity(gravity: Phaser.Math.Vector2)
+    protected set bulletGravity(gravity: Phaser.Math.Vector2)
     {
         this.weapon.bulletGravity = gravity;
+    }
+
+    protected set bulletClass(bulletClass: typeof Bullet)
+    {
+        this.weapon.bulletClass = bulletClass;
     }
 
     public set fireAngle(fireAngle: number)
@@ -187,27 +203,27 @@ export class CYBR_Weapon extends Phaser.GameObjects.Sprite
         this.weapon.fireAngle = fireAngle;
     }
 
-    public set fireRate(fireRate: number)
+    protected set fireRate(fireRate: number)
     {
         this.weapon.fireRate = fireRate;
     }
 
-    public set bulletLifespan(bulletLifespan: number)
+    protected set bulletLifespan(bulletLifespan: number)
     {
         this.weapon.bulletLifespan = bulletLifespan;
     }
 
-    public set bulletSpeed(bulletSpeed: number)
+    protected set bulletSpeed(bulletSpeed: number)
     {
         this.weapon.bulletSpeed = bulletSpeed;
     }
 
-    public set bulletKillType(bulletKillType: number)
+    protected set bulletKillType(bulletKillType: number)
     {
         this.weapon.bulletKillType = bulletKillType;
     }
 
-    public set fireLimit(fireLimit: number)
+    protected set fireLimit(fireLimit: number)
     {
         this.weapon.fireLimit = fireLimit;
     }

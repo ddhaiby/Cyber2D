@@ -25,7 +25,6 @@ export class Player extends Pawn
 
         const weaponClass = (Math.random() < 0.5) ? CyberPistol : CyberShotgun;
         let weapon = new weaponClass(this.scene, this.x, this.y);
-        weapon.init();
         this.equipWeapon(weapon);
 
         PlayerManager.Instance.reloadKeys(this.scene);
@@ -118,8 +117,8 @@ export class Player extends Pawn
     protected initAttributes() : void
     {
         super.initAttributes();
-        this.attributes.set(CST.PLAYER.ATTRIBUTES.WALK_SPEED, 180);
-        this.attributes.set(CST.PLAYER.ATTRIBUTES.CLIMB_SPEED, 150);
+        this.attributes.set(CST.PAWN.ATTRIBUTES.WALK_SPEED, 180);
+        this.attributes.set(CST.PAWN.ATTRIBUTES.CLIMB_SPEED, 150);
     }
 
     public reset(x: number, y: number) : void

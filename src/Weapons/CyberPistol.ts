@@ -6,11 +6,10 @@ export class CyberPistol extends CYBR_Weapon
     {
         super(scene, x, y, "pistol");
 
-        this.bulletLifespan = 100;
         this.bulletSpeed = 750;
         this.fireRate = 240;
         this.fireLimit = 6;
-        this.damage = 35;
+        this.damage = 5;
 
         this.setGripPosition(-4, 2);
         this.setMuzzlePosition(-15, -2);

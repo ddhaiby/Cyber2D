@@ -7,11 +7,12 @@ export class GuardWeapon extends CYBR_Weapon
     {
         super(scene, x, y);
 
-        // this.bulletLifespan = 100;
-        // this.bulletSpeed = 650;
-        // this.bulletKillType = consts.KillType.KILL_WORLD_BOUNDS;
-        // this.fireLimit = 300;
-        // this.fireRate = 50;
-        // this.fireAngle = 0;
+        this.bulletSpeed = 300;
+        this.fireLimit = 0;
+        this.fireRate = 100;
+        this.damage = 5;
+
+        this.setGripPosition(0);
+        this.setMuzzlePosition(0);
     }
 }

@@ -13,6 +13,7 @@ export class PatrolAI extends Pawn
     private fireWeapon: boolean = false;
     private fireWeaponDelay: number = 1000;
     private fireWeaponTimer: Phaser.Time.TimerEvent;
+    private bulletPerFire: number = 1;
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture, frame?: string | number)
     {
@@ -31,6 +32,7 @@ export class PatrolAI extends Pawn
         if (this.fireWeapon)
         {
             let weapon = new GuardWeapon(this.scene, this.x, this.y);
+            weapon.setBulletPerFire(this.bulletPerFire);
             this.equipWeapon(weapon);
             this.prepareNextFire();
         }
@@ -77,7 +79,7 @@ export class PatrolAI extends Pawn
     protected initAttributes() : void
     {
         super.initAttributes();
-        this.attributes.set(CST.PLAYER.ATTRIBUTES.WALK_SPEED, 100);
+        this.attributes.set(CST.PAWN.ATTRIBUTES.WALK_SPEED, 100);
     }
 
     public reset(x: number, y: number) : void
@@ -122,6 +124,17 @@ export class PatrolAI extends Pawn
         {
             this.anims.play(this.isWalking ? "walk" : "idle", true);
             this.setFlipX(this.isLookingLeft);
+        }
+    }
+
+    public postUpdate(): void
+    {
+        const currentHandPosition = {x: 30, y: 18};
+
+        if (this.currentWeapon)
+        {
+            this.currentWeapon.setFlipX(this.isLookingRight);
+            this.currentWeapon.setPosition(this.x - this.width * this.originX + currentHandPosition.x, this.y - this.height * this.originY + currentHandPosition.y);
         }
     }
 
