@@ -39,11 +39,13 @@ export class CYBR_Weapon extends Phaser.GameObjects.Sprite
         this.bulletGravity = new Phaser.Math.Vector2(0, -scene.physics.world.gravity.y); // So the bullets ignore the gravity
         this.timerReloadWeapon = scene.time.addEvent({}); // Create an empty timer to avoid null error
 
-        this.on("fire", function (bullet: CYBR_Bullet/*, weapon: Weapon, speed: number*/){
-            this.play("firing");
-            this.owner.emit("shotsChanged", this.shots, this.fireLimit);
+        this.weapon.on("fire", (bullet: CYBR_Bullet/*, weapon: Weapon, speed: number*/)=>{
             this.owner.emit("fire", bullet);
+            this.owner.emit("shotsChanged", this.shots, this.fireLimit);
         }, this);
+
+        if (this.visible)
+            this.weapon.on("fire", ()=>{ this.play("firing"); }, this);
 
         this.initAnimations(this.texture.key);
     }
