@@ -357,13 +357,13 @@ export class SceneGame extends CYBR_Scene
         this.physics.add.collider(this.enemies, this.platforms);
         this.enemies.getChildren().forEach(function (ai: PatrolAI) {
             this.physics.add.collider(ai, this.movingPlatforms, this.collideMovingPlatforms);
-            this.physics.add.overlap(this.player, ai, this.onPlayerOverlapEnnemy, this.canPlayerOverlapEnnemy, this); 
-            this.physics.add.overlap(this.player.currentWeapon.bullets, ai, this.onWeaponHitPawn, this.canHitPawn, this);
+            this.physics.add.overlap(this.player, ai, this.onPlayerOverlapEnnemy, this.playerCanOverlapEnnemy, this); 
+            this.physics.add.overlap(this.player.currentWeapon.bullets, ai, this.onWeaponHitPawn, this.weaponCanHitPawn, this);
 
             if (ai.currentWeapon)
             {
                 this.physics.add.collider(ai.currentWeapon.bullets, this.platforms, this.onWeaponHitPlatforms);
-                this.physics.add.overlap(ai.currentWeapon.bullets, this.player, this.onWeaponHitPawn, this.canHitPawn, this);
+                this.physics.add.overlap(ai.currentWeapon.bullets, this.player, this.onWeaponHitPawn, this.weaponCanHitPawn, this);
             }
         }, this);
     }
@@ -470,12 +470,12 @@ export class SceneGame extends CYBR_Scene
         this.enemies.getChildren().forEach((ai: PatrolAI) => { ai.postUpdate(); }, this);
     }
 
-    // Enemies
+    // Pawns
     ////////////////////////////////////////////////////////////////////////
 
-    private canHitPawn(bullet: CYBR_Bullet, pawn: Pawn): boolean
+    private weaponCanHitPawn(bullet: CYBR_Bullet, pawn: Pawn): boolean
     {
-        return !pawn.dead() && !pawn.isRecovering;
+        return !pawn.dead() && !pawn.isRecovering && (Math.abs(bullet.x - pawn.x) < 20);
     }
 
     private onWeaponHitPawn(bullet: CYBR_Bullet, pawn: Pawn): void
@@ -489,17 +489,14 @@ export class SceneGame extends CYBR_Scene
         bullet.kill();
     }
 
-    // Player
-    ////////////////////////////////////////////////////////////////////////
-
     private playerReachedDeadZone(): boolean
     {
         return this.player.y > this.physics.world.bounds.height;
     }
 
-    private canPlayerOverlapEnnemy(player: Player, enemy: Pawn): boolean
+    private playerCanOverlapEnnemy(player: Player, enemy: Pawn): boolean
     {
-        return !player.dead() && !player.isRecovering && !enemy.dead();
+        return !player.dead() && !player.isRecovering && !enemy.dead() && (Math.abs(player.x - enemy.x) < 30);
     }
 
     private onPlayerOverlapEnnemy(player: Player, enemy: Pawn): void
