@@ -21,6 +21,8 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     public isFiring: boolean = false;
     public isClimbing: boolean = false;
     public wasClimbing: boolean = false;
+    public isTakingDmg: boolean = false
+    protected takingDmgDuration: number = 300;
     public isRecovering: boolean = false
 
     // Attributes
@@ -91,6 +93,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     public reset(x: number, y: number): void
     {
         this.enableBody(true, x, y, true, true);
+        this.isTakingDmg = false;
         this.setHealth(this.getMaxHealth());
         this.setVelocity(0,0);
         this.setAlpha(1);
@@ -225,7 +228,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         }
     }
 
-    public hurt(health: number): void
+    public hurt(health: number, hurtFromRight: boolean = true, velocityProjection: number = 250): void
     {
         this.setHealth(this.getHealth() - health);
         AudioManager.playSound(this.hurtSound);
@@ -234,6 +237,14 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     public heal(health: number): void
     {
         this.setHealth(this.getHealth() + health);
+    }
+
+    public startRecovering() : void
+    {
+    }
+
+    public stopRecovering() : void {
+        this.isRecovering = false;
     }
 
     public setHealth(health: number): void

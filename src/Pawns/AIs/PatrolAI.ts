@@ -22,6 +22,7 @@ export class PatrolAI extends Pawn
         this.fireWeaponTimer = scene.time.addEvent({}); // Create an empty timer to avoid null error
         this.on("die", () => { this.fireWeaponTimer.remove(false); }, this);
         this.deathSound = "Robot_Death";
+        this.takingDmgDuration = 50;
     }
 
     // Init
@@ -98,7 +99,7 @@ export class PatrolAI extends Pawn
     {
         super.update(args);
 
-        if (!this.dead())
+        if (!this.dead() && !this.isTakingDmg)
             this.updateControl();
     }
 
@@ -159,5 +160,26 @@ export class PatrolAI extends Pawn
         }
         else
             console.error("pathStartX can't be higher than pathEndX!");
+    }
+
+    public hurt(health: number, hurtFromRight: boolean = true, velocityProjection: number = 150) : void
+    {
+        super.hurt(health);
+
+        if (!this.dead())
+        {
+            this.startRecovering();
+
+            if (hurtFromRight)
+                this.setVelocityX(-velocityProjection);
+            else
+                this.setVelocityX(velocityProjection);
+
+            this.isTakingDmg = true;
+            this.scene.time.delayedCall(this.takingDmgDuration, () => {
+                this.isTakingDmg = false;
+                this.setVelocityX(0);
+            });
+        }
     }
 }

@@ -98,8 +98,8 @@ export class LevelTransition extends Phaser.GameObjects.Container {
             targets: this.levelBackground,
             width: 0,
             ease: Phaser.Math.Easing.Linear,
-            delay: 2200,
-            duration: 1000,
+            delay: 220,
+            duration: 100,
             onUpdate: function() : void {
                 this.levelBackground.x = (this.width - this.levelBackground.width) / 1.5,
                 this.levelBackground.clear();

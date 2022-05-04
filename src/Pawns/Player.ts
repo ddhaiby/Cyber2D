@@ -6,7 +6,6 @@ import { CST } from "../CST";
 
 export class Player extends Pawn
 {
-    public isTakingDmg: boolean = false
     private keys: IPlayerKeys;
     private currentHandPosition: Phaser.Math.Vector2;
     private handPositions: Phaser.Math.Vector2[];
@@ -32,6 +31,8 @@ export class Player extends Pawn
         PlayerManager.Instance.reloadKeys(this.scene);
         this.keys = PlayerManager.Instance.keyBinding;
         this.keys.jump.on("down", this.jump, this);
+
+        this.takingDmgDuration = 300;
 
         return this;
     }
@@ -126,7 +127,6 @@ export class Player extends Pawn
     public reset(x: number, y: number) : void
     {
         super.reset(x, y);
-        this.isTakingDmg = false;
         this.stopRecovering();
     }
 
@@ -231,7 +231,7 @@ export class Player extends Pawn
         return this.handPositions[this.anims.currentAnim.key] ? this.handPositions[this.anims.currentAnim.key][this.anims.currentFrame.index - 1] as Phaser.Math.Vector2 : null;
     }
 
-    public recover() : void
+    public startRecovering() : void
     {
         this.isRecovering = true;
 
@@ -259,19 +259,14 @@ export class Player extends Pawn
         });
     }
 
-    public stopRecovering() : void {
-        this.isRecovering = false;
-    }
-
-    public hurt(health: number, hurtFromRight?: boolean) : void
+    public hurt(health: number, hurtFromRight: boolean = true, velocityProjection: number = 250) : void
     {
         super.hurt(health);
+
         if (!this.dead())
         {
-            this.stopWalking();
-            this.stopClimbing();
+            this.startRecovering();
 
-            let velocityProjection = 250;
             if (hurtFromRight)
             {
                 this.setVelocityX(-velocityProjection);
@@ -284,11 +279,10 @@ export class Player extends Pawn
             }
 
             this.isTakingDmg = true;
-            this.scene.time.delayedCall(300, () => { // TODO: Could use an animation instead of a timer
+            this.scene.time.delayedCall(this.takingDmgDuration, () => {
                 this.isTakingDmg = false;
                 this.setVelocityX(0);
             });
-            this.recover();
         }
     }
 }

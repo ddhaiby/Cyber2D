@@ -487,7 +487,7 @@ export class SceneGame extends CYBR_Scene
 
     private onWeaponHitPawn(bullet: CYBR_Bullet, pawn: Pawn): void
     {
-        pawn.hurt(bullet.damage);
+        pawn.hurt(bullet.damage, pawn.body.touching.right);
         bullet.kill();
     }
 
