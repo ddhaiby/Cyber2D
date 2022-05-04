@@ -25,7 +25,7 @@ export class ScenePreloadAssets extends CYBR_Scene
 
     public preload() : void
     {
-        this.loadAudios();
+        this.loadAudioSprite();
         this.loadVideos();
         this.loadPawns();
         this.loadWeapons();
@@ -37,13 +37,14 @@ export class ScenePreloadAssets extends CYBR_Scene
         this.load.atlas("platform_atlas", "platform_atlas.png", "platform_atlas.json");
     }
 
-    private loadAudios() : void
+    /** Load audios from an audio sprite. Below is an example to generate an audio sprite from audios (make sure to run in admin). 
+     * audiosprite -e "mp3,ogg" -o ./audiosprite *.mp3 -f howler
+     * Check https://www.npmjs.com/package/audiosprite
+      */
+    private loadAudioSprite() : void
     {
-        // Music
-        this.load.setPath("./assets/audio/music");
-        this.load.audio("8-bit-samba", "./8-bit-samba20by20ian-post20Artlist.mp3");
-        this.load.audio("breaking-point", "./breaking-point20by20ian-post20Artlist.mp3");
-        this.load.audio("super-duper", "./super-duper20by20ian-post20Artlist.mp3");
+        this.load.setPath("./assets/audio");
+        this.load.json("audiosprite", "audiosprite.json");
     }
 
     private loadVideos() : void
@@ -73,6 +74,7 @@ export class ScenePreloadAssets extends CYBR_Scene
     {
         this.textures.addSpriteSheetFromAtlas("portal", { atlas: "platform_atlas", frame: "portal.png", frameWidth: 32, frameHeight: 32 });
         this.createWeaponAtlas();
+        this.createAudioManager();
         this.createMainMenu();
     }
 
@@ -85,7 +87,6 @@ export class ScenePreloadAssets extends CYBR_Scene
     private createMainMenu(): void
     {
         const sceneMainMenu = this.scene.add(CST.SCENES.MAINMENU_UI, SceneMainMenu_UI, false, null) as SceneMainMenu_UI; 
-        AudioManager.init(sceneMainMenu);
 
         // Splash screen
         this.splashScreen = new SplashScreen(this, 0, 0, this.scale.displaySize.width, this.scale.displaySize.height);
@@ -95,5 +96,12 @@ export class ScenePreloadAssets extends CYBR_Scene
         }, this);
 
         this.splashScreen.showAnimation();
+    }
+
+    private createAudioManager(): void
+    {
+        let audioSprite = this.cache.json.get("audiosprite");
+        audioSprite = JSON.parse(JSON.stringify(audioSprite).replace("urls", "src").replace("./", "./assets/audio/")/*.replace("./", "./assets/audio/")*/);
+        AudioManager.init(audioSprite);
     }
 }

@@ -13,6 +13,7 @@ import {Player} from "../Pawns/Player";
 import { CYBR_Bullet } from "../Weapons/CYBR_Bullet";
 
 import { Token } from "../Pickups/Token";
+import { CyberToken } from "../Pickups/CyberToken";
 import { EffectPickup } from "../Pickups/EffectPickup"
 import { HealPickup } from "../Pickups/HealPickup"
 import { WeaponBoostPickup } from "../Pickups/WeaponBoostPickup"
@@ -103,8 +104,9 @@ export class SceneGame extends CYBR_Scene
         this.spawnPositions = new Phaser.Structs.Map([]);
         this.createLevel();
         this.events.emit("levelStarted", data.level);
+        AudioManager.playSound("New_Level");
 
-        AudioManager.playMusic(CST.LEVELS[this.currentLevel - 1].MUSIC);
+        //AudioManager.playMusic(CST.LEVELS[this.currentLevel - 1].MUSIC);
     }
 
     private createKeyboardMap(): void
@@ -260,14 +262,19 @@ export class SceneGame extends CYBR_Scene
     {
         this.tokens = this.physics.add.staticGroup();
 
-        const tokenNames = ["tokenCopper", "tokenSilver", "tokenGold", "tokenCyber"];
+        const tokenData = [
+            {name: "tokenCopper", classType: Token},
+            {name: "tokenSilver", classType: Token},
+            {name: "tokenGold", classType: Token},
+            {name: "tokenCyber", classType: CyberToken}
+        ];
 
-        for (let tokenName of tokenNames)
+        for (let token of tokenData)
         {
              // @ts-ignore - Problem with Phaser’s types. classType supports classes 
-            const tokenObjects = this.currentMap.createFromObjects("Tokens", {name: tokenName, classType: Token});
+            const tokenObjects = this.currentMap.createFromObjects("Tokens", {name: token.name, classType: token.classType});
             tokenObjects.map((token: Token)=>{
-                token.setTexture("platform_atlas", tokenName + ".png");
+                token.setTexture("platform_atlas", token.name + ".png");
                 this.tokens.add(token);
             });
         }
@@ -444,7 +451,7 @@ export class SceneGame extends CYBR_Scene
         const sceneMainMenu_UI = this.scene.get(CST.SCENES.MAINMENU_UI) as SceneMainMenu_UI;
         sceneMainMenu_UI.scene.setActive(true);
         sceneMainMenu_UI.scene.setVisible(true);
-        AudioManager.playMusic(CST.MAIN_MENU.MUSIC);
+        //AudioManager.playMusic(CST.MAIN_MENU.MUSIC);
     }
 
     // Update
@@ -526,7 +533,7 @@ export class SceneGame extends CYBR_Scene
 
     private collectToken(player: Player, token: Token): void
     {
-        token.disableBody(true, true);
+        token.collected();
         this.setCollectedTokens(this.getCollectedTokens() + 1);
     }
 
@@ -534,12 +541,15 @@ export class SceneGame extends CYBR_Scene
     {
         pickup.disableBody(true, true);
         pickup.applyEffect(this.player);
+        AudioManager.playSound("Item_Pickup");
     }
 
     private reachCheckpoint(player: Player, checkpoint: Phaser.Physics.Arcade.Image): void
     {
         checkpoint.setTexture("platform_atlas", "checkpointOn.png");
         this.spawnPositions.set(this.player.name, new Phaser.Math.Vector2(checkpoint.x, checkpoint.y));
+        checkpoint.disableBody(true, false);
+        AudioManager.playSound("Checkpoint");
     }
 
     private respawnPlayer(): void

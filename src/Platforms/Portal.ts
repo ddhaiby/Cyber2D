@@ -1,3 +1,4 @@
+import { AudioManager } from "../Managers/AudioManager";
 import { Player } from "../Pawns/Player";
 
 export class Portal extends Phaser.Physics.Arcade.Sprite
@@ -58,6 +59,7 @@ export class Portal extends Phaser.Physics.Arcade.Sprite
         {
             this.activating = true;
             this.anims.play("activating", true);
+            AudioManager.playSound("Level_Completion");
         }
     }
 

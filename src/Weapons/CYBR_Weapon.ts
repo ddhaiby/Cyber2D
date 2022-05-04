@@ -1,4 +1,5 @@
 import { Weapon, consts, Bullet, ObjectWithTransform } from "phaser3-weapon-plugin";
+import { AudioManager } from "../Managers/AudioManager";
 import { Pawn } from "../Pawns/Pawn";
 import { CYBR_Bullet } from "./CYBR_Bullet";
 
@@ -20,10 +21,25 @@ export class CYBR_Weapon extends Phaser.GameObjects.Sprite
     protected gripY: number = 0;
 
     protected damage: number = 0;
-    
+
     protected bulletPerFire: number = 1;
 
+    protected reloadRate: number = 400;
+
     private owner: Pawn = null;
+
+    // Sounds
+    /** Sound for the fire */
+    protected fireSound: string = "";
+
+    /** Sound when trying to fire with 0 bullet */
+    protected emptyWeaponSound: string = "";
+
+    /** Last time emptyWeaponSound has been played */
+    private lastTimeEmptyWeaponSoundPlayed = 0;
+
+    /** Sound when a weapon is reloaded */
+    protected reloadSound: string = "";
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture?: string | Phaser.Textures.Texture, frame?: string | number)
     {
@@ -67,7 +83,7 @@ export class CYBR_Weapon extends Phaser.GameObjects.Sprite
             this.anims.create({
                 key: "firing",
                 frames: this.anims.generateFrameNumbers(key, { start: 0, end: 2 }),
-                frameRate: 10,
+                frameRate: 24,
                 repeat: 0
             });
 
@@ -78,7 +94,7 @@ export class CYBR_Weapon extends Phaser.GameObjects.Sprite
     // Update
     ////////////////////////////////////////////////////////////////////////
 
-    public fire(from?: Phaser.Math.Vector2 | Phaser.GameObjects.Sprite | ObjectWithTransform, x?: number, y?: number, offsetX?: number, offsetY?: number) : Bullet[]
+    public fire(from?: Phaser.Math.Vector2 | Phaser.GameObjects.Sprite | ObjectWithTransform, x?: number, y?: number, offsetX?: number, offsetY?: number): Bullet[]
     {
         this.stopReloading();
 
@@ -91,18 +107,26 @@ export class CYBR_Weapon extends Phaser.GameObjects.Sprite
                 bullets.push(bullet);
 
                 if (bullet)
+                {
                     bullet.damage = this.damage;
+                    AudioManager.playSound(this.fireSound);
+                }
+                else if ((this.shots == this.fireLimit) && (new Date().getTime() - this.lastTimeEmptyWeaponSoundPlayed > this.fireRate))
+                {
+                    AudioManager.playSound(this.emptyWeaponSound);
+                    this.lastTimeEmptyWeaponSoundPlayed = new Date().getTime();
+                }
             }, null, this);
         }
         return bullets;
     }
 
-    public stopReloading() : void
+    public stopReloading(): void
     {
         this.timerReloadWeapon.remove();
     }
 
-    public reload() : void
+    public tryReloading(): void
     {
         if (this.shots == 0) // Full ammunition
         {
@@ -111,29 +135,36 @@ export class CYBR_Weapon extends Phaser.GameObjects.Sprite
         }
         else if (this.timerReloadWeapon.getRemaining() == 0) // The timer is inactive or it has been triggered 
         {
-            this.timerReloadWeapon = this.scene.time.delayedCall(100, () => {
-                this.decrementShots();
-                if (this.shots > 0)
-                    this.timerReloadWeapon = this.timerReloadWeapon.reset({delay: this.timerReloadWeapon.delay, repeat: 1, callbackScope: this, callback: this.reload });
-                else
-                    this.stopReloading();
+            this.timerReloadWeapon = this.scene.time.delayedCall(this.reloadRate, () => {
+                this.reload();
             }, null, this);
         }
     }
 
-    public decrementShots() : void
+    private reload(): void
+    {
+        this.decrementShots();
+        if (this.shots > 0)
+            this.timerReloadWeapon = this.timerReloadWeapon.reset({delay: this.timerReloadWeapon.delay, repeat: 1, callbackScope: this, callback: this.reload });
+        else
+            this.stopReloading();
+
+        AudioManager.playSound(this.reloadSound);
+    }
+
+    private decrementShots(): void
     {
         this.weapon.shots -= 1;
         this.owner.emit("shotsChanged", this.weapon.shots, this.weapon.fireLimit);
     }
 
-    public setShots(shots: number) : void
+    public setShots(shots: number): void
     {
         this.weapon.shots = shots;
         this.owner.emit("shotsChanged", this.weapon.shots, this.weapon.fireLimit);
     }
 
-    public get shots() : number
+    public get shots(): number
     {
         return this.weapon.shots;
     }
@@ -143,12 +174,12 @@ export class CYBR_Weapon extends Phaser.GameObjects.Sprite
         return this.weapon.bullets;
     }
 
-    public stopFiring() : void
+    public stopFiring(): void
     {
-        this.reload();
+        this.tryReloading();
     }
 
-    public setOwner(owner: Pawn) : void
+    public setOwner(owner: Pawn): void
     {
         this.owner = owner;
     }
@@ -184,7 +215,7 @@ export class CYBR_Weapon extends Phaser.GameObjects.Sprite
         this.bulletPerFire = Math.max(bulletPerFire, 1);
     }
 
-    public trackSprite(sprite: Phaser.GameObjects.Sprite | ObjectWithTransform, offsetX?: number, offsetY?: number, trackRotation?: boolean) : void
+    public trackSprite(sprite: Phaser.GameObjects.Sprite | ObjectWithTransform, offsetX?: number, offsetY?: number, trackRotation?: boolean): void
     {
         this.setPosition(sprite.x, sprite.y);
         this.weapon.trackSprite(sprite, offsetX, offsetY, trackRotation);
@@ -205,6 +236,11 @@ export class CYBR_Weapon extends Phaser.GameObjects.Sprite
         this.weapon.fireAngle = fireAngle;
     }
 
+    protected get fireRate(): number
+    {
+        return this.weapon.fireRate;
+    }
+
     protected set fireRate(fireRate: number)
     {
         this.weapon.fireRate = fireRate;
@@ -223,6 +259,11 @@ export class CYBR_Weapon extends Phaser.GameObjects.Sprite
     protected set bulletKillType(bulletKillType: number)
     {
         this.weapon.bulletKillType = bulletKillType;
+    }
+
+    protected get fireLimit(): number
+    {
+        return this.weapon.fireLimit;
     }
 
     protected set fireLimit(fireLimit: number)

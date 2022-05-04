@@ -8,10 +8,14 @@ export class CyberShotgun extends CYBR_Weapon
         super(scene, x, y, "shotgun");
 
         this.bulletSpeed = 750;
-        this.fireRate = 650;
         this.fireLimit = 3;
+        this.fireRate = 650;
+        this.reloadRate = 650;
         this.damage = 10;
 
+        this.fireSound = "Shotgun_Shot";
+        this.emptyWeaponSound = "Pistol__Shotgun_Empty";
+        this.reloadSound = "Shotgun_Reload_One_Bullet";
         this.setGripPosition(-7, 2);
         this.setMuzzlePosition(-16, -2);
     }

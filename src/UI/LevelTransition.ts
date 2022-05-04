@@ -9,7 +9,7 @@ export class LevelTransition extends Phaser.GameObjects.Container {
     private levelBackground: CYBR_Graphics;
 
     constructor(scene: Phaser.Scene, x: number, y: number, width: number, height: number)
-    {        
+    {
         super(scene, x, y);
 
         this.width = width;

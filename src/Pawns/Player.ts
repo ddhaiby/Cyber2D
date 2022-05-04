@@ -14,6 +14,8 @@ export class Player extends Pawn
     constructor(scene: Phaser.Scene, x: number, y: number, texture?: string | Phaser.Textures.Texture) {
         super(scene, x, y, texture);
         this.setDepth(1);
+        this.hurtSound = "Player_Damage";
+        this.deathSound = "Player_Death";
     }
 
     // Init

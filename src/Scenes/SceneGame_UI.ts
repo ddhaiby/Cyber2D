@@ -29,6 +29,7 @@ export class SceneGame_UI extends CYBR_Scene {
 
     // Level
     private levelTransition: LevelTransition;
+    private levelStarting: boolean = false;
 
     constructor() {
         super({key: CST.SCENES.GAME_UI});
@@ -179,12 +180,13 @@ export class SceneGame_UI extends CYBR_Scene {
     }
 
     private startLevelStartedTransition(): void {
-        this.sceneGame.scene.pause();
+        this.levelStarting = true;
 
         this.levelTransition.showLevelStartedAnimation(this.sceneGame.currentLevel);
         this.levelTransition.onAnimationCompleted("levelStartedAnimationCompleted", () => {
             this.elapsedTime = 0;
             this.sceneGame.scene.resume();
+            this.levelStarting = false;
         }, this);
     }
 
@@ -196,6 +198,7 @@ export class SceneGame_UI extends CYBR_Scene {
 
         if (!this.scene.isPaused(this.sceneGame)) {
             this.elapsedTime += delta;
+            this.chronoText.setVisible(!this.levelStarting);
             this.chronoText.text = CYBR_Scene.formatTime(this.elapsedTime);
         }
     }

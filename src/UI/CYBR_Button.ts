@@ -1,7 +1,11 @@
+import { AudioManager } from "../Managers/AudioManager";
+
 export class CYBR_Button extends Phaser.GameObjects.Container
 {
     private backgroundObject: Phaser.GameObjects.Image;
     private textObject: Phaser.GameObjects.Text;
+    public clickSound: string = "Menu_Buttons_Hover";
+    public hoverSound: string = "Menu_Buttons_Click";
 
     constructor(scene: Phaser.Scene, x: number, y: number, text: string)
     {
@@ -26,13 +30,19 @@ export class CYBR_Button extends Phaser.GameObjects.Container
         this.add(this.textObject);
 
         // Behaviors
-        this.backgroundObject.on("pointerover", () => { this.backgroundObject.setTexture("UI_atlas", "btn_background_hovered"); }, this);
+        this.backgroundObject.on("pointerover", () => {
+            this.backgroundObject.setTexture("UI_atlas", "btn_background_hovered");
+            AudioManager.playSound(this.hoverSound);
+        }, this);
 
         this.backgroundObject.on("pointerout", () => { this.backgroundObject.setTexture("UI_atlas", "btn_background"); }, this);
 
         this.backgroundObject.on("pointerdown", () => { this.backgroundObject.setTexture("UI_atlas", "btn_background_hovered"); }, this);
 
-        this.backgroundObject.on("pointerup", () => { this.backgroundObject.setTexture("UI_atlas", "btn_background"); }, this);
+        this.backgroundObject.on("pointerup", () => {
+            this.backgroundObject.setTexture("UI_atlas", "btn_background");
+            AudioManager.playSound(this.clickSound);
+        }, this);
 
         this.backgroundObject.on("pointermove", () => { this.backgroundObject.setTexture("UI_atlas", "btn_background_hovered"); }, this);
     }

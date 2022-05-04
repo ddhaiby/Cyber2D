@@ -1,3 +1,4 @@
+import { AudioManager } from "../Managers/AudioManager";
 import { CST } from "../CST";
 import { CYBR_Weapon } from "../Weapons/CYBR_Weapon";
 
@@ -26,6 +27,10 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     protected attributes: Phaser.Structs.Map<string, number>;
     private maxHealth: number = 10;
     private bodyDamage: number = 5;
+
+    // Sounds
+    protected hurtSound: string = "";
+    protected deathSound: string = "";
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture, frame?: string | number)
     {
@@ -223,6 +228,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     public hurt(health: number): void
     {
         this.setHealth(this.getHealth() - health);
+        AudioManager.playSound(this.hurtSound);
     }
 
     public heal(health: number): void
@@ -279,6 +285,8 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.stopWalking();
         this.stopClimbing();
         this.emit("die");
+
+        AudioManager.playSound(this.deathSound);
     }
 
     public dead(): boolean

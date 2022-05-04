@@ -31,8 +31,7 @@ export class SceneMainMenu_UI extends CYBR_Scene
 
     public create() : void
     {
-        AudioManager.playMusic(CST.MAIN_MENU.MUSIC);
-
+        //AudioManager.playMusic(CST.MAIN_MENU.MUSIC);
 
         // Background
         let background = new CYBR_Graphics(this);
@@ -61,7 +60,6 @@ export class SceneMainMenu_UI extends CYBR_Scene
         // Game Scene
         const sceneData = {level: 1} as SceneData;
         this.sceneGame = this.scene.add(CST.SCENES.GAME, SceneGame, false, sceneData) as SceneGame;
-
     }
 
     // Update
@@ -85,7 +83,6 @@ export class SceneMainMenu_UI extends CYBR_Scene
         console.log("Settings requested");
         this.mainMenuContainer.setVisible(false);
         this.settingsContainer.setVisible(true);
-
     }
 
     private onConnect() : void

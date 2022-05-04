@@ -18,6 +18,7 @@ export class MainMenuContainer extends Phaser.GameObjects.Container
         this.add(buttonRegister);
 
         let buttonPlay = new CYBR_Button(scene, 0, 200, "Play");
+        buttonPlay.clickSound = "Play_Button_Click";
         buttonPlay.onClicked(this.onPlayClicked, this);
         Phaser.Display.Align.To.TopCenter(buttonPlay, buttonRegister, 0, 40);
         this.add(buttonPlay);

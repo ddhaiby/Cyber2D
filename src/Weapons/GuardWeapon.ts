@@ -11,6 +11,7 @@ export class GuardWeapon extends CYBR_Weapon
         this.fireLimit = 0;
         this.fireRate = 100;
         this.damage = 5;
+        this.fireSound = "";
 
         this.setGripPosition(0);
         this.setMuzzlePosition(0);

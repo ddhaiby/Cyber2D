@@ -1,31 +1,42 @@
+import { Howl } from "howler";
+
 export class AudioManager {
-    private static scene: Phaser.Scene;
-    private static currentMusic: Phaser.Sound.BaseSound;
+    private static howl: Howl = null;
+    private static loopIDs: number[]; 
+    private static loopKeys: string[];
 
-    public static init(scene: Phaser.Scene)
+    public static init(audiosprite: any)
     {
-        AudioManager.scene = scene;
-        AudioManager.scene.sound.pauseOnBlur = false;
+        this.howl = new Howl(audiosprite);
+        AudioManager.unmute();
     }
 
-    public static playMusic(key: string, config?: Phaser.Types.Sound.SoundConfig) : void
+    public static mute(): void
     {
-        if (AudioManager.currentMusic)
-        {
-            AudioManager.currentMusic.stop();
-            AudioManager.currentMusic.destroy();
-            AudioManager.currentMusic = null;
-        }
-
-        AudioManager.currentMusic = AudioManager.scene.sound.add(key, config);
-        AudioManager.currentMusic.play({loop: true});
+        if (!!AudioManager.howl)
+            AudioManager.howl.mute(true);
     }
 
-    public static stopMusic() : void
+    public static unmute(): void
     {
-        if (AudioManager.currentMusic)
+        if (!!AudioManager.howl)
+            AudioManager.howl.mute(false);
+    }
+
+    public static playSound(key: string, loop: boolean = false, volume: number = 1): number
+    {
+        if (loop && AudioManager.loopKeys.includes(key)) // This sound is already playing in loop
+            return AudioManager.loopIDs[AudioManager.loopKeys.indexOf(key)];
+
+        const id = AudioManager.howl.play(key);
+        AudioManager.howl.volume(volume, id);
+        AudioManager.howl.loop(loop, id);
+
+        if (loop)
         {
-            AudioManager.currentMusic.stop();
+            AudioManager.loopKeys.push(key);
+            AudioManager.loopIDs.push(id);
         }
+        return id;
     }
 }
