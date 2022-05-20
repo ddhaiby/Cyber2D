@@ -72,7 +72,7 @@ export class RegisterContainer extends Phaser.GameObjects.Container {
         this.add(labelEmail);
 
         // Password
-        this.textFieldPassword = new CYBR_TextField(this.scene, 0, this.textFieldEmail.y + this.textFieldEmail.height + 64, "");
+        this.textFieldPassword = new CYBR_TextField(this.scene, 0, this.textFieldEmail.y + this.textFieldEmail.height + 64, "", "password");
         Phaser.Display.Align.To.BottomCenter(this.textFieldPassword, this.textFieldEmail, 0, 60);
         this.add(this.textFieldPassword);
 
@@ -89,9 +89,9 @@ export class RegisterContainer extends Phaser.GameObjects.Container {
         super.setVisible(value);
 
         if (value) {
-            this.textFieldUsername.setText("");
-            this.textFieldEmail.setText("");
-            this.textFieldPassword.setText("");
+            this.textFieldUsername.clear();
+            this.textFieldEmail.clear();
+            this.textFieldPassword.clear();
         }
         return this;
     }

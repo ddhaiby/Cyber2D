@@ -6,7 +6,10 @@ export class CYBR_TextField extends BBCodeText
     public width: number;
     public height: number;
 
-    constructor(scene: Phaser.Scene, x?: number, y?: number, content?: string)
+    /** Stores the text when you use the password mode */
+    public passwordText: string;
+
+    constructor(scene: Phaser.Scene, x?: number, y?: number, content?: string, type: string = "text")
     {
         const style = {
             color: "yellow",
@@ -25,14 +28,46 @@ export class CYBR_TextField extends BBCodeText
         this.height = style.fixedHeight;
         this.setInteractive();
 
-        this.on("pointerdown", function () {
+        const that = this;
+
+        this.on("pointerdown", () => {
             const config = {
-                selectAll: true,
-                onTextChanged: function (textObject: Phaser.GameObjects.Text, text: string) {
-                    textObject.text = text;
+                selectAll: false,
+                text: this.passwordText,
+                type: type,
+                onOpen: () => { that.emit("open"); },
+                onClose: () => { that.emit("close"); },
+                onTextChanged: (textObject: Phaser.GameObjects.Text, text: string) => {
+                    this.passwordText = text;
+                    textObject.text = (type == "password") ? new Array(this.passwordText.length + 1).join('•') : text;
+                    that.emit("textChanged", text);
                 }
             }
             this.scene.plugins.get("rexTextEditPlugin").edit(this, config);
         }, this);
+    }
+
+    public onTextChanged(fn: Function, context?: any) : this
+    {
+        this.on("textChanged", fn, context);
+        return this;
+    }
+
+    public onOpen(fn: Function, context?: any) : this
+    {
+        this.on("open", fn, context);
+        return this;
+    }
+
+    public onClose(fn: Function, context?: any) : this
+    {
+        this.on("close", fn, context);
+        return this;
+    }
+
+    public clear(): void
+    {
+        this.setText("");
+        this.passwordText = "";
     }
 }
