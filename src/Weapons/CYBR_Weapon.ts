@@ -108,6 +108,7 @@ export class CYBR_Weapon extends Phaser.GameObjects.Sprite
 
                 if (bullet)
                 {
+                    bullet.setDepth(0.8);
                     bullet.damage = this.damage;
                     AudioManager.playSound(this.fireSound);
                 }

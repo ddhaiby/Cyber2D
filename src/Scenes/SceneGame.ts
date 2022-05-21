@@ -358,7 +358,9 @@ export class SceneGame extends CYBR_Scene
         this.physics.add.overlap(this.player, this.checkpoints, this.reachCheckpoint, null, this);
 
         if (this.player.currentWeapon)
+        {
             this.physics.add.collider(this.player.currentWeapon.bullets, this.platforms, this.onWeaponHitPlatforms.bind(this));
+        }
 
         /////// Enemies
         this.physics.add.collider(this.enemies, this.platforms);

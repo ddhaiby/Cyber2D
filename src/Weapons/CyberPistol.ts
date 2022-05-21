@@ -16,6 +16,6 @@ export class CyberPistol extends CYBR_Weapon
         this.emptyWeaponSound = "Pistol__Shotgun_Empty";
         this.reloadSound = "Pistol_Reload";
         this.setGripPosition(-4, 2);
-        this.setMuzzlePosition(-15, -2);
+        this.setMuzzlePosition(5, -2);
     }
 }

@@ -17,7 +17,7 @@ export class CyberShotgun extends CYBR_Weapon
         this.emptyWeaponSound = "Pistol__Shotgun_Empty";
         this.reloadSound = "Shotgun_Reload_One_Bullet";
         this.setGripPosition(-7, 2);
-        this.setMuzzlePosition(-16, -2);
+        this.setMuzzlePosition(10, -2);
     }
 
     public fire(from?: Phaser.Math.Vector2 | Phaser.GameObjects.Sprite | ObjectWithTransform, x?: number, y?: number, offsetX?: number, offsetY?: number) : Bullet[]
