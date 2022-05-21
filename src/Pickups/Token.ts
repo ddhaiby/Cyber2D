@@ -2,8 +2,9 @@ import { AudioManager } from "../Managers/AudioManager";
 
 export class Token extends Phaser.Physics.Arcade.Image
 {
-     // Sounds
-     protected collectedSound: string = "";
+    // Sounds
+    protected collectedSound: string = "";
+    public value: number = -9999;
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture, frame?: string | number)
     {

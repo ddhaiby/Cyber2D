@@ -713,6 +713,12 @@
                  "height":32,
                  "id":164,
                  "name":"tokenCopper",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":1
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -725,6 +731,12 @@
                  "height":32,
                  "id":165,
                  "name":"tokenCopper",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":1
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -737,6 +749,12 @@
                  "height":32,
                  "id":167,
                  "name":"tokenCopper",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":1
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -749,6 +767,12 @@
                  "height":32,
                  "id":168,
                  "name":"tokenCopper",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":1
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -761,6 +785,12 @@
                  "height":32,
                  "id":169,
                  "name":"tokenCopper",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":1
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -773,6 +803,12 @@
                  "height":32,
                  "id":170,
                  "name":"tokenSilver",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":5
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -785,6 +821,12 @@
                  "height":32,
                  "id":171,
                  "name":"tokenSilver",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":5
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -797,6 +839,12 @@
                  "height":32,
                  "id":172,
                  "name":"tokenSilver",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":5
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -809,6 +857,12 @@
                  "height":32,
                  "id":173,
                  "name":"tokenSilver",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":5
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -821,6 +875,12 @@
                  "height":32,
                  "id":174,
                  "name":"Token",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":5
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -833,6 +893,12 @@
                  "height":32,
                  "id":175,
                  "name":"Token",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":5
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -845,6 +911,12 @@
                  "height":32,
                  "id":176,
                  "name":"Token",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":5
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -857,6 +929,12 @@
                  "height":32,
                  "id":177,
                  "name":"Token",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":1
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -869,6 +947,12 @@
                  "height":32,
                  "id":235,
                  "name":"tokenCyber",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":1
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -881,6 +965,12 @@
                  "height":32,
                  "id":268,
                  "name":"tokenCopper",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":1
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -893,6 +983,12 @@
                  "height":32,
                  "id":269,
                  "name":"tokenCopper",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":1
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -905,6 +1001,12 @@
                  "height":32,
                  "id":270,
                  "name":"tokenCopper",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":1
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -917,6 +1019,12 @@
                  "height":32,
                  "id":271,
                  "name":"tokenCopper",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":1
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -929,6 +1037,12 @@
                  "height":32,
                  "id":273,
                  "name":"tokenCopper",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":1
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -941,6 +1055,12 @@
                  "height":32,
                  "id":274,
                  "name":"tokenCopper",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":1
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -953,6 +1073,12 @@
                  "height":32,
                  "id":275,
                  "name":"tokenCopper",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":1
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -965,6 +1091,12 @@
                  "height":32,
                  "id":276,
                  "name":"tokenCopper",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":1
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,

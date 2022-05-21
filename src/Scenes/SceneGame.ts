@@ -536,7 +536,7 @@ export class SceneGame extends CYBR_Scene
     private collectToken(player: Player, token: Token): void
     {
         token.collected();
-        this.setCollectedTokens(this.getCollectedTokens() + 1);
+        this.setCollectedTokens(this.getCollectedTokens() + token.value);
     }
 
     private applyEffectOnPlayer(player: Player, pickup: EffectPickup): void
@@ -639,6 +639,6 @@ export class SceneGame extends CYBR_Scene
     {
         this.remainLife = remainLife;
         this.events.emit("playerRemainLifeChanged", this.remainLife);
-        this.setGameOver(remainLife < 0); // TODO game over tests should be part of a game mode
+        this.setGameOver(remainLife < 0);
     }
 }
