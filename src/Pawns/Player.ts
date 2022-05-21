@@ -16,6 +16,7 @@ export class Player extends Pawn
         this.setDepth(1);
         this.hurtSound = "Player_Damage";
         this.deathSound = "Player_Death";
+        this.maxHealth = 15;
     }
 
     // Init

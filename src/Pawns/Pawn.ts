@@ -25,7 +25,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
     // Attributes
     protected attributes: Phaser.Structs.Map<string, number>;
-    private maxHealth: number = 10;
+    protected maxHealth: number = 10;
     private bodyDamage: number = 5;
 
     // Sounds
