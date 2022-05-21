@@ -35,6 +35,15 @@ export class ScenePreloadAssets extends CYBR_Scene
         this.load.image("background", "./background.png");
         this.load.atlas("UI_atlas", "UI_atlas.png", "UI_atlas.json");
         this.load.atlas("platform_atlas", "platform_atlas.png", "platform_atlas.json");
+
+		
+
+
+
+
+
+		// TEMPORARYTILL SPIKE ASSET
+        this.load.spritesheet("spike", "./spike.png", { frameWidth: 32, frameHeight: 32 });
     }
 
     /** Load audios from an audio sprite. Below is an example to generate an audio sprite from audios (make sure to run in admin). 
@@ -73,6 +82,7 @@ export class ScenePreloadAssets extends CYBR_Scene
     public create() : void
     {
         this.textures.addSpriteSheetFromAtlas("portal", { atlas: "platform_atlas", frame: "portal.png", frameWidth: 32, frameHeight: 32 });
+        //this.textures.addSpriteSheetFromAtlas("spike", { atlas: "platform_atlas", frame: "spike.png", frameWidth: 32, frameHeight: 32 });
         this.createWeaponAtlas();
         this.createAudioManager();
         this.createMainMenu();

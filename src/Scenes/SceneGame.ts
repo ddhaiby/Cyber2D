@@ -21,6 +21,7 @@ import { WeaponBoostPickup } from "../Pickups/WeaponBoostPickup"
 import { Ladder } from "../Platforms/Ladder";
 import { Portal } from "../Platforms/Portal";
 import { MovingPlatform } from "../Platforms/MovingPlatform";
+import { Spike } from "../Platforms/Spike";
 
 import { LadderManager } from "../Managers/LadderManager";
 import { AudioManager } from "../Managers/AudioManager";
@@ -39,6 +40,7 @@ export class SceneGame extends CYBR_Scene
     private movingPlatforms: Phaser.Physics.Arcade.StaticGroup;
     private checkpoints: Phaser.Physics.Arcade.StaticGroup;
     private portals: Phaser.Physics.Arcade.StaticGroup;
+    private spikes: Phaser.Physics.Arcade.StaticGroup;
     private backgrounds: Phaser.Physics.Arcade.StaticGroup;
     private tokens: Phaser.Physics.Arcade.StaticGroup;
     private pickupItems: Phaser.Physics.Arcade.StaticGroup;
@@ -128,6 +130,7 @@ export class SceneGame extends CYBR_Scene
         this.createCheckpoints();
         this.createLadders();
         this.createPortals();
+        this.createTraps();
         this.createTokens();
         this.createPickupItems();
         this.createKeyboardMap();
@@ -258,6 +261,18 @@ export class SceneGame extends CYBR_Scene
         });
     }
 
+    private createTraps(): void
+    {
+        this.spikes = this.physics.add.staticGroup();
+
+        // @ts-ignore - Problem with Phaser’s types. classType supports classes 
+        const spikeObjects = this.currentMap.createFromObjects("Traps", {name: "Spike", classType: Spike});
+        spikeObjects.map((spike: Spike)=>{
+            spike.init();
+            this.spikes.add(spike);
+        });
+    }
+
     private createTokens(): void
     {
         this.tokens = this.physics.add.staticGroup();
@@ -366,7 +381,7 @@ export class SceneGame extends CYBR_Scene
         this.physics.add.collider(this.enemies, this.platforms);
         this.enemies.getChildren().forEach(function (ai: PatrolAI) {
             this.physics.add.collider(ai, this.movingPlatforms, this.collideMovingPlatforms);
-            this.physics.add.overlap(this.player, ai, this.onPlayerOverlapEnnemy, this.playerCanOverlapEnnemy, this); 
+            this.physics.add.overlap(this.player, ai, this.onPlayerOverlapEnnemy, this.playerCanOverlapEnnemy, this);
             this.physics.add.overlap(this.player.currentWeapon.bullets, ai, this.onWeaponHitPawn, this.weaponCanHitPawn, this);
 
             if (ai.currentWeapon)
@@ -375,6 +390,9 @@ export class SceneGame extends CYBR_Scene
                 this.physics.add.overlap(ai.currentWeapon.bullets, this.player, this.onWeaponHitPawn, this.weaponCanHitPawn, this);
             }
         }, this);
+
+        /////// Traps
+        this.physics.add.overlap(this.player, this.spikes, this.onPlayerOverlapSpike, this.playerCanOverlapSpike, this); 
     }
 
     private createCameras(): void
@@ -511,6 +529,16 @@ export class SceneGame extends CYBR_Scene
     private onPlayerOverlapEnnemy(player: Player, enemy: Pawn): void
     {
         this.player.hurt(enemy.getBodyDamage(), this.player.body.touching.right);
+    }
+
+    private playerCanOverlapSpike(player: Player, spike: Spike): boolean
+    {
+        return !player.dead() && !player.isRecovering;
+    }
+
+    private onPlayerOverlapSpike(player: Player, enemy: Pawn): void
+    {
+        this.player.hurt(5, this.player.body.touching.right);
     }
 
     private onPlayerHealthChanged(health: number, maxHealth: number): void

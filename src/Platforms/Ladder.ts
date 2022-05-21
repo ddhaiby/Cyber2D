@@ -1,6 +1,6 @@
-// Note: This class works if only one Player interacts with the ladder.
 import { Player } from "../Pawns/Player";
 
+/** This class works if only one Player interacts with the ladder. */
 export class Ladder extends Phaser.Physics.Arcade.Image
 {
     private player: Player = null;
