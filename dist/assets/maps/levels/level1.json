@@ -64,7 +64,19 @@
          "draworder":"topdown",
          "id":16,
          "name":"Traps",
-         "objects":[],
+         "objects":[
+                {
+                 "gid":13,
+                 "height":32,
+                 "id":382,
+                 "name":"checkpoint",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":224,
+                 "y":832
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -1880,7 +1892,7 @@
          "y":0
         }],
  "nextlayerid":17,
- "nextobjectid":379,
+ "nextobjectid":383,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",

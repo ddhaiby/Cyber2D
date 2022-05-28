@@ -222,6 +222,78 @@
                  "width":32,
                  "x":1152,
                  "y":736
+                }, 
+                {
+                 "gid":1034,
+                 "height":32,
+                 "id":284,
+                 "name":"Spike",
+                 "properties":[
+                        {
+                         "name":"alwaysShow",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":180,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":320,
+                 "y":960
+                }, 
+                {
+                 "gid":1034,
+                 "height":32,
+                 "id":285,
+                 "name":"Spike",
+                 "properties":[
+                        {
+                         "name":"alwaysShow",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":180,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":352,
+                 "y":960
+                }, 
+                {
+                 "gid":1034,
+                 "height":32,
+                 "id":286,
+                 "name":"Spike",
+                 "properties":[
+                        {
+                         "name":"alwaysShow",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":180,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":384,
+                 "y":960
+                }, 
+                {
+                 "gid":1034,
+                 "height":32,
+                 "id":287,
+                 "name":"Spike",
+                 "properties":[
+                        {
+                         "name":"alwaysShow",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":180,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":288,
+                 "y":960
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1927,7 +1999,19 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":544,
+                 "x":576,
+                 "y":3776
+                }, 
+                {
+                 "gid":1037,
+                 "height":32,
+                 "id":283,
+                 "name":"checkpoint",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":512,
                  "y":3776
                 }],
          "opacity":1,
@@ -1937,7 +2021,7 @@
          "y":0
         }],
  "nextlayerid":17,
- "nextobjectid":283,
+ "nextobjectid":288,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",

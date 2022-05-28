@@ -264,7 +264,7 @@ export class Player extends Pawn
         this.isRecovering = false;
     }
 
-    public hurt(health: number, hurtFromRight?: boolean) : void
+    public hurt(health: number, hurtFromRight: boolean = false, velocityProjection: number = 250) : void
     {
         super.hurt(health);
         if (!this.dead())
@@ -272,7 +272,6 @@ export class Player extends Pawn
             this.stopWalking();
             this.stopClimbing();
 
-            let velocityProjection = 250;
             if (hurtFromRight)
             {
                 this.setVelocityX(-velocityProjection);

@@ -26,6 +26,11 @@ export const CST = {
             TITLE: "Cyber reach the moon",
             DESCRIPTION: "",
             MUSIC: "breaking-point"
+        },
+        {
+            TITLE: "Woop woop",
+            DESCRIPTION: "",
+            MUSIC: "breaking-point"
         }
     ],
 
