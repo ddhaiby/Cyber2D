@@ -22,7 +22,7 @@ https://tortoisegit.org/download/
 ![image](https://user-images.githubusercontent.com/72042952/171312447-43432d00-4114-4e43-8082-47960f741e89.png)
 
 #### _Visual Studio Code_
-
+https://code.visualstudio.com/download
 
 ## The game
 #### _Quick version_
