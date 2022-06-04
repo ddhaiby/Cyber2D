@@ -16,7 +16,7 @@ https://git-scm.com/ and https://git-lfs.github.com/
 ![image](https://user-images.githubusercontent.com/72042952/171312315-c9cd3fe9-c717-4675-9572-a9c4b45dad9d.png)
 
 
-If you are not familiar with git, I suggest you to install _TortoiseGit_ which is a convenient software to use. In the next steps, I will use this software to show you how to save and send your updates of the project.
+If you are not familiar with git, I suggest you to install _TortoiseGit_ which is a convenient software to use.
 https://tortoisegit.org/download/
 
 ![image](https://user-images.githubusercontent.com/72042952/171312447-43432d00-4114-4e43-8082-47960f741e89.png)
@@ -46,9 +46,6 @@ To double-check that npm has installed. Write _npm_ in a console. It should disp
 - You are ready! You can now use Visual Studio code to make your change. When you save your changes, the browser page automatically refreshes so you can see and debug your work.
 
 #### _Long version_
-
-If you are not familiar with git, this version will help you understand the basis of git through TortoiseGit.
-
 ##### I) Check installation
 First of all make sure TortoiseGit is correctly installed. The quickest way to check it is to right click on your file explorer and see if TortoiseGit is on the menu.
 
@@ -77,9 +74,5 @@ Once the initialization is done, write and run _npm run start_. Use the localhos
 
 ![image](https://user-images.githubusercontent.com/72042952/172019645-edc3fef7-9474-43f5-9cf8-2af92a8d43d2.png)
 
-
-##### V) Get and send your work with TortoiseGit
-
-
-
-
+You can play now !
+![image](https://user-images.githubusercontent.com/72042952/172020414-0ede451e-962c-470c-ada1-d72b35e56cfe.png)
