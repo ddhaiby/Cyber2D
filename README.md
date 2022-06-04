@@ -22,10 +22,13 @@ https://tortoisegit.org/download/
 ![image](https://user-images.githubusercontent.com/72042952/171312447-43432d00-4114-4e43-8082-47960f741e89.png)
 
 #### _Visual Studio Code_
+Download and install Visual Studio Code.
+
 https://code.visualstudio.com/download
 
 #### _npm_
 Download and install nodejs 
+
 https://nodejs.org/en/download/
 
 To double-check that npm has installed. Write _npm_ in a console. It should display something like below.
