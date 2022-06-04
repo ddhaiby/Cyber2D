@@ -31,7 +31,6 @@ https://nodejs.org/en/download/
 To double-check that npm has installed. Write _npm_ in a console. It should display something like below.
 ![image](https://user-images.githubusercontent.com/72042952/171963988-863ee360-e815-4b63-bb17-0861254e1b7e.png)
 
-
 ## The game
 #### _Quick version_
 
@@ -40,7 +39,7 @@ To double-check that npm has installed. Write _npm_ in a console. It should disp
 - In a console of the root project run the following line
   - npm i
   - npm run start
-- The console should show you a link. It looks like _http://localhost:1234/_. In a browser write this localhost link to see the game 
+- The console should show you a link - usually _http://localhost:1234/_. In a browser use this link to see the game.
 - You are ready! You can now use Visual Studio code to make your change. When you save your changes, the browser page automatically refreshes so you can see and debug your work.
 
 #### _Long version_
@@ -57,15 +56,26 @@ On this menu, click on ''Git Clone''. You should see a menu like the image below
 
 ![image](https://user-images.githubusercontent.com/72042952/171685595-c23d9000-c138-44b1-965f-69dfc75061e2.png)
 
-Once all files have been download, the project is ready to be used.
+Once all files have been download, the project is ready to be used. The root folder should look like the image below.
+![image](https://user-images.githubusercontent.com/72042952/172019490-9e1bc26b-e365-40f0-9de2-ff978ba6574c.png)
 
-##### III) Open a console and run the game
+##### III) Open a console and initialize the game
+
+Open a console in the root folder. One of the quickest way is to write _cmd_ in the path text box.
+
+![image](https://user-images.githubusercontent.com/72042952/172019427-7a64c362-0894-4803-becf-c34dbf41daf5.png)
+
+In this console, write then run _npm i_ and wait for the initialisation of the game. This will install everything you need to run the game. You won't need to do that again.
+
+![image](https://user-images.githubusercontent.com/72042952/172019583-478d8228-e10c-4fb4-b295-9ccbe92bf7f5.png)
+
+##### IV) Run the game
+Once the initialization is done, write and run _npm run start_. Use the localhost link given in the console in a browser to see the game. The link is usually _http://localhost:1234/_.
+
+![image](https://user-images.githubusercontent.com/72042952/172019645-edc3fef7-9474-43f5-9cf8-2af92a8d43d2.png)
 
 
-
-##### IV) Open a console and run the game
-
-##### V) Get and send your work
+##### V) Get and send your work with TortoiseGit
 
 
 
