@@ -309,7 +309,7 @@ export class SceneGame extends CYBR_Scene
         // @ts-ignore - Problem with Phaser’s types. classType supports classes 
         const weaponBoostObjects = this.currentMap.createFromObjects("Pickups", {name: "weaponBoost", classType: WeaponBoostPickup});
         weaponBoostObjects.map((boost: WeaponBoostPickup)=>{
-            boost.setTexture("platform_atlas", "weaponBoost_48.png");
+            boost.setTexture("platform_atlas", "weaponBoost.png");
             this.pickupItems.add(boost);
         });
     }
