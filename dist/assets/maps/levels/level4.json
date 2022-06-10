@@ -112,7 +112,7 @@
          "name":"Traps",
          "objects":[
                 {
-                 "gid":1034,
+                 "gid":1081,
                  "height":32,
                  "id":413,
                  "name":"Spike",
@@ -130,7 +130,7 @@
                  "y":256
                 }, 
                 {
-                 "gid":1034,
+                 "gid":1081,
                  "height":32,
                  "id":414,
                  "name":"Spike",
@@ -148,7 +148,7 @@
                  "y":256
                 }, 
                 {
-                 "gid":1034,
+                 "gid":1081,
                  "height":32,
                  "id":415,
                  "name":"Spike",
@@ -166,7 +166,7 @@
                  "y":256
                 }, 
                 {
-                 "gid":1034,
+                 "gid":1081,
                  "height":32,
                  "id":416,
                  "name":"Spike",
@@ -184,7 +184,7 @@
                  "y":256
                 }, 
                 {
-                 "gid":1034,
+                 "gid":1081,
                  "height":32,
                  "id":419,
                  "name":"Spike",
@@ -202,7 +202,7 @@
                  "y":256
                 }, 
                 {
-                 "gid":1034,
+                 "gid":1081,
                  "height":32,
                  "id":420,
                  "name":"Spike",
@@ -218,6 +218,138 @@
                  "width":32,
                  "x":2848,
                  "y":256
+                }, 
+                {
+                 "gid":1081,
+                 "height":32,
+                 "id":407,
+                 "name":"Spike",
+                 "properties":[
+                        {
+                         "name":"alwaysShow",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"durationAttack",
+                         "type":"int",
+                         "value":1500
+                        }, 
+                        {
+                         "name":"durationHide",
+                         "type":"int",
+                         "value":1000
+                        }, 
+                        {
+                         "name":"durationPrepareAttack",
+                         "type":"int",
+                         "value":1000
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":1120,
+                 "y":544
+                }, 
+                {
+                 "gid":1081,
+                 "height":32,
+                 "id":408,
+                 "name":"Spike",
+                 "properties":[
+                        {
+                         "name":"alwaysShow",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"durationAttack",
+                         "type":"int",
+                         "value":1500
+                        }, 
+                        {
+                         "name":"durationHide",
+                         "type":"int",
+                         "value":1000
+                        }, 
+                        {
+                         "name":"durationPrepareAttack",
+                         "type":"int",
+                         "value":1000
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":1088,
+                 "y":544
+                }, 
+                {
+                 "gid":1081,
+                 "height":32,
+                 "id":409,
+                 "name":"Spike",
+                 "properties":[
+                        {
+                         "name":"alwaysShow",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"durationAttack",
+                         "type":"int",
+                         "value":1500
+                        }, 
+                        {
+                         "name":"durationHide",
+                         "type":"int",
+                         "value":1000
+                        }, 
+                        {
+                         "name":"durationPrepareAttack",
+                         "type":"int",
+                         "value":1000
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":1024,
+                 "y":480
+                }, 
+                {
+                 "gid":1081,
+                 "height":32,
+                 "id":410,
+                 "name":"Spike",
+                 "properties":[
+                        {
+                         "name":"alwaysShow",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"durationAttack",
+                         "type":"int",
+                         "value":1500
+                        }, 
+                        {
+                         "name":"durationHide",
+                         "type":"int",
+                         "value":1000
+                        }, 
+                        {
+                         "name":"durationPrepareAttack",
+                         "type":"int",
+                         "value":1000
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":1056,
+                 "y":480
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2110,138 +2242,6 @@
                  "width":32,
                  "x":2880,
                  "y":1216
-                }, 
-                {
-                 "gid":1034,
-                 "height":32,
-                 "id":407,
-                 "name":"Spike",
-                 "properties":[
-                        {
-                         "name":"alwaysShow",
-                         "type":"bool",
-                         "value":false
-                        }, 
-                        {
-                         "name":"durationAttack",
-                         "type":"int",
-                         "value":1500
-                        }, 
-                        {
-                         "name":"durationHide",
-                         "type":"int",
-                         "value":1000
-                        }, 
-                        {
-                         "name":"durationPrepareAttack",
-                         "type":"int",
-                         "value":1000
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":1120,
-                 "y":544
-                }, 
-                {
-                 "gid":1034,
-                 "height":32,
-                 "id":408,
-                 "name":"Spike",
-                 "properties":[
-                        {
-                         "name":"alwaysShow",
-                         "type":"bool",
-                         "value":false
-                        }, 
-                        {
-                         "name":"durationAttack",
-                         "type":"int",
-                         "value":1500
-                        }, 
-                        {
-                         "name":"durationHide",
-                         "type":"int",
-                         "value":1000
-                        }, 
-                        {
-                         "name":"durationPrepareAttack",
-                         "type":"int",
-                         "value":1000
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":1088,
-                 "y":544
-                }, 
-                {
-                 "gid":1034,
-                 "height":32,
-                 "id":409,
-                 "name":"Spike",
-                 "properties":[
-                        {
-                         "name":"alwaysShow",
-                         "type":"bool",
-                         "value":false
-                        }, 
-                        {
-                         "name":"durationAttack",
-                         "type":"int",
-                         "value":1500
-                        }, 
-                        {
-                         "name":"durationHide",
-                         "type":"int",
-                         "value":1000
-                        }, 
-                        {
-                         "name":"durationPrepareAttack",
-                         "type":"int",
-                         "value":1000
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":1024,
-                 "y":480
-                }, 
-                {
-                 "gid":1034,
-                 "height":32,
-                 "id":410,
-                 "name":"Spike",
-                 "properties":[
-                        {
-                         "name":"alwaysShow",
-                         "type":"bool",
-                         "value":false
-                        }, 
-                        {
-                         "name":"durationAttack",
-                         "type":"int",
-                         "value":1500
-                        }, 
-                        {
-                         "name":"durationHide",
-                         "type":"int",
-                         "value":1000
-                        }, 
-                        {
-                         "name":"durationPrepareAttack",
-                         "type":"int",
-                         "value":1000
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":1056,
-                 "y":480
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -3119,7 +3119,7 @@
                         {
                          "name":"maxHealth",
                          "type":"float",
-                         "value":10
+                         "value":100
                         }, 
                         {
                          "name":"pathEndX",
@@ -4482,6 +4482,195 @@
                 }, 
                 {
                  "id":126,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":144,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":145,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":146,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":148,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":149,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":150,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":168,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":169,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":170,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":172,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":173,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":174,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":192,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":193,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":194,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":196,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":197,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":198,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":216,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":217,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":218,
                  "properties":[
                         {
                          "name":"collides",

@@ -81,11 +81,18 @@ export class ScenePreloadAssets extends CYBR_Scene
   
     public create() : void
     {
-        this.textures.addSpriteSheetFromAtlas("portal", { atlas: "platform_atlas", frame: "portal.png", frameWidth: 32, frameHeight: 32 });
-        //this.textures.addSpriteSheetFromAtlas("spike", { atlas: "platform_atlas", frame: "spike.png", frameWidth: 32, frameHeight: 32 });
+        this.createPlatformAtlas();
         this.createWeaponAtlas();
         this.createAudioManager();
         this.createMainMenu();
+    }
+
+    private createPlatformAtlas(): void
+    {
+        this.textures.addSpriteSheetFromAtlas("portal", { atlas: "platform_atlas", frame: "portal.png", frameWidth: 32, frameHeight: 32 });
+        this.textures.addSpriteSheetFromAtlas("spikeShort", { atlas: "platform_atlas", frame: "spikeShort.png", frameWidth: 17, frameHeight: 16 });
+        //this.textures.addSpriteSheetFromAtlas("spikeLong", { atlas: "platform_atlas", frame: "spikeLong.png", frameWidth: 17, frameHeight: 16 });
+        //this.textures.addSpriteSheetFromAtlas("mine", { atlas: "platform_atlas", frame: "mine.png", frameWidth: 17, frameHeight: 16 });
     }
 
     private createWeaponAtlas(): void
