@@ -108,8 +108,8 @@ export class SceneGame_UI extends CYBR_Scene {
         tokenText.x -= tokenText.width / 2;
         tokenText.y -= tokenText.height / 2;
 
-        this.sceneGame.events.on("collectedTokenChanged", (collectedTokens) => {
-            tokenText.text = collectedTokens;
+        this.sceneGame.events.on("collectedTokenChanged", (collectedTokens: number) => {
+            tokenText.text = collectedTokens.toString();
         }, this);
 
         return new Map<string, Phaser.GameObjects.GameObject>().set("image", tokenImage).set("text", tokenText);
