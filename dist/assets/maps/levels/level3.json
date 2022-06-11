@@ -109,7 +109,7 @@
                         {
                          "name":"pathEndX",
                          "type":"float",
-                         "value":117
+                         "value":1170
                         }, 
                         {
                          "name":"time",
@@ -135,10 +135,10 @@
          "name":"Traps",
          "objects":[
                 {
-                 "gid":1073742905,
+                 "gid":1073742929,
                  "height":32,
                  "id":414,
-                 "name":"Spike",
+                 "name":"spikeLong",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -168,10 +168,10 @@
                  "y":1152
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1105,
                  "height":32,
                  "id":415,
-                 "name":"Spike",
+                 "name":"spikeLong",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -201,10 +201,10 @@
                  "y":1184
                 }, 
                 {
-                 "gid":1073742905,
+                 "gid":1073742929,
                  "height":32,
                  "id":416,
-                 "name":"Spike",
+                 "name":"spikeLong",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -234,10 +234,10 @@
                  "y":1152
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1105,
                  "height":32,
                  "id":417,
-                 "name":"Spike",
+                 "name":"spikeLong",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -267,10 +267,10 @@
                  "y":1184
                 }, 
                 {
-                 "gid":1073742905,
+                 "gid":1073742929,
                  "height":32,
                  "id":419,
-                 "name":"Spike",
+                 "name":"spikeLong",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -300,10 +300,10 @@
                  "y":1152
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1105,
                  "height":32,
                  "id":420,
-                 "name":"Spike",
+                 "name":"spikeLong",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -333,10 +333,10 @@
                  "y":1184
                 }, 
                 {
-                 "gid":1073742905,
+                 "gid":1073742929,
                  "height":32,
                  "id":421,
-                 "name":"Spike",
+                 "name":"spikeLong",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -366,10 +366,10 @@
                  "y":1152
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1105,
                  "height":32,
                  "id":422,
-                 "name":"Spike",
+                 "name":"spikeLong",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -399,10 +399,10 @@
                  "y":1184
                 }, 
                 {
-                 "gid":1073742905,
+                 "gid":1073742929,
                  "height":32,
                  "id":423,
-                 "name":"Spike",
+                 "name":"spikeLong",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -432,10 +432,10 @@
                  "y":1152
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1105,
                  "height":32,
                  "id":424,
-                 "name":"Spike",
+                 "name":"spikeLong",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -465,10 +465,10 @@
                  "y":1184
                 }, 
                 {
-                 "gid":1073742905,
+                 "gid":1073742929,
                  "height":32,
                  "id":425,
-                 "name":"Spike",
+                 "name":"spikeLong",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -498,10 +498,10 @@
                  "y":1152
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1105,
                  "height":32,
                  "id":426,
-                 "name":"Spike",
+                 "name":"spikeLong",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -531,10 +531,10 @@
                  "y":1184
                 }, 
                 {
-                 "gid":1073742905,
+                 "gid":1073742929,
                  "height":32,
                  "id":427,
-                 "name":"Spike",
+                 "name":"spikeLong",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -564,10 +564,10 @@
                  "y":1152
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1105,
                  "height":32,
                  "id":428,
-                 "name":"Spike",
+                 "name":"spikeLong",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -597,10 +597,10 @@
                  "y":1184
                 }, 
                 {
-                 "gid":1073742905,
+                 "gid":1073742929,
                  "height":32,
                  "id":429,
-                 "name":"Spike",
+                 "name":"spikeLong",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -630,10 +630,10 @@
                  "y":1152
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1105,
                  "height":32,
                  "id":430,
-                 "name":"Spike",
+                 "name":"spikeLong",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -663,10 +663,10 @@
                  "y":1184
                 }, 
                 {
-                 "gid":1073742905,
+                 "gid":1073742929,
                  "height":32,
                  "id":431,
-                 "name":"Spike",
+                 "name":"spikeLong",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -696,10 +696,10 @@
                  "y":1152
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1105,
                  "height":32,
                  "id":432,
-                 "name":"Spike",
+                 "name":"spikeLong",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -729,10 +729,10 @@
                  "y":1184
                 }, 
                 {
-                 "gid":1073742905,
+                 "gid":1073742929,
                  "height":32,
                  "id":435,
-                 "name":"Spike",
+                 "name":"spikeLong",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -762,10 +762,10 @@
                  "y":1152
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1105,
                  "height":32,
                  "id":436,
-                 "name":"Spike",
+                 "name":"spikeLong",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -795,10 +795,10 @@
                  "y":1184
                 }, 
                 {
-                 "gid":1073742905,
+                 "gid":1073742929,
                  "height":32,
                  "id":437,
-                 "name":"Spike",
+                 "name":"spikeLong",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -828,10 +828,10 @@
                  "y":1152
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1105,
                  "height":32,
                  "id":438,
-                 "name":"Spike",
+                 "name":"spikeLong",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -861,10 +861,10 @@
                  "y":1184
                 }, 
                 {
-                 "gid":1073742905,
+                 "gid":1073742929,
                  "height":32,
                  "id":439,
-                 "name":"Spike",
+                 "name":"spikeLong",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -894,10 +894,10 @@
                  "y":1152
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1105,
                  "height":32,
                  "id":440,
-                 "name":"Spike",
+                 "name":"spikeLong",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -930,7 +930,7 @@
                  "gid":1081,
                  "height":32,
                  "id":653,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -942,13 +942,13 @@
                  "visible":true,
                  "width":32,
                  "x":2688,
-                 "y":1632
+                 "y":1640
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":654,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -960,13 +960,13 @@
                  "visible":true,
                  "width":32,
                  "x":2656,
-                 "y":1632
+                 "y":1640
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":655,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -978,13 +978,13 @@
                  "visible":true,
                  "width":32,
                  "x":2624,
-                 "y":1632
+                 "y":1640
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":656,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -996,13 +996,13 @@
                  "visible":true,
                  "width":32,
                  "x":2592,
-                 "y":1632
+                 "y":1640
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":657,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1014,13 +1014,13 @@
                  "visible":true,
                  "width":32,
                  "x":2560,
-                 "y":1632
+                 "y":1640
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":658,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1032,13 +1032,13 @@
                  "visible":true,
                  "width":32,
                  "x":2528,
-                 "y":1632
+                 "y":1640
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":659,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1050,13 +1050,13 @@
                  "visible":true,
                  "width":32,
                  "x":2496,
-                 "y":1632
+                 "y":1640
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":660,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1068,13 +1068,13 @@
                  "visible":true,
                  "width":32,
                  "x":2464,
-                 "y":1632
+                 "y":1640
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":661,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1086,13 +1086,13 @@
                  "visible":true,
                  "width":32,
                  "x":2432,
-                 "y":1632
+                 "y":1640
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":662,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1104,13 +1104,13 @@
                  "visible":true,
                  "width":32,
                  "x":2400,
-                 "y":1632
+                 "y":1640
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":663,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1122,13 +1122,13 @@
                  "visible":true,
                  "width":32,
                  "x":2368,
-                 "y":1632
+                 "y":1640
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":664,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1140,13 +1140,13 @@
                  "visible":true,
                  "width":32,
                  "x":2336,
-                 "y":1632
+                 "y":1640
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":665,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1158,13 +1158,13 @@
                  "visible":true,
                  "width":32,
                  "x":2304,
-                 "y":1632
+                 "y":1640
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":666,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1176,13 +1176,13 @@
                  "visible":true,
                  "width":32,
                  "x":2272,
-                 "y":1632
+                 "y":1640
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":667,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1194,13 +1194,13 @@
                  "visible":true,
                  "width":32,
                  "x":2240,
-                 "y":1632
+                 "y":1640
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":668,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1212,13 +1212,13 @@
                  "visible":true,
                  "width":32,
                  "x":2208,
-                 "y":1632
+                 "y":1640
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":669,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1230,13 +1230,13 @@
                  "visible":true,
                  "width":32,
                  "x":2176,
-                 "y":1632
+                 "y":1640
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":670,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1247,14 +1247,14 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":2080,
+                 "x":2072,
                  "y":1504
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":671,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1265,14 +1265,14 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":2080,
+                 "x":2072,
                  "y":1536
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":672,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1283,14 +1283,14 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":2080,
+                 "x":2072,
                  "y":1568
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":673,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1301,14 +1301,14 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":2080,
+                 "x":2072,
                  "y":1600
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":674,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1319,14 +1319,14 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":2080,
+                 "x":2072,
                  "y":1632
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":675,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1337,14 +1337,14 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":2080,
+                 "x":2072,
                  "y":1664
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":676,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1355,14 +1355,14 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":2080,
+                 "x":2072,
                  "y":1696
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":677,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1373,14 +1373,14 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":2080,
+                 "x":2072,
                  "y":1728
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":678,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1391,14 +1391,14 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":2080,
+                 "x":2072,
                  "y":1760
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":679,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1409,14 +1409,14 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":2080,
+                 "x":2072,
                  "y":1792
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":684,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1428,13 +1428,13 @@
                  "visible":true,
                  "width":32,
                  "x":2624,
-                 "y":1856
+                 "y":1864
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":685,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1446,13 +1446,13 @@
                  "visible":true,
                  "width":32,
                  "x":2592,
-                 "y":1856
+                 "y":1864
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":686,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1464,13 +1464,13 @@
                  "visible":true,
                  "width":32,
                  "x":2560,
-                 "y":1856
+                 "y":1864
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":687,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1482,13 +1482,13 @@
                  "visible":true,
                  "width":32,
                  "x":2528,
-                 "y":1856
+                 "y":1864
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":688,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1500,13 +1500,13 @@
                  "visible":true,
                  "width":32,
                  "x":2496,
-                 "y":1856
+                 "y":1864
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":689,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1518,13 +1518,13 @@
                  "visible":true,
                  "width":32,
                  "x":2464,
-                 "y":1856
+                 "y":1864
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":690,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1536,13 +1536,13 @@
                  "visible":true,
                  "width":32,
                  "x":2432,
-                 "y":1856
+                 "y":1864
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":691,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1554,13 +1554,13 @@
                  "visible":true,
                  "width":32,
                  "x":2400,
-                 "y":1856
+                 "y":1864
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":692,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1572,13 +1572,13 @@
                  "visible":true,
                  "width":32,
                  "x":2368,
-                 "y":1856
+                 "y":1864
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":693,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1590,13 +1590,13 @@
                  "visible":true,
                  "width":32,
                  "x":2336,
-                 "y":1856
+                 "y":1864
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":694,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1608,13 +1608,13 @@
                  "visible":true,
                  "width":32,
                  "x":2304,
-                 "y":1856
+                 "y":1864
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":695,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1626,13 +1626,13 @@
                  "visible":true,
                  "width":32,
                  "x":2272,
-                 "y":1856
+                 "y":1864
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":696,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1644,13 +1644,13 @@
                  "visible":true,
                  "width":32,
                  "x":2240,
-                 "y":1856
+                 "y":1864
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":697,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1662,13 +1662,13 @@
                  "visible":true,
                  "width":32,
                  "x":2208,
-                 "y":1856
+                 "y":1864
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":698,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1680,13 +1680,13 @@
                  "visible":true,
                  "width":32,
                  "x":2176,
-                 "y":1856
+                 "y":1864
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":699,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1698,13 +1698,13 @@
                  "visible":true,
                  "width":32,
                  "x":2144,
-                 "y":1856
+                 "y":1864
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":700,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1716,13 +1716,13 @@
                  "visible":true,
                  "width":32,
                  "x":2112,
-                 "y":1856
+                 "y":1864
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":701,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1733,14 +1733,14 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":2080,
+                 "x":2072,
                  "y":1824
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":703,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1752,13 +1752,13 @@
                  "visible":true,
                  "width":32,
                  "x":2656,
-                 "y":1856
+                 "y":1864
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":704,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1770,13 +1770,13 @@
                  "visible":true,
                  "width":32,
                  "x":2720,
-                 "y":1856
+                 "y":1864
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":705,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1788,13 +1788,13 @@
                  "visible":true,
                  "width":32,
                  "x":2688,
-                 "y":1856
+                 "y":1864
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":706,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1806,13 +1806,13 @@
                  "visible":true,
                  "width":32,
                  "x":2752,
-                 "y":1856
+                 "y":1864
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":707,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1824,13 +1824,13 @@
                  "visible":true,
                  "width":32,
                  "x":2816,
-                 "y":1856
+                 "y":1864
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":708,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1842,13 +1842,13 @@
                  "visible":true,
                  "width":32,
                  "x":2848,
-                 "y":1856
+                 "y":1864
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":709,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1860,13 +1860,13 @@
                  "visible":true,
                  "width":32,
                  "x":2784,
-                 "y":1856
+                 "y":1864
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":710,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1878,13 +1878,13 @@
                  "visible":true,
                  "width":32,
                  "x":2880,
-                 "y":1856
+                 "y":1864
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":711,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1896,13 +1896,13 @@
                  "visible":true,
                  "width":32,
                  "x":2944,
-                 "y":1856
+                 "y":1864
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":712,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1914,13 +1914,13 @@
                  "visible":true,
                  "width":32,
                  "x":2976,
-                 "y":1856
+                 "y":1864
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":713,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -1932,517 +1932,517 @@
                  "visible":true,
                  "width":32,
                  "x":2912,
-                 "y":1856
+                 "y":1864
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1073742905,
                  "height":32,
                  "id":752,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
                          "type":"bool",
                          "value":true
                         }],
-                 "rotation":180,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":2656,
-                 "y":1920
-                }, 
-                {
-                 "gid":1081,
-                 "height":32,
-                 "id":753,
-                 "name":"Spike",
-                 "properties":[
-                        {
-                         "name":"alwaysShow",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":180,
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
                  "x":2624,
-                 "y":1920
+                 "y":1944
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1073742905,
                  "height":32,
-                 "id":754,
-                 "name":"Spike",
+                 "id":753,
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
                          "type":"bool",
                          "value":true
                         }],
-                 "rotation":180,
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
                  "x":2592,
-                 "y":1920
+                 "y":1944
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1073742905,
                  "height":32,
-                 "id":755,
-                 "name":"Spike",
+                 "id":754,
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
                          "type":"bool",
                          "value":true
                         }],
-                 "rotation":180,
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
                  "x":2560,
-                 "y":1920
+                 "y":1944
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1073742905,
                  "height":32,
-                 "id":756,
-                 "name":"Spike",
+                 "id":755,
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
                          "type":"bool",
                          "value":true
                         }],
-                 "rotation":180,
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
                  "x":2528,
-                 "y":1920
+                 "y":1944
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1073742905,
                  "height":32,
-                 "id":757,
-                 "name":"Spike",
+                 "id":756,
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
                          "type":"bool",
                          "value":true
                         }],
-                 "rotation":180,
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
                  "x":2496,
-                 "y":1920
+                 "y":1944
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1073742905,
                  "height":32,
-                 "id":758,
-                 "name":"Spike",
+                 "id":757,
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
                          "type":"bool",
                          "value":true
                         }],
-                 "rotation":180,
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
                  "x":2464,
-                 "y":1920
+                 "y":1944
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1073742905,
                  "height":32,
-                 "id":759,
-                 "name":"Spike",
+                 "id":758,
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
                          "type":"bool",
                          "value":true
                         }],
-                 "rotation":180,
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
                  "x":2432,
-                 "y":1920
+                 "y":1944
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1073742905,
                  "height":32,
-                 "id":760,
-                 "name":"Spike",
+                 "id":759,
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
                          "type":"bool",
                          "value":true
                         }],
-                 "rotation":180,
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
                  "x":2400,
-                 "y":1920
+                 "y":1944
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1073742905,
                  "height":32,
-                 "id":761,
-                 "name":"Spike",
+                 "id":760,
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
                          "type":"bool",
                          "value":true
                         }],
-                 "rotation":180,
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
                  "x":2368,
-                 "y":1920
+                 "y":1944
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1073742905,
                  "height":32,
-                 "id":762,
-                 "name":"Spike",
+                 "id":761,
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
                          "type":"bool",
                          "value":true
                         }],
-                 "rotation":180,
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
                  "x":2336,
-                 "y":1920
+                 "y":1944
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1073742905,
                  "height":32,
-                 "id":763,
-                 "name":"Spike",
+                 "id":762,
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
                          "type":"bool",
                          "value":true
                         }],
-                 "rotation":180,
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
                  "x":2304,
-                 "y":1920
+                 "y":1944
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1073742905,
                  "height":32,
-                 "id":764,
-                 "name":"Spike",
+                 "id":763,
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
                          "type":"bool",
                          "value":true
                         }],
-                 "rotation":180,
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
                  "x":2272,
-                 "y":1920
+                 "y":1944
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1073742905,
                  "height":32,
-                 "id":765,
-                 "name":"Spike",
+                 "id":764,
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
                          "type":"bool",
                          "value":true
                         }],
-                 "rotation":180,
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
                  "x":2240,
-                 "y":1920
+                 "y":1944
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1073742905,
                  "height":32,
-                 "id":766,
-                 "name":"Spike",
+                 "id":765,
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
                          "type":"bool",
                          "value":true
                         }],
-                 "rotation":180,
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
                  "x":2208,
-                 "y":1920
+                 "y":1944
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1073742905,
                  "height":32,
-                 "id":767,
-                 "name":"Spike",
+                 "id":766,
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
                          "type":"bool",
                          "value":true
                         }],
-                 "rotation":180,
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
                  "x":2176,
-                 "y":1920
+                 "y":1944
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1073742905,
                  "height":32,
-                 "id":768,
-                 "name":"Spike",
+                 "id":767,
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
                          "type":"bool",
                          "value":true
                         }],
-                 "rotation":180,
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
                  "x":2144,
-                 "y":1920
+                 "y":1944
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1073742905,
+                 "height":32,
+                 "id":768,
+                 "name":"spikeShort",
+                 "properties":[
+                        {
+                         "name":"alwaysShow",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":2112,
+                 "y":1944
+                }, 
+                {
+                 "gid":1073742905,
                  "height":32,
                  "id":769,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
                          "type":"bool",
                          "value":true
                         }],
-                 "rotation":180,
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":2688,
-                 "y":1920
+                 "x":2656,
+                 "y":1944
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1073742905,
                  "height":32,
                  "id":770,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
                          "type":"bool",
                          "value":true
                         }],
-                 "rotation":180,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":2752,
-                 "y":1920
-                }, 
-                {
-                 "gid":1081,
-                 "height":32,
-                 "id":771,
-                 "name":"Spike",
-                 "properties":[
-                        {
-                         "name":"alwaysShow",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":180,
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
                  "x":2720,
-                 "y":1920
+                 "y":1944
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1073742905,
+                 "height":32,
+                 "id":771,
+                 "name":"spikeShort",
+                 "properties":[
+                        {
+                         "name":"alwaysShow",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":2688,
+                 "y":1944
+                }, 
+                {
+                 "gid":1073742905,
                  "height":32,
                  "id":772,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
                          "type":"bool",
                          "value":true
                         }],
-                 "rotation":180,
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":2784,
-                 "y":1920
+                 "x":2752,
+                 "y":1944
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1073742905,
                  "height":32,
                  "id":773,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
                          "type":"bool",
                          "value":true
                         }],
-                 "rotation":180,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":2848,
-                 "y":1920
-                }, 
-                {
-                 "gid":1081,
-                 "height":32,
-                 "id":774,
-                 "name":"Spike",
-                 "properties":[
-                        {
-                         "name":"alwaysShow",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":180,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":2880,
-                 "y":1920
-                }, 
-                {
-                 "gid":1081,
-                 "height":32,
-                 "id":775,
-                 "name":"Spike",
-                 "properties":[
-                        {
-                         "name":"alwaysShow",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":180,
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
                  "x":2816,
-                 "y":1920
+                 "y":1944
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1073742905,
+                 "height":32,
+                 "id":774,
+                 "name":"spikeShort",
+                 "properties":[
+                        {
+                         "name":"alwaysShow",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":2848,
+                 "y":1944
+                }, 
+                {
+                 "gid":1073742905,
+                 "height":32,
+                 "id":775,
+                 "name":"spikeShort",
+                 "properties":[
+                        {
+                         "name":"alwaysShow",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":2784,
+                 "y":1944
+                }, 
+                {
+                 "gid":1073742905,
                  "height":32,
                  "id":776,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
                          "type":"bool",
                          "value":true
                         }],
-                 "rotation":180,
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":2912,
-                 "y":1920
+                 "x":2880,
+                 "y":1944
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1073742905,
                  "height":32,
                  "id":777,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
                          "type":"bool",
                          "value":true
                         }],
-                 "rotation":180,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":2976,
-                 "y":1920
-                }, 
-                {
-                 "gid":1081,
-                 "height":32,
-                 "id":778,
-                 "name":"Spike",
-                 "properties":[
-                        {
-                         "name":"alwaysShow",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":180,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":3008,
-                 "y":1920
-                }, 
-                {
-                 "gid":1081,
-                 "height":32,
-                 "id":779,
-                 "name":"Spike",
-                 "properties":[
-                        {
-                         "name":"alwaysShow",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":180,
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
                  "x":2944,
-                 "y":1920
+                 "y":1944
+                }, 
+                {
+                 "gid":1073742905,
+                 "height":32,
+                 "id":778,
+                 "name":"spikeShort",
+                 "properties":[
+                        {
+                         "name":"alwaysShow",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":2976,
+                 "y":1944
+                }, 
+                {
+                 "gid":1073742905,
+                 "height":32,
+                 "id":779,
+                 "name":"spikeShort",
+                 "properties":[
+                        {
+                         "name":"alwaysShow",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":2912,
+                 "y":1944
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":781,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -2469,13 +2469,13 @@
                  "visible":true,
                  "width":32,
                  "x":2624,
-                 "y":2112
+                 "y":2120
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":782,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -2502,13 +2502,13 @@
                  "visible":true,
                  "width":32,
                  "x":2592,
-                 "y":2112
+                 "y":2120
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":825,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -2520,13 +2520,13 @@
                  "visible":true,
                  "width":32,
                  "x":1696,
-                 "y":2464
+                 "y":2472
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":826,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -2538,13 +2538,13 @@
                  "visible":true,
                  "width":32,
                  "x":1664,
-                 "y":2464
+                 "y":2472
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":827,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -2556,13 +2556,13 @@
                  "visible":true,
                  "width":32,
                  "x":1632,
-                 "y":2464
+                 "y":2472
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":828,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -2574,13 +2574,13 @@
                  "visible":true,
                  "width":32,
                  "x":1600,
-                 "y":2464
+                 "y":2472
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":829,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -2592,13 +2592,13 @@
                  "visible":true,
                  "width":32,
                  "x":1568,
-                 "y":2464
+                 "y":2472
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":830,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -2610,13 +2610,13 @@
                  "visible":true,
                  "width":32,
                  "x":1536,
-                 "y":2464
+                 "y":2472
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":831,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -2628,13 +2628,13 @@
                  "visible":true,
                  "width":32,
                  "x":1504,
-                 "y":2464
+                 "y":2472
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":832,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -2646,13 +2646,13 @@
                  "visible":true,
                  "width":32,
                  "x":1472,
-                 "y":2464
+                 "y":2472
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":833,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -2664,13 +2664,13 @@
                  "visible":true,
                  "width":32,
                  "x":1440,
-                 "y":2464
+                 "y":2472
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":834,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -2682,13 +2682,13 @@
                  "visible":true,
                  "width":32,
                  "x":1408,
-                 "y":2464
+                 "y":2472
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":835,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -2700,13 +2700,13 @@
                  "visible":true,
                  "width":32,
                  "x":1376,
-                 "y":2464
+                 "y":2472
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":836,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -2718,13 +2718,13 @@
                  "visible":true,
                  "width":32,
                  "x":1344,
-                 "y":2464
+                 "y":2472
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":837,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -2736,13 +2736,13 @@
                  "visible":true,
                  "width":32,
                  "x":1312,
-                 "y":2464
+                 "y":2472
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":838,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -2754,13 +2754,13 @@
                  "visible":true,
                  "width":32,
                  "x":1280,
-                 "y":2464
+                 "y":2472
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":839,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -2772,13 +2772,13 @@
                  "visible":true,
                  "width":32,
                  "x":1248,
-                 "y":2464
+                 "y":2472
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":840,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -2790,13 +2790,13 @@
                  "visible":true,
                  "width":32,
                  "x":1728,
-                 "y":2464
+                 "y":2472
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":841,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -2808,13 +2808,13 @@
                  "visible":true,
                  "width":32,
                  "x":1792,
-                 "y":2464
+                 "y":2472
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":842,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -2826,13 +2826,13 @@
                  "visible":true,
                  "width":32,
                  "x":1760,
-                 "y":2464
+                 "y":2472
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":843,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -2844,13 +2844,13 @@
                  "visible":true,
                  "width":32,
                  "x":1824,
-                 "y":2464
+                 "y":2472
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":844,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -2862,13 +2862,13 @@
                  "visible":true,
                  "width":32,
                  "x":1888,
-                 "y":2464
+                 "y":2472
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":845,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -2880,13 +2880,13 @@
                  "visible":true,
                  "width":32,
                  "x":1920,
-                 "y":2464
+                 "y":2472
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":846,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -2898,13 +2898,13 @@
                  "visible":true,
                  "width":32,
                  "x":1856,
-                 "y":2464
+                 "y":2472
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":847,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -2916,13 +2916,13 @@
                  "visible":true,
                  "width":32,
                  "x":1952,
-                 "y":2464
+                 "y":2472
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":848,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -2934,13 +2934,13 @@
                  "visible":true,
                  "width":32,
                  "x":2016,
-                 "y":2464
+                 "y":2472
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":849,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -2952,13 +2952,13 @@
                  "visible":true,
                  "width":32,
                  "x":2048,
-                 "y":2464
+                 "y":2472
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":850,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -2970,13 +2970,13 @@
                  "visible":true,
                  "width":32,
                  "x":1984,
-                 "y":2464
+                 "y":2472
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":851,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -2988,13 +2988,13 @@
                  "visible":true,
                  "width":32,
                  "x":1216,
-                 "y":2464
+                 "y":2472
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":852,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -3006,13 +3006,13 @@
                  "visible":true,
                  "width":32,
                  "x":1184,
-                 "y":2464
+                 "y":2472
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":853,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -3024,13 +3024,13 @@
                  "visible":true,
                  "width":32,
                  "x":1152,
-                 "y":2464
+                 "y":2472
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":854,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -3042,13 +3042,13 @@
                  "visible":true,
                  "width":32,
                  "x":1120,
-                 "y":2464
+                 "y":2472
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":858,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -3059,14 +3059,14 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":2080,
+                 "x":2072,
                  "y":1920
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":859,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -3077,14 +3077,14 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":2080,
+                 "x":2072,
                  "y":1952
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":860,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -3095,14 +3095,14 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":2080,
+                 "x":2072,
                  "y":1984
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":861,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -3113,14 +3113,14 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":2080,
+                 "x":2072,
                  "y":2016
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":862,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -3131,14 +3131,14 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":2080,
+                 "x":2072,
                  "y":2048
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":863,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -3149,14 +3149,14 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":2080,
+                 "x":2072,
                  "y":2080
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":864,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -3167,14 +3167,14 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":2080,
+                 "x":2072,
                  "y":2112
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":865,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -3185,14 +3185,14 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":2080,
+                 "x":2072,
                  "y":2144
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":866,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -3203,14 +3203,14 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":2080,
+                 "x":2072,
                  "y":2208
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":867,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -3221,14 +3221,14 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":2080,
+                 "x":2072,
                  "y":2272
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":868,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -3239,14 +3239,14 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":2080,
+                 "x":2072,
                  "y":2176
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":869,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -3257,7 +3257,7 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":2080,
+                 "x":2072,
                  "y":2240
                 }],
          "opacity":1,
@@ -5719,7 +5719,7 @@
                 {
                  "gid":1038,
                  "height":32,
-                 "id":870,
+                 "id":889,
                  "name":"player",
                  "properties":[
                         {
@@ -5731,8 +5731,8 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":128,
-                 "y":608
+                 "x":136,
+                 "y":704
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -5741,7 +5741,7 @@
          "y":0
         }],
  "nextlayerid":17,
- "nextobjectid":879,
+ "nextobjectid":890,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",

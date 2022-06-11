@@ -161,7 +161,7 @@
                  "gid":1081,
                  "height":32,
                  "id":280,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -188,13 +188,13 @@
                  "visible":true,
                  "width":32,
                  "x":1088,
-                 "y":928
+                 "y":936
                 }, 
                 {
                  "gid":1081,
                  "height":32,
                  "id":281,
-                 "name":"Spike",
+                 "name":"spikeShort",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -221,13 +221,13 @@
                  "visible":true,
                  "width":32,
                  "x":1152,
-                 "y":736
+                 "y":744
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1105,
                  "height":32,
                  "id":284,
-                 "name":"Spike",
+                 "name":"spikeLong",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -242,10 +242,10 @@
                  "y":960
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1105,
                  "height":32,
                  "id":285,
-                 "name":"Spike",
+                 "name":"spikeLong",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -260,10 +260,10 @@
                  "y":960
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1105,
                  "height":32,
                  "id":286,
-                 "name":"Spike",
+                 "name":"spikeLong",
                  "properties":[
                         {
                          "name":"alwaysShow",
@@ -278,10 +278,10 @@
                  "y":960
                 }, 
                 {
-                 "gid":1081,
+                 "gid":1105,
                  "height":32,
                  "id":287,
-                 "name":"Spike",
+                 "name":"spikeLong",
                  "properties":[
                         {
                          "name":"alwaysShow",

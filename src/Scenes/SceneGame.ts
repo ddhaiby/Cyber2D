@@ -266,10 +266,18 @@ export class SceneGame extends CYBR_Scene
         this.spikes = this.physics.add.staticGroup();
 
         // @ts-ignore - Problem with Phaser’s types. classType supports classes 
-        const spikeObjects = this.currentMap.createFromObjects("Traps", {name: "Spike", classType: Spike});
+        let spikeObjects = this.currentMap.createFromObjects("Traps", {name: "spikeLong", classType: Spike});
+        // @ts-ignore - Problem with Phaser’s types. classType supports classes 
+        spikeObjects = spikeObjects.concat(this.currentMap.createFromObjects("Traps", {name: "spikeShort", classType: Spike}));
+
         spikeObjects.map((spike: Spike)=>{
             spike.init();
             this.spikes.add(spike);
+
+            if (spike.rotation == 0)
+                spike.setBodySize(spike.width, spike.height);
+            else // rotation is ±90 so we do this hack as we can't rotate arcade physic body
+                spike.setBodySize(spike.height, spike.width);
         });
     }
 

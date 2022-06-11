@@ -21,29 +21,29 @@ export class Spike extends Phaser.Physics.Arcade.Sprite
     public init(): void
     {
         this.initAnimations();
-
-        // Spikes positions are based on their center with Tiled
-        this.originX = this.flipX ? 1 : 0;
-        this.originY = this.flipY ? 1 : 0;
     }
 
     private initAnimations() : void
     {
+        const spikeName = this.name;
+        const idxPrepareAttack = 1;
+        const idxAttackEnd = (spikeName == "spikeShort") ? 2 : 4;
+
         this.anims.create({
             key: "prepareAttack",
-            frames: this.anims.generateFrameNumbers("spikeShort", { start: 0, end: 1 }),
+            frames: this.anims.generateFrameNumbers(spikeName, { start: 0, end: idxPrepareAttack }),
             frameRate: 30,
         });
 
         this.anims.create({
             key: "attack",
-            frames: this.anims.generateFrameNumbers("spikeShort", { start: 1, end: 2 }),
+            frames: this.anims.generateFrameNumbers(spikeName, { start: idxPrepareAttack, end: idxAttackEnd }),
             frameRate: 30,
         });
 
         this.anims.create({
             key: "hide",
-            frames: this.anims.generateFrameNumbers("spikeShort", { start: 2, end: 0 }),
+            frames: this.anims.generateFrameNumbers(spikeName, { start: idxAttackEnd, end: 0 }),
             frameRate: 30,
         });
 
