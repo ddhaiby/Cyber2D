@@ -8,6 +8,8 @@ export class MovingPlatform extends Phaser.Physics.Arcade.Image
     private pathEndY: number = null;
     private time: number = 10;
     private activateOnStart: boolean = true;
+    private slowOnEdges: boolean = true;
+    private oneWay: boolean = false;
     private activated: boolean = false;
     private tweenMovement: Phaser.Tweens.Tween = null;
     public collidedObjects: Phaser.Structs.Map<string, Phaser.Physics.Arcade.Image>;
@@ -49,10 +51,10 @@ export class MovingPlatform extends Phaser.Physics.Arcade.Image
             targets: this,
             x: (this.pathEndX !== null) ? this.pathEndX : this.x,
             y: (this.pathEndY !== null) ? this.pathEndY : this.y,
-            ease: Phaser.Math.Easing.Linear,
-            loop: -1,
+            ease: this.slowOnEdges ? Phaser.Math.Easing.Sine.InOut : Phaser.Math.Easing.Linear,
+            loop: this.oneWay ? 0 : -1,
             duration: this.time,
-            yoyo: true,
+            yoyo: !this.oneWay,
             onUpdate: function () {
                 this.body.x = this.x;
                 this.body.y = this.y;

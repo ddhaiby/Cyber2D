@@ -38,9 +38,19 @@
                  "name":"movingPlatform",
                  "properties":[
                         {
+                         "name":"oneWay",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
                          "name":"pathEndX",
                          "type":"float",
                          "value":250
+                        }, 
+                        {
+                         "name":"slowOnEdges",
+                         "type":"bool",
+                         "value":true
                         }, 
                         {
                          "name":"time",
@@ -61,9 +71,19 @@
                  "name":"movingPlatform",
                  "properties":[
                         {
+                         "name":"oneWay",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
                          "name":"pathEndX",
                          "type":"float",
                          "value":250
+                        }, 
+                        {
+                         "name":"slowOnEdges",
+                         "type":"bool",
+                         "value":true
                         }, 
                         {
                          "name":"time",
@@ -84,9 +104,19 @@
                  "name":"movingPlatform",
                  "properties":[
                         {
+                         "name":"oneWay",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
                          "name":"pathEndX",
                          "type":"float",
                          "value":1930
+                        }, 
+                        {
+                         "name":"slowOnEdges",
+                         "type":"bool",
+                         "value":false
                         }, 
                         {
                          "name":"time",

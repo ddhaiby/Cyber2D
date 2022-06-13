@@ -43,9 +43,19 @@
                          "value":true
                         }, 
                         {
+                         "name":"oneWay",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
                          "name":"pathEndY",
                          "type":"float",
                          "value":1325
+                        }, 
+                        {
+                         "name":"slowOnEdges",
+                         "type":"bool",
+                         "value":true
                         }, 
                         {
                          "name":"time",
@@ -71,14 +81,24 @@
                          "value":false
                         }, 
                         {
+                         "name":"oneWay",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
                          "name":"pathEndX",
                          "type":"float",
                          "value":2172
                         }, 
                         {
+                         "name":"slowOnEdges",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
                          "name":"time",
                          "type":"float",
-                         "value":4000
+                         "value":5000
                         }],
                  "rotation":0,
                  "type":"",
@@ -99,14 +119,24 @@
                          "value":false
                         }, 
                         {
+                         "name":"oneWay",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
                          "name":"pathEndX",
                          "type":"float",
                          "value":3050
                         }, 
                         {
+                         "name":"slowOnEdges",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
                          "name":"time",
                          "type":"float",
-                         "value":7000
+                         "value":9000
                         }],
                  "rotation":0,
                  "type":"",
@@ -127,14 +157,24 @@
                          "value":false
                         }, 
                         {
+                         "name":"oneWay",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
                          "name":"pathEndX",
                          "type":"float",
                          "value":1170
                         }, 
                         {
+                         "name":"slowOnEdges",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
                          "name":"time",
                          "type":"float",
-                         "value":7000
+                         "value":16000
                         }],
                  "rotation":0,
                  "type":"",
