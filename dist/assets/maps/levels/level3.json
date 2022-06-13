@@ -38,6 +38,11 @@
                  "name":"movingPlatform",
                  "properties":[
                         {
+                         "name":"activateOnStart",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
                          "name":"pathEndY",
                          "type":"float",
                          "value":1325
@@ -60,6 +65,11 @@
                  "id":680,
                  "name":"movingPlatform",
                  "properties":[
+                        {
+                         "name":"activateOnStart",
+                         "type":"bool",
+                         "value":false
+                        }, 
                         {
                          "name":"pathEndX",
                          "type":"float",
@@ -84,6 +94,11 @@
                  "name":"movingPlatform",
                  "properties":[
                         {
+                         "name":"activateOnStart",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
                          "name":"pathEndX",
                          "type":"float",
                          "value":3050
@@ -106,6 +121,11 @@
                  "id":855,
                  "name":"movingPlatform",
                  "properties":[
+                        {
+                         "name":"activateOnStart",
+                         "type":"bool",
+                         "value":false
+                        }, 
                         {
                          "name":"pathEndX",
                          "type":"float",
@@ -5704,6 +5724,49 @@
                  "width":32,
                  "x":2432,
                  "y":2272
+                }, 
+                {
+                 "gid":1040,
+                 "height":32,
+                 "id":890,
+                 "name":"patrolAI",
+                 "properties":[
+                        {
+                         "name":"fireWeapon",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"maxHealth",
+                         "type":"float",
+                         "value":15
+                        }, 
+                        {
+                         "name":"pathEndX",
+                         "type":"float",
+                         "value":1585
+                        }, 
+                        {
+                         "name":"pathStartX",
+                         "type":"float",
+                         "value":1485
+                        }, 
+                        {
+                         "name":"patrol",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"startOnRight",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":1472,
+                 "y":2368
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -5731,8 +5794,8 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":136,
-                 "y":704
+                 "x":2728,
+                 "y":1568
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -5741,7 +5804,7 @@
          "y":0
         }],
  "nextlayerid":17,
- "nextobjectid":890,
+ "nextobjectid":891,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",

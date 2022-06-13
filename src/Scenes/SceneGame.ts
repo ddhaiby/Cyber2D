@@ -368,7 +368,7 @@ export class SceneGame extends CYBR_Scene
 
         this.platforms.setCollisionByProperty({collides:true});
 
-        this.physics.add.collider(this.player, this.movingPlatforms, this.collideMovingPlatforms);
+        this.physics.add.collider(this.player, this.movingPlatforms, this.playerCollideMovingPlatforms);
 
         // @ts-ignore
         this.physics.add.collider(this.player, this.platforms, null, (player: Player, platform: Phaser.Tile) => {
@@ -388,7 +388,7 @@ export class SceneGame extends CYBR_Scene
         /////// Enemies
         this.physics.add.collider(this.enemies, this.platforms);
         this.enemies.getChildren().forEach(function (ai: PatrolAI) {
-            this.physics.add.collider(ai, this.movingPlatforms, this.collideMovingPlatforms);
+            this.physics.add.collider(ai, this.movingPlatforms, this.pawnCollideMovingPlatforms);
             this.physics.add.overlap(this.player, ai, this.onPlayerOverlapEnnemy, this.playerCanOverlapEnnemy, this);
             this.physics.add.overlap(this.player.currentWeapon.bullets, ai, this.onWeaponHitPawn, this.weaponCanHitPawn, this);
 
@@ -435,6 +435,13 @@ export class SceneGame extends CYBR_Scene
     {
         this.enemies.getChildren().forEach(function (ai: PatrolAI) {
             this.respawnPawn(ai);
+        }, this);
+    }
+
+    private restartMovingPlatforms(): void
+    {
+        this.movingPlatforms.getChildren().forEach(function (platform: MovingPlatform) {
+            platform.reset();
         }, this);
     }
 
@@ -556,7 +563,6 @@ export class SceneGame extends CYBR_Scene
 
     private onPlayerDie(): void
     {
-        // TODO: should a gameMode handle all of this ?
         this.setRemainLife(this.getRemainLife() - 1);
 
         if (!this.isGameOver())
@@ -565,6 +571,7 @@ export class SceneGame extends CYBR_Scene
                 this.respawnPlayer();
                 this.restartAIs();
                 this.restartPortals();
+                this.restartMovingPlatforms();
             }, null, this);
         }
     }
@@ -650,9 +657,15 @@ export class SceneGame extends CYBR_Scene
         ladder.overlapPawnBegin(player);
     }
 
-    private collideMovingPlatforms(pawn: Pawn, movingPlatform: MovingPlatform)
+    private pawnCollideMovingPlatforms(pawn: Pawn, movingPlatform: MovingPlatform)
     {
         movingPlatform.addCollidedObject(pawn);
+    }
+
+    private playerCollideMovingPlatforms(player: Player, movingPlatform: MovingPlatform)
+    {
+        movingPlatform.activate();
+        movingPlatform.addCollidedObject(player);
     }
 
     public getCollectedTokens(): number
