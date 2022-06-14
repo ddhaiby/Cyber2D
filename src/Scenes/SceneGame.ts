@@ -93,6 +93,7 @@ export class SceneGame extends CYBR_Scene
         const levelName = "level" + this.currentLevel.toString();
        // console.log(await this.httpService.getLevel(levelName));
        this.load.tilemapTiledJSON(levelName, "./levels" + "/" + levelName + ".json");
+       //this.load.tilemapTiledJSON(levelName, "./levels/levelDev.json");
         //this.load.tilemapTiledJSON(levelName,this.httpService.getLevel(levelName));
     }
 
