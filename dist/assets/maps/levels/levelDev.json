@@ -249,6 +249,11 @@
                          "value":false
                         }, 
                         {
+                         "name":"damage",
+                         "type":"float",
+                         "value":5
+                        }, 
+                        {
                          "name":"durationAttack",
                          "type":"int",
                          "value":1500
@@ -280,6 +285,11 @@
                          "name":"alwaysShow",
                          "type":"bool",
                          "value":false
+                        }, 
+                        {
+                         "name":"damage",
+                         "type":"float",
+                         "value":5
                         }, 
                         {
                          "name":"durationAttack",
@@ -315,6 +325,11 @@
                          "value":false
                         }, 
                         {
+                         "name":"damage",
+                         "type":"float",
+                         "value":5
+                        }, 
+                        {
                          "name":"durationAttack",
                          "type":"int",
                          "value":1500
@@ -346,6 +361,11 @@
                          "name":"alwaysShow",
                          "type":"bool",
                          "value":false
+                        }, 
+                        {
+                         "name":"damage",
+                         "type":"float",
+                         "value":5
                         }, 
                         {
                          "name":"durationAttack",
@@ -381,6 +401,11 @@
                          "value":false
                         }, 
                         {
+                         "name":"damage",
+                         "type":"float",
+                         "value":5
+                        }, 
+                        {
                          "name":"durationAttack",
                          "type":"int",
                          "value":300
@@ -412,6 +437,11 @@
                          "name":"alwaysShow",
                          "type":"bool",
                          "value":false
+                        }, 
+                        {
+                         "name":"damage",
+                         "type":"float",
+                         "value":5
                         }, 
                         {
                          "name":"durationAttack",
@@ -447,6 +477,11 @@
                          "value":true
                         }, 
                         {
+                         "name":"damage",
+                         "type":"float",
+                         "value":5
+                        }, 
+                        {
                          "name":"durationAttack",
                          "type":"int",
                          "value":1500
@@ -478,6 +513,11 @@
                          "name":"alwaysShow",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"damage",
+                         "type":"float",
+                         "value":5
                         }, 
                         {
                          "name":"durationAttack",
@@ -513,6 +553,11 @@
                          "value":true
                         }, 
                         {
+                         "name":"damage",
+                         "type":"float",
+                         "value":5
+                        }, 
+                        {
                          "name":"durationAttack",
                          "type":"int",
                          "value":300
@@ -546,6 +591,11 @@
                          "value":true
                         }, 
                         {
+                         "name":"damage",
+                         "type":"float",
+                         "value":5
+                        }, 
+                        {
                          "name":"durationAttack",
                          "type":"int",
                          "value":300
@@ -573,6 +623,11 @@
                  "id":924,
                  "name":"mine",
                  "properties":[
+                        {
+                         "name":"damage",
+                         "type":"float",
+                         "value":5
+                        }, 
                         {
                          "name":"delayAboutToExplode",
                          "type":"float",
@@ -602,6 +657,11 @@
                  "name":"mine",
                  "properties":[
                         {
+                         "name":"damage",
+                         "type":"float",
+                         "value":5
+                        }, 
+                        {
                          "name":"delayAboutToExplode",
                          "type":"float",
                          "value":1
@@ -629,6 +689,11 @@
                  "id":926,
                  "name":"mine",
                  "properties":[
+                        {
+                         "name":"damage",
+                         "type":"float",
+                         "value":5
+                        }, 
                         {
                          "name":"delayAboutToExplode",
                          "type":"float",
@@ -743,7 +808,7 @@
                         {
                          "name":"value",
                          "type":"int",
-                         "value":1
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -1223,6 +1288,11 @@
                  "name":"patrolAI",
                  "properties":[
                         {
+                         "name":"bodyDamage",
+                         "type":"float",
+                         "value":5
+                        }, 
+                        {
                          "name":"fireWeapon",
                          "type":"bool",
                          "value":false
@@ -1260,6 +1330,16 @@
                  "id":919,
                  "name":"patrolAI",
                  "properties":[
+                        {
+                         "name":"bodyDamage",
+                         "type":"float",
+                         "value":5
+                        }, 
+                        {
+                         "name":"bulletDamage",
+                         "type":"float",
+                         "value":5
+                        }, 
                         {
                          "name":"bulletPerFire",
                          "type":"string",
@@ -1304,6 +1384,16 @@
                  "name":"patrolAI",
                  "properties":[
                         {
+                         "name":"bodyDamage",
+                         "type":"float",
+                         "value":5
+                        }, 
+                        {
+                         "name":"bulletDamage",
+                         "type":"float",
+                         "value":5
+                        }, 
+                        {
                          "name":"bulletPerFire",
                          "type":"string",
                          "value":"2"
@@ -1346,6 +1436,16 @@
                  "id":921,
                  "name":"patrolAI",
                  "properties":[
+                        {
+                         "name":"bodyDamage",
+                         "type":"float",
+                         "value":5
+                        }, 
+                        {
+                         "name":"bulletDamage",
+                         "type":"float",
+                         "value":5
+                        }, 
                         {
                          "name":"bulletPerFire",
                          "type":"string",
@@ -1410,6 +1510,11 @@
                  "id":889,
                  "name":"player",
                  "properties":[
+                        {
+                         "name":"maxHealth",
+                         "type":"float",
+                         "value":15
+                        }, 
                         {
                          "name":"startOnRight",
                          "type":"bool",

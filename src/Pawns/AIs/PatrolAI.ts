@@ -14,6 +14,7 @@ export class PatrolAI extends Pawn
     private fireWeaponDelay: number = 1000;
     private fireWeaponTimer: Phaser.Time.TimerEvent;
     private bulletPerFire: number = 1;
+    private bulletDamage: number = 1;
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture, frame?: string | number)
     {
@@ -34,6 +35,7 @@ export class PatrolAI extends Pawn
         if (this.fireWeapon)
         {
             let weapon = new GuardWeapon(this.scene, this.x, this.y);
+            weapon.damage = this.bulletDamage;
             weapon.setBulletPerFire(this.bulletPerFire);
             this.equipWeapon(weapon);
             this.prepareNextFire();

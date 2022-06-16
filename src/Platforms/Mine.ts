@@ -3,6 +3,7 @@ export class Mine extends Phaser.Physics.Arcade.Sprite
     private delayAboutToExplode: number = 2000;
     private delayExplosion: number = 3000;
     private sizeExplosion: number = 40;
+    private damage: number = 5;
 
     private _exploding: boolean = false;
     private _activated: boolean = false;
@@ -112,5 +113,10 @@ export class Mine extends Phaser.Physics.Arcade.Sprite
     public get activated(): boolean
     {
         return this._activated;
+    }
+
+    public getDamage(): number
+    {
+        return this.damage;
     }
 }

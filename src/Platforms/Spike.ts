@@ -4,6 +4,7 @@ export class Spike extends Phaser.Physics.Arcade.Sprite
     private durationAttack: number = 1500;
     private durationHide: number = 1000;
     private alwaysShow: boolean = false;
+    private damage: number = 5;
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture, frame?: string | number)
     {
@@ -75,5 +76,10 @@ export class Spike extends Phaser.Physics.Arcade.Sprite
     
             this.anims.play("prepareAttack", true);
         }
+    }
+
+    public getDamage(): number
+    {
+        return this.damage;
     }
 }

@@ -20,7 +20,7 @@ export class CYBR_Weapon extends Phaser.GameObjects.Sprite
     /** Y-position of the grip. It defines the origin of the weapon */
     protected gripY: number = 0;
 
-    protected damage: number = 0;
+    public damage: number = 0;
 
     protected bulletPerFire: number = 1;
 

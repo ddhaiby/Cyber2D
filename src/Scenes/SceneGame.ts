@@ -576,14 +576,14 @@ export class SceneGame extends CYBR_Scene
 
     private onPlayerOverlapSpike(player: Player, spike: Spike): void
     {
-        this.player.hurt(5, this.player.body.touching.right);
+        this.player.hurt(spike.getDamage(), this.player.body.touching.right);
     }
 
     private onPlayerOverlapMine(player: Player, mine: Mine): void
     {
         if (mine.exploding && !player.dead() && !player.isRecovering)
         {
-            this.player.hurt(5, this.player.body.touching.right);
+            this.player.hurt(mine.getDamage(), this.player.body.touching.right);
         }
         else
         {
