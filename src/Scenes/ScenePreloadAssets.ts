@@ -29,21 +29,12 @@ export class ScenePreloadAssets extends CYBR_Scene
         this.loadVideos();
         this.loadPawns();
         this.loadWeapons();
+        this.loadPlatforms();
 
         this.load.setPath("./assets");
 
         this.load.image("background", "./background.png");
         this.load.atlas("UI_atlas", "UI_atlas.png", "UI_atlas.json");
-        this.load.atlas("platform_atlas", "platform_atlas.png", "platform_atlas.json");
-
-		
-
-
-
-
-
-		// TEMPORARYTILL SPIKE ASSET
-        this.load.spritesheet("spike", "./spike.png", { frameWidth: 32, frameHeight: 32 });
     }
 
     /** Load audios from an audio sprite. Below is an example to generate an audio sprite from audios (make sure to run in admin). 
@@ -76,6 +67,13 @@ export class ScenePreloadAssets extends CYBR_Scene
         this.load.json("handPositions", "handPositions.json");
     }
 
+    private loadPlatforms() : void
+    {
+        this.load.setPath("./assets/platforms");
+        this.load.atlas("platform_atlas", "platform_atlas.png", "platform_atlas.json");
+        this.load.atlas("mine", "mine_atlas.png", "mine_atlas.json");
+    }
+
     // Create
     ////////////////////////////////////////////////////////////////////////
   
@@ -92,7 +90,6 @@ export class ScenePreloadAssets extends CYBR_Scene
         this.textures.addSpriteSheetFromAtlas("portal", { atlas: "platform_atlas", frame: "portal.png", frameWidth: 32, frameHeight: 32 });
         this.textures.addSpriteSheetFromAtlas("spikeShort", { atlas: "platform_atlas", frame: "spikeShort.png", frameWidth: 17, frameHeight: 16 });
         this.textures.addSpriteSheetFromAtlas("spikeLong", { atlas: "platform_atlas", frame: "spikeLong.png", frameWidth: 17, frameHeight: 32 });
-        //this.textures.addSpriteSheetFromAtlas("mine", { atlas: "platform_atlas", frame: "mine.png", frameWidth: 17, frameHeight: 16 });
     }
 
     private createWeaponAtlas(): void

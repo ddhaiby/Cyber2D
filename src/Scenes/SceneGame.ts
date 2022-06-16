@@ -22,6 +22,7 @@ import { Ladder } from "../Platforms/Ladder";
 import { Portal } from "../Platforms/Portal";
 import { MovingPlatform } from "../Platforms/MovingPlatform";
 import { Spike } from "../Platforms/Spike";
+import { Mine } from "../Platforms/Mine";
 
 import { LadderManager } from "../Managers/LadderManager";
 import { AudioManager } from "../Managers/AudioManager";
@@ -41,6 +42,7 @@ export class SceneGame extends CYBR_Scene
     private checkpoints: Phaser.Physics.Arcade.StaticGroup;
     private portals: Phaser.Physics.Arcade.StaticGroup;
     private spikes: Phaser.Physics.Arcade.StaticGroup;
+    private mines: Phaser.Physics.Arcade.StaticGroup;
     private backgrounds: Phaser.Physics.Arcade.StaticGroup;
     private tokens: Phaser.Physics.Arcade.StaticGroup;
     private pickupItems: Phaser.Physics.Arcade.StaticGroup;
@@ -265,6 +267,7 @@ export class SceneGame extends CYBR_Scene
     private createTraps(): void
     {
         this.spikes = this.physics.add.staticGroup();
+        this.mines = this.physics.add.staticGroup();
 
         // @ts-ignore - Problem with Phaser’s types. classType supports classes 
         let spikeObjects = this.currentMap.createFromObjects("Traps", {name: "spikeLong", classType: Spike});
@@ -279,6 +282,14 @@ export class SceneGame extends CYBR_Scene
                 spike.setBodySize(spike.width, spike.height);
             else // rotation is ±90 so we do this hack as we can't rotate arcade physic body
                 spike.setBodySize(spike.height, spike.width);
+        });
+
+        // @ts-ignore - Problem with Phaser’s types. classType supports classes 
+        let mineObjects = this.currentMap.createFromObjects("Traps", {name: "mine", classType: Mine});
+
+        mineObjects.map((mine: Mine)=>{
+            mine.init();
+            this.mines.add(mine);
         });
     }
 
@@ -380,6 +391,8 @@ export class SceneGame extends CYBR_Scene
         this.physics.add.overlap(this.player, this.tokens, this.collectToken, null, this);
         this.physics.add.overlap(this.player, this.pickupItems, this.applyEffectOnPlayer, null, this);
         this.physics.add.overlap(this.player, this.checkpoints, this.reachCheckpoint, null, this);
+        this.physics.add.overlap(this.player, this.spikes, this.onPlayerOverlapSpike, this.playerCanOverlapSpike, this); 
+        this.physics.add.overlap(this.player, this.mines, this.onPlayerOverlapMine, this.playerCanOverlapMine, this); 
 
         if (this.player.currentWeapon)
         {
@@ -399,9 +412,6 @@ export class SceneGame extends CYBR_Scene
                 this.physics.add.overlap(ai.currentWeapon.bullets, this.player, this.onWeaponHitPawn, this.weaponCanHitPawn, this);
             }
         }, this);
-
-        /////// Traps
-        this.physics.add.overlap(this.player, this.spikes, this.onPlayerOverlapSpike, this.playerCanOverlapSpike, this); 
     }
 
     private createCameras(): void
@@ -443,6 +453,13 @@ export class SceneGame extends CYBR_Scene
     {
         this.movingPlatforms.getChildren().forEach(function (platform: MovingPlatform) {
             platform.reset();
+        }, this);
+    }
+
+    private restartTraps(): void
+    {
+        this.mines.getChildren().forEach(function (mine: Mine) {
+            mine.reset();
         }, this);
     }
 
@@ -552,9 +569,26 @@ export class SceneGame extends CYBR_Scene
         return !player.dead() && !player.isRecovering;
     }
 
-    private onPlayerOverlapSpike(player: Player, enemy: Pawn): void
+    private playerCanOverlapMine(player: Player, mine: Mine): boolean
+    {
+        return !player.dead() && (!mine.activated || mine.exploding);
+    }
+
+    private onPlayerOverlapSpike(player: Player, spike: Spike): void
     {
         this.player.hurt(5, this.player.body.touching.right);
+    }
+
+    private onPlayerOverlapMine(player: Player, mine: Mine): void
+    {
+        if (mine.exploding && !player.dead() && !player.isRecovering)
+        {
+            this.player.hurt(5, this.player.body.touching.right);
+        }
+        else
+        {
+            mine.activate();
+        }
     }
 
     private onPlayerHealthChanged(health: number, maxHealth: number): void
@@ -573,6 +607,7 @@ export class SceneGame extends CYBR_Scene
                 this.restartAIs();
                 this.restartPortals();
                 this.restartMovingPlatforms();
+                this.restartTraps();
             }, null, this);
         }
     }

@@ -1,0 +1,167 @@
+{
+	"textures": [
+		{
+			"image": "mine_atlas.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 122,
+				"h": 44
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "mine_007.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 32,
+						"h": 31
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 32,
+						"h": 31
+					}
+				},
+				{
+					"filename": "mine_005.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 30,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 30,
+						"h": 31
+					},
+					"frame": {
+						"x": 35,
+						"y": 1,
+						"w": 30,
+						"h": 31
+					}
+				},
+				{
+					"filename": "mine_006.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 30,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 30,
+						"h": 31
+					},
+					"frame": {
+						"x": 67,
+						"y": 1,
+						"w": 30,
+						"h": 31
+					}
+				},
+				{
+					"filename": "mine_004.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 22,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 9,
+						"w": 22,
+						"h": 23
+					},
+					"frame": {
+						"x": 99,
+						"y": 1,
+						"w": 22,
+						"h": 23
+					}
+				},
+				{
+					"filename": "mine_003.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 17,
+						"w": 17,
+						"h": 15
+					},
+					"frame": {
+						"x": 99,
+						"y": 26,
+						"w": 17,
+						"h": 15
+					}
+				},
+				{
+					"filename": "mine_001.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 23,
+						"w": 17,
+						"h": 9
+					},
+					"frame": {
+						"x": 1,
+						"y": 34,
+						"w": 17,
+						"h": 9
+					}
+				},
+				{
+					"filename": "mine_002.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 23,
+						"w": 17,
+						"h": 9
+					},
+					"frame": {
+						"x": 20,
+						"y": 34,
+						"w": 17,
+						"h": 9
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:204724a0bbd07a54104c3c2d78b60cbe:0e287cc6dfd569153ab5881b9587baee:def1523f38bd2982432f1fbbbae2e6d4$"
+	}
+}
