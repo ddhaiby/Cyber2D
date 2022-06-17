@@ -343,7 +343,7 @@ export class SceneGame extends CYBR_Scene
         this.player = playerObjects[0] as Player;
         this.player.on("healthChanged", this.onPlayerHealthChanged.bind(this));
         this.player.on("die", this.onPlayerDie.bind(this));
-        this.player.init("player");
+        this.player.init();
         this.player.setScale(this.player.scaleX, this.player.scaleY);
 
         this.player.setName(CYBR_Scene.generateUniqueName(this.player));
@@ -360,7 +360,7 @@ export class SceneGame extends CYBR_Scene
         enemyObjects.map((ai: PatrolAI)=>{ this.enemies.add(ai); });
 
         this.enemies.getChildren().forEach((ai: PatrolAI) => {
-            ai.init("patrol");
+            ai.init();
             ai.setScale(ai.scaleX, ai.scaleY);
 
             ai.setName(CYBR_Scene.generateUniqueName(ai));

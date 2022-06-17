@@ -10,6 +10,7 @@ export class Player extends Pawn
     private keys: IPlayerKeys;
     private currentHandPosition: Phaser.Math.Vector2;
     private handPositions: Phaser.Math.Vector2[];
+    private sparkle: Phaser.GameObjects.Sprite = null;
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture?: string | Phaser.Textures.Texture) {
         super(scene, x, y, texture);
@@ -17,15 +18,19 @@ export class Player extends Pawn
         this.hurtSound = "Player_Damage";
         this.deathSound = "Player_Death";
         this.maxHealth = 15;
+
+        this.sparkle = this.scene.add.sprite(this.x, this.y, "player");
+        this.sparkle.setVisible(false);
+        this.sparkle.setDepth(1);
+        this.on("healthChanged", this.updateSparkles, this);
     }
 
     // Init
     ////////////////////////////////////////////////////////////////////////
 
-    public init(textureKey?: string) : this
+    public init() : this
     {
-        super.init(textureKey);
-
+        super.init("player");
         const weaponClass = (Math.random() < 0.5) ? CyberPistol : CyberShotgun;
         let weapon = new weaponClass(this.scene, this.x, this.y);
         this.equipWeapon(weapon);
@@ -41,6 +46,12 @@ export class Player extends Pawn
     {
         super.initAnimations(textureKey);
 
+        this.initCharacterAnim();
+        this.initSparkleAnim();
+    }
+
+    private initCharacterAnim(): void
+    {
         const modes = ["", "HoldingWeapon"];
 
         for (let mode of modes)
@@ -117,6 +128,23 @@ export class Player extends Pawn
         this.body.setOffset(0,0);
     }
 
+    private initSparkleAnim(): void
+    {
+        this.sparkle.anims.create({
+            key: "sparkleOrange",
+            frames: this.anims.generateFrameNames(this.texture.key, { prefix: "sparkleOrange_", suffix: ".png", start: 1, end: 4, zeroPad: 3 }),
+            frameRate: 7,
+            repeat: -1
+        });
+
+        this.sparkle.anims.create({
+            key: "sparkleRed",
+            frames: this.anims.generateFrameNames(this.texture.key, { prefix: "sparkleRed_", suffix: ".png", start: 1, end: 4, zeroPad: 3 }),
+            frameRate: 10,
+            repeat: -1
+        });
+    }
+
     protected initAttributes() : void
     {
         super.initAttributes();
@@ -150,21 +178,8 @@ export class Player extends Pawn
 
     public postUpdate(): void
     {
-        const handPosition = this.getHandPosition();
-
-        if (this.currentWeapon)
-        {
-            this.currentWeapon.setVisible(!!handPosition);
-            this.currentWeapon.setDepth(0.9);
-
-            if (this.currentWeapon.visible)
-            {
-                this.currentHandPosition = handPosition;
-            
-                this.currentWeapon.setFlipX(this.isLookingRight);
-                this.currentWeapon.setPosition(this.x - this.width * this.originX + this.currentHandPosition.x, this.y - this.height * this.originY + this.currentHandPosition.y);
-            }
-        }
+        this.postUpdateHand();
+        this.postUpdateSparkles();
     }
 
     protected updateControl() : void
@@ -224,6 +239,51 @@ export class Player extends Pawn
         else
         {
             this.anims.play("idle" + side + mode, true);
+        }
+    }
+
+    private updateSparkles(health: number, maxHealth: number): void
+    {
+        const healthRate = health / maxHealth;
+
+        if (healthRate < 0.4)
+        {
+            this.sparkle.anims.pause();
+            this.sparkle.setVisible(false);
+        }
+        else if (healthRate < 1)
+        {
+            this.sparkle.anims.play("sparkleRed", true);
+            this.sparkle.setVisible(true);
+        }
+        else
+        {
+            this.sparkle.anims.play("sparkleOrange", true);
+            this.sparkle.setVisible(true); 
+        }
+    }
+
+    private postUpdateSparkles(): void
+    {
+        this.sparkle.setPosition(this.x, this.y);
+    }
+
+    private postUpdateHand(): void
+    {
+        if (this.currentWeapon)
+        {
+            const handPosition = this.getHandPosition();
+
+            this.currentWeapon.setVisible(!!handPosition);
+            this.currentWeapon.setDepth(0.9);
+
+            if (this.currentWeapon.visible)
+            {
+                this.currentHandPosition = handPosition;
+            
+                this.currentWeapon.setFlipX(this.isLookingRight);
+                this.currentWeapon.setPosition(this.x - this.width * this.originX + this.currentHandPosition.x, this.y - this.height * this.originY + this.currentHandPosition.y);
+            }
         }
     }
 

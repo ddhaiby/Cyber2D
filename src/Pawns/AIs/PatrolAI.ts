@@ -28,9 +28,9 @@ export class PatrolAI extends Pawn
     // Init
     ////////////////////////////////////////////////////////////////////////
 
-    public init(textureKey?: string) : this
+    public init() : this
     {
-        super.init(textureKey);
+        super.init("patrol");
 
         if (this.fireWeapon)
         {

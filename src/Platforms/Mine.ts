@@ -24,7 +24,6 @@ export class Mine extends Phaser.Physics.Arcade.Sprite
     public init(): void
     {
         this.initAnimations();
-        console.log(this.width, this.height)
     }
 
     private initAnimations() : void
