@@ -22,7 +22,6 @@ export class Player extends Pawn
         this.sparkle = this.scene.add.sprite(this.x, this.y, "player");
         this.sparkle.setVisible(false);
         this.sparkle.setDepth(1);
-        this.on("healthChanged", this.updateSparkles, this);
     }
 
     // Init
@@ -38,6 +37,9 @@ export class Player extends Pawn
         PlayerManager.Instance.reloadKeys(this.scene);
         this.keys = PlayerManager.Instance.keyBinding;
         this.keys.jump.on("down", this.jump, this);
+
+        this.on("healthChanged", this.updateSparkles, this);
+        this.emit("healthChanged");
 
         return this;
     }
