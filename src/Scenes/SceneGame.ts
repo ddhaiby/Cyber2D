@@ -52,7 +52,7 @@ export class SceneGame extends CYBR_Scene
 
     // Pawns
     public player: Player;
-    private enemies: Phaser.Physics.Arcade.StaticGroup;
+    private enemies: Phaser.Physics.Arcade.Group;
 
     // GameMode
     private spawnPositions: Phaser.Structs.Map<string, Phaser.Math.Vector2>;
@@ -223,7 +223,7 @@ export class SceneGame extends CYBR_Scene
 
     private createLadders(): void
     {
-        let ladders = this.physics.add.staticGroup();
+        let ladders = this.physics.add.group();
 
         // @ts-ignore - Problem with Phaser’s types. classType supports classes 
         let ladderObjects = this.currentMap.createFromObjects("Ladders", {name: "ladder", classType: Ladder});
@@ -231,6 +231,10 @@ export class SceneGame extends CYBR_Scene
             ladder.setTexture("platform_atlas", "ladder.png");
             ladders.add(ladder);
             ladder.setName(CYBR_Scene.generateUniqueName(ladder));
+
+            this.add.existing(ladder);
+            this.physics.add.existing(ladder);
+            ladder.setGravity(0, -this.physics.world.gravity.y);
         });
 
         // @ts-ignore - Problem with Phaser’s types. classType supports classes 
@@ -239,6 +243,10 @@ export class SceneGame extends CYBR_Scene
             ladder.setTexture("platform_atlas", "ladderBottom.png");
             ladders.add(ladder);
             ladder.setName(CYBR_Scene.generateUniqueName(ladder));
+
+            this.add.existing(ladder);
+            this.physics.add.existing(ladder);
+            ladder.setGravity(0, -this.physics.world.gravity.y);
         });
 
         // No physic for the top of the ladder
@@ -352,7 +360,7 @@ export class SceneGame extends CYBR_Scene
 
     private createEnemies(): void
     {
-        this.enemies = this.physics.add.staticGroup();
+        this.enemies = this.physics.add.group();
 
         // @ts-ignore - Problem with Phaser’s types. classType supports classes 
         const enemyObjects = this.currentMap.createFromObjects("Enemies", {name: "patrolAI", classType: PatrolAI});
@@ -416,7 +424,6 @@ export class SceneGame extends CYBR_Scene
 
     private createCameras(): void
     {
-        const platformsBounds = this.platforms.getBounds();
         this.cameras.main.setBounds(0, 0, this.physics.world.bounds.width, this.physics.world.bounds.height);
         this.cameras.main.startFollow(this.player);
     }

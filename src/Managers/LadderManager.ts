@@ -6,10 +6,10 @@ export class LadderManager {
     private scene: Phaser.Scene;
     private player: Player;
 
-    public ladders: Phaser.Physics.Arcade.StaticGroup;
+    public ladders: Phaser.Physics.Arcade.Group;
     public laddersOnPlayer: Phaser.Structs.Map<string, Ladder>;
 
-    constructor(scene: Phaser.Scene, ladders: Phaser.Physics.Arcade.StaticGroup)
+    constructor(scene: Phaser.Scene, ladders: Phaser.Physics.Arcade.Group)
     {
         this.scene = scene;
         this.ladders = ladders;
