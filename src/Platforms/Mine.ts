@@ -92,7 +92,7 @@ export class Mine extends Phaser.Physics.Arcade.Sprite
 
             this.anims.play("activating", true);
             this.anims.playAfterDelay("aboutToExplode", this.delayAboutToExplode);
-            this.scene.time.delayedCall(this.delayExplosion, ()=>{ this.anims.play("explode", true); }, null, this);
+            this.scene.time.delayedCall(this.delayExplosion, () => { this.anims.play("explode", true); }, null, this);
         }
     }
 
@@ -101,7 +101,7 @@ export class Mine extends Phaser.Physics.Arcade.Sprite
         this._exploding = true;
         this.enableBody(false, 0, 0, true, true);
         this.body.setSize(this.sizeExplosion, this.sizeExplosion);
-        this.scene.time.delayedCall(1, ()=>{ this.disableBody(); this._activated = false; }, null, this);
+        this.scene.time.delayedCall(100, () => { this.disableBody(); this._activated = false; }, null, this);
     }
 
     public get exploding(): boolean
