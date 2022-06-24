@@ -9,6 +9,8 @@ import {SceneMainMenu_UI} from "./SceneMainMenu_UI";
 import { Pawn } from "../Pawns/Pawn";
 import {PatrolAI} from "../Pawns/AIs/PatrolAI";
 import {Player} from "../Pawns/Player";
+import { PawnSpawn } from "../Pawns/PawnSpawn";
+import { AISpawn } from "../Pawns/AIs/AISpawn";
 
 import { CYBR_Bullet } from "../Weapons/CYBR_Bullet";
 
@@ -345,17 +347,19 @@ export class SceneGame extends CYBR_Scene
     private createPlayer(): void
     {
         // @ts-ignore - Problem with Phaser’s types. classType supports classes 
-        const playerObjects = this.currentMap.createFromObjects("Player", {name: "player", classType: Player});
+        const playerSpawns = this.currentMap.createFromObjects("Player", {name: "player", classType: PawnSpawn});
 
-        // For this game, there should be exactly one player.
-        this.player = playerObjects[0] as Player;
+        const playerSpawn = playerSpawns[0] as PawnSpawn;
+
+        this.player = new Player(this);
         this.player.on("healthChanged", this.onPlayerHealthChanged.bind(this));
         this.player.on("die", this.onPlayerDie.bind(this));
-        this.player.init();
-        this.player.setScale(this.player.scaleX, this.player.scaleY);
+        this.player.init(playerSpawn.getPawnData());
 
         this.player.setName(CYBR_Scene.generateUniqueName(this.player));
         this.spawnPositions.set(this.player.name, new Phaser.Math.Vector2(this.player.x, this.player.y));
+
+        playerSpawn.destroy();
     }
 
     private createEnemies(): void
@@ -363,17 +367,18 @@ export class SceneGame extends CYBR_Scene
         this.enemies = this.physics.add.group();
 
         // @ts-ignore - Problem with Phaser’s types. classType supports classes 
-        const enemyObjects = this.currentMap.createFromObjects("Enemies", {name: "patrolAI", classType: PatrolAI});
+        const aiSpawns = this.currentMap.createFromObjects("Enemies", {name: "patrolAI", classType: AISpawn});
 
-        enemyObjects.map((ai: PatrolAI)=>{ this.enemies.add(ai); });
-
-        this.enemies.getChildren().forEach((ai: PatrolAI) => {
-            ai.init();
-            ai.setScale(ai.scaleX, ai.scaleY);
+        aiSpawns.map((aiSpawn: AISpawn)=>{
+            const ai = new PatrolAI(this);
+            ai.init(aiSpawn.getPawnData());
+            this.enemies.add(ai);
 
             ai.setName(CYBR_Scene.generateUniqueName(ai));
             this.spawnPositions.set(ai.name, new Phaser.Math.Vector2(ai.x, ai.y));
-        }, this);
+
+            aiSpawn.destroy();
+        });
     }
 
     // Create all the overlaps and the colldiers - The order is important!

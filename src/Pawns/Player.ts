@@ -3,6 +3,7 @@ import {IPlayerKeys, PlayerManager} from "../Managers/PlayerManager";
 import { CyberPistol } from "../Weapons/CyberPistol";
 import { CyberShotgun } from "../Weapons/CyberShotgun";
 import { CST } from "../CST";
+import { PawnData } from "./PawnSpawn";
 
 export class Player extends Pawn
 {
@@ -12,7 +13,7 @@ export class Player extends Pawn
     private handPositions: Phaser.Math.Vector2[];
     private sparkle: Phaser.GameObjects.Sprite = null;
 
-    constructor(scene: Phaser.Scene, x: number, y: number, texture?: string | Phaser.Textures.Texture) {
+    constructor(scene: Phaser.Scene, x?: number, y?: number, texture?: string | Phaser.Textures.Texture) {
         super(scene, x, y, texture);
         this.setDepth(1);
         this.hurtSound = "Player_Damage";
@@ -27,9 +28,10 @@ export class Player extends Pawn
     // Init
     ////////////////////////////////////////////////////////////////////////
 
-    public init() : this
+    public init(playerData: PawnData) : this
     {
-        super.init("player");
+        super.init(playerData, "player");
+
         const weaponClass = (Math.random() < 0.5) ? CyberPistol : CyberShotgun;
         let weapon = new weaponClass(this.scene, this.x, this.y);
         this.equipWeapon(weapon);

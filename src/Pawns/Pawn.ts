@@ -1,6 +1,7 @@
 import { AudioManager } from "../Managers/AudioManager";
 import { CST } from "../CST";
 import { CYBR_Weapon } from "../Weapons/CYBR_Weapon";
+import { PawnData } from "./PawnSpawn";
 
 export class Pawn extends Phaser.Physics.Arcade.Sprite
 {
@@ -25,14 +26,18 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
     // Attributes
     protected attributes: Phaser.Structs.Map<string, number>;
+
+    /** Max hp */
     protected maxHealth: number = 10;
+
+    /** The damage when there is a body contact */
     private bodyDamage: number = 5;
 
     // Sounds
     protected hurtSound: string = "";
     protected deathSound: string = "";
 
-    constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture, frame?: string | number)
+    constructor(scene: Phaser.Scene, x?: number, y?: number, texture?: string | Phaser.Textures.Texture, frame?: string | number)
     {
         super(scene, x, y, texture, frame);
 
@@ -53,8 +58,17 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     // Init
     ////////////////////////////////////////////////////////////////////////
 
-    public init(textureKey?: string): this
+    public init(pawnData?: PawnData, textureKey?: string): this
     {
+        if (pawnData)
+        {
+            this.x = pawnData.x;
+            this.y = pawnData.y;
+            this.maxHealth = pawnData.maxHealth;
+            this.startOnRight = pawnData.startOnRight;
+            this.bodyDamage = pawnData.bodyDamage;
+        }
+
         this.initStates();
         this.initAttributes();
         if (textureKey)

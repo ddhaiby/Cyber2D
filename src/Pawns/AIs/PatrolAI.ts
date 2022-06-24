@@ -1,22 +1,37 @@
 import {Pawn} from "../Pawn";
 import { GuardWeapon } from "../../Weapons/GuardWeapon";
 import { CST } from "../../CST";
+import { AIData } from "./AISpawn";
 
 export class PatrolAI extends Pawn
 {
     // Patrol
+    /** Whether the AI can moves */
     public patrol: boolean = false;
+
+    /** The start position for the patrol. Must be lower than pathEndX */
     private pathStartX: number = 0;
+
+    /** The end position for the patrol. Must be greater than pathStartX */
     private pathEndX: number = 0;
 
     // FireWeapon
+    /** Whether the AI has a weapon */
     private fireWeapon: boolean = false;
+
+    /** The delay between each fire */
     private fireWeaponDelay: number = 1000;
+
+    /** Internal timer to handle fires */
     private fireWeaponTimer: Phaser.Time.TimerEvent;
+
+    /** The number of bullet shotper fire */
     private bulletPerFire: number = 1;
+
+    /** The damage of each bullet */
     private bulletDamage: number = 1;
 
-    constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture, frame?: string | number)
+    constructor(scene: Phaser.Scene, x?: number, y?: number, texture?: string | Phaser.Textures.Texture, frame?: string | number)
     {
         super(scene, x, y, texture, frame);
 
@@ -28,9 +43,20 @@ export class PatrolAI extends Pawn
     // Init
     ////////////////////////////////////////////////////////////////////////
 
-    public init() : this
+    public init(aiData: AIData) : this
     {
-        super.init("patrol");
+        super.init(aiData, "patrol");
+
+        if (aiData)
+        {
+            this.bulletDamage = aiData.bulletDamage;
+            this.bulletPerFire = aiData.bulletPerFire;
+            this.fireWeapon = aiData.fireWeapon;
+            this.fireWeaponDelay = aiData.fireWeaponDelay;
+            this.patrol = aiData.patrol;
+            this.pathStartX = aiData.pathStartX;
+            this.pathEndX = aiData.pathEndX;
+        }
 
         if (this.fireWeapon)
         {
