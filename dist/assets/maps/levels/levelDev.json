@@ -267,6 +267,11 @@
                          "name":"durationPrepareAttack",
                          "type":"int",
                          "value":1000
+                        }, 
+                        {
+                         "name":"startDelay",
+                         "type":"float",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -305,6 +310,11 @@
                          "name":"durationPrepareAttack",
                          "type":"int",
                          "value":1000
+                        }, 
+                        {
+                         "name":"startDelay",
+                         "type":"float",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -343,6 +353,11 @@
                          "name":"durationPrepareAttack",
                          "type":"int",
                          "value":1000
+                        }, 
+                        {
+                         "name":"startDelay",
+                         "type":"float",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -381,6 +396,11 @@
                          "name":"durationPrepareAttack",
                          "type":"int",
                          "value":300
+                        }, 
+                        {
+                         "name":"startDelay",
+                         "type":"float",
+                         "value":100
                         }],
                  "rotation":0,
                  "type":"",
@@ -419,6 +439,11 @@
                          "name":"durationPrepareAttack",
                          "type":"int",
                          "value":300
+                        }, 
+                        {
+                         "name":"startDelay",
+                         "type":"float",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -457,6 +482,11 @@
                          "name":"durationPrepareAttack",
                          "type":"int",
                          "value":300
+                        }, 
+                        {
+                         "name":"startDelay",
+                         "type":"float",
+                         "value":200
                         }],
                  "rotation":0,
                  "type":"",
@@ -495,6 +525,11 @@
                          "name":"durationPrepareAttack",
                          "type":"int",
                          "value":1000
+                        }, 
+                        {
+                         "name":"startDelay",
+                         "type":"float",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -533,6 +568,11 @@
                          "name":"durationPrepareAttack",
                          "type":"int",
                          "value":1000
+                        }, 
+                        {
+                         "name":"startDelay",
+                         "type":"float",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -571,6 +611,11 @@
                          "name":"durationPrepareAttack",
                          "type":"int",
                          "value":300
+                        }, 
+                        {
+                         "name":"startDelay",
+                         "type":"float",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -609,6 +654,11 @@
                          "name":"durationPrepareAttack",
                          "type":"int",
                          "value":300
+                        }, 
+                        {
+                         "name":"startDelay",
+                         "type":"float",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",

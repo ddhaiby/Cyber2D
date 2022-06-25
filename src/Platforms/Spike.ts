@@ -3,6 +3,7 @@ export class Spike extends Phaser.Physics.Arcade.Sprite
     private durationPrepareAttack: number = 1000;
     private durationAttack: number = 1500;
     private durationHide: number = 1000;
+    private startDelay: number = 0;
     private alwaysShow: boolean = false;
     private damage: number = 5;
 
@@ -74,7 +75,7 @@ export class Spike extends Phaser.Physics.Arcade.Sprite
                 this.anims.playAfterDelay("prepareAttack", this.durationHide);
             }, true);
     
-            this.anims.play("prepareAttack", true);
+            this.anims.playAfterDelay("prepareAttack", this.startDelay);
         }
     }
 
