@@ -22,6 +22,9 @@ export class PatrolAI extends Pawn
     /** The delay between each fire */
     private fireWeaponDelay: number = 1000;
 
+    /** The delay before the first fire */
+    private startFireWeponDelay: number = 0;
+
     /** Internal timer to handle fires */
     private fireWeaponTimer: Phaser.Time.TimerEvent;
 
@@ -56,6 +59,7 @@ export class PatrolAI extends Pawn
             this.patrol = aiData.patrol;
             this.pathStartX = aiData.pathStartX;
             this.pathEndX = aiData.pathEndX;
+            this.startFireWeponDelay = aiData.startFireWeponDelay;
         }
 
         if (this.fireWeapon)
@@ -64,7 +68,7 @@ export class PatrolAI extends Pawn
             weapon.damage = this.bulletDamage;
             weapon.setBulletPerFire(this.bulletPerFire);
             this.equipWeapon(weapon);
-            this.prepareNextFire();
+            this.scene.time.delayedCall(this.startFireWeponDelay, this.prepareNextFire, null, this);
         }
 
         return this;
@@ -116,7 +120,7 @@ export class PatrolAI extends Pawn
     {
         super.reset(x,y);
         this.fireWeaponTimer.remove(false);
-        this.prepareNextFire();
+        this.scene.time.delayedCall(this.startFireWeponDelay, this.prepareNextFire, null, this);
     }
 
     // Update

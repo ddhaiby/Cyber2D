@@ -13,6 +13,7 @@ export declare type AIData = {
     pathStartX: number;
     pathEndX: number;
     startOnRight: boolean;
+    startFireWeponDelay: number;
 }
 
 export class AISpawn extends PawnSpawn
@@ -38,6 +39,9 @@ export class AISpawn extends PawnSpawn
     /** The end position for the patrol. Must be greater than pathStartX */
     private pathEndX: number = 0;
 
+    /** The delay before the first fire */
+    private startFireWeponDelay: number = 0;
+
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture, frame?: string | number)
     {
         super(scene, x, y, texture, frame);
@@ -57,7 +61,8 @@ export class AISpawn extends PawnSpawn
             patrol: this.patrol,
             pathStartX: this.pathStartX,
             pathEndX: this.pathEndX,
-            startOnRight: this.startOnRight 
+            startOnRight: this.startOnRight,
+            startFireWeponDelay: this.startFireWeponDelay
         }
     }
 }

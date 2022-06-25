@@ -1366,6 +1366,11 @@
                          "name":"patrol",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"startFireWeponDelay",
+                         "type":"float",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -1414,6 +1419,11 @@
                          "name":"patrol",
                          "type":"bool",
                          "value":false
+                        }, 
+                        {
+                         "name":"startFireWeponDelay",
+                         "type":"float",
+                         "value":1000
                         }, 
                         {
                          "name":"startOnRight",
@@ -1467,6 +1477,11 @@
                          "name":"patrol",
                          "type":"bool",
                          "value":false
+                        }, 
+                        {
+                         "name":"startFireWeponDelay",
+                         "type":"float",
+                         "value":0
                         }, 
                         {
                          "name":"startOnRight",
@@ -1530,6 +1545,11 @@
                          "name":"patrol",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"startFireWeponDelay",
+                         "type":"float",
+                         "value":0
                         }, 
                         {
                          "name":"startOnRight",
