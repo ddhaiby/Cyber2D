@@ -40,7 +40,7 @@ export class SceneGame extends CYBR_Scene
     // Map
     private currentMap: Phaser.Tilemaps.Tilemap;
     private platforms: Phaser.Tilemaps.TilemapLayer;
-    private movingPlatforms: Phaser.Physics.Arcade.StaticGroup;
+    private movingPlatforms: Phaser.Physics.Arcade.Group;
     private checkpoints: Phaser.Physics.Arcade.StaticGroup;
     private portals: Phaser.Physics.Arcade.StaticGroup;
     private spikes: Phaser.Physics.Arcade.StaticGroup;
@@ -65,7 +65,8 @@ export class SceneGame extends CYBR_Scene
 
     public currentLevel: number;
 
-    private readonly httpService:HttpServices;
+    private readonly httpService: HttpServices;
+
     constructor()
     {
         super({key: CST.SCENES.GAME});
@@ -193,20 +194,20 @@ export class SceneGame extends CYBR_Scene
     {
         const terrain = this.currentMap.addTilesetImage("cyber_plateforms_atlas", "terrain");
 
-        // Static platforms
+        // Tile platforms
         this.platforms = this.currentMap.createLayer("Platforms", [terrain], 0, 0);
 
         const platformsBounds = this.platforms.getBounds();
         this.physics.world.setBounds(0, 0, platformsBounds.width, platformsBounds.height);
 
-        // Dynamic platforms
-        this.movingPlatforms = this.physics.add.staticGroup();
+        // Moving platforms
+        this.movingPlatforms = this.physics.add.group();
 
         // @ts-ignore - Problem with Phaser’s types. classType supports classes 
         const movingPlatformObjects = this.currentMap.createFromObjects("MovingPlatforms", {name: "movingPlatform", classType: MovingPlatform});
         movingPlatformObjects.map((platform: MovingPlatform)=>{
-            platform.init();
             this.movingPlatforms.add(platform);
+            platform.init();
         });
     }
 
@@ -268,9 +269,9 @@ export class SceneGame extends CYBR_Scene
         // @ts-ignore - Problem with Phaser’s types. classType supports classes 
         const portalObjects = this.currentMap.createFromObjects("Portals", {name: "Portal", classType: Portal});
         portalObjects.map((portal: Portal)=>{
-            portal.init();
             portal.onActivated(this.completeLevel, this);
             this.portals.add(portal);
+            portal.init();
         });
     }
 
@@ -285,8 +286,8 @@ export class SceneGame extends CYBR_Scene
         spikeObjects = spikeObjects.concat(this.currentMap.createFromObjects("Traps", {name: "spikeShort", classType: Spike}));
 
         spikeObjects.map((spike: Spike)=>{
-            spike.init();
             this.spikes.add(spike);
+            spike.init();
 
             if (spike.rotation == 0)
                 spike.setBodySize(spike.width, spike.height);
@@ -298,8 +299,8 @@ export class SceneGame extends CYBR_Scene
         let mineObjects = this.currentMap.createFromObjects("Traps", {name: "mine", classType: Mine});
 
         mineObjects.map((mine: Mine)=>{
-            mine.init();
             this.mines.add(mine);
+            mine.init();
         });
     }
 
@@ -371,8 +372,8 @@ export class SceneGame extends CYBR_Scene
 
         aiSpawns.map((aiSpawn: AISpawn)=>{
             const ai = new PatrolAI(this);
-            ai.init(aiSpawn.getPawnData());
             this.enemies.add(ai);
+            ai.init(aiSpawn.getPawnData());
 
             ai.setName(CYBR_Scene.generateUniqueName(ai));
             this.spawnPositions.set(ai.name, new Phaser.Math.Vector2(ai.x, ai.y));
@@ -393,7 +394,8 @@ export class SceneGame extends CYBR_Scene
 
         this.platforms.setCollisionByProperty({collides:true});
 
-        this.physics.add.collider(this.player, this.movingPlatforms, this.playerCollideMovingPlatforms);
+        // @ts-ignore
+        this.physics.add.collider(this.player, this.movingPlatforms, this.playerCollideMovingPlatforms, null, this);
 
         // @ts-ignore
         this.physics.add.collider(this.player, this.platforms, null, (player: Player, platform: Phaser.Tile) => {
@@ -703,11 +705,6 @@ export class SceneGame extends CYBR_Scene
     private overlapLadder(player: Player, ladder: Ladder): void
     {
         ladder.overlapPawnBegin(player);
-    }
-
-    private pawnCollideMovingPlatforms(pawn: Pawn, movingPlatform: MovingPlatform)
-    {
-        movingPlatform.addCollidedObject(pawn);
     }
 
     private playerCollideMovingPlatforms(player: Player, movingPlatform: MovingPlatform)

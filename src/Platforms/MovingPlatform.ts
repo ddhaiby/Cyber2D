@@ -1,76 +1,71 @@
+// https://codepen.io/samme/pen/YzPEqYd
 import { Pawn } from "../Pawns/Pawn";
 
-export class MovingPlatform extends Phaser.Physics.Arcade.Image
+export class MovingPlatform extends Phaser.GameObjects.PathFollower
 {
     private pathStartX: number = null;
     private pathStartY: number = null;
     private pathEndX: number = null;
     private pathEndY: number = null;
+
+    /** The duration to go from the pathStart to its pathEnd */
     private time: number = 10;
+
+    /** Whether this platform is activated in its constructor*/
     private activateOnStart: boolean = true;
+
+    /** Whether the platform slow once it's close the end of it's path */
     private slowOnEdges: boolean = true;
+
+    /** If true, this platform will stop moving once it reaches its goal. If false, this platform acts like a yoyo */
     private oneWay: boolean = false;
+
+    /** Whether the platform is activated */
     private activated: boolean = false;
-    private tweenMovement: Phaser.Tweens.Tween = null;
-    public collidedObjects: Phaser.Structs.Map<string, Phaser.Physics.Arcade.Image>;
+
+    /** The list of pawns on this platform */
+    public collidedObjects: Phaser.Structs.Map<string, Pawn>;
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture, frame?: string | number)
     {
-        super(scene, x, y, texture, frame);
-        this.setOrigin(0);
+        super(scene, null, x, y, texture, frame);
         this.collidedObjects = new Phaser.Structs.Map([]);
+
+        this.scene.physics.add.existing(this);
     }
 
     public init(): void
     {
         this.setTexture("platform_atlas", (this.pathEndX !== null) ? "movingPlatformHorizontal.png" : "movingPlatformVertical.png");
 
+        const body = (this.body as Phaser.Physics.Arcade.Body);
+
+        body.setSize(this.width, this.height);
+        body.allowGravity = false;
+        body.setImmovable(true);
+
         this.pathStartX = this.x;
         this.pathStartY = this.y;
+        this.pathEndX = this.pathEndX ?? this.pathStartX;
+        this.pathEndY = this.pathEndY ?? this.pathStartY;
 
         if (this.activateOnStart)
         {
             this.activate();
+        }
+        else
+        {
+            this.startFollowPath(this.pathStartX, this.pathStartY, this.pathStartX, this.pathStartY);
         }
     }
 
     public activate(): void
     {
         if (this.activated)
-        {
             return;
-        }
 
-        let previousX = this.x;
-        let previousY = this.y;
-
-        let vx = 0;
-        let vy = 0;
-
-        this.tweenMovement = this.scene.tweens.add({
-            targets: this,
-            x: (this.pathEndX !== null) ? this.pathEndX : this.x,
-            y: (this.pathEndY !== null) ? this.pathEndY : this.y,
-            ease: this.slowOnEdges ? Phaser.Math.Easing.Sine.InOut : Phaser.Math.Easing.Linear,
-            loop: this.oneWay ? 0 : -1,
-            duration: this.time,
-            yoyo: !this.oneWay,
-            onUpdate: function () {
-                this.body.x = this.x;
-                this.body.y = this.y;
-                vx = this.body.x - previousX;
-                vy = this.body.y - previousY;
-                previousX = this.body.x;
-                previousY = this.body.y;
-
-                this.collidedObjects.getArray().forEach((object: Phaser.Physics.Arcade.Image) => {
-                    object.setX(object.x + vx);
-                    object.setY(object.y + vy);
-                });
-            },
-            onUpdateScope: this
-        });
-
+        this.stopFollow();
+        this.startFollowPath(this.pathStartX, this.pathStartY, this.pathEndX, this.pathEndY);
         this.activated = true;
     }
 
@@ -78,31 +73,56 @@ export class MovingPlatform extends Phaser.Physics.Arcade.Image
     {
         this.setX(this.pathStartX);
         this.setY(this.pathStartY);
-        this.body.x = this.x;
-        this.body.y = this.y;
 
-        if (!this.activateOnStart && this.tweenMovement)
+        if (!this.activateOnStart)
         {
-            this.tweenMovement.remove();
-            this.tweenMovement = null;
+            this.stopFollow();
             this.activated = false;
         }
     }
 
-    public addCollidedObject(object: Phaser.Physics.Arcade.Image): void
+    public addCollidedObject(pawn: Pawn): void
     {
-        this.collidedObjects.set(object.name, object);
+        this.collidedObjects.set(pawn.name, pawn);
     }
 
     public update(): void
     {
-        let newCollidedObjects: Phaser.Structs.Map<string, Phaser.Physics.Arcade.Image> = new Phaser.Structs.Map([]) ;
+        let newCollidedObjects: Phaser.Structs.Map<string, Pawn> = new Phaser.Structs.Map([]) ;
 
-        this.collidedObjects.getArray().forEach((object: Phaser.Physics.Arcade.Image) => {
-            if (object.body.touching.down)
-                newCollidedObjects.set(object.name, object);
+        this.collidedObjects.getArray().forEach((pawn: Pawn) => {
+            if (pawn.body.touching.down && !pawn.isJumping)
+            {
+                newCollidedObjects.set(pawn.name, pawn);
+            }
         });
 
         this.collidedObjects = newCollidedObjects;
+    }
+
+    private startFollowPath(pathStartX: number, pathStartY: number, pathEndX: number, pathEndY: number): void
+    {
+        const path = new Phaser.Curves.Path(pathStartX, pathStartY).lineTo(pathEndX, pathEndY);
+        this.setPath(path);
+
+        const loop = this.scene.game.loop;
+        this.startFollow({
+            duration: this.time,
+            yoyo: !this.oneWay,
+            loop: this.oneWay ? 0 : -1,
+            ease: this.slowOnEdges ? Phaser.Math.Easing.Sine.InOut : Phaser.Math.Easing.Linear,
+            onUpdate: () => {
+                // Scale 'pathDelta' to a 1-second velocity vector, for correct collisions.
+                const body = this.body as Phaser.Physics.Arcade.Body;
+                body.velocity.copy(this.pathDelta).scale(1000 / loop.delta);
+                body.position = new Phaser.Math.Vector2(this.x - body.width / 2, this.y - body.height / 2);
+
+                this.collidedObjects.getArray().forEach((pawn: Pawn) => 
+                {
+                    if (!pawn.isWalking && !pawn.isJumping)
+                        (pawn.body.velocity as Phaser.Math.Vector2).copy(body.velocity);
+                });
+            }
+        });
     }
 }
