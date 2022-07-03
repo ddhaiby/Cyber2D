@@ -215,8 +215,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
     public isOnFloor(): boolean
     {
-        const body = this.body as Phaser.Physics.Arcade.Body;
-        return body.onFloor() || body.touching.down;
+        return (this.body as Phaser.Physics.Arcade.Body).onFloor();
     }
 
     public canJump(): boolean
