@@ -554,7 +554,7 @@ export class SceneGame extends CYBR_Scene
 
     private onWeaponHitPawn(bullet: CYBR_Bullet, pawn: Pawn): void
     {
-        pawn.hurt(bullet.damage);
+        pawn.hurt(bullet.damage, pawn == this.player, pawn.body.touching.right);
         bullet.kill();
     }
 
@@ -565,7 +565,7 @@ export class SceneGame extends CYBR_Scene
 
     private onPunchPawn(punch: Phaser.Physics.Arcade.Image, pawn: Pawn): void
     {
-        pawn.hurt(5);
+        pawn.hurt(5, true, punch.x > pawn.x, 100);
         punch.emit("hit");
     }
 
@@ -586,7 +586,7 @@ export class SceneGame extends CYBR_Scene
 
     private onPlayerOverlapEnnemy(player: Player, enemy: Pawn): void
     {
-        this.player.hurt(enemy.getBodyDamage(), this.player.body.touching.right);
+        this.player.hurt(enemy.getBodyDamage(), true, player.body.touching.right);
     }
 
     private playerCanOverlapSpike(player: Player, spike: Spike): boolean
@@ -601,14 +601,14 @@ export class SceneGame extends CYBR_Scene
 
     private onPlayerOverlapSpike(player: Player, spike: Spike): void
     {
-        this.player.hurt(spike.getDamage(), this.player.body.touching.right);
+        this.player.hurt(spike.getDamage(), true, player.body.touching.right);
     }
 
     private onPlayerOverlapMine(player: Player, mine: Mine): void
     {
         if (mine.exploding && !player.dead() && !player.isRecovering)
         {
-            this.player.hurt(mine.getDamage(), this.player.body.touching.right);
+            this.player.hurt(mine.getDamage(), true, this.player.body.touching.right);
         }
         else
         {

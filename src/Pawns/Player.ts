@@ -7,7 +7,6 @@ import { PawnData } from "./PawnSpawn";
 
 export class Player extends Pawn
 {
-    public isTakingDmg: boolean = false
     private keys: IPlayerKeys;
     private currentHandPosition: Phaser.Math.Vector2;
     private handPositions: Phaser.Math.Vector2[];
@@ -186,7 +185,6 @@ export class Player extends Pawn
     public reset(x: number, y: number) : void
     {
         super.reset(x, y);
-        this.isTakingDmg = false;
         this.stopRecovering();
     }
 
@@ -368,30 +366,12 @@ export class Player extends Pawn
         this.isRecovering = false;
     }
 
-    public hurt(health: number, hurtFromRight: boolean = false, velocityProjection: number = 250) : void
+    public hurt(health: number, isProjected: boolean = false, hurtFromRight: boolean = false, velocityProjection: number = 250) : void
     {
-        super.hurt(health);
+        super.hurt(health, isProjected, hurtFromRight, velocityProjection);
         if (!this.dead())
         {
-            this.stopWalking();
-            this.stopClimbing();
 
-            if (hurtFromRight)
-            {
-                this.setVelocityX(-velocityProjection);
-                this.lookOnRight();
-            }
-            else
-            {
-                this.setVelocityX(velocityProjection);
-                this.lookOnLeft();
-            }
-
-            this.isTakingDmg = true;
-            this.scene.time.delayedCall(300, () => { // TODO: Could use an animation instead of a timer
-                this.isTakingDmg = false;
-                this.setVelocityX(0);
-            });
             this.recover();
         }
     }

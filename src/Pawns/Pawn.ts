@@ -23,6 +23,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     public isClimbing: boolean = false;
     public wasClimbing: boolean = false;
     public isRecovering: boolean = false
+    public isTakingDmg: boolean = false
 
     // Attributes
     protected attributes: Phaser.Structs.Map<string, number>;
@@ -109,6 +110,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.setVelocity(0,0);
         this.setAlpha(1);
         this.initStates();
+        this.isTakingDmg = false;
     }
 
     // Update
@@ -235,9 +237,34 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         }
     }
 
-    public hurt(health: number): void
+    public hurt(health: number, isProjected: boolean = false, hurtFromRight: boolean = false, velocityProjection: number = 250): void
     {
         this.setHealth(this.getHealth() - health);
+
+        if (!this.dead() && isProjected)
+        {
+            this.stopWalking();
+            this.stopClimbing();
+
+            if (hurtFromRight)
+            {
+                this.setVelocityX(-velocityProjection);
+                this.lookOnRight();
+            }
+            else
+            {
+                this.setVelocityX(velocityProjection);
+                this.lookOnLeft();
+            }
+
+            this.isTakingDmg = true;
+            this.scene.time.delayedCall(300, () => { // TODO: Could use an animation instead of a timer
+                this.isTakingDmg = false;
+                this.setVelocityX(0);
+            });
+        }
+
+
         AudioManager.playSound(this.hurtSound);
     }
 

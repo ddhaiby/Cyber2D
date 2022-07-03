@@ -130,7 +130,7 @@ export class PatrolAI extends Pawn
     {
         super.update(args);
 
-        if (!this.dead())
+        if (!this.dead() && !this.isTakingDmg)
             this.updateControl();
     }
 
@@ -156,7 +156,7 @@ export class PatrolAI extends Pawn
         }
         else
         {
-            this.anims.play(this.isWalking ? "walk" : "idle", true);
+            this.anims.play((this.isWalking || this.isTakingDmg) ? "walk" : "idle", true);
             this.setFlipX(this.isLookingLeft);
         }
     }
