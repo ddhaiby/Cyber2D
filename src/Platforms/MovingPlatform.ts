@@ -102,10 +102,10 @@ export class MovingPlatform extends Phaser.GameObjects.PathFollower
 
     private startFollowPath(pathStartX: number, pathStartY: number, pathEndX: number, pathEndY: number): void
     {
+        const loop = this.scene.game.loop;
         const path = new Phaser.Curves.Path(pathStartX, pathStartY).lineTo(pathEndX, pathEndY);
         this.setPath(path);
 
-        const loop = this.scene.game.loop;
         this.startFollow({
             duration: this.time,
             yoyo: !this.oneWay,
@@ -115,12 +115,23 @@ export class MovingPlatform extends Phaser.GameObjects.PathFollower
                 // Scale 'pathDelta' to a 1-second velocity vector, for correct collisions.
                 const body = this.body as Phaser.Physics.Arcade.Body;
                 body.velocity.copy(this.pathDelta).scale(1000 / loop.delta);
-                body.position = new Phaser.Math.Vector2(this.x - body.width / 2, this.y - body.height / 2);
 
-                this.collidedObjects.getArray().forEach((pawn: Pawn) => 
+                this.collidedObjects.getArray().forEach((pawn: Pawn) =>
                 {
-                    if (!pawn.isWalking && !pawn.isJumping)
-                        (pawn.body.velocity as Phaser.Math.Vector2).copy(body.velocity);
+                    if (!pawn.isJumping)
+                    {
+                        // The platform and the pawn go to the same X-direction
+                        if ((pawn.body.velocity.x * body.velocity.x) > 0)
+                        {
+                            const newVelocity = new Phaser.Math.Vector2(pawn.body.velocity.x + body.velocity.x, pawn.body.velocity.y + body.velocity.y);
+                            pawn.body.velocity.copy(newVelocity);
+                        }
+                        else
+                        {
+                            const newVelocity = new Phaser.Math.Vector2(pawn.body.velocity.x, pawn.body.velocity.y);
+                            pawn.body.velocity.copy(newVelocity);
+                        }
+                    }
                 });
             }
         });
