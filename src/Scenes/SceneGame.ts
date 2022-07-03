@@ -184,7 +184,7 @@ export class SceneGame extends CYBR_Scene
     private createBackground(): void
     {
         this.backgrounds = this.physics.add.staticGroup().setDepth(-999);
-        this.backgrounds.add(this.add.image(0, 0, "background").setScale(4,4).setScrollFactor(0));
+        //this.backgrounds.add(this.add.image(0, 0, "background").setScale(4,4).setScrollFactor(0));
 
         const terrain = this.currentMap.addTilesetImage("cyber_plateforms_atlas", "terrain");
         this.currentMap.createLayer("Background", [terrain], 0, 0);
@@ -349,7 +349,6 @@ export class SceneGame extends CYBR_Scene
     {
         // @ts-ignore - Problem with Phaser’s types. classType supports classes 
         const playerSpawns = this.currentMap.createFromObjects("Player", {name: "player", classType: PawnSpawn});
-
         const playerSpawn = playerSpawns[0] as PawnSpawn;
 
         this.player = new Player(this);
@@ -420,6 +419,7 @@ export class SceneGame extends CYBR_Scene
             this.physics.add.collider(ai, this.movingPlatforms, this.pawnCollideMovingPlatforms);
             this.physics.add.overlap(this.player, ai, this.onPlayerOverlapEnnemy, this.playerCanOverlapEnnemy, this);
             this.physics.add.overlap(this.player.currentWeapon.bullets, ai, this.onWeaponHitPawn, this.weaponCanHitPawn, this);
+            this.physics.add.overlap(this.player.punchHitBox, ai, this.onPunchPawn, this.canPunchPawn, this);
 
             if (ai.currentWeapon)
             {
@@ -561,6 +561,17 @@ export class SceneGame extends CYBR_Scene
     private onWeaponHitPlatforms(bullet: CYBR_Bullet, platform: Phaser.Tilemaps.TilemapLayer): void
     {
         bullet.kill();
+    }
+
+    private onPunchPawn(punch: Phaser.Physics.Arcade.Image, pawn: Pawn): void
+    {
+        pawn.hurt(5);
+        punch.emit("hit");
+    }
+
+    private canPunchPawn(bullet: CYBR_Bullet, pawn: Pawn): boolean
+    {
+        return !pawn.dead() && !pawn.isRecovering;
     }
 
     private playerReachedDeadZone(): boolean

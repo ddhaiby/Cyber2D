@@ -12,6 +12,9 @@ export class Player extends Pawn
     private currentHandPosition: Phaser.Math.Vector2;
     private handPositions: Phaser.Math.Vector2[];
     private sparkle: Phaser.GameObjects.Sprite = null;
+    private isPunching: boolean = false;
+
+    private _punchHitBox: Phaser.Physics.Arcade.Image;
 
     constructor(scene: Phaser.Scene, x?: number, y?: number, texture?: string | Phaser.Textures.Texture) {
         super(scene, x, y, texture);
@@ -23,6 +26,11 @@ export class Player extends Pawn
         this.sparkle = this.scene.add.sprite(this.x, this.y, "player");
         this.sparkle.setVisible(false);
         this.sparkle.setDepth(1);
+
+        this._punchHitBox = scene.physics.add.image(0, 0, "");
+        this._punchHitBox.disableBody(true, true);
+        (this._punchHitBox.body as Phaser.Physics.Arcade.Body).allowGravity = false;
+        this._punchHitBox.on("hit", () => { this._punchHitBox.disableBody(true, true); }, this);
     }
 
     // Init
@@ -31,6 +39,7 @@ export class Player extends Pawn
     public init(playerData: PawnData) : this
     {
         super.init(playerData, "player");
+        this._punchHitBox.setSize(10, this.height);
 
         const weaponClass = (Math.random() < 0.5) ? CyberPistol : CyberShotgun;
         let weapon = new weaponClass(this.scene, this.x, this.y);
@@ -39,6 +48,7 @@ export class Player extends Pawn
         PlayerManager.Instance.reloadKeys(this.scene);
         this.keys = PlayerManager.Instance.keyBinding;
         this.keys.jump.on("down", this.jump, this);
+        this.keys.punch.on("down", this.punch, this);
 
         this.on("healthChanged", this.updateSparkles, this);
         this.emit("healthChanged");
@@ -105,6 +115,20 @@ export class Player extends Pawn
         }
 
         this.anims.create({
+            key: "punchLeft",
+            frames: this.anims.generateFrameNames(this.texture.key, {prefix: "punchLeft_", suffix: ".png", start: 1, end: 5, zeroPad: 3 }),
+            frameRate: 18,
+            repeat: 0
+        });
+
+        this.anims.create({
+            key: "punchRight",
+            frames: this.anims.generateFrameNames(this.texture.key, {prefix: "punchRight_", suffix: ".png", start: 1, end: 5, zeroPad: 3 }),
+            frameRate: 18,
+            repeat: 0
+        });
+
+        this.anims.create({
             key: "deathRight",
             frames: this.anims.generateFrameNames(this.texture.key, { prefix: "deathRight_", suffix: ".png", start: 1, end: 4, zeroPad: 3 }),
             frameRate: 7,
@@ -124,6 +148,9 @@ export class Player extends Pawn
             frameRate: 10,
             repeat: -1
         });
+
+        this.on("animationcomplete_punchLeft", () => { this.stopPunching(); }, true);
+        this.on("animationcomplete_punchRight", () => { this.stopPunching(); }, true);
 
         const keyIdle = this.isLookingRight ? "idleRightHoldingWeapon" : "idleLeftHoldingWeapon";
         this.anims.play(keyIdle, true);
@@ -208,10 +235,14 @@ export class Player extends Pawn
         else
             this.stopWalking();
 
-        if ( this.keys.fire.isDown)
+        if (this.keys.fire.isDown && !this.isPunching)
+        {
             this.fire();
+        }
         else
+        {
             this.stopFiring();
+        }
     }
 
     protected updateAnimations() : void
@@ -231,6 +262,10 @@ export class Player extends Pawn
                 this.anims.play("climb", true);
             else
                 this.anims.pause();
+        }
+        else if (this.isPunching)
+        {
+            this.anims.play("punch" + side, true);
         }
         else if (!this.isOnFloor())
         {
@@ -265,6 +300,7 @@ export class Player extends Pawn
             this.sparkle.anims.play("sparkleOrange", true);
             this.sparkle.setVisible(true); 
         }
+        this.sparkle.setVisible(false);
     }
 
     private postUpdateSparkles(): void
@@ -289,6 +325,10 @@ export class Player extends Pawn
                 this.currentWeapon.setPosition(this.x - this.width * this.originX + this.currentHandPosition.x, this.y - this.height * this.originY + this.currentHandPosition.y);
             }
         }
+
+        const punchX = this.isLookingRight ? this.x + (this.width / 2 + this._punchHitBox.width) / 2 : this.x - (this.width / 2 + this._punchHitBox.width) / 2;
+        const punchY = this.y;
+        this._punchHitBox.setPosition(punchX, punchY);
     }
 
     private getHandPosition(): Phaser.Math.Vector2
@@ -354,5 +394,30 @@ export class Player extends Pawn
             });
             this.recover();
         }
+    }
+
+    private canPunch(): boolean
+    {
+        return !this.dead() && !this.isClimbing;
+    }
+
+    private punch(): void
+    {
+        if (this.canPunch())
+        {
+            this.isPunching = true;
+            this._punchHitBox.enableBody(false, 0, 0, true, false);
+        }
+    }
+
+    private stopPunching(): void
+    {
+        this.isPunching = false;
+        this._punchHitBox.disableBody(true, true);
+    }
+
+    public get punchHitBox(): Phaser.GameObjects.Image
+    {
+        return this._punchHitBox;
     }
 }

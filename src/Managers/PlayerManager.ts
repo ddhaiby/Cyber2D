@@ -5,6 +5,7 @@ export interface IPlayerKeys {
     right: Phaser.Input.Keyboard.Key;
     fire: Phaser.Input.Keyboard.Key;
     jump: Phaser.Input.Keyboard.Key;
+    punch: Phaser.Input.Keyboard.Key;
 }
 
 export interface ISetPlayerKeys extends Partial<IPlayerKeys> {
@@ -37,7 +38,8 @@ export class PlayerManager {
             left: "Q",
             right: "D",
             jump: "SPACE",
-            fire: "K"
+            fire: "K",
+            punch: "J"
         },false) as IPlayerKeys;
     }
 
@@ -48,7 +50,8 @@ export class PlayerManager {
             left: playerKeys.left == undefined ? this.keyBinding.left : playerKeys.left,
             right: playerKeys.right == undefined ? this.keyBinding.right : playerKeys.right,
             jump: playerKeys.jump == undefined ? this.keyBinding.jump : playerKeys.jump,
-            fire: playerKeys.fire == undefined ? this.keyBinding.fire : playerKeys.fire
+            fire: playerKeys.fire == undefined ? this.keyBinding.fire : playerKeys.fire,
+            punch: playerKeys.punch == undefined ? this.keyBinding.fire : playerKeys.punch
         },false) as IPlayerKeys;
     }
 
@@ -59,7 +62,8 @@ export class PlayerManager {
             left: this.keyBinding.left,
             right: this.keyBinding.right,
             jump: this.keyBinding.jump,
-            fire: this.keyBinding.fire
+            fire: this.keyBinding.fire,
+            punch: this.keyBinding.punch
         },true) as IPlayerKeys
     }
 }
