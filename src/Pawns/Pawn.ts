@@ -141,7 +141,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
     public canWalk(): boolean
     {
-        return !this.dead() && (this.isOnFloor() || !this.isClimbing);
+        return !this.dead() && this.isOnFloor() && !this.isClimbing;
     }
 
     public walk(): void

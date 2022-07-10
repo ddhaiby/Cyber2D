@@ -258,10 +258,12 @@ export class Player extends Pawn
         }
         else if (this.isClimbing)
         {
-            if (this.body.velocity.y != 0)
-                this.anims.play("climb", true);
-            else
+            this.anims.play("climb", true);
+
+            if (this.isOnFloor() || this.body.velocity.y == 0)
+            {
                 this.anims.pause();
+            }
         }
         else if (this.isPunching)
         {
