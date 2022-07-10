@@ -12,7 +12,7 @@ import {Player} from "../Pawns/Player";
 import { PawnSpawn } from "../Pawns/PawnSpawn";
 import { AISpawn } from "../Pawns/AIs/AISpawn";
 
-import { CYBR_Bullet } from "../Weapons/CYBR_Bullet";
+import { CYBR_Bullet } from "../Weapons/FireWeapons/CYBR_Bullet";
 
 import { Token } from "../Pickups/Token";
 import { CyberToken } from "../Pickups/CyberToken";
@@ -30,6 +30,7 @@ import { LadderManager } from "../Managers/LadderManager";
 import { AudioManager } from "../Managers/AudioManager";
 
 import {HttpServices} from "../Core/Http.Services";
+import { CyberPunch } from "src/Weapons/CyberPunch";
 
 export class SceneGame extends CYBR_Scene
 {
@@ -184,7 +185,7 @@ export class SceneGame extends CYBR_Scene
     private createBackground(): void
     {
         this.backgrounds = this.physics.add.staticGroup().setDepth(-999);
-        //this.backgrounds.add(this.add.image(0, 0, "background").setScale(4,4).setScrollFactor(0));
+        this.backgrounds.add(this.add.image(0, 0, "background").setScale(4,4).setScrollFactor(0));
 
         const terrain = this.currentMap.addTilesetImage("cyber_plateforms_atlas", "terrain");
         this.currentMap.createLayer("Background", [terrain], 0, 0);
@@ -418,8 +419,12 @@ export class SceneGame extends CYBR_Scene
         this.enemies.getChildren().forEach(function (ai: PatrolAI) {
             this.physics.add.collider(ai, this.movingPlatforms, this.pawnCollideMovingPlatforms);
             this.physics.add.overlap(this.player, ai, this.onPlayerOverlapEnnemy, this.playerCanOverlapEnnemy, this);
-            this.physics.add.overlap(this.player.currentWeapon.bullets, ai, this.onWeaponHitPawn, this.weaponCanHitPawn, this);
-            this.physics.add.overlap(this.player.punchHitBox, ai, this.onPunchPawn, this.canPunchPawn, this);
+            this.physics.add.overlap(this.player.cyberPunch, ai, this.onPunchPawn, this.canPunchPawn, this);
+
+            if (this.player.currentWeapon)
+            {
+                this.physics.add.overlap(this.player.currentWeapon.bullets, ai, this.onWeaponHitPawn, this.weaponCanHitPawn, this);
+            }
 
             if (ai.currentWeapon)
             {
@@ -563,9 +568,9 @@ export class SceneGame extends CYBR_Scene
         bullet.kill();
     }
 
-    private onPunchPawn(punch: Phaser.Physics.Arcade.Image, pawn: Pawn): void
+    private onPunchPawn(punch: CyberPunch, pawn: Pawn): void
     {
-        pawn.hurt(5, true, punch.x > pawn.x, 100);
+        pawn.hurt(punch.damage, true, punch.x > pawn.x, 100);
         punch.emit("hit");
     }
 

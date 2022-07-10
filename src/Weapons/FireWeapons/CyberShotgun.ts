@@ -1,14 +1,14 @@
 import { Bullet, ObjectWithTransform } from "phaser3-weapon-plugin";
-import { CYBR_Weapon } from "./CYBR_Weapon";
+import { CYBR_FireWeapon } from "./CYBR_FireWeapon";
 
-export class CyberShotgun extends CYBR_Weapon
+export class CyberShotgun extends CYBR_FireWeapon
 {
     constructor(scene: Phaser.Scene, x: number, y: number)
     {
         super(scene, x, y, "shotgun");
 
         this.bulletSpeed = 750;
-        this.fireLimit = 3;
+        this.fireLimit = 0;
         this.fireRate = 650;
         this.reloadRate = 650;
         this.damage = 10;

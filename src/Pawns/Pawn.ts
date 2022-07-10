@@ -1,6 +1,6 @@
 import { AudioManager } from "../Managers/AudioManager";
 import { CST } from "../CST";
-import { CYBR_Weapon } from "../Weapons/CYBR_Weapon";
+import { CYBR_FireWeapon } from "../Weapons/FireWeapons/CYBR_FireWeapon";
 import { PawnData } from "./PawnSpawn";
 
 export class Pawn extends Phaser.Physics.Arcade.Sprite
@@ -8,7 +8,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     protected startOnRight: boolean = false;
 
     // Weapons
-    public currentWeapon: CYBR_Weapon;
+    public currentWeapon: CYBR_FireWeapon;
 
     // States
     public isLookingUp: boolean = false;
@@ -33,6 +33,12 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
     /** The damage when there is a body contact */
     private bodyDamage: number = 5;
+
+    /** The number of bullet shotper fire */
+    protected bulletPerFire: number = 1;
+
+    /** The damage of each bullet */
+    protected bulletDamage: number = 1;
 
     // Sounds
     protected hurtSound: string = "";
@@ -68,6 +74,8 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
             this.maxHealth = pawnData.maxHealth;
             this.startOnRight = pawnData.startOnRight;
             this.bodyDamage = pawnData.bodyDamage;
+            this.bulletDamage = pawnData.bulletDamage;
+            this.bulletPerFire = pawnData.bulletPerFire;
         }
 
         this.initStates();
@@ -331,7 +339,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         return this.getHealth() <= 0;
     }
 
-    public equipWeapon(weapon: CYBR_Weapon): void
+    public equipWeapon(weapon: CYBR_FireWeapon): void
     {
         this.currentWeapon = weapon;
         this.currentWeapon.setOwner(this);

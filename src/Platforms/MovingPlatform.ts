@@ -31,7 +31,7 @@ export class MovingPlatform extends Phaser.GameObjects.PathFollower
         super(scene, null, x, y, texture, frame);
         this.collidedObjects = new Phaser.Structs.Map([]);
 
-        this.scene.physics.add.existing(this);
+        scene.physics.add.existing(this);
     }
 
     public init(): void

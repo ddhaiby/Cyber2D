@@ -23,12 +23,6 @@ export class AISpawn extends PawnSpawn
 
     /** The delay between each fire */
     private fireWeaponDelay: number = 1000;
-
-    /** The number of bullet shotper fire */
-    private bulletPerFire: number = 1;
-
-    /** The damage of each bullet */
-    private bulletDamage: number = 1;
     
     /** Whether the AI can moves */
     public patrol: boolean = false;

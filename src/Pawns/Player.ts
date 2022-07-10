@@ -1,7 +1,8 @@
 import {Pawn} from "./Pawn";
 import {IPlayerKeys, PlayerManager} from "../Managers/PlayerManager";
-import { CyberPistol } from "../Weapons/CyberPistol";
-import { CyberShotgun } from "../Weapons/CyberShotgun";
+import { CyberPistol } from "../Weapons/FireWeapons/CyberPistol";
+import { CyberShotgun } from "../Weapons/FireWeapons/CyberShotgun";
+import { CyberPunch } from "../Weapons/CyberPunch";
 import { CST } from "../CST";
 import { PawnData } from "./PawnSpawn";
 
@@ -13,7 +14,7 @@ export class Player extends Pawn
     private sparkle: Phaser.GameObjects.Sprite = null;
     private isPunching: boolean = false;
 
-    private _punchHitBox: Phaser.Physics.Arcade.Image;
+    private _cyberPunch: CyberPunch;
 
     constructor(scene: Phaser.Scene, x?: number, y?: number, texture?: string | Phaser.Textures.Texture) {
         super(scene, x, y, texture);
@@ -26,10 +27,10 @@ export class Player extends Pawn
         this.sparkle.setVisible(false);
         this.sparkle.setDepth(1);
 
-        this._punchHitBox = scene.physics.add.image(0, 0, "");
-        this._punchHitBox.disableBody(true, true);
-        (this._punchHitBox.body as Phaser.Physics.Arcade.Body).allowGravity = false;
-        this._punchHitBox.on("hit", () => { this._punchHitBox.disableBody(true, true); }, this);
+        this._cyberPunch = new CyberPunch(scene,0,0);
+        this._cyberPunch.disableBody(true, true);
+        (this._cyberPunch.body as Phaser.Physics.Arcade.Body).allowGravity = false;
+        this._cyberPunch.on("hit", () => { this._cyberPunch.disableBody(true, true); }, this);
     }
 
     // Init
@@ -38,7 +39,8 @@ export class Player extends Pawn
     public init(playerData: PawnData) : this
     {
         super.init(playerData, "player");
-        this._punchHitBox.setSize(10, this.height);
+        this._cyberPunch.setSize(10, this.height);
+        this._cyberPunch.damage = playerData.bodyDamage;
 
         const weaponClass = (Math.random() < 0.5) ? CyberPistol : CyberShotgun;
         let weapon = new weaponClass(this.scene, this.x, this.y);
@@ -324,9 +326,9 @@ export class Player extends Pawn
             }
         }
 
-        const punchX = this.isLookingRight ? this.x + (this.width / 2 + this._punchHitBox.width) / 2 : this.x - (this.width / 2 + this._punchHitBox.width) / 2;
+        const punchX = this.isLookingRight ? this.x + (this.width / 2 + this._cyberPunch.width) / 2 : this.x - (this.width / 2 + this._cyberPunch.width) / 2;
         const punchY = this.y;
-        this._punchHitBox.setPosition(punchX, punchY);
+        this._cyberPunch.setPosition(punchX, punchY);
     }
 
     private getHandPosition(): Phaser.Math.Vector2
@@ -386,18 +388,18 @@ export class Player extends Pawn
         if (this.canPunch())
         {
             this.isPunching = true;
-            this._punchHitBox.enableBody(false, 0, 0, true, false);
+            this._cyberPunch.enableBody(false, 0, 0, true, false);
         }
     }
 
     private stopPunching(): void
     {
         this.isPunching = false;
-        this._punchHitBox.disableBody(true, true);
+        this._cyberPunch.disableBody(true, true);
     }
 
-    public get punchHitBox(): Phaser.GameObjects.Image
+    public get cyberPunch(): CyberPunch
     {
-        return this._punchHitBox;
+        return this._cyberPunch;
     }
 }
