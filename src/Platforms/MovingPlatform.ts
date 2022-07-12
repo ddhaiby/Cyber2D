@@ -123,7 +123,7 @@ export class MovingPlatform extends Phaser.GameObjects.PathFollower
                         // The platform and the pawn go to the same X-direction
                         if ((pawn.body.velocity.x * body.velocity.x) >= 0)
                         {
-                            const newVelocity = new Phaser.Math.Vector2(pawn.body.velocity.x + body.velocity.x, pawn.body.velocity.y + body.velocity.y);
+                            const newVelocity = new Phaser.Math.Vector2(pawn.body.velocity.x + body.velocity.x, body.velocity.y);
                             pawn.body.velocity.copy(newVelocity);
                         }
                         else

@@ -17,11 +17,9 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     public isLookingLeft: boolean = false;
     public isWalking: boolean = false;
     public isJumping: boolean = false;
-    public wasJumping: boolean = false;
     protected wasOnFloor: boolean = true;
     public isFiring: boolean = false;
     public isClimbing: boolean = false;
-    public wasClimbing: boolean = false;
     public isRecovering: boolean = false
     public isTakingDmg: boolean = false
 
@@ -141,7 +139,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
     public canWalk(): boolean
     {
-        return !this.dead() && this.isOnFloor() && !this.isClimbing;
+        return !this.dead() && (this.isOnFloor() || !this.isClimbing);
     }
 
     public walk(): void
@@ -184,12 +182,11 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
     public stopClimbing(): void
     {
-        this.isClimbing = false;
-
-        if (this.wasClimbing)
+        if (this.isClimbing)
         {
             this.setVelocityY(0);
             this.setGravity(this.scene.physics.world.gravity.x, this.scene.physics.world.gravity.y);
+            this.isClimbing = false;
         }
     }
 

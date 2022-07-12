@@ -197,14 +197,17 @@ export class Player extends Pawn
     {
         super.update(args);
 
-        this.wasJumping = this.isJumping;
-        this.wasClimbing = this.isClimbing;
-
         if (this.isOnFloor())
+        {
             this.isJumping = false;
+        }
 
         if (!this.dead() && !this.isTakingDmg)
+        {
             this.updateControl();
+        }
+
+        this.wasOnFloor = this.isOnFloor();
     }
 
     public postUpdate(): void
@@ -269,7 +272,7 @@ export class Player extends Pawn
         {
             this.anims.play("punch" + side, true);
         }
-        else if (!this.isOnFloor())
+        else if (!this.isOnFloor() && !this.wasOnFloor)
         {
             this.anims.play("inAir" + side + mode, true);
         }
