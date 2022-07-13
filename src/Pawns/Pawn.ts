@@ -163,8 +163,11 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
     public stopWalking(): void
     {
-        this.setVelocityX(0);
-        this.isWalking = false;
+        if (this.isWalking)
+        {
+            this.setVelocityX(0);
+            this.isWalking = false;
+        }
     }
 
     public climb(speedX: number, speedY: number): void
