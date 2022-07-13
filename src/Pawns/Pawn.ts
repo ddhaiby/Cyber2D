@@ -48,6 +48,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
+        (this.body as Phaser.Physics.Arcade.Body).setMaxSpeed(CST.PHYSIC.PAWN_MAX_SPEED);
         this.setGravity(this.scene.physics.world.gravity.x, this.scene.physics.world.gravity.y);
         this.setCollideWorldBounds(false);
 

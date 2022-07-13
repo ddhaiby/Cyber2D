@@ -4,6 +4,7 @@ import BBCodeTextPlugin from 'phaser3-rex-plugins/plugins/bbcodetext-plugin.js';
 import TextEditPlugin from 'phaser3-rex-plugins/plugins/textedit-plugin.js';
 import {ScenePreloadAssets} from "./Scenes/ScenePreloadAssets";
 import { CYBR_Game } from './CYBR_Game';
+import { CST } from './CST';
 
 document.body.style.margin = String(0);
 document.body.style.padding = String(0);
@@ -23,7 +24,7 @@ new CYBR_Game({
     physics: {
         default: "arcade",
         arcade: {
-            gravity: {y: 530},
+            gravity: {y: CST.PHYSIC.GRAVITY},
             debug: false
         }
     },

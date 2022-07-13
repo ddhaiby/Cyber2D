@@ -7,6 +7,11 @@ export const CST = {
         MAINMENU_UI: "MAINMENU_UI",
     },
 
+    PHYSIC: {
+        GRAVITY: 530,
+        PAWN_MAX_SPEED: 1000
+    },
+
     MAIN_MENU: {
         MUSIC: "breaking-point"
     },
