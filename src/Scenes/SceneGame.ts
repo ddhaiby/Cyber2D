@@ -66,12 +66,10 @@ export class SceneGame extends CYBR_Scene
 
     public currentLevel: number;
 
-    private readonly httpService: HttpServices;
 
     constructor()
     {
         super({key: CST.SCENES.GAME});
-        this.httpService = new HttpServices();
     }
 
     // Init

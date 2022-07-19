@@ -1,14 +1,10 @@
 import {CYBR_Button} from "../CYBR_Button";
 import {CYBR_TextField} from "../CYBR_TextField";
 import {CYBR_Scene} from "../../Scenes/CYBR_Scene";
-import {HttpServices} from "../../Core/Http.Services";
-import {ShareData} from "../../Shared/SharedData";
 import {IResponsePlayer} from "../../Interface/InterfaceResponse";
 import {IRequestPlayer} from "../../Interface/InterfaceRequest";
 
 export class RegisterContainer extends Phaser.GameObjects.Container {
-    private readonly httpService: HttpServices;
-    private sharedData: ShareData;
     private textFieldUsername: CYBR_TextField;
     private textFieldEmail: CYBR_TextField;
     private textFieldPassword: CYBR_TextField;
@@ -22,8 +18,6 @@ export class RegisterContainer extends Phaser.GameObjects.Container {
         this.createButtons();
         this.createTextFields();
 
-        this.httpService = new HttpServices();
-        this.sharedData = new ShareData();
     }
 
     private createButtons() : void
@@ -102,7 +96,7 @@ export class RegisterContainer extends Phaser.GameObjects.Container {
         console.log("textFieldUsername:", this.textFieldUsername.text)
         console.log("textFieldEmail:", this.textFieldEmail.text)
         console.log("textFieldPassword:", this.textFieldPassword.text)
-        this.httpService.register({
+      /*  this.httpService.register({
             mail: this.textFieldEmail.text,
             password: this.textFieldPassword.text,
             name: this.textFieldUsername.text
@@ -123,7 +117,7 @@ export class RegisterContainer extends Phaser.GameObjects.Container {
             if(result.status==403) {
                 console.log(result.data.message);//
             }
-        });
+        });*/
 
         //this.httpService.register({mail: this.textFieldEmail.text,password: this.textFieldPassword.text,name: this.textFieldUsername.text}).then(res=>console.log(res))
 
@@ -135,7 +129,7 @@ export class RegisterContainer extends Phaser.GameObjects.Container {
         console.log("textFieldUsername:", this.textFieldUsername.text)
         console.log("textFieldEmail:", this.textFieldEmail.text)
         console.log("textFieldPassword:", this.textFieldPassword.text)
-        this.httpService.login({mail:this.textFieldEmail.text, password:this.textFieldPassword.text}).then(async result=>{
+      /*  this.httpService.login({mail:this.textFieldEmail.text, password:this.textFieldPassword.text}).then(async result=>{
             let parsedResult = JSON.parse(result.data as unknown as string);
             await this.sharedData.setToken(JSON.parse(result.data as unknown as string).message.token);
             this.httpService.getPlayerData(parsedResult.message.token).then(async result=>{
@@ -143,7 +137,7 @@ export class RegisterContainer extends Phaser.GameObjects.Container {
                 await this.sharedData.setUser(playerParsed.playerData);
             });
         });
-        this.emit("playerConnected");
+        this.emit("playerConnected");*/
     }
 
     private cancelClicked(): void {
