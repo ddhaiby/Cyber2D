@@ -38,11 +38,11 @@ export class MovingPlatform extends Phaser.GameObjects.PathFollower
     {
         this.setTexture("platform_atlas", (this.pathEndX !== null) ? "movingPlatformHorizontal.png" : "movingPlatformVertical.png");
 
-        const body = (this.body as Phaser.Physics.Arcade.Body);
+        const platformBody = (this.body as Phaser.Physics.Arcade.Body);
 
-        body.setSize(this.width, this.height);
-        body.allowGravity = false;
-        body.setImmovable(true);
+        platformBody.setSize(this.width, this.height);
+        platformBody.allowGravity = false;
+        platformBody.setImmovable(true);
 
         this.pathStartX = this.x;
         this.pathStartY = this.y;
@@ -90,8 +90,11 @@ export class MovingPlatform extends Phaser.GameObjects.PathFollower
     {
         let newCollidedObjects: Phaser.Structs.Map<string, Pawn> = new Phaser.Structs.Map([]) ;
 
+        const epsilon = 3;
         this.collidedObjects.getArray().forEach((pawn: Pawn) => {
-            if (pawn.body.touching.down && !pawn.isJumping)
+            const isPawnAbovePlatform = ((pawn.y + pawn.height / 2) - (this.y - this.height / 2) <= epsilon);
+
+            if (!pawn.isJumping && isPawnAbovePlatform)
             {
                 newCollidedObjects.set(pawn.name, pawn);
             }
@@ -113,25 +116,48 @@ export class MovingPlatform extends Phaser.GameObjects.PathFollower
             ease: this.slowOnEdges ? Phaser.Math.Easing.Sine.InOut : Phaser.Math.Easing.Linear,
             onUpdate: () => {
                 // Scale 'pathDelta' to a 1-second velocity vector, for correct collisions.
-                const body = this.body as Phaser.Physics.Arcade.Body;
-                body.velocity.copy(this.pathDelta).scale(1000 / loop.delta);
+                const platformVelocity = new Phaser.Math.Vector2(this.pathDelta.x * 1000 / loop.delta, this.pathDelta.y * 1000 / loop.delta);
+                const isPlatformMovingOnRight = (platformVelocity.x >= 0);
+                (this.body as Phaser.Physics.Arcade.Body).velocity.copy(new Phaser.Math.Vector2(isPlatformMovingOnRight ? 0.001 : -0.001)); // hack to make sure the physic body is updated
 
                 this.collidedObjects.getArray().forEach((pawn: Pawn) =>
                 {
+                    let newVelocityX = pawn.body.velocity.x;
+                    let newVelocitY = pawn.body.velocity.y;
+
                     if (!pawn.isJumping)
                     {
-                        // The platform and the pawn go to the same X-direction
-                        if ((pawn.body.velocity.x * body.velocity.x) >= 0)
+                        // Update x
+                        if (!pawn.isWalking)
                         {
-                            const newVelocity = new Phaser.Math.Vector2(pawn.body.velocity.x + body.velocity.x, body.velocity.y);
-                            pawn.body.velocity.copy(newVelocity);
+                            newVelocityX = platformVelocity.x;
                         }
-                        else
+                        else if (isPlatformMovingOnRight && pawn.isLookingRight) // Platform and pawn go on the right
                         {
-                            const newVelocity = new Phaser.Math.Vector2(pawn.body.velocity.x, pawn.body.velocity.y);
-                            pawn.body.velocity.copy(newVelocity);
+                            newVelocityX = platformVelocity.x + pawn.getWalkSpeed();
+                        }
+                        else if(!isPlatformMovingOnRight && pawn.isLookingLeft) // Platform and pawn go on the left
+                        {
+                            newVelocityX = platformVelocity.x - pawn.getWalkSpeed();
+                        }
+                        else // Platform and pawn go on opposite directions
+                        {
+                            newVelocityX = pawn.body.velocity.x;
+                        }
+
+                        // Update y
+                        if (this.pathDelta.y > 0)
+                        {
+                            newVelocitY = platformVelocity.y * 2;
                         }
                     }
+                    else
+                    {
+                        newVelocityX = 0;
+                        newVelocitY = pawn.body.velocity.y;
+                    }
+
+                    pawn.body.velocity.copy(new Phaser.Math.Vector2(newVelocityX, newVelocitY));
                 });
             }
         });

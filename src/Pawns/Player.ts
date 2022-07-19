@@ -207,13 +207,14 @@ export class Player extends Pawn
             this.updateControl();
         }
 
-        this.wasOnFloor = this.isOnFloor();
     }
 
     public postUpdate(): void
     {
         this.postUpdateHand();
         this.postUpdateSparkles();
+
+        this.wasOnFloor = this.isOnFloor();
     }
 
     protected updateControl() : void
