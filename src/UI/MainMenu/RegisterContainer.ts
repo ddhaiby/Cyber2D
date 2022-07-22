@@ -3,18 +3,20 @@ import {CYBR_TextField} from "../CYBR_TextField";
 import {CYBR_Scene} from "../../Scenes/CYBR_Scene";
 import {IResponsePlayer} from "../../Interface/InterfaceResponse";
 import {IRequestPlayer} from "../../Interface/InterfaceRequest";
+import {HttpServices} from "../../Core/Http.Services";
 
 export class RegisterContainer extends Phaser.GameObjects.Container {
     private textFieldUsername: CYBR_TextField;
     private textFieldEmail: CYBR_TextField;
     private textFieldPassword: CYBR_TextField;
-
+    private httpService:HttpServices;
+    static resultOauth;
     constructor(scene: CYBR_Scene, x?: number, y?: number) {
         super(scene, x, y);
         scene.add.existing(this);
         this.width = scene.scale.displaySize.width;
         this.height = scene.scale.displaySize.height;
-
+        this.httpService =new HttpServices();
         this.createButtons();
         this.createTextFields();
 
@@ -89,14 +91,43 @@ export class RegisterContainer extends Phaser.GameObjects.Container {
         }
         return this;
     }
+    private async ShowAuthWindow(options) {
+        new Promise((res) =>
+        {
+            console.log('ee');
+            options.windowName = options.windowName || '_blank'; // should not include space for IE
+            options.windowOptions = options.windowOptions || 'location=0,status=0,width=800,height=400';
+            options.callback = options.callback || function () {
+                window.location.reload();
+            };
+            console.log(options.path);
+            let _oauthWindow = window.open(options.path, options.windowName, options.windowOptions);
+            console.log(_oauthWindow);
 
-    private confirmLoginClicked(): void {
+            let _oauthInterval = window.setInterval(function () {
+                if (_oauthWindow.closed) {
+                    console.log('closed');
+                    clearInterval(_oauthInterval);
+                    new HttpServices().loginValidation().then(console.log);
+                }
+            }, 100);
+        })
+    }
+    private  confirmLoginClicked(): void {
         // this.httpService.register({mail:"pierreluucmillet@gmail.com",password:"A1azerty*",name:"Pldu78"}).then(res=>console.log(res));
 
         console.log("textFieldUsername:", this.textFieldUsername.text)
         console.log("textFieldEmail:", this.textFieldEmail.text)
         console.log("textFieldPassword:", this.textFieldPassword.text)
-      /*  this.httpService.register({
+        this.httpService.login().then(async result =>{
+            console.log(result)
+
+            await this.ShowAuthWindow({path:JSON.parse(result.data as unknown as string).url,callback:{}});
+
+        });
+
+
+        /*  this.httpService.register({
             mail: this.textFieldEmail.text,
             password: this.textFieldPassword.text,
             name: this.textFieldUsername.text
