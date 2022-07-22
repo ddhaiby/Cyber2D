@@ -5,7 +5,8 @@
   "main": "./src/main.ts",
   "scripts": {
     "start": "parcel serve ./index.html",
-    "build": "parcel build ./index.html"
+    "build": "parcel build ./index.html",
+    "test":"echo test"
   },
   "keywords": [],
   "author": "The Cybros",
