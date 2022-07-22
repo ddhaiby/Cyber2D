@@ -11,28 +11,30 @@ export class HttpServices {
         this.axiosService = new Axios({
             headers: {
                 'Content-Type': 'application/json',
-                'Access-Allow-Control-Origin':'*'
+                'Access-Allow-Control-Origin':this.baseUrl
             }
         })
     }
     public setAuthToken(token: string): void {
         this.authToken = token;
     }
-    register(data: IRequestRegister): Promise<AxiosResponse<IResponseRegister>> {
+    /*register(data: IRequestRegister): Promise<AxiosResponse<IResponseRegister>> {
         console.log(data);
         return this.axiosService.post<IResponseRegister>(this.baseUrl + "/auth/register", JSON.stringify(data),{method:"POST",headers:{'Access-Allow-Control-Origin':'*'
             }});
+    }*/
+
+    login():Promise<AxiosResponse<IResponseLogin>> {
+        return this.axiosService.post<IResponseLogin>(this.baseUrl + "/api/login/");
+    }
+    loginValidation():Promise <AxiosResponse>{
+       return this.axiosService.post(this.baseUrl+'/api/auth/');
+    }
+    logout(token:string):Promise<AxiosResponse<IResponse>> {
+        return this.axiosService.post(this.baseUrl + "/api/logout/",{token:token});
     }
 
-    login(data: IRequestLogin): Promise<AxiosResponse<IResponseLogin>> {
-        return this.axiosService.post<IResponseLogin>(this.baseUrl + "/auth/login",JSON.stringify(data));
-    }
-
-    logout():Promise<AxiosResponse<IResponse>> {
-        return this.axiosService.delete(this.baseUrl + "/auth/logout");
-    }
-
-    createPlayerData(data: IRequestPlayer): Promise<AxiosResponse<IResponsePlayer>> {
+    /*createPlayerData(data: IRequestPlayer): Promise<AxiosResponse<IResponsePlayer>> {
         return this.axiosService.put<IResponsePlayer>(this.baseUrl + "/player/add",JSON.stringify(data));
     }
 
@@ -49,5 +51,5 @@ export class HttpServices {
     }
     getLevel(level:string){
         return this.baseUrl+"/levels/"+level+".json";
-    }
+    }*/
 }
