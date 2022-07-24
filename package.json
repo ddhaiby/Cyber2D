@@ -23,11 +23,12 @@
     "phaser": "^3.55.2",
     "phaser3-rex-plugins": "^1.1.67",
     "phaser3-weapon-plugin": "^2.2.0",
-    "src": "^1.1.2",
+    "src": "^1.0.0",
     "ts-loader": "^9.2.8",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
     "typescript": "^4.6.2"
+
   }
 }
