@@ -1,5 +1,6 @@
 import { AudioManager } from "../Managers/AudioManager";
 import { CST } from "../CST";
+import { CYBR_MeleeWeapon } from "../Weapons/MeleeWeapons/CYBR_MeleeWeapon";
 import { CYBR_FireWeapon } from "../Weapons/FireWeapons/CYBR_FireWeapon";
 import { PawnData } from "./PawnSpawn";
 
@@ -22,6 +23,18 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     public isClimbing: boolean = false;
     public isRecovering: boolean = false
     public isTakingDmg: boolean = false
+
+    /** Whether the pawn do a melee attack */
+    protected isMeleeAttacking: boolean = false;
+
+    /** Whether the AI is preparing an attack */
+    protected isPreparingAttack: boolean = false;
+    
+    /** The delay before the attack */
+    protected prepareAttackDelay: number = 0;
+    
+    /** The melee weapon */
+    protected _meleeWeapon: CYBR_MeleeWeapon = null;
 
     // Attributes
     protected attributes: Phaser.Structs.Map<string, number>;
@@ -340,6 +353,45 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     {
         return this.getHealth() <= 0;
     }
+
+    // Melee Attack
+    ////////////////////////////////////////////////////////////////////////
+
+    protected canAttack(): boolean
+    {
+        return !this.dead() && !this.isMeleeAttacking && !this.isPreparingAttack;
+    }
+
+    protected attack(): void
+    {
+        if (this.canAttack())
+        {
+            this.stopWalking();
+
+            this.isPreparingAttack = true;
+
+            this.scene.time.delayedCall(this.prepareAttackDelay, () => {
+                this.isPreparingAttack = false;
+                this.isMeleeAttacking = true;
+                this._meleeWeapon.enableBody(false, 0, 0, true, false);
+            });
+        }
+    }
+
+    protected stopAttacking(): void
+    {
+        this.isMeleeAttacking = false;
+        this.isPreparingAttack = false;
+        this._meleeWeapon.disableBody(true, true);
+    }
+
+    public get meleeWeapon(): CYBR_MeleeWeapon
+    {
+        return this._meleeWeapon;
+    }
+    
+    // Fire weapon
+    ////////////////////////////////////////////////////////////////////////
 
     public equipWeapon(weapon: CYBR_FireWeapon): void
     {

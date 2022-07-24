@@ -2,7 +2,7 @@ import {Pawn} from "./Pawn";
 import {IPlayerKeys, PlayerManager} from "../Managers/PlayerManager";
 import { CyberPistol } from "../Weapons/FireWeapons/CyberPistol";
 import { CyberShotgun } from "../Weapons/FireWeapons/CyberShotgun";
-import { CyberPunch } from "../Weapons/CyberPunch";
+import { CyberPunch } from "../Weapons/MeleeWeapons/CyberPunch";
 import { CST } from "../CST";
 import { PawnData } from "./PawnSpawn";
 
@@ -12,9 +12,6 @@ export class Player extends Pawn
     private currentHandPosition: Phaser.Math.Vector2;
     private handPositions: Phaser.Math.Vector2[];
     private sparkle: Phaser.GameObjects.Sprite = null;
-    private isPunching: boolean = false;
-
-    private _cyberPunch: CyberPunch;
 
     constructor(scene: Phaser.Scene, x?: number, y?: number, texture?: string | Phaser.Textures.Texture) {
         super(scene, x, y, texture);
@@ -27,10 +24,10 @@ export class Player extends Pawn
         this.sparkle.setVisible(false);
         this.sparkle.setDepth(1);
 
-        this._cyberPunch = new CyberPunch(scene,0,0);
-        this._cyberPunch.disableBody(true, true);
-        (this._cyberPunch.body as Phaser.Physics.Arcade.Body).allowGravity = false;
-        this._cyberPunch.on("hit", () => { this._cyberPunch.disableBody(true, true); }, this);
+        this._meleeWeapon = new CyberPunch(scene, this);
+        this._meleeWeapon.disableBody(true, true);
+        (this._meleeWeapon.body as Phaser.Physics.Arcade.Body).allowGravity = false;
+        this._meleeWeapon.on("hit", () => { this._meleeWeapon.disableBody(true, true); }, this);
     }
 
     // Init
@@ -39,8 +36,7 @@ export class Player extends Pawn
     public init(playerData: PawnData) : this
     {
         super.init(playerData, "player");
-        this._cyberPunch.setSize(10, this.height);
-        this._cyberPunch.damage = playerData.bodyDamage;
+        this._meleeWeapon.damage = playerData.bodyDamage;
 
         const weaponClass = (Math.random() < 0.5) ? CyberPistol : CyberShotgun;
         let weapon = new weaponClass(this.scene, this.x, this.y);
@@ -49,7 +45,7 @@ export class Player extends Pawn
         PlayerManager.Instance.reloadKeys(this.scene);
         this.keys = PlayerManager.Instance.keyBinding;
         this.keys.jump.on("down", this.jump, this);
-        this.keys.punch.on("down", this.punch, this);
+        this.keys.punch.on("down", this.attack, this);
 
         this.on("healthChanged", this.updateSparkles, this);
         this.emit("healthChanged");
@@ -150,8 +146,8 @@ export class Player extends Pawn
             repeat: -1
         });
 
-        this.on("animationcomplete_punchLeft", () => { this.stopPunching(); }, true);
-        this.on("animationcomplete_punchRight", () => { this.stopPunching(); }, true);
+        this.on("animationcomplete_punchLeft", () => { this.stopAttacking(); }, true);
+        this.on("animationcomplete_punchRight", () => { this.stopAttacking(); }, true);
 
         const keyIdle = this.isLookingRight ? "idleRightHoldingWeapon" : "idleLeftHoldingWeapon";
         this.anims.play(keyIdle, true);
@@ -239,7 +235,7 @@ export class Player extends Pawn
         else
             this.stopWalking();
 
-        if (this.keys.fire.isDown && !this.isPunching)
+        if (this.keys.fire.isDown && !this.isMeleeAttacking)
         {
             this.fire();
         }
@@ -269,7 +265,7 @@ export class Player extends Pawn
                 this.anims.pause();
             }
         }
-        else if (this.isPunching)
+        else if (this.isMeleeAttacking)
         {
             this.anims.play("punch" + side, true);
         }
@@ -332,9 +328,9 @@ export class Player extends Pawn
             }
         }
 
-        const punchX = this.isLookingRight ? this.x + (this.width / 2 + this._cyberPunch.width) / 2 : this.x - (this.width / 2 + this._cyberPunch.width) / 2;
+        const punchX = this.isLookingRight ? this.x + (this.width / 2 + this._meleeWeapon.width) / 2 : this.x - (this.width / 2 + this._meleeWeapon.width) / 2;
         const punchY = this.y;
-        this._cyberPunch.setPosition(punchX, punchY);
+        this._meleeWeapon.setPosition(punchX, punchY);
     }
 
     private getHandPosition(): Phaser.Math.Vector2
@@ -384,28 +380,8 @@ export class Player extends Pawn
         }
     }
 
-    private canPunch(): boolean
+    protected canAttack(): boolean
     {
-        return !this.dead() && !this.isClimbing;
-    }
-
-    private punch(): void
-    {
-        if (this.canPunch())
-        {
-            this.isPunching = true;
-            this._cyberPunch.enableBody(false, 0, 0, true, false);
-        }
-    }
-
-    private stopPunching(): void
-    {
-        this.isPunching = false;
-        this._cyberPunch.disableBody(true, true);
-    }
-
-    public get cyberPunch(): CyberPunch
-    {
-        return this._cyberPunch;
+        return super.canAttack() && !this.isClimbing;
     }
 }

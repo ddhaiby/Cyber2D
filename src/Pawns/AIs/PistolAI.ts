@@ -6,6 +6,6 @@ export class PistolAI extends ShooterAI
     {
         super(scene, x, y, texture, frame);
 
-        this.weaponName = "pistol";
+        this.aiName = "pistol";
     }
 }

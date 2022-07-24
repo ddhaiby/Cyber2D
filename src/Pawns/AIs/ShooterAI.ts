@@ -58,6 +58,14 @@ export class ShooterAI extends BasicAI
         this.scene.time.delayedCall(this.startFireWeponDelay, this.prepareNextFire, null, this);
     }
 
+    // Update
+    ////////////////////////////////////////////////////////////////////////
+    
+    protected updateControl() : void
+    {
+        this.doPatrol();
+    }
+
     public postUpdate(): void
     {
         super.postUpdate();
@@ -78,4 +86,5 @@ export class ShooterAI extends BasicAI
             this.prepareNextFire();
         }});
     }
+
 }

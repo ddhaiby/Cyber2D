@@ -233,12 +233,12 @@ export class CYBR_FireWeapon extends CYBR_Weapon
         this.weapon.fireAngle = fireAngle;
     }
 
-    protected get fireRate(): number
+    public get fireRate(): number
     {
         return this.weapon.fireRate;
     }
 
-    protected set fireRate(fireRate: number)
+    public set fireRate(fireRate: number)
     {
         this.weapon.fireRate = fireRate;
     }
@@ -258,12 +258,12 @@ export class CYBR_FireWeapon extends CYBR_Weapon
         this.weapon.bulletKillType = bulletKillType;
     }
 
-    protected get fireLimit(): number
+    public get fireLimit(): number
     {
         return this.weapon.fireLimit;
     }
 
-    protected set fireLimit(fireLimit: number)
+    public set fireLimit(fireLimit: number)
     {
         this.weapon.fireLimit = fireLimit;
     }

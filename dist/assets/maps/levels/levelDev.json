@@ -1332,233 +1332,6 @@
          "name":"Enemies",
          "objects":[
                 {
-                 "gid":1039,
-                 "height":32,
-                 "id":919,
-                 "name":"RifleAI",
-                 "properties":[
-                        {
-                         "name":"bodyDamage",
-                         "type":"float",
-                         "value":5
-                        }, 
-                        {
-                         "name":"bulletDamage",
-                         "type":"float",
-                         "value":5
-                        }, 
-                        {
-                         "name":"bulletPerFire",
-                         "type":"string",
-                         "value":"2"
-                        }, 
-                        {
-                         "name":"fireWeapon",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"fireWeaponDelay",
-                         "type":"float",
-                         "value":2000
-                        }, 
-                        {
-                         "name":"maxHealth",
-                         "type":"float",
-                         "value":10
-                        }, 
-                        {
-                         "name":"patrol",
-                         "type":"bool",
-                         "value":false
-                        }, 
-                        {
-                         "name":"startFireWeponDelay",
-                         "type":"float",
-                         "value":1000
-                        }, 
-                        {
-                         "name":"startOnRight",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":576,
-                 "y":544
-                }, 
-                {
-                 "gid":1039,
-                 "height":32,
-                 "id":920,
-                 "name":"RifleAI",
-                 "properties":[
-                        {
-                         "name":"bodyDamage",
-                         "type":"float",
-                         "value":5
-                        }, 
-                        {
-                         "name":"bulletDamage",
-                         "type":"float",
-                         "value":5
-                        }, 
-                        {
-                         "name":"bulletPerFire",
-                         "type":"string",
-                         "value":"2"
-                        }, 
-                        {
-                         "name":"fireWeapon",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"fireWeaponDelay",
-                         "type":"float",
-                         "value":2000
-                        }, 
-                        {
-                         "name":"maxHealth",
-                         "type":"float",
-                         "value":10
-                        }, 
-                        {
-                         "name":"patrol",
-                         "type":"bool",
-                         "value":false
-                        }, 
-                        {
-                         "name":"startFireWeponDelay",
-                         "type":"float",
-                         "value":0
-                        }, 
-                        {
-                         "name":"startOnRight",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":632,
-                 "y":544
-                }, 
-                {
-                 "gid":1040,
-                 "height":32,
-                 "id":921,
-                 "name":"PistolAI",
-                 "properties":[
-                        {
-                         "name":"bodyDamage",
-                         "type":"float",
-                         "value":5
-                        }, 
-                        {
-                         "name":"bulletDamage",
-                         "type":"float",
-                         "value":5
-                        }, 
-                        {
-                         "name":"bulletPerFire",
-                         "type":"string",
-                         "value":"2"
-                        }, 
-                        {
-                         "name":"fireWeapon",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"fireWeaponDelay",
-                         "type":"float",
-                         "value":2000
-                        }, 
-                        {
-                         "name":"maxHealth",
-                         "type":"float",
-                         "value":10
-                        }, 
-                        {
-                         "name":"pathEndX",
-                         "type":"float",
-                         "value":815
-                        }, 
-                        {
-                         "name":"pathStartX",
-                         "type":"float",
-                         "value":665
-                        }, 
-                        {
-                         "name":"patrol",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"startFireWeponDelay",
-                         "type":"float",
-                         "value":0
-                        }, 
-                        {
-                         "name":"startOnRight",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":736,
-                 "y":416
-                }, 
-                {
-                 "gid":1041,
-                 "height":32,
-                 "id":928,
-                 "name":"MeleeAI",
-                 "properties":[
-                        {
-                         "name":"bodyDamage",
-                         "type":"float",
-                         "value":5
-                        }, 
-                        {
-                         "name":"maxHealth",
-                         "type":"float",
-                         "value":20
-                        }, 
-                        {
-                         "name":"pathEndX",
-                         "type":"float",
-                         "value":815
-                        }, 
-                        {
-                         "name":"pathStartX",
-                         "type":"float",
-                         "value":665
-                        }, 
-                        {
-                         "name":"patrol",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"startOnRight",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":648,
-                 "y":736
-                }, 
-                {
                  "gid":1041,
                  "height":32,
                  "id":929,
@@ -1590,6 +1363,11 @@
                          "value":true
                         }, 
                         {
+                         "name":"prepareAttackDelay",
+                         "type":"float",
+                         "value":400
+                        }, 
+                        {
                          "name":"startOnRight",
                          "type":"bool",
                          "value":true
@@ -1598,7 +1376,7 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":672,
+                 "x":664,
                  "y":736
                 }],
          "opacity":1,
@@ -1626,7 +1404,7 @@
                         {
                          "name":"maxHealth",
                          "type":"float",
-                         "value":15
+                         "value":5000
                         }, 
                         {
                          "name":"startOnRight",
