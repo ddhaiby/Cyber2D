@@ -1,29 +1,30 @@
 import {CYBR_Button} from "../CYBR_Button";
 import {CYBR_TextField} from "../CYBR_TextField";
 import {CYBR_Scene} from "../../Scenes/CYBR_Scene";
-import {IResponsePlayer} from "../../Interface/InterfaceResponse";
-import {IRequestPlayer} from "../../Interface/InterfaceRequest";
 import {HttpServices} from "../../Core/Http.Services";
+import {StorageService} from "../../Shared/StorageService";
 
 export class RegisterContainer extends Phaser.GameObjects.Container {
     private textFieldUsername: CYBR_TextField;
     private textFieldEmail: CYBR_TextField;
     private textFieldPassword: CYBR_TextField;
-    private httpService:HttpServices;
-    static resultOauth;
+    private httpService: HttpServices;
+    private localStorage: StorageService;
+
     constructor(scene: CYBR_Scene, x?: number, y?: number) {
         super(scene, x, y);
         scene.add.existing(this);
         this.width = scene.scale.displaySize.width;
         this.height = scene.scale.displaySize.height;
-        this.httpService =new HttpServices();
+        this.httpService = new HttpServices();
+        this.localStorage = new StorageService();
         this.createButtons();
-        this.createTextFields();
+        //this.createTextFields();
+
 
     }
 
-    private createButtons() : void
-    {
+    private createButtons(): void {
         const buttonCancel = new CYBR_Button(this.scene, 100, 520, "Cancel");
         buttonCancel.onClicked(this.cancelClicked, this);
         (this.scene as CYBR_Scene).centerHItem(buttonCancel, -320);
@@ -81,7 +82,7 @@ export class RegisterContainer extends Phaser.GameObjects.Container {
         this.add(labelPassword);
     }
 
-    public setVisible(value: boolean): this {
+   /* public setVisible(value: boolean): this {
         super.setVisible(value);
 
         if (value) {
@@ -91,38 +92,40 @@ export class RegisterContainer extends Phaser.GameObjects.Container {
         }
         return this;
     }
+*/
     private async ShowAuthWindow(options) {
-        new Promise((res) =>
-        {
-            console.log('ee');
+
             options.windowName = options.windowName || '_blank'; // should not include space for IE
             options.windowOptions = options.windowOptions || 'location=0,status=0,width=800,height=400';
             options.callback = options.callback || function () {
                 window.location.reload();
             };
-            console.log(options.path);
+
             let _oauthWindow = window.open(options.path, options.windowName, options.windowOptions);
-            console.log(_oauthWindow);
+
 
             let _oauthInterval = window.setInterval(function () {
                 if (_oauthWindow.closed) {
-                    console.log('closed');
+
                     clearInterval(_oauthInterval);
-                    new HttpServices().loginValidation().then(console.log);
+                    new HttpServices().loginValidation().then(result => {
+                        if(result.status==200) {
+                            new StorageService().setToken(JSON.parse(result.data).JWT).then(() => new StorageService().setUserData({
+                                username: JSON.parse(result.data).username,
+                                email: JSON.parse(result.data).email
+                            }))
+                        }
+                    });
                 }
             }, 100);
-        })
     }
-    private  confirmLoginClicked(): void {
-        // this.httpService.register({mail:"pierreluucmillet@gmail.com",password:"A1azerty*",name:"Pldu78"}).then(res=>console.log(res));
 
-        console.log("textFieldUsername:", this.textFieldUsername.text)
-        console.log("textFieldEmail:", this.textFieldEmail.text)
-        console.log("textFieldPassword:", this.textFieldPassword.text)
-        this.httpService.login().then(async result =>{
-            console.log(result)
+    private confirmLoginClicked(): void {
+        // this.httpService.register({mail:"pierreluucmillet@gmail.com",password:"A1azerty*",name:"Pldu78"}).then(res=>
 
-            await this.ShowAuthWindow({path:JSON.parse(result.data as unknown as string).url,callback:{}});
+
+        this.httpService.login().then(async result => {
+            await this.ShowAuthWindow({path: JSON.parse(result.data as unknown as string).url, callback: {}});
 
         });
 
@@ -132,7 +135,7 @@ export class RegisterContainer extends Phaser.GameObjects.Container {
             password: this.textFieldPassword.text,
             name: this.textFieldUsername.text
         }).then(async res => {
-            console.log(JSON.parse(res.data as unknown as string).message.token);
+
             await this.sharedData.setToken(JSON.parse(res.data as unknown as string).message.token);
             const playerData: IRequestPlayer = {
                 playerId:JSON.parse(res.data as unknown as string).message.token ,
@@ -143,32 +146,30 @@ export class RegisterContainer extends Phaser.GameObjects.Container {
                 best_time: 9*3600000,
             }
             let result = await this.httpService.createPlayerData(playerData);
-            console.log(JSON.parse(result.data as unknown as string).playerData);
+
             await this.sharedData.setUser(JSON.parse(result.data as unknown as string).playerData);
             if(result.status==403) {
-                console.log(result.data.message);//
+
             }
         });*/
 
-        //this.httpService.register({mail: this.textFieldEmail.text,password: this.textFieldPassword.text,name: this.textFieldUsername.text}).then(res=>console.log(res))
+        //this.httpService.register({mail: this.textFieldEmail.text,password: this.textFieldPassword.text,name: this.textFieldUsername.text}).then(res=>
 
         this.emit("playerConnected");
     }
 
     private signUpClicked(): void {
 
-        console.log("textFieldUsername:", this.textFieldUsername.text)
-        console.log("textFieldEmail:", this.textFieldEmail.text)
-        console.log("textFieldPassword:", this.textFieldPassword.text)
-      /*  this.httpService.login({mail:this.textFieldEmail.text, password:this.textFieldPassword.text}).then(async result=>{
-            let parsedResult = JSON.parse(result.data as unknown as string);
-            await this.sharedData.setToken(JSON.parse(result.data as unknown as string).message.token);
-            this.httpService.getPlayerData(parsedResult.message.token).then(async result=>{
-                let playerParsed = JSON.parse(result.data as unknown as string);
-                await this.sharedData.setUser(playerParsed.playerData);
-            });
-        });
-        this.emit("playerConnected");*/
+
+        /*  this.httpService.login({mail:this.textFieldEmail.text, password:this.textFieldPassword.text}).then(async result=>{
+              let parsedResult = JSON.parse(result.data as unknown as string);
+              await this.sharedData.setToken(JSON.parse(result.data as unknown as string).message.token);
+              this.httpService.getPlayerData(parsedResult.message.token).then(async result=>{
+                  let playerParsed = JSON.parse(result.data as unknown as string);
+                  await this.sharedData.setUser(playerParsed.playerData);
+              });
+          });
+          this.emit("playerConnected");*/
     }
 
     private cancelClicked(): void {
