@@ -1581,6 +1581,11 @@
                  "name":"player",
                  "properties":[
                         {
+                         "name":"bodyDamage",
+                         "type":"float",
+                         "value":5
+                        }, 
+                        {
                          "name":"maxHealth",
                          "type":"float",
                          "value":15
