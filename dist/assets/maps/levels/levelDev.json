@@ -1335,7 +1335,7 @@
                  "gid":1040,
                  "height":32,
                  "id":586,
-                 "name":"patrolAI",
+                 "name":"PistolAI",
                  "properties":[
                         {
                          "name":"bodyDamage",
@@ -1383,7 +1383,7 @@
                  "gid":1039,
                  "height":32,
                  "id":919,
-                 "name":"patrolAI",
+                 "name":"RifleAI",
                  "properties":[
                         {
                          "name":"bodyDamage",
@@ -1441,7 +1441,7 @@
                  "gid":1039,
                  "height":32,
                  "id":920,
-                 "name":"patrolAI",
+                 "name":"RifleAI",
                  "properties":[
                         {
                          "name":"bodyDamage",
@@ -1499,7 +1499,7 @@
                  "gid":1039,
                  "height":32,
                  "id":921,
-                 "name":"patrolAI",
+                 "name":"RifleAI",
                  "properties":[
                         {
                          "name":"bodyDamage",

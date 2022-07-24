@@ -6,7 +6,8 @@ import {SceneGameMenu_UI} from "./SceneGameMenu_UI";
 import {SceneMainMenu_UI} from "./SceneMainMenu_UI";
 
 import {Pawn} from "../Pawns/Pawn";
-import {ShooterAI} from "../Pawns/AIs/ShooterAI";
+import {RifleAI} from "../Pawns/AIs/RifleAI";
+import {PistolAI} from "../Pawns/AIs/PistolAI";
 import {Player} from "../Pawns/Player";
 import {PawnSpawn} from "../Pawns/PawnSpawn";
 import {AISpawn} from "../Pawns/AIs/AISpawn";
@@ -343,19 +344,28 @@ export class SceneGame extends CYBR_Scene {
     private createEnemies(): this {
         this.enemies = this.physics.add.group();
 
-        // @ts-ignore - Problem with Phaser’s types. classType supports classes
-        const aiSpawns = this.currentMap.createFromObjects("Enemies", {name: "patrolAI", classType: AISpawn});
+        const aIClasses = {
+            "PistolAI": PistolAI,
+            "RifleAI": RifleAI,
+        };
 
-        aiSpawns.map((aiSpawn: AISpawn) => {
-            const ai = new ShooterAI(this);
-            this.enemies.add(ai);
-            ai.init(aiSpawn.getPawnData());
+        for (let className in aIClasses)
+        {
+            //@ts-ignore - Problem with Phaser’s types. classType supports classes
+            const aiSpawns = this.currentMap.createFromObjects("Enemies", {name: className, classType: AISpawn});
 
-            ai.setName(CYBR_Scene.generateUniqueName(ai));
-            this.spawnPositions.set(ai.name, new Phaser.Math.Vector2(ai.x, ai.y));
+            aiSpawns.map((aiSpawn: AISpawn) => {
+                const ai = new aIClasses[className](this);
 
-            aiSpawn.destroy();
-        });
+                this.enemies.add(ai);
+                ai.init(aiSpawn.getPawnData());
+
+                ai.setName(CYBR_Scene.generateUniqueName(ai));
+                this.spawnPositions.set(ai.name, new Phaser.Math.Vector2(ai.x, ai.y));
+
+                aiSpawn.destroy();
+            });
+        }
         return this;
     }
 
@@ -391,7 +401,7 @@ export class SceneGame extends CYBR_Scene {
 
         /////// Enemies
         this.physics.add.collider(this.enemies, this.platforms);
-        this.enemies.getChildren().forEach(function (ai: ShooterAI) {
+        this.enemies.getChildren().forEach(function (ai: RifleAI) {
             this.physics.add.collider(ai, this.movingPlatforms, this.pawnCollideMovingPlatforms);
             this.physics.add.overlap(this.player, ai, this.onPlayerOverlapEnnemy, this.playerCanOverlapEnnemy, this);
             this.physics.add.overlap(this.player.cyberPunch, ai, this.onPunchPawn, this.canPunchPawn, this);
@@ -471,7 +481,7 @@ export class SceneGame extends CYBR_Scene {
     }
 
     private restartAIs(): void {
-        this.enemies.getChildren().forEach(function (ai: ShooterAI) {
+        this.enemies.getChildren().forEach(function (ai: RifleAI) {
             this.respawnPawn(ai);
         }, this);
     }
@@ -503,14 +513,14 @@ export class SceneGame extends CYBR_Scene {
             this.player.setHealth(0);
 
         this.player.update();
-        this.enemies.getChildren().forEach((ai: ShooterAI) => {
+        this.enemies.getChildren().forEach((ai: RifleAI) => {
             ai.update();
         }, this);
     }
 
     private postUpdate(): void {
         this.player.postUpdate();
-        this.enemies.getChildren().forEach((ai: ShooterAI) => {
+        this.enemies.getChildren().forEach((ai: RifleAI) => {
             ai.postUpdate();
         }, this);
     }
