@@ -6,11 +6,12 @@ import {SceneGameMenu_UI} from "./SceneGameMenu_UI";
 import {SceneMainMenu_UI} from "./SceneMainMenu_UI";
 
 import {Pawn} from "../Pawns/Pawn";
-import {RifleAI} from "../Pawns/AIs/RifleAI";
-import {PistolAI} from "../Pawns/AIs/PistolAI";
-import {Player} from "../Pawns/Player";
 import {PawnSpawn} from "../Pawns/PawnSpawn";
 import {AISpawn} from "../Pawns/AIs/AISpawn";
+import {RifleAI} from "../Pawns/AIs/RifleAI";
+import {PistolAI} from "../Pawns/AIs/PistolAI";
+import {MeleeAI} from "../Pawns/AIs/MeleeAI";
+import {Player} from "../Pawns/Player";
 
 import {CYBR_Bullet} from "../Weapons/FireWeapons/CYBR_Bullet";
 
@@ -347,6 +348,7 @@ export class SceneGame extends CYBR_Scene {
         const aIClasses = {
             "PistolAI": PistolAI,
             "RifleAI": RifleAI,
+            "MeleeAI": MeleeAI
         };
 
         for (let className in aIClasses)

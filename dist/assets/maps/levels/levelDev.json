@@ -1332,54 +1332,6 @@
          "name":"Enemies",
          "objects":[
                 {
-                 "gid":1040,
-                 "height":32,
-                 "id":586,
-                 "name":"PistolAI",
-                 "properties":[
-                        {
-                         "name":"bodyDamage",
-                         "type":"float",
-                         "value":5
-                        }, 
-                        {
-                         "name":"fireWeapon",
-                         "type":"bool",
-                         "value":false
-                        }, 
-                        {
-                         "name":"maxHealth",
-                         "type":"float",
-                         "value":15
-                        }, 
-                        {
-                         "name":"pathEndX",
-                         "type":"float",
-                         "value":815
-                        }, 
-                        {
-                         "name":"pathStartX",
-                         "type":"float",
-                         "value":654
-                        }, 
-                        {
-                         "name":"patrol",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"startFireWeponDelay",
-                         "type":"float",
-                         "value":0
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":656,
-                 "y":736
-                }, 
-                {
                  "gid":1039,
                  "height":32,
                  "id":919,
@@ -1496,10 +1448,10 @@
                  "y":544
                 }, 
                 {
-                 "gid":1039,
+                 "gid":1040,
                  "height":32,
                  "id":921,
-                 "name":"RifleAI",
+                 "name":"PistolAI",
                  "properties":[
                         {
                          "name":"bodyDamage",
@@ -1562,6 +1514,92 @@
                  "width":32,
                  "x":736,
                  "y":416
+                }, 
+                {
+                 "gid":1041,
+                 "height":32,
+                 "id":928,
+                 "name":"MeleeAI",
+                 "properties":[
+                        {
+                         "name":"bodyDamage",
+                         "type":"float",
+                         "value":5
+                        }, 
+                        {
+                         "name":"maxHealth",
+                         "type":"float",
+                         "value":20
+                        }, 
+                        {
+                         "name":"pathEndX",
+                         "type":"float",
+                         "value":815
+                        }, 
+                        {
+                         "name":"pathStartX",
+                         "type":"float",
+                         "value":665
+                        }, 
+                        {
+                         "name":"patrol",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"startOnRight",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":648,
+                 "y":736
+                }, 
+                {
+                 "gid":1041,
+                 "height":32,
+                 "id":929,
+                 "name":"MeleeAI",
+                 "properties":[
+                        {
+                         "name":"bodyDamage",
+                         "type":"float",
+                         "value":5
+                        }, 
+                        {
+                         "name":"maxHealth",
+                         "type":"float",
+                         "value":20
+                        }, 
+                        {
+                         "name":"pathEndX",
+                         "type":"float",
+                         "value":815
+                        }, 
+                        {
+                         "name":"pathStartX",
+                         "type":"float",
+                         "value":665
+                        }, 
+                        {
+                         "name":"patrol",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"startOnRight",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":672,
+                 "y":736
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1609,7 +1647,7 @@
          "y":0
         }],
  "nextlayerid":17,
- "nextobjectid":927,
+ "nextobjectid":930,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",

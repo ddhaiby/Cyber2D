@@ -346,6 +346,27 @@
 					}
 				},
 				{
+					"filename": "meleeIdle_001.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 0,
+						"w": 25,
+						"h": 38
+					},
+					"frame": {
+						"x": 38,
+						"y": 43,
+						"w": 25,
+						"h": 38
+					}
+				},
+				{
 					"filename": "meleeWalk_004.png",
 					"rotated": false,
 					"trimmed": true,
@@ -813,6 +834,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:99a0eca9726b2d3a3ee1907fe89a25fd:49d7faf2d217b88e09dc533dbd98e15a:350936d5dc64ec5e7c2a5c66f2eb433e$"
+		"smartupdate": "$TexturePacker:SmartUpdate:310268c2916e1f5ae81013b9bfd6d0fa:2389074b1b0079aafaeceec0a08d1bf7:350936d5dc64ec5e7c2a5c66f2eb433e$"
 	}
 }
