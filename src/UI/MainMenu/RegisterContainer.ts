@@ -121,9 +121,6 @@ export class RegisterContainer extends Phaser.GameObjects.Container {
     }
 
     private confirmLoginClicked(): void {
-        // this.httpService.register({mail:"pierreluucmillet@gmail.com",password:"A1azerty*",name:"Pldu78"}).then(res=>
-
-
         this.httpService.login().then(async result => {
             await this.ShowAuthWindow({path: JSON.parse(result.data as unknown as string).url, callback: {}});
 

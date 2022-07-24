@@ -12,7 +12,7 @@ export class StorageService {
     }
 
     async getUserData(){
-        const {value} = await Storage.get({key: 'userData'});
+        const value = JSON.stringify(await Storage.get({key: 'userData'}));
         return JSON.parse(value);
     }
 
@@ -26,6 +26,9 @@ export class StorageService {
     async getToken(): Promise<string> {
         const {value} = await Storage.get({key: 'token'});
         return value as string;
+    }
+     async remove(item){
+        return await Storage.remove({key:item});
     }
 
 }

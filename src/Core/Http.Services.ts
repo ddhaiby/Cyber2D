@@ -30,10 +30,13 @@ export class HttpServices {
     loginValidation():Promise <AxiosResponse>{
        return this.axiosService.post(this.baseUrl+'/api/auth/');
     }
-    logout(token:string):Promise<AxiosResponse<IResponse>> {
-        return this.axiosService.post(this.baseUrl + "/api/logout/",{token:token});
+    logout(data):Promise<AxiosResponse<IResponse>> {
+        return this.axiosService.post(this.baseUrl + "/api/logout/",JSON.stringify({token:data.token,username:data.username}));
     }
 
+    validateToken(token:string):Promise<AxiosResponse>{
+        return this.axiosService.post(this.baseUrl+"/api/validate/",JSON.stringify({token:token}))
+    }
     /*createPlayerData(data: IRequestPlayer): Promise<AxiosResponse<IResponsePlayer>> {
         return this.axiosService.put<IResponsePlayer>(this.baseUrl + "/player/add",JSON.stringify(data));
     }
