@@ -3,7 +3,7 @@ import { GuardWeapon } from "../../Weapons/FireWeapons/GuardWeapon";
 import { CST } from "../../CST";
 import { AIData } from "./AISpawn";
 
-export class PatrolAI extends Pawn
+export class ShooterAI extends Pawn
 {
     // Patrol
     /** Whether the AI can moves */

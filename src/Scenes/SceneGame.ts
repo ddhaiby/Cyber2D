@@ -6,7 +6,7 @@ import {SceneGameMenu_UI} from "./SceneGameMenu_UI";
 import {SceneMainMenu_UI} from "./SceneMainMenu_UI";
 
 import {Pawn} from "../Pawns/Pawn";
-import {PatrolAI} from "../Pawns/AIs/PatrolAI";
+import {ShooterAI} from "../Pawns/AIs/ShooterAI";
 import {Player} from "../Pawns/Player";
 import {PawnSpawn} from "../Pawns/PawnSpawn";
 import {AISpawn} from "../Pawns/AIs/AISpawn";
@@ -347,7 +347,7 @@ export class SceneGame extends CYBR_Scene {
         const aiSpawns = this.currentMap.createFromObjects("Enemies", {name: "patrolAI", classType: AISpawn});
 
         aiSpawns.map((aiSpawn: AISpawn) => {
-            const ai = new PatrolAI(this);
+            const ai = new ShooterAI(this);
             this.enemies.add(ai);
             ai.init(aiSpawn.getPawnData());
 
@@ -391,7 +391,7 @@ export class SceneGame extends CYBR_Scene {
 
         /////// Enemies
         this.physics.add.collider(this.enemies, this.platforms);
-        this.enemies.getChildren().forEach(function (ai: PatrolAI) {
+        this.enemies.getChildren().forEach(function (ai: ShooterAI) {
             this.physics.add.collider(ai, this.movingPlatforms, this.pawnCollideMovingPlatforms);
             this.physics.add.overlap(this.player, ai, this.onPlayerOverlapEnnemy, this.playerCanOverlapEnnemy, this);
             this.physics.add.overlap(this.player.cyberPunch, ai, this.onPunchPawn, this.canPunchPawn, this);
@@ -471,7 +471,7 @@ export class SceneGame extends CYBR_Scene {
     }
 
     private restartAIs(): void {
-        this.enemies.getChildren().forEach(function (ai: PatrolAI) {
+        this.enemies.getChildren().forEach(function (ai: ShooterAI) {
             this.respawnPawn(ai);
         }, this);
     }
@@ -503,14 +503,14 @@ export class SceneGame extends CYBR_Scene {
             this.player.setHealth(0);
 
         this.player.update();
-        this.enemies.getChildren().forEach((ai: PatrolAI) => {
+        this.enemies.getChildren().forEach((ai: ShooterAI) => {
             ai.update();
         }, this);
     }
 
     private postUpdate(): void {
         this.player.postUpdate();
-        this.enemies.getChildren().forEach((ai: PatrolAI) => {
+        this.enemies.getChildren().forEach((ai: ShooterAI) => {
             ai.postUpdate();
         }, this);
     }
