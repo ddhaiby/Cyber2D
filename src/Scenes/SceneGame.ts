@@ -14,6 +14,7 @@ import {MeleeAI} from "../Pawns/AIs/MeleeAI";
 import {Player} from "../Pawns/Player";
 
 import {CYBR_Bullet} from "../Weapons/FireWeapons/CYBR_Bullet";
+import {CYBR_MeleeWeapon} from "../Weapons/MeleeWeapons/CYBR_MeleeWeapon";
 
 import {Token} from "../Pickups/Token";
 import {CyberToken} from "../Pickups/CyberToken";
@@ -29,7 +30,6 @@ import {Mine} from "../Platforms/Mine";
 
 import {LadderManager} from "../Managers/LadderManager";
 import {AudioManager} from "../Managers/AudioManager";
-import {CyberPunch} from "src/Weapons/CyberPunch";
 
 export class SceneGame extends CYBR_Scene {
     // Pawns
@@ -361,6 +361,7 @@ export class SceneGame extends CYBR_Scene {
 
                 this.enemies.add(ai);
                 ai.init(aiSpawn.getPawnData());
+                ai.target = this.player;
 
                 ai.setName(CYBR_Scene.generateUniqueName(ai));
                 this.spawnPositions.set(ai.name, new Phaser.Math.Vector2(ai.x, ai.y));
@@ -397,7 +398,8 @@ export class SceneGame extends CYBR_Scene {
         this.physics.add.overlap(this.player, this.spikes, this.onPlayerOverlapSpike, this.playerCanOverlapSpike, this);
         this.physics.add.overlap(this.player, this.mines, this.onPlayerOverlapMine, this.playerCanOverlapMine, this);
 
-        if (this.player.currentWeapon) {
+        if (this.player.currentWeapon)
+        {
             this.physics.add.collider(this.player.currentWeapon.bullets, this.platforms, this.onWeaponHitPlatforms.bind(this));
         }
 
@@ -406,15 +408,26 @@ export class SceneGame extends CYBR_Scene {
         this.enemies.getChildren().forEach(function (ai: RifleAI) {
             this.physics.add.collider(ai, this.movingPlatforms, this.pawnCollideMovingPlatforms);
             this.physics.add.overlap(this.player, ai, this.onPlayerOverlapEnnemy, this.playerCanOverlapEnnemy, this);
-            this.physics.add.overlap(this.player.cyberPunch, ai, this.onPunchPawn, this.canPunchPawn, this);
 
-            if (this.player.currentWeapon) {
+            if (this.player.meleeWeapon)
+            {
+                this.physics.add.overlap(this.player.meleeWeapon, ai, this.onHitPawn, this.canHitPawn, this);
+            }
+
+            if (this.player.currentWeapon)
+            {
                 this.physics.add.overlap(this.player.currentWeapon.bullets, ai, this.onWeaponHitPawn, this.weaponCanHitPawn, this);
             }
 
-            if (ai.currentWeapon) {
+            if (ai.currentWeapon)
+            {
                 this.physics.add.collider(ai.currentWeapon.bullets, this.platforms, this.onWeaponHitPlatforms);
                 this.physics.add.overlap(ai.currentWeapon.bullets, this.player, this.onWeaponHitPawn, this.weaponCanHitPawn, this);
+            }
+
+            if (ai.meleeWeapon)
+            {
+                this.physics.add.overlap(ai.meleeWeapon, this.player, this.onHitPawn, this.canHitPawn, this);
             }
         }, this);
         return this;
@@ -543,12 +556,12 @@ export class SceneGame extends CYBR_Scene {
         bullet.kill();
     }
 
-    private onPunchPawn(punch: CyberPunch, pawn: Pawn): void {
-        pawn.hurt(punch.damage, true, punch.x > pawn.x, 100);
-        punch.emit("hit");
+    private onHitPawn(meleeWeapon: CYBR_MeleeWeapon, pawn: Pawn): void {
+        pawn.hurt(meleeWeapon.damage, true, meleeWeapon.x > pawn.x, 100);
+        meleeWeapon.emit("hit");
     }
 
-    private canPunchPawn(bullet: CYBR_Bullet, pawn: Pawn): boolean {
+    private canHitPawn(bullet: CYBR_Bullet, pawn: Pawn): boolean {
         return !pawn.dead() && !pawn.isRecovering;
     }
 
