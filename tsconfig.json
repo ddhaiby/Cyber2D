@@ -25,9 +25,14 @@
 	],
 	"include": [
 		"./**/*.ts",
+		"./**/**/*.ts"
 	],
 	"exclude": [
 		"node_modules",
 		"dist"
-	]
+	],
+	"typedocOptions": {
+		"entryPoints": ["src/*.ts","src/**/*.ts"],
+		"out": "docs"
+	}
 }
