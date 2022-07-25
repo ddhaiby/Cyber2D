@@ -6,7 +6,7 @@
   "scripts": {
     "start": "parcel serve ./index.html",
     "build": "parcel build ./index.html",
-    "test": "typedoc --plugin typedoc-plugin-markdown"
+    "test": "echo test OK"
   },
   "keywords": [],
   "author": "The Cybros",
