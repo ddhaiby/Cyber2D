@@ -43,6 +43,7 @@ export class CYBR_TextField extends BBCodeText
                     that.emit("textChanged", text);
                 }
             }
+            // @ts-ignore
             this.scene.plugins.get("rexTextEditPlugin").edit(this, config);
         }, this);
     }

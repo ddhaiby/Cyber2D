@@ -218,12 +218,12 @@ export class CYBR_FireWeapon extends CYBR_Weapon
         this.weapon.trackSprite(sprite, offsetX, offsetY, trackRotation);
     }
 
-    protected set bulletGravity(gravity: Phaser.Math.Vector2)
+    public set bulletGravity(gravity: Phaser.Math.Vector2)
     {
         this.weapon.bulletGravity = gravity;
     }
 
-    protected set bulletClass(bulletClass: typeof Bullet)
+    public set bulletClass(bulletClass: typeof Bullet)
     {
         this.weapon.bulletClass = bulletClass;
     }
@@ -243,17 +243,17 @@ export class CYBR_FireWeapon extends CYBR_Weapon
         this.weapon.fireRate = fireRate;
     }
 
-    protected set bulletLifespan(bulletLifespan: number)
+    public set bulletLifespan(bulletLifespan: number)
     {
         this.weapon.bulletLifespan = bulletLifespan;
     }
 
-    protected set bulletSpeed(bulletSpeed: number)
+    public set bulletSpeed(bulletSpeed: number)
     {
         this.weapon.bulletSpeed = bulletSpeed;
     }
 
-    protected set bulletKillType(bulletKillType: number)
+    public set bulletKillType(bulletKillType: number)
     {
         this.weapon.bulletKillType = bulletKillType;
     }
