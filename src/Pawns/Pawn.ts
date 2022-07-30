@@ -7,22 +7,47 @@ import { PawnData } from "./PawnSpawn";
 export class Pawn extends Phaser.Physics.Arcade.Sprite
 {
     protected startOnRight: boolean = false;
+    protected startUp: boolean = false;
 
     // Weapons
     public currentWeapon: CYBR_FireWeapon;
 
     // States
+    /** Whether the pawn is looking above */
     public isLookingUp: boolean = false;
+
+    /** Whether the pawn is looking down */
     public isLookingDown: boolean = false;
+
+    /** Whether the pawn is looking on right direction */
     public isLookingRight: boolean = false;
+
+    /** Whether the pawn is looking on left direction */
     public isLookingLeft: boolean = false;
+
+    /** Whether the pawn is walking */
     public isWalking: boolean = false;
+
+    /** Whether the pawn is flying */
+    protected isFlying: boolean = false;
+
+    /** Whether the pawn is jumping */
     public isJumping: boolean = false;
+
+    /** Whether the pawn was on the floor the last frame */
     protected wasOnFloor: boolean = true;
+
+    /** Whether the pawn was on the floor the last frame */
     public isFiring: boolean = false;
+
+    /** Whether the pawn is climbing */
     public isClimbing: boolean = false;
-    public isRecovering: boolean = false
-    public isTakingDmg: boolean = false
+
+    /** Whether the pawn is recovering from damage it took. This property is used to handle invincible mode */
+    public isRecovering: boolean = false;
+
+    /** Whether the pawn is taking damage. The pawn can't move on this state */
+    public isTakingDmg: boolean = false;
 
     /** Whether the pawn do a melee attack */
     protected isMeleeAttacking: boolean = false;
@@ -85,6 +110,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
             this.y = pawnData.y;
             this.maxHealth = pawnData.maxHealth;
             this.startOnRight = pawnData.startOnRight;
+            this.startUp = pawnData.startUp;
             this.bodyDamage = pawnData.bodyDamage;
             this.bulletDamage = pawnData.bulletDamage;
             this.bulletPerFire = pawnData.bulletPerFire;
@@ -92,8 +118,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
         this.initStates();
         this.initAttributes();
-        if (textureKey)
-            this.initAnimations(textureKey);
+        this.initAnimations(textureKey);
 
         return this;
     }
@@ -104,14 +129,19 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.isLookingDown = false;
 
         if (this.startOnRight)
+        {
             this.lookOnRight();
+        }
         else
+        {
             this.lookOnLeft();
+        }
     }
 
-    protected initAnimations(textureKey: string): void
+    protected initAnimations(textureKey?: string): void
     {
-        this.setTexture(textureKey);
+        if (textureKey)
+            this.setTexture(textureKey);
     }
 
     protected initAttributes(): void
@@ -120,6 +150,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.attributes.set(CST.PAWN.ATTRIBUTES.MAX_HEALTH, this.maxHealth);
         this.attributes.set(CST.PAWN.ATTRIBUTES.HEALTH, this.maxHealth);
         this.attributes.set(CST.PAWN.ATTRIBUTES.BODY_DAMAGE, this.bodyDamage);
+        this.attributes.set(CST.PAWN.ATTRIBUTES.FLY_SPEED, 100);
         this.setHealth(this.getMaxHealth());
     }
 
@@ -151,9 +182,12 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     {
     }
 
+    // Walk
+    ////////////////////////////////////////////////////////////////////////
+
     public canWalk(): boolean
     {
-        return !this.dead() && (this.isOnFloor() || !this.isClimbing);
+        return !this.isDead() && (this.isOnFloor() || !this.isClimbing);
     }
 
     public walk(): void
@@ -183,6 +217,57 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
         this.setVelocityX(0);
     }
+
+    // Fly
+    ////////////////////////////////////////////////////////////////////////
+
+    public canFly(): boolean
+    {
+        return !this.isDead();
+    }
+
+    public fly(): void
+    {
+        if (this.canFly())
+        {
+            const speed = this.getFlySpeed();
+
+            if (!this.isFlying)
+            {
+                this.startFlying();
+            }
+
+            const velocityX = this.isLookingRight ? speed : (this.isLookingLeft ? -speed : 0);
+            const velocityY = this.isLookingDown ? speed : (this.isLookingUp ? -speed : 0);
+
+            this.setVelocityX(velocityX);
+            this.setVelocityY(velocityY);
+        }
+    }
+
+    private startFlying(): void
+    {
+        this.isFlying = true;
+    }
+
+    public stopFlying(): void
+    {
+        if (this.isFlying)
+        {
+            this.isFlying = false;
+        }
+
+        this.setVelocityX(0);
+        this.setVelocityY(0);
+    }
+
+    public getFlySpeed(): number
+    {
+        return this.getAttribute(CST.PAWN.ATTRIBUTES.FLY_SPEED);
+    }
+
+    // Climb
+    ////////////////////////////////////////////////////////////////////////
 
     public climb(speedX: number, speedY: number): void
     {
@@ -238,6 +323,9 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.isLookingDown = false;
     }
 
+    // Jump
+    ////////////////////////////////////////////////////////////////////////
+
     public isOnFloor(): boolean
     {
         return (this.body as Phaser.Physics.Arcade.Body).onFloor();
@@ -245,7 +333,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
     public canJump(): boolean
     {
-        return !this.dead() && (this.isOnFloor() || this.isClimbing);
+        return !this.isDead() && (this.isOnFloor() || this.isClimbing);
     }
 
     public jump(): void
@@ -260,11 +348,14 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         }
     }
 
+    // Attributes and damage
+    ////////////////////////////////////////////////////////////////////////
+
     public hurt(health: number, isProjected: boolean = false, hurtFromRight: boolean = false, velocityProjection: number = 250): void
     {
         this.setHealth(this.getHealth() - health);
 
-        if (!this.dead() && isProjected)
+        if (!this.isDead() && isProjected)
         {
             this.stopWalking();
             this.stopClimbing();
@@ -301,7 +392,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.attributes.set(CST.PAWN.ATTRIBUTES.HEALTH, Math.max(0, Math.min(health, this.attributes.get(CST.PAWN.ATTRIBUTES.MAX_HEALTH))));
         this.emit("healthChanged", this.attributes.get(CST.PAWN.ATTRIBUTES.HEALTH), this.attributes.get(CST.PAWN.ATTRIBUTES.MAX_HEALTH));
 
-        if (this.dead())
+        if (this.isDead())
         {
             this.die();
             this.stopFiring();
@@ -338,18 +429,22 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         return this.getAttribute(CST.PAWN.ATTRIBUTES.BODY_DAMAGE);
     }
 
+    // Death
+    ////////////////////////////////////////////////////////////////////////
+
     // Called when the health reaches 0 or to kill instantly 
     public die(): void
     {
         this.attributes.set(CST.PAWN.ATTRIBUTES.HEALTH, 0);
         this.stopWalking();
+        this.stopFlying();
         this.stopClimbing();
         this.emit("die");
 
         AudioManager.playSound(this.deathSound);
     }
 
-    public dead(): boolean
+    public isDead(): boolean
     {
         return this.getHealth() <= 0;
     }
@@ -359,7 +454,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
     protected canAttack(): boolean
     {
-        return !this.dead() && !this.isMeleeAttacking && !this.isPreparingAttack;
+        return !this.isDead() && !this.isMeleeAttacking && !this.isPreparingAttack;
     }
 
     protected attack(): void

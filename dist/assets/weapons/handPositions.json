@@ -1,8 +1,8 @@
 {
-    "idleLeftHoldingWeapon": [{"x": 30, "y": 17}],
-    "idleRightHoldingWeapon": [{"x": 28, "y": 17}],
-    "walkLeftHoldingWeapon": [{"x": 27, "y": 17}, {"x": 27, "y": 18}, {"x": 27, "y": 19}, {"x": 27, "y": 18}, {"x": 27, "y": 18}],
-    "walkRightHoldingWeapon": [{"x": 28, "y": 17}, {"x": 28, "y": 18}, {"x": 28, "y": 19}, {"x": 28, "y": 18}, {"x": 28, "y": 18}],
-    "inAirLeftHoldingWeapon": [{"x": 27, "y": 16}],
-    "inAirRightHoldingWeapon": [{"x": 28, "y": 16}]
+    "IdleLeftHoldingWeapon": [{"x": 30, "y": 17}],
+    "IdleRightHoldingWeapon": [{"x": 28, "y": 17}],
+    "WalkLeftHoldingWeapon": [{"x": 27, "y": 17}, {"x": 27, "y": 18}, {"x": 27, "y": 19}, {"x": 27, "y": 18}, {"x": 27, "y": 18}],
+    "WalkRightHoldingWeapon": [{"x": 28, "y": 17}, {"x": 28, "y": 18}, {"x": 28, "y": 19}, {"x": 28, "y": 18}, {"x": 28, "y": 18}],
+    "InAirLeftHoldingWeapon": [{"x": 27, "y": 16}],
+    "InAirRightHoldingWeapon": [{"x": 28, "y": 16}]
 }

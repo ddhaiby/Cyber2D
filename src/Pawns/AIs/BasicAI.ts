@@ -5,17 +5,23 @@ import {AIData} from "./AISpawn";
 export class BasicAI extends Pawn
 {
     // Patrol
-    /** Whether the AI can moves */
-    public patrol: boolean = false;
+    /** Whether the AI can move */
+    protected patrol: boolean = false;
 
-    /** The start position for the patrol. Must be lower than pathEndX */
-    protected pathStartX: number = 0;
+    /** The X start position for the patrol. Must be lower than pathEndX */
+    protected pathStartX: number = null;
 
-    /** The end position for the patrol. Must be greater than pathStartX */
-    protected pathEndX: number = 0;
+    /** The X end position for the patrol. Must be greater than pathStartX */
+    protected pathEndX: number = null;
 
-    /** AI name used as prefix for the animations */
-    protected aiName: string = null;
+    /** The Y start position for the patrol. Must be lower than pathEndY */
+    protected pathStartY: number = null;
+
+    /** The Y end position for the patrol. Must be greater than pathStartY */
+    protected pathEndY: number = null;
+
+    /** Name used for the animations */
+    protected pawnName: string = null;
 
     /** Whether this AI should have a melee attack */
     protected hasMeleeAttackAnim: boolean = false;
@@ -34,71 +40,53 @@ export class BasicAI extends Pawn
 
     public init(aiData: AIData) : this
     {
-        super.init(aiData, "patrol");
+        super.init(aiData);
 
         if (aiData)
         {
             this.patrol = aiData.patrol;
-            this.pathStartX = aiData.pathStartX;
-            this.pathEndX = aiData.pathEndX;
             this.prepareAttackDelay = aiData.prepareAttackDelay;
+            this.setPathX(aiData.pathStartX, aiData.pathEndX);
+            this.setPathY(aiData.pathStartY, aiData.pathEndY);
         }
         return this;
     }
 
-    protected initAnimations(textureKey: string) : void
+    protected initAnimations() : void
     {
-        super.initAnimations(textureKey);
-
-        if (!this.aiName)
+        if (!this.pawnName)
         {
             return;   
         }
 
-        this.anims.create({
-            key: "idle",
-            frames: this.anims.generateFrameNames(this.texture.key, { prefix: this.aiName + "Idle_", suffix: ".png", start: 1, end: 1, zeroPad: 3 }),
-            frameRate: 10,
-            repeat: -1
-        });
+        const animationsJSON = this.scene.cache.json.get("animationsPawn");
+        const animationData = animationsJSON ? animationsJSON[this.pawnName] : null;
 
-        this.anims.create({
-            key: "walk",
-            frames: this.anims.generateFrameNames(this.texture.key, { prefix: this.aiName +  "Walk_", suffix: ".png", start: 1, end: 5, zeroPad: 3 }),
-            frameRate: 10,
-            repeat: -1
-        });
-
-        this.anims.create({
-            key: "death",
-            frames: this.anims.generateFrameNames(this.texture.key, { prefix: this.aiName + "Death_", suffix: ".png", start: 1, end: 5, zeroPad: 3 }),
-            frameRate: 5,
-            repeat: 0
-        });
-
-        if (this.hasMeleeAttackAnim)
+        if (!animationData)
         {
-            this.anims.create({
-                key: "attack",
-                frames: this.anims.generateFrameNames(this.texture.key, { prefix: this.aiName +  "Attack_", suffix: ".png", start: 1, end: 6, zeroPad: 3 }),
-                frameRate: 15,
-                repeat: 0
-            });
-
-            this.anims.create({
-                key: "prepareAttack",
-                frames: this.anims.generateFrameNames(this.texture.key, { prefix: this.aiName +  "Idle_", suffix: ".png", start: 1, end: 1, zeroPad: 3 }),
-                frameRate: 8,
-                repeat: 0
-            });
+            return;
         }
 
-        this.on("animationcomplete_attack", () => { this.stopAttacking(); }, true);
-        this.on("animationcomplete_death", function (anim: Phaser.Animations.Animation, frame: Phaser.Animations.AnimationFrame) {
+        super.initAnimations(animationData.texture);
+
+        for (let animKey in animationData.anims)
+        {
+            const animObj = animationData.anims[animKey];
+
+            this.anims.create({
+                key: animKey,
+                frames: this.anims.generateFrameNames(this.texture.key, { prefix: animationData.prefix + animObj.name + "_", suffix: ".png", start: animObj.start, end: animObj.end, zeroPad: 3 }),
+                frameRate: animObj.frameRate,
+                repeat: animObj.repeat
+            });    
+        }
+
+        this.on("animationcomplete_Attack", () => { this.stopAttacking(); }, true);
+        this.on("animationcomplete_Death", function (anim: Phaser.Animations.Animation, frame: Phaser.Animations.AnimationFrame) {
             this.scene.time.delayedCall(500, () => { this.disableBody(true, true); }, null, this);
         }, this);
 
-        this.anims.play("idle", true);
+        this.anims.play("Idle", true);
         this.body.setSize(this.anims.currentAnim.frames[0].frame.realWidth, this.anims.currentAnim.frames[0].frame.realHeight);
         this.body.setOffset(0,0);
     }
@@ -116,7 +104,7 @@ export class BasicAI extends Pawn
     {
         super.update(args);
 
-        if (!this.dead() && !this.isTakingDmg)
+        if (!this.isDead() && !this.isTakingDmg)
         {
             this.updateControl();
         }
@@ -132,24 +120,24 @@ export class BasicAI extends Pawn
 
     protected updateAnimations() : void
     {
-        if (this.dead())
+        if (this.isDead())
         {
-            if (this.anims.currentAnim.key != "death")
+            if (this.anims.currentAnim.key != "Death")
             {
-                this.anims.play("death");
+                this.anims.play("Death");
             }
         }
         else if (this.isPreparingAttack)
         {
-            this.anims.play("prepareAttack", true);
+            this.anims.play("PrepareAttack", true);
         }
         else if (this.isMeleeAttacking)
         {
-            this.anims.play("attack", true);
+            this.anims.play("Attack", true);
         }
         else
         {
-            this.anims.play((this.isWalking || this.isTakingDmg) ? "walk" : "idle", true);
+            this.anims.play((this.body.velocity.x != 0 || this.isTakingDmg) ? "Walk" : "Idle", true);
             this.setFlipX(this.isLookingLeft);
         }
     }
@@ -174,11 +162,53 @@ export class BasicAI extends Pawn
         }
     }
 
-    public setPath(pathStartX: number, pathEndX: number) : void
+    public doFlyPatrol()
+    {
+        if (this.patrol)
+        {
+            if (this.pathStartX != null)
+            {
+                if (this.x <= this.pathStartX)
+                {
+                    this.lookOnRight();
+                }
+                else if (this.x >= this.pathEndX)
+                {
+                    this.lookOnLeft();
+                }
+            }
+            else
+            {
+                this.isLookingRight = false;
+                this.isLookingLeft = false;
+            }
+            
+            if (this.pathStartY != null)
+            {
+                if (this.y <= this.pathStartY)
+                {
+                    this.lookDown();
+                }
+                else if (this.y >= this.pathEndY)
+                {
+                    this.lookUp();
+                }
+            }
+            else
+            {
+                this.isLookingDown = false;
+                this.isLookingUp = false;
+            }
+
+            this.fly();
+        }
+    }
+
+    public setPathX(pathStartX: number, pathEndX: number) : void
     {
         if (pathStartX == undefined || pathEndX == undefined)
         {
-            console.error("pathStartX or pathEndX is undefined!");
+            return;
         }
         else if (pathStartX < pathEndX)
         {
@@ -188,6 +218,27 @@ export class BasicAI extends Pawn
         else
         {
             console.error("pathStartX can't be higher than pathEndX!");
+            this.pathStartX = pathEndX;
+            this.pathEndX = pathStartX;
+        }
+    }
+
+    public setPathY(pathStartY: number, pathEndY: number) : void
+    {
+        if (pathStartY == undefined || pathEndY == undefined)
+        {
+            return;
+        }
+        else if (pathStartY < pathEndY)
+        {
+            this.pathStartY = pathStartY;
+            this.pathEndY = pathEndY;
+        }
+        else
+        {
+            console.error("pathStartY can't be higher than pathEndY!");
+            this.pathStartY = pathEndY;
+            this.pathEndY = pathStartY;
         }
     }
 }

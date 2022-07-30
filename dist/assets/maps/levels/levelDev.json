@@ -1549,7 +1549,7 @@
                         {
                          "name":"prepareAttackDelay",
                          "type":"float",
-                         "value":500
+                         "value":300
                         }, 
                         {
                          "name":"startOnRight",
@@ -1562,6 +1562,102 @@
                  "width":32,
                  "x":648,
                  "y":736
+                }, 
+                {
+                 "gid":1042,
+                 "height":32,
+                 "id":930,
+                 "name":"DroneAI",
+                 "properties":[
+                        {
+                         "name":"bodyDamage",
+                         "type":"float",
+                         "value":5
+                        }, 
+                        {
+                         "name":"maxHealth",
+                         "type":"float",
+                         "value":20
+                        }, 
+                        {
+                         "name":"pathEndY",
+                         "type":"float",
+                         "value":750
+                        }, 
+                        {
+                         "name":"pathStartY",
+                         "type":"float",
+                         "value":550
+                        }, 
+                        {
+                         "name":"patrol",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"prepareAttackDelay",
+                         "type":"float",
+                         "value":300
+                        }, 
+                        {
+                         "name":"startUp",
+                         "type":"bool",
+                         "value":false
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":504,
+                 "y":696
+                }, 
+                {
+                 "gid":1042,
+                 "height":32,
+                 "id":931,
+                 "name":"DroneAI",
+                 "properties":[
+                        {
+                         "name":"bodyDamage",
+                         "type":"float",
+                         "value":5
+                        }, 
+                        {
+                         "name":"maxHealth",
+                         "type":"float",
+                         "value":20
+                        }, 
+                        {
+                         "name":"pathEndX",
+                         "type":"float",
+                         "value":815
+                        }, 
+                        {
+                         "name":"pathStartX",
+                         "type":"float",
+                         "value":600
+                        }, 
+                        {
+                         "name":"patrol",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"prepareAttackDelay",
+                         "type":"float",
+                         "value":300
+                        }, 
+                        {
+                         "name":"startOnRight",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":560,
+                 "y":696
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1609,7 +1705,7 @@
          "y":0
         }],
  "nextlayerid":17,
- "nextobjectid":930,
+ "nextobjectid":932,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",

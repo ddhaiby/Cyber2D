@@ -58,6 +58,8 @@ export class ScenePreloadAssets extends CYBR_Scene
         this.load.setPath("./assets/pawns");
         this.load.atlas("player", "player.png", "player.json");
         this.load.atlas("patrol", "patrol.png", "patrol.json");
+        this.load.atlas("drone", "drone.png", "drone.json");
+        this.load.json("animationsPawn", "animationsPawn.json");
     }
 
     private loadWeapons() : void

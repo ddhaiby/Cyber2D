@@ -68,14 +68,14 @@ export class Player extends Pawn
         for (let mode of modes)
         {
             this.anims.create({
-                key: "idleRight" + mode,
+                key: "IdleRight" + mode,
                 frames: this.anims.generateFrameNames(this.texture.key, { prefix: "idleRight" + mode + "_", suffix: ".png", start: 1, end: 1, zeroPad: 3 }),
                 frameRate: 1,
                 repeat: -1
             });
 
             this.anims.create({
-                key: "idleLeft" + mode,
+                key: "IdleLeft" + mode,
                 frames: this.anims.generateFrameNames(this.texture.key, { prefix: "idleLeft" + mode + "_", suffix: ".png", start: 1, end: 1, zeroPad: 3 }),
                 frameRate: 1,
                 repeat: -1
@@ -83,28 +83,28 @@ export class Player extends Pawn
 
             const frameRateWalk = 10;
             this.anims.create({
-                key: "walkRight" + mode,
+                key: "WalkRight" + mode,
                 frames: this.anims.generateFrameNames(this.texture.key, { prefix:  "walkRight" + mode + "_", suffix: ".png", start: 1, end: 5, zeroPad: 3 }),
                 frameRate: frameRateWalk,
                 repeat: -1
             });
 
             this.anims.create({
-                key: "walkLeft" + mode,
+                key: "WalkLeft" + mode,
                 frames: this.anims.generateFrameNames(this.texture.key, { prefix: "walkLeft" + mode + "_", suffix: ".png", start: 1, end: 5, zeroPad: 3 }),
                 frameRate: frameRateWalk,
                 repeat: -1
             });
 
             this.anims.create({
-                key: "inAirRight" + mode,
+                key: "InAirRight" + mode,
                 frames: this.anims.generateFrameNames(this.texture.key, { prefix: "jumpRight" + mode + "_", suffix: ".png", start: 3, end: 3, zeroPad: 3 }),
                 frameRate: 10,
                 repeat: -1
             });
 
             this.anims.create({
-                key: "inAirLeft" + mode,
+                key: "InAirLeft" + mode,
                 frames: this.anims.generateFrameNames(this.texture.key, { prefix: "jumpLeft" + mode + "_", suffix: ".png", start: 3, end: 3, zeroPad: 3 }),
                 frameRate: 10,
                 repeat: -1
@@ -112,44 +112,44 @@ export class Player extends Pawn
         }
 
         this.anims.create({
-            key: "punchLeft",
+            key: "PunchLeft",
             frames: this.anims.generateFrameNames(this.texture.key, {prefix: "punchLeft_", suffix: ".png", start: 1, end: 5, zeroPad: 3 }),
             frameRate: 18,
             repeat: 0
         });
 
         this.anims.create({
-            key: "punchRight",
+            key: "PunchRight",
             frames: this.anims.generateFrameNames(this.texture.key, {prefix: "punchRight_", suffix: ".png", start: 1, end: 5, zeroPad: 3 }),
             frameRate: 18,
             repeat: 0
         });
 
         this.anims.create({
-            key: "deathRight",
+            key: "DeathRight",
             frames: this.anims.generateFrameNames(this.texture.key, { prefix: "deathRight_", suffix: ".png", start: 1, end: 4, zeroPad: 3 }),
             frameRate: 7,
             repeat: 0
         });
 
         this.anims.create({
-            key: "deathLeft",
+            key: "DeathLeft",
             frames: this.anims.generateFrameNames(this.texture.key, { prefix: "deathLeft_", suffix: ".png", start: 1, end: 4, zeroPad: 3 }),
             frameRate: 7,
             repeat: 0
         });
 
         this.anims.create({
-            key: "climb",
+            key: "Climb",
             frames: this.anims.generateFrameNames(this.texture.key, {prefix: "climb_", suffix: ".png", start: 1, end: 4, zeroPad: 3 }),
             frameRate: 10,
             repeat: -1
         });
 
-        this.on("animationcomplete_punchLeft", () => { this.stopAttacking(); }, true);
-        this.on("animationcomplete_punchRight", () => { this.stopAttacking(); }, true);
+        this.on("animationcomplete_PunchLeft", () => { this.stopAttacking(); }, true);
+        this.on("animationcomplete_PunchRight", () => { this.stopAttacking(); }, true);
 
-        const keyIdle = this.isLookingRight ? "idleRightHoldingWeapon" : "idleLeftHoldingWeapon";
+        const keyIdle = this.isLookingRight ? "IdleRightHoldingWeapon" : "IdleLeftHoldingWeapon";
         this.anims.play(keyIdle, true);
         this.handPositions = this.scene.cache.json.get("handPositions");
         this.body.setSize(this.anims.currentAnim.frames[0].frame.realWidth, this.anims.currentAnim.frames[0].frame.realHeight);
@@ -198,7 +198,7 @@ export class Player extends Pawn
             this.isJumping = false;
         }
 
-        if (!this.dead() && !this.isTakingDmg)
+        if (!this.isDead() && !this.isTakingDmg)
         {
             this.updateControl();
         }
@@ -216,11 +216,18 @@ export class Player extends Pawn
     protected updateControl() : void
     {
         if (this.keys.up.isDown)
+        {
             this.lookUp();
+        }
+            
         else if (this.keys.down.isDown)
+        {
             this.lookDown();
+        }
         else
+        {
             this.lookStraight();
+        }
 
         if (this.keys.left.isDown)
         {
@@ -251,14 +258,14 @@ export class Player extends Pawn
         const mode = this.currentWeapon ? "HoldingWeapon" : "";
         const currentAnim = this.anims.currentAnim.key;
 
-        if (this.dead())
+        if (this.isDead())
         {
-            if (currentAnim != "deathRight" && currentAnim != "deathLeft")
-                this.anims.play("death" + side, true);
+            if (currentAnim != "DeathRight" && currentAnim != "DeathLeft")
+                this.anims.play("Death" + side, true);
         }
         else if (this.isClimbing)
         {
-            this.anims.play("climb", true);
+            this.anims.play("Climb", true);
 
             if (this.isOnFloor() || this.body.velocity.y == 0)
             {
@@ -267,19 +274,19 @@ export class Player extends Pawn
         }
         else if (this.isMeleeAttacking)
         {
-            this.anims.play("punch" + side, true);
+            this.anims.play("Punch" + side, true);
         }
         else if (!this.isOnFloor() && !this.wasOnFloor)
         {
-            this.anims.play("inAir" + side + mode, true);
+            this.anims.play("InAir" + side + mode, true);
         }
         else if (this.isWalking || this.isTakingDmg)
         {
-            this.anims.play("walk" + side + mode, true);
+            this.anims.play("Walk" + side + mode, true);
         }
         else
         {
-            this.anims.play("idle" + side + mode, true);
+            this.anims.play("Idle" + side + mode, true);
         }
     }
 
@@ -373,7 +380,7 @@ export class Player extends Pawn
     public hurt(health: number, isProjected: boolean = false, hurtFromRight: boolean = false, velocityProjection: number = 250) : void
     {
         super.hurt(health, isProjected, hurtFromRight, velocityProjection);
-        if (!this.dead())
+        if (!this.isDead())
         {
 
             this.recover();

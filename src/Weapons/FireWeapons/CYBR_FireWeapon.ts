@@ -70,7 +70,7 @@ export class CYBR_FireWeapon extends CYBR_Weapon
         if (this.visible)
         {
             this.anims.create({
-                key: "idle",
+                key: "Idle",
                 frames: this.anims.generateFrameNumbers(key, { start: 0, end: 0 }),
                 frameRate: 1,
                 repeat: 0
@@ -83,7 +83,7 @@ export class CYBR_FireWeapon extends CYBR_Weapon
                 repeat: 0
             });
 
-            this.play("idle");
+            this.play("Idle");
         }
     }
 

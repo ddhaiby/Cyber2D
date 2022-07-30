@@ -12,7 +12,10 @@ export declare type AIData = {
     patrol: boolean;
     pathStartX: number;
     pathEndX: number;
+    pathStartY: number;
+    pathEndY: number;
     startOnRight: boolean;
+    startUp: boolean;
     startFireWeponDelay: number;
     prepareAttackDelay: number;
 }
@@ -29,11 +32,17 @@ export class AISpawn extends PawnSpawn
     public patrol: boolean = false;
 
     /** The start position for the patrol. Must be lower than pathEndX */
-    private pathStartX: number = 0;
+    private pathStartX: number = null;
 
     /** The end position for the patrol. Must be greater than pathStartX */
-    private pathEndX: number = 0;
+    private pathEndX: number = null;
 
+    /** The start position for the patrol. Must be lower than pathEndY */
+    private pathStartY: number = null;
+
+    /** The end position for the patrol. Must be greater than pathStartY */
+    private pathEndY: number = null;
+    
     /** The delay before the first fire */
     private startFireWeponDelay: number = 0;
 
@@ -59,7 +68,10 @@ export class AISpawn extends PawnSpawn
             patrol: this.patrol,
             pathStartX: this.pathStartX,
             pathEndX: this.pathEndX,
+            pathStartY: this.pathStartY,
+            pathEndY: this.pathEndY,
             startOnRight: this.startOnRight,
+            startUp: this.startUp,
             startFireWeponDelay: this.startFireWeponDelay,
             prepareAttackDelay: this.prepareAttackDelay,
         }

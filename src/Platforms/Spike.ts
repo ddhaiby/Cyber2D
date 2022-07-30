@@ -32,50 +32,50 @@ export class Spike extends Phaser.Physics.Arcade.Sprite
         const idxAttackEnd = (spikeName == "spikeShort") ? 2 : 4;
 
         this.anims.create({
-            key: "prepareAttack",
+            key: "PrepareAttack",
             frames: this.anims.generateFrameNumbers(spikeName, { start: 0, end: idxPrepareAttack }),
             frameRate: 30,
         });
 
         this.anims.create({
-            key: "attack",
+            key: "Attack",
             frames: this.anims.generateFrameNumbers(spikeName, { start: idxPrepareAttack, end: idxAttackEnd }),
             frameRate: 30,
         });
 
         this.anims.create({
-            key: "hide",
+            key: "Hide",
             frames: this.anims.generateFrameNumbers(spikeName, { start: idxAttackEnd, end: 0 }),
             frameRate: 30,
         });
 
         if (this.alwaysShow)
         {
-            this.anims.play({ key: "attack", frameRate: 100 });
+            this.anims.play({ key: "Attack", frameRate: 100 });
         }
         else
         {
-            this.on("animationcomplete_prepareAttack", () => {
-                this.anims.playAfterDelay("attack", this.durationPrepareAttack);
+            this.on("animationcomplete_PrepareAttack", () => {
+                this.anims.playAfterDelay("Attack", this.durationPrepareAttack);
             }, true);
     
-            this.on("animationstart_attack", () => {
+            this.on("animationstart_Attack", () => {
                 this.enableBody(false, 0, 0, true, true);
             }, true);
     
-            this.on("animationcomplete_attack", () => {
-                this.anims.playAfterDelay("hide", this.durationAttack);
+            this.on("animationcomplete_Attack", () => {
+                this.anims.playAfterDelay("Hide", this.durationAttack);
             }, true);
     
-            this.on("animationstart_hide", () => {
+            this.on("animationstart_Hide", () => {
                 this.disableBody();
             }, true);
     
-            this.on("animationcomplete_hide", () => {
-                this.anims.playAfterDelay("prepareAttack", this.durationHide);
+            this.on("animationcomplete_Hide", () => {
+                this.anims.playAfterDelay("PrepareAttack", this.durationHide);
             }, true);
     
-            this.anims.playAfterDelay("prepareAttack", this.startDelay);
+            this.anims.playAfterDelay("PrepareAttack", this.startDelay);
         }
     }
 

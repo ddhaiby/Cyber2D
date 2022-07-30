@@ -44,6 +44,7 @@ export const CST = {
             HEALTH: "health",
             MAX_HEALTH: "maxHealth",
             WALK_SPEED: "walkSpeed",
+            FLY_SPEED: "flySpeed",
             CLIMB_SPEED: "climbSpeed",
             BODY_DAMAGE: "bodyDamage"
         }

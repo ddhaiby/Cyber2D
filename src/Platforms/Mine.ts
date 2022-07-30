@@ -32,43 +32,43 @@ export class Mine extends Phaser.Physics.Arcade.Sprite
 
 
         this.anims.create({
-            key: "idle",
+            key: "Idle",
             frames: this.anims.generateFrameNames(this.texture.key, { prefix: "mine_", suffix: ".png", start: 1, end: 1, zeroPad: 3 }),
             frameRate: 1,
             repeat: 0
         });
 
         this.anims.create({
-            key: "activating",
+            key: "Activating",
             frames: this.anims.generateFrameNames(this.texture.key, { prefix: "mine_", suffix: ".png", start: 1, end: 2, zeroPad: 3 }),
             frameRate: 4,
             repeat: -1
         });
 
         this.anims.create({
-            key: "aboutToExplode",
+            key: "AboutToExplode",
             frames: this.anims.generateFrameNames(this.texture.key, { prefix: "mine_", suffix: ".png", start: 1, end: 2, zeroPad: 3 }),
             frameRate: 12,
             repeat: -1
         });
 
         this.anims.create({
-            key: "explode",
+            key: "Explode",
             frames: this.anims.generateFrameNames(this.texture.key, { prefix: "mine_", suffix: ".png", start: 2, end: 7, zeroPad: 3 }),
             frameRate: 11,
             repeat: 0
         });
 
-        this.on("animationstart_explode", () => {
+        this.on("animationstart_Explode", () => {
             this.explode();
         }, true);
 
-        this.on("animationcomplete_explode", () => {
+        this.on("animationcomplete_Explode", () => {
             this.setVisible(false);
             this._exploding = false;
         }, true);
 
-        this.anims.play("idle", true);
+        this.anims.play("Idle", true);
     }
 
     public reset(): void
@@ -77,7 +77,7 @@ export class Mine extends Phaser.Physics.Arcade.Sprite
         this._exploding = false;
         this.enableBody(false, 0, 0, true, true);
         this.setVisible(true);
-        this.anims.play("idle", true);
+        this.anims.play("Idle", true);
 
         // Make sure the collision box is of the size of the mine
         this.body.setSize(this.anims.currentAnim.frames[0].frame.realWidth, this.anims.currentAnim.frames[0].frame.realHeight);
@@ -90,9 +90,9 @@ export class Mine extends Phaser.Physics.Arcade.Sprite
             this._activated = true;
             this.disableBody();
 
-            this.anims.play("activating", true);
-            this.anims.playAfterDelay("aboutToExplode", this.delayAboutToExplode);
-            this.scene.time.delayedCall(this.delayExplosion, () => { this.anims.play("explode", true); }, null, this);
+            this.anims.play("Activating", true);
+            this.anims.playAfterDelay("AboutToExplode", this.delayAboutToExplode);
+            this.scene.time.delayedCall(this.delayExplosion, () => { this.anims.play("Explode", true); }, null, this);
         }
     }
 

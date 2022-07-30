@@ -1,3 +1,4 @@
+import { AIData } from "./AISpawn";
 import { ShooterAI } from "./ShooterAI";
 
 export class RifleAI extends ShooterAI
@@ -6,6 +7,6 @@ export class RifleAI extends ShooterAI
     {
         super(scene, x, y, texture, frame);
 
-        this.aiName = "rifle";
+        this.pawnName = "PatrolRifle";
     }
 }

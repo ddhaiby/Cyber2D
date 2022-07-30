@@ -8,7 +8,7 @@ export class MeleeAI extends BasicAI
     {
         super(scene, x, y, texture, frame);
 
-        this.aiName = "melee";
+        this.pawnName = "PatrolMelee";
         this.hasMeleeAttackAnim = true;
 
         this._meleeWeapon = new IronStick(scene, this);
@@ -62,7 +62,7 @@ export class MeleeAI extends BasicAI
 
     protected isTargetInRange(): boolean
     {
-        if (this.target)
+        if (this.target && !this.target.isDead())
         {
             const targetDistY = this.target.y - this.y; 
 

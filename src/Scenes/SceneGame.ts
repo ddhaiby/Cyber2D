@@ -8,10 +8,11 @@ import {SceneMainMenu_UI} from "./SceneMainMenu_UI";
 import {Pawn} from "../Pawns/Pawn";
 import {PawnSpawn} from "../Pawns/PawnSpawn";
 import {AISpawn} from "../Pawns/AIs/AISpawn";
+import {Player} from "../Pawns/Player";
 import {RifleAI} from "../Pawns/AIs/RifleAI";
 import {PistolAI} from "../Pawns/AIs/PistolAI";
 import {MeleeAI} from "../Pawns/AIs/MeleeAI";
-import {Player} from "../Pawns/Player";
+import {DroneAI} from "../Pawns/AIs/DroneAI";
 
 import {CYBR_Bullet} from "../Weapons/FireWeapons/CYBR_Bullet";
 import {CYBR_MeleeWeapon} from "../Weapons/MeleeWeapons/CYBR_MeleeWeapon";
@@ -348,7 +349,8 @@ export class SceneGame extends CYBR_Scene {
         const aIClasses = {
             "PistolAI": PistolAI,
             "RifleAI": RifleAI,
-            "MeleeAI": MeleeAI
+            "MeleeAI": MeleeAI,
+            "DroneAI": DroneAI
         };
 
         for (let className in aIClasses)
@@ -524,7 +526,7 @@ export class SceneGame extends CYBR_Scene {
             movingPlatform.update();
         }, this);
 
-        if (this.playerReachedDeadZone() && !this.player.dead())
+        if (this.playerReachedDeadZone() && !this.player.isDead())
             this.player.setHealth(0);
 
         this.player.update();
@@ -544,7 +546,7 @@ export class SceneGame extends CYBR_Scene {
     ////////////////////////////////////////////////////////////////////////
 
     private weaponCanHitPawn(bullet: CYBR_Bullet, pawn: Pawn): boolean {
-        return !pawn.dead() && !pawn.isRecovering && (Math.abs(bullet.x - pawn.x) < 20);
+        return !pawn.isDead() && !pawn.isRecovering && (Math.abs(bullet.x - pawn.x) < 20);
     }
 
     private onWeaponHitPawn(bullet: CYBR_Bullet, pawn: Pawn): void {
@@ -562,7 +564,7 @@ export class SceneGame extends CYBR_Scene {
     }
 
     private canHitPawn(bullet: CYBR_Bullet, pawn: Pawn): boolean {
-        return !pawn.dead() && !pawn.isRecovering;
+        return !pawn.isDead() && !pawn.isRecovering;
     }
 
     private playerReachedDeadZone(): boolean {
@@ -570,7 +572,7 @@ export class SceneGame extends CYBR_Scene {
     }
 
     private playerCanOverlapEnnemy(player: Player, enemy: Pawn): boolean {
-        return !player.dead() && !player.isRecovering && !enemy.dead() && (Math.abs(player.x - enemy.x) < 30);
+        return !player.isDead() && !player.isRecovering && !enemy.isDead() && (Math.abs(player.x - enemy.x) < 30);
     }
 
     private onPlayerOverlapEnnemy(player: Player, enemy: Pawn): void {
@@ -578,11 +580,11 @@ export class SceneGame extends CYBR_Scene {
     }
 
     private playerCanOverlapSpike(player: Player, spike: Spike): boolean {
-        return !player.dead() && !player.isRecovering;
+        return !player.isDead() && !player.isRecovering;
     }
 
     private playerCanOverlapMine(player: Player, mine: Mine): boolean {
-        return !player.dead() && (!mine.activated || mine.exploding);
+        return !player.isDead() && (!mine.activated || mine.exploding);
     }
 
     private onPlayerOverlapSpike(player: Player, spike: Spike): void {
@@ -590,7 +592,7 @@ export class SceneGame extends CYBR_Scene {
     }
 
     private onPlayerOverlapMine(player: Player, mine: Mine): void {
-        if (mine.exploding && !player.dead() && !player.isRecovering) {
+        if (mine.exploding && !player.isDead() && !player.isRecovering) {
             this.player.hurt(mine.getDamage(), true, this.player.body.touching.right);
         } else {
             mine.activate();
@@ -677,7 +679,7 @@ export class SceneGame extends CYBR_Scene {
     }
 
     private completeLevel(): void {
-        if (!this.player.dead())
+        if (!this.player.isDead())
             this.events.emit("levelCompleted");
     }
 
