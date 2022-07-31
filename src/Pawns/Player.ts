@@ -41,6 +41,8 @@ export class Player extends Pawn
         const weaponClass = (Math.random() < 0.5) ? CyberPistol : CyberShotgun;
         let weapon = new weaponClass(this.scene, this.x, this.y);
         this.equipWeapon(weapon);
+        this.currentWeapon.setBulletPerFire(this.bulletPerFire);
+        this.currentWeapon.setBulletSpeed(this.bulletSpeed);
 
         PlayerManager.Instance.reloadKeys(this.scene);
         this.keys = PlayerManager.Instance.keyBinding;
@@ -390,5 +392,10 @@ export class Player extends Pawn
     protected canAttack(): boolean
     {
         return super.canAttack() && !this.isClimbing;
+    }
+
+    public canFire(): boolean
+    {
+        return this.canFire && !this.isClimbing;
     }
 }

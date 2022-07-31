@@ -21,8 +21,13 @@ export class CYBR_FireWeapon extends CYBR_Weapon
     /** Y-position of the grip. It defines the origin of the weapon */
     protected gripY: number = 0;
 
+    /** If set to true, the grip will be internally updated with flipX value */
+    protected bindGripToFlipX: boolean = true;
+
+    /** Number of bullets when a fire is triggered */
     protected bulletPerFire: number = 1;
 
+    /** Time to reload the weapon */
     protected reloadRate: number = 400;
 
     // Sounds
@@ -44,7 +49,7 @@ export class CYBR_FireWeapon extends CYBR_Weapon
         this.setVisible(!!texture);
 
         this.weapon = new Weapon(scene, -1, "weapon_atlas", "bullet.png");
-        this.weapon.trackSprite(this, this.muzzleX, this.muzzleY, false);
+        this.weapon.trackSprite(this);
         this.bulletClass = CYBR_Bullet;
         this.fireAngle = 0;
         this.bulletKillType = consts.KillType.KILL_WORLD_BOUNDS;
@@ -57,7 +62,9 @@ export class CYBR_FireWeapon extends CYBR_Weapon
         }, this);
 
         if (this.visible)
-            this.weapon.on("fire", ()=>{ this.play("firing"); }, this);
+        {
+            this.weapon.on("fire", ()=>{ this.play("Fire"); }, this);
+        }
 
         this.initAnimations(this.texture.key);
     }
@@ -77,7 +84,7 @@ export class CYBR_FireWeapon extends CYBR_Weapon
             });
 
             this.anims.create({
-                key: "firing",
+                key: "Fire",
                 frames: this.anims.generateFrameNumbers(key, { start: 0, end: 2 }),
                 frameRate: 24,
                 repeat: 0
@@ -90,16 +97,29 @@ export class CYBR_FireWeapon extends CYBR_Weapon
     // Update
     ////////////////////////////////////////////////////////////////////////
 
-    public fire(from?: Phaser.Math.Vector2 | Phaser.GameObjects.Sprite | ObjectWithTransform, x?: number, y?: number, offsetX?: number, offsetY?: number): Bullet[]
+    public fire(from?: Phaser.Math.Vector2 | Phaser.GameObjects.Sprite | ObjectWithTransform, x?: number, y?: number): Bullet[]
     {
         this.stopReloading();
 
         let bullets = [];
 
+        const offsetX = this.muzzleX;
+        const offsetY = this.flipX ? -this.muzzleY: this.muzzleY;
+
+        let offsetWithRotationX = offsetX; 
+        let offsetWithRotationY = offsetY;
+
+        const rotation = this.fireAngle * Math.PI / 180;
+        const sinAngle = Math.sin(rotation);
+        const cosAngle = Math.cos(rotation);
+
+        offsetWithRotationX = offsetX * cosAngle - offsetY * sinAngle;
+        offsetWithRotationY = offsetX * sinAngle + offsetY * cosAngle;
+
         for (let i = 0; i < this.bulletPerFire; ++i)
         {
             this.scene.time.delayedCall(i * 300, ()=> {
-                const bullet = this.weapon.fire(from, x, y, offsetX, offsetY) as CYBR_Bullet;
+                const bullet = this.weapon.fire(from, x, y, offsetWithRotationX, offsetWithRotationY) as CYBR_Bullet;
                 bullets.push(bullet);
 
                 if (bullet)
@@ -183,26 +203,24 @@ export class CYBR_FireWeapon extends CYBR_Weapon
 
     public setFlipX(value: boolean): this
     {
-        this.weapon.trackSprite(this, value ? -this.muzzleX : this.muzzleX, this.muzzleY, false);
+        this.weapon.trackSprite(this);
         return super.setFlipX(value);
     }
 
-    public setGripPosition(x: number, y?: number): void
+    public setGripPosition(x: number, y: number): void
     {
-        y = y || x;
         this.gripX = x;
         this.gripY = y;
     }
 
     public setPosition(x?: number, y?: number, z?: number, w?: number): this
     {
-        const finalGripX = !this.flipX ? this.width-this.gripX : this.gripX;
+        const finalGripX = (this.bindGripToFlipX && !this.flipX) ? this.width - this.gripX : this.gripX;
         return super.setPosition(x - finalGripX, y - this.gripY, z, w);
     }
 
-    public setMuzzlePosition(x: number, y?: number): void
+    public setMuzzlePosition(x: number, y: number): void
     {
-        y = y || x;
         this.muzzleX = x;
         this.muzzleY = y;
     }
@@ -210,6 +228,11 @@ export class CYBR_FireWeapon extends CYBR_Weapon
     public setBulletPerFire(bulletPerFire: number): void
     {
         this.bulletPerFire = Math.max(bulletPerFire, 1);
+    }
+
+    public setBulletSpeed(bulletSpeed: number): void
+    {
+        this.bulletSpeed = bulletSpeed;
     }
 
     public trackSprite(sprite: Phaser.GameObjects.Sprite | ObjectWithTransform, offsetX?: number, offsetY?: number, trackRotation?: boolean): void
@@ -226,6 +249,11 @@ export class CYBR_FireWeapon extends CYBR_Weapon
     public set bulletClass(bulletClass: typeof Bullet)
     {
         this.weapon.bulletClass = bulletClass;
+    }
+
+    public get fireAngle(): number
+    {
+        return this.weapon.fireAngle;
     }
 
     public set fireAngle(fireAngle: number)
@@ -266,5 +294,15 @@ export class CYBR_FireWeapon extends CYBR_Weapon
     public set fireLimit(fireLimit: number)
     {
         this.weapon.fireLimit = fireLimit;
+    }
+
+    public get autofire(): boolean
+    {
+        return this.weapon.autofire;
+    }
+
+    public set autofire(autofire: boolean)
+    {
+        this.weapon.autofire = autofire;
     }
 }

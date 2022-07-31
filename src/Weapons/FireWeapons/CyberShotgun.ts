@@ -19,9 +19,4 @@ export class CyberShotgun extends CYBR_FireWeapon
         this.setGripPosition(-7, 2);
         this.setMuzzlePosition(10, -2);
     }
-
-    public fire(from?: Phaser.Math.Vector2 | Phaser.GameObjects.Sprite | ObjectWithTransform, x?: number, y?: number, offsetX?: number, offsetY?: number) : Bullet[]
-    {
-        return super.fire(from, x, y, offsetX, offsetY);
-    }
 }

@@ -78,13 +78,11 @@ export class BasicAI extends Pawn
                 frames: this.anims.generateFrameNames(this.texture.key, { prefix: animationData.prefix + animObj.name + "_", suffix: ".png", start: animObj.start, end: animObj.end, zeroPad: 3 }),
                 frameRate: animObj.frameRate,
                 repeat: animObj.repeat
-            });    
+            });
         }
 
         this.on("animationcomplete_Attack", () => { this.stopAttacking(); }, true);
-        this.on("animationcomplete_Death", function (anim: Phaser.Animations.Animation, frame: Phaser.Animations.AnimationFrame) {
-            this.scene.time.delayedCall(500, () => { this.disableBody(true, true); }, null, this);
-        }, this);
+        this.on("animationcomplete_Death", this.onDeathAnimationComplete, this);
 
         this.anims.play("Idle", true);
         this.body.setSize(this.anims.currentAnim.frames[0].frame.realWidth, this.anims.currentAnim.frames[0].frame.realHeight);

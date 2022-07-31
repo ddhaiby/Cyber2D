@@ -6,6 +6,8 @@ import { PawnData } from "./PawnSpawn";
 
 export class Pawn extends Phaser.Physics.Arcade.Sprite
 {
+    protected timerPrepareAttack: Phaser.Time.TimerEvent;
+
     protected startOnRight: boolean = false;
     protected startUp: boolean = false;
 
@@ -73,6 +75,9 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     /** The number of bullet shotper fire */
     protected bulletPerFire: number = 1;
 
+    /** The number of bullet shotper fire */
+    protected bulletSpeed: number = 500;
+
     /** The damage of each bullet */
     protected bulletDamage: number = 1;
 
@@ -89,6 +94,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         (this.body as Phaser.Physics.Arcade.Body).setMaxSpeed(CST.PHYSIC.PAWN_MAX_SPEED);
         this.setGravity(this.scene.physics.world.gravity.x, this.scene.physics.world.gravity.y);
         this.setCollideWorldBounds(false);
+        this.timerPrepareAttack = scene.time.addEvent({}); // Create an empty timer to avoid null error
 
         this.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function (anim: Phaser.Animations.Animation, frame: Phaser.Animations.AnimationFrame) {
             this.emit("animationcomplete_" + anim.key, anim, frame);
@@ -114,6 +120,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
             this.bodyDamage = pawnData.bodyDamage;
             this.bulletDamage = pawnData.bulletDamage;
             this.bulletPerFire = pawnData.bulletPerFire;
+            this.bulletSpeed = pawnData.bulletSpeed;
         }
 
         this.initStates();
@@ -439,6 +446,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.stopWalking();
         this.stopFlying();
         this.stopClimbing();
+        this.timerPrepareAttack.remove();
         this.emit("die");
 
         AudioManager.playSound(this.deathSound);
@@ -447,6 +455,11 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     public isDead(): boolean
     {
         return this.getHealth() <= 0;
+    }
+
+    protected onDeathAnimationComplete(): void
+    {
+        this.scene.time.delayedCall(500, () => { this.disableBody(true, true); }, null, this);
     }
 
     // Melee Attack
@@ -465,7 +478,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
             this.isPreparingAttack = true;
 
-            this.scene.time.delayedCall(this.prepareAttackDelay, () => {
+            this.timerPrepareAttack = this.scene.time.delayedCall(this.prepareAttackDelay, () => {
                 this.isPreparingAttack = false;
                 this.isMeleeAttacking = true;
                 this._meleeWeapon.enableBody(false, 0, 0, true, false);
@@ -494,12 +507,19 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.currentWeapon.setOwner(this);
     }
 
+    public canFire(): boolean
+    {
+        return !!this.currentWeapon;
+    }
+
     public fire(fireAngle?: number): void
     {
-        if (this.currentWeapon && !this.isClimbing)
+        if (this.canFire())
         {
             if (!fireAngle)
+            {
                 fireAngle = this.isLookingRight ? 0 : 180;
+            }
 
             this.currentWeapon.fireAngle = fireAngle;
             this.currentWeapon.fire();

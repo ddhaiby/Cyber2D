@@ -5,33 +5,12 @@
 			"format": "RGBA8888",
 			"size": {
 				"w": 128,
-				"h": 344
+				"h": 325
 			},
 			"scale": 1,
 			"frames": [
 				{
 					"filename": "droneDeath_006.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 64,
-						"h": 59
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 64,
-						"h": 59
-					},
-					"frame": {
-						"x": 1,
-						"y": 1,
-						"w": 64,
-						"h": 59
-					}
-				},
-				{
-					"filename": "droneDownDeath_006.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -94,49 +73,7 @@
 					}
 				},
 				{
-					"filename": "droneDownDeath_002.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 64,
-						"h": 59
-					},
-					"spriteSourceSize": {
-						"x": 4,
-						"y": 11,
-						"w": 58,
-						"h": 41
-					},
-					"frame": {
-						"x": 67,
-						"y": 44,
-						"w": 58,
-						"h": 41
-					}
-				},
-				{
 					"filename": "droneDeath_007.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 64,
-						"h": 59
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 0,
-						"w": 63,
-						"h": 53
-					},
-					"frame": {
-						"x": 1,
-						"y": 62,
-						"w": 63,
-						"h": 53
-					}
-				},
-				{
-					"filename": "droneDownDeath_007.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -178,49 +115,7 @@
 					}
 				},
 				{
-					"filename": "droneDownDeath_008.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 64,
-						"h": 59
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 1,
-						"w": 61,
-						"h": 47
-					},
-					"frame": {
-						"x": 66,
-						"y": 87,
-						"w": 61,
-						"h": 47
-					}
-				},
-				{
 					"filename": "droneDeath_005.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 64,
-						"h": 59
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 2,
-						"w": 62,
-						"h": 53
-					},
-					"frame": {
-						"x": 1,
-						"y": 117,
-						"w": 62,
-						"h": 53
-					}
-				},
-				{
-					"filename": "droneDownDeath_005.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -262,49 +157,7 @@
 					}
 				},
 				{
-					"filename": "droneDownDeath_004.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 64,
-						"h": 59
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 5,
-						"w": 62,
-						"h": 49
-					},
-					"frame": {
-						"x": 65,
-						"y": 136,
-						"w": 62,
-						"h": 49
-					}
-				},
-				{
 					"filename": "droneDeath_003.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 64,
-						"h": 59
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 6,
-						"w": 61,
-						"h": 46
-					},
-					"frame": {
-						"x": 1,
-						"y": 172,
-						"w": 61,
-						"h": 46
-					}
-				},
-				{
-					"filename": "droneDownDeath_003.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -367,6 +220,27 @@
 					}
 				},
 				{
+					"filename": "droneGattlingDeath_006.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1,
+						"h": 1
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 3,
+						"h": 3
+					},
+					"frame": {
+						"x": 124,
+						"y": 187,
+						"w": 3,
+						"h": 3
+					}
+				},
+				{
 					"filename": "droneDeath_009.png",
 					"rotated": false,
 					"trimmed": true,
@@ -388,48 +262,6 @@
 					}
 				},
 				{
-					"filename": "droneDownDeath_009.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 64,
-						"h": 59
-					},
-					"spriteSourceSize": {
-						"x": 4,
-						"y": 4,
-						"w": 57,
-						"h": 43
-					},
-					"frame": {
-						"x": 1,
-						"y": 220,
-						"w": 57,
-						"h": 43
-					}
-				},
-				{
-					"filename": "droneDownDeath_001.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 64,
-						"h": 59
-					},
-					"spriteSourceSize": {
-						"x": 6,
-						"y": 6,
-						"w": 55,
-						"h": 46
-					},
-					"frame": {
-						"x": 60,
-						"y": 229,
-						"w": 55,
-						"h": 46
-					}
-				},
-				{
 					"filename": "droneDown_001.png",
 					"rotated": false,
 					"trimmed": true,
@@ -444,8 +276,8 @@
 						"h": 44
 					},
 					"frame": {
-						"x": 1,
-						"y": 265,
+						"x": 60,
+						"y": 229,
 						"w": 55,
 						"h": 44
 					}
@@ -465,8 +297,8 @@
 						"h": 15
 					},
 					"frame": {
-						"x": 58,
-						"y": 277,
+						"x": 1,
+						"y": 265,
 						"w": 45,
 						"h": 15
 					}
@@ -486,8 +318,8 @@
 						"h": 15
 					},
 					"frame": {
-						"x": 58,
-						"y": 294,
+						"x": 48,
+						"y": 275,
 						"w": 45,
 						"h": 15
 					}
@@ -508,7 +340,7 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 311,
+						"y": 282,
 						"w": 41,
 						"h": 15
 					}
@@ -529,7 +361,7 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 311,
+						"y": 282,
 						"w": 41,
 						"h": 15
 					}
@@ -550,7 +382,28 @@
 					},
 					"frame": {
 						"x": 44,
-						"y": 311,
+						"y": 292,
+						"w": 41,
+						"h": 15
+					}
+				},
+				{
+					"filename": "droneGattlingDeath_003.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 45,
+						"h": 15
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 0,
+						"w": 41,
+						"h": 15
+					},
+					"frame": {
+						"x": 1,
+						"y": 299,
 						"w": 41,
 						"h": 15
 					}
@@ -571,7 +424,7 @@
 					},
 					"frame": {
 						"x": 87,
-						"y": 311,
+						"y": 292,
 						"w": 40,
 						"h": 15
 					}
@@ -592,29 +445,8 @@
 					},
 					"frame": {
 						"x": 87,
-						"y": 311,
+						"y": 292,
 						"w": 40,
-						"h": 15
-					}
-				},
-				{
-					"filename": "droneGattlingDeath_003.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 45,
-						"h": 15
-					},
-					"spriteSourceSize": {
-						"x": 4,
-						"y": 0,
-						"w": 41,
-						"h": 15
-					},
-					"frame": {
-						"x": 1,
-						"y": 328,
-						"w": 41,
 						"h": 15
 					}
 				},
@@ -634,7 +466,7 @@
 					},
 					"frame": {
 						"x": 44,
-						"y": 328,
+						"y": 309,
 						"w": 41,
 						"h": 15
 					}
@@ -645,6 +477,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:f64f9dc4aaa624adf04cf6ddfd9cddd5:24ae0aa0507b7a1e0cdecda65c223a1d:f560fd4d737d2038c010f449481185da$"
+		"smartupdate": "$TexturePacker:SmartUpdate:c57ec6af8cd79779fe3378671676b072:7803d60e1f8cbedc89a64c42dbc4feec:f560fd4d737d2038c010f449481185da$"
 	}
 }

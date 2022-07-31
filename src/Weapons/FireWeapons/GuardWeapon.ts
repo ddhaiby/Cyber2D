@@ -12,7 +12,7 @@ export class GuardWeapon extends CYBR_FireWeapon
         this.damage = 5;
         this.fireSound = "";
 
-        this.setGripPosition(0);
-        this.setMuzzlePosition(0);
+        this.setGripPosition(0, 0);
+        this.setMuzzlePosition(0, 0);
     }
 }

@@ -17,6 +17,8 @@ export class ShooterAI extends BasicAI
     /** Internal timer to handle fires */
     protected fireWeaponTimer: Phaser.Time.TimerEvent;
 
+    protected ClassWeapon: Class = GuardWeapon;
+
     constructor(scene: Phaser.Scene, x?: number, y?: number, texture?: string | Phaser.Textures.Texture, frame?: string | number)
     {
         super(scene, x, y, texture, frame);
@@ -41,10 +43,13 @@ export class ShooterAI extends BasicAI
 
         if (this.fireWeapon)
         {
-            let weapon = new GuardWeapon(this.scene, this.x, this.y);
-            weapon.damage = this.bulletDamage;
-            weapon.setBulletPerFire(this.bulletPerFire);
-            this.equipWeapon(weapon);
+            //@ts-ignore
+            const currentWeapon = new this.ClassWeapon(this.scene, this.x, this.y);
+            this.equipWeapon(currentWeapon);
+            this.currentWeapon.damage = this.bulletDamage;
+            this.currentWeapon.setBulletPerFire(this.bulletPerFire);
+            this.currentWeapon.setBulletSpeed(this.bulletSpeed);
+            this.equipWeapon(this.currentWeapon);
             this.scene.time.delayedCall(this.startFireWeponDelay, this.prepareNextFire, null, this);
         }
 

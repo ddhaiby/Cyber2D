@@ -5,6 +5,7 @@ export declare type AIData = {
     y: number;
     bodyDamage: number;
     bulletDamage: number;
+    bulletSpeed: number;
     bulletPerFire: number;
     fireWeapon: boolean;
     fireWeaponDelay: number;
@@ -61,6 +62,7 @@ export class AISpawn extends PawnSpawn
             y: this.y,
             bodyDamage: this.bodyDamage,
             bulletDamage: this.bulletDamage,
+            bulletSpeed: this.bulletSpeed,
             bulletPerFire: this.bulletPerFire,
             fireWeapon: this.fireWeapon,
             fireWeaponDelay: this.fireWeaponDelay,
