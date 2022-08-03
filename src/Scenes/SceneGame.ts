@@ -93,7 +93,8 @@ export class SceneGame extends CYBR_Scene {
     // Create
     ////////////////////////////////////////////////////////////////////////
 
-    public create(data?: SceneData): void {
+    public create(data?: SceneData): void
+    {
         this.events.on("postupdate", this.postUpdate, this);
 
         this.spawnPositions = new Phaser.Structs.Map([]);
@@ -104,7 +105,8 @@ export class SceneGame extends CYBR_Scene {
         //AudioManager.playMusic(CST.LEVELS[this.currentLevel - 1].MUSIC);
     }
 
-    private createLevel(): void {
+    private createLevel(): void
+    {
         this.createGameMode()
             .createMap()
             .createBackground()
@@ -123,16 +125,19 @@ export class SceneGame extends CYBR_Scene {
             .createUI();
     }
 
-    public startLevel(level: number): void {
+    public startLevel(level: number): void
+    {
         this.events.off("postupdate");
         this.scene.restart({level: level});
     }
 
-    public restartLevel(): void {
+    public restartLevel(): void
+    {
         this.startLevel(this.currentLevel);
     }
 
-    public startNextLevel(): void {
+    public startNextLevel(): void
+    {
         if (this.currentLevel < CST.LEVELS.length)
             this.startLevel(this.currentLevel + 1);
         else {
@@ -142,18 +147,21 @@ export class SceneGame extends CYBR_Scene {
         }
     }
 
-    private createGameMode(): this {
+    private createGameMode(): this
+    {
         this.setRemainLife(3);
         this.setCollectedTokens(0);
         return this;
     }
 
-    private createMap(): this {
+    private createMap(): this
+    {
         this.currentMap = this.add.tilemap("level" + this.currentLevel.toString());
         return this;
     }
 
-    private createBackground(): this {
+    private createBackground(): this
+    {
         this.backgrounds = this.physics.add.staticGroup().setDepth(-999);
         this.backgrounds.add(this.add.image(0, 0, "background").setScale(4, 4).setScrollFactor(0));
 
@@ -162,7 +170,8 @@ export class SceneGame extends CYBR_Scene {
         return this;
     }
 
-    private createPlatforms(): this {
+    private createPlatforms(): this
+    {
         const terrain = this.currentMap.addTilesetImage("cyber_plateforms_atlas", "terrain");
 
         // Tile platforms
@@ -183,7 +192,8 @@ export class SceneGame extends CYBR_Scene {
         return this;
     }
 
-    private createCheckpoints(): this {
+    private createCheckpoints(): this
+    {
         this.checkpoints = this.physics.add.staticGroup();
 
         // @ts-ignore - Problem with Phaser’s types. classType supports classes
@@ -196,7 +206,8 @@ export class SceneGame extends CYBR_Scene {
         return this;
     }
 
-    private createLadders(): this {
+    private createLadders(): this
+    {
         let ladders = this.physics.add.group();
 
         // @ts-ignore - Problem with Phaser’s types. classType supports classes
@@ -234,7 +245,8 @@ export class SceneGame extends CYBR_Scene {
         return this;
     }
 
-    private createPortals(): this {
+    private createPortals(): this
+    {
         this.portals = this.physics.add.staticGroup();
 
         // @ts-ignore - Problem with Phaser’s types. classType supports classes
@@ -247,7 +259,8 @@ export class SceneGame extends CYBR_Scene {
         return this
     }
 
-    private createTraps(): this {
+    private createTraps(): this
+    {
         this.spikes = this.physics.add.staticGroup();
         this.mines = this.physics.add.staticGroup();
 
@@ -276,7 +289,8 @@ export class SceneGame extends CYBR_Scene {
         return this;
     }
 
-    private createTokens(): this {
+    private createTokens(): this
+    {
         this.tokens = this.physics.add.staticGroup();
 
         const tokenData = [
@@ -297,7 +311,8 @@ export class SceneGame extends CYBR_Scene {
         return this;
     }
 
-    private createPickupItems(): this {
+    private createPickupItems(): this
+    {
         this.pickupItems = this.physics.add.staticGroup();
 
         // @ts-ignore - Problem with Phaser’s types. classType supports classes
@@ -316,7 +331,8 @@ export class SceneGame extends CYBR_Scene {
         return this;
     }
 
-    private createKeyboardMap(): this {
+    private createKeyboardMap(): this
+    {
         let keyESC = this.input.keyboard.addKey("ESC");
         keyESC.on("down", function () {
             this.showGameMenu(true);
@@ -326,7 +342,8 @@ export class SceneGame extends CYBR_Scene {
         return this;
     }
 
-    private createPlayer(): this {
+    private createPlayer(): this
+    {
         // @ts-ignore - Problem with Phaser’s types. classType supports classes
         const playerSpawns = this.currentMap.createFromObjects("Player", {name: "player", classType: PawnSpawn});
         const playerSpawn = playerSpawns[0] as PawnSpawn;
@@ -343,7 +360,8 @@ export class SceneGame extends CYBR_Scene {
         return this;
     }
 
-    private createEnemies(): this {
+    private createEnemies(): this
+    {
         this.enemies = this.physics.add.group();
 
         const aIClasses = {
@@ -375,7 +393,8 @@ export class SceneGame extends CYBR_Scene {
     }
 
     // Create all the overlaps and the colldiers - The order is important!
-    private createInteractions(): this {
+    private createInteractions(): this
+    {
         this.ladderManager.init(this.player);
 
         /////// Player
@@ -424,24 +443,26 @@ export class SceneGame extends CYBR_Scene {
             if (ai.currentWeapon)
             {
                 this.physics.add.collider(ai.currentWeapon.bullets, this.platforms, this.onWeaponHitPlatforms);
-                this.physics.add.overlap(ai.currentWeapon.bullets, this.player, this.onWeaponHitPawn, this.weaponCanHitPawn, this);
+                this.physics.add.overlap(ai.currentWeapon.bullets, this.player, this.onWeaponHitPlayer, this.weaponCanHitPawn, this);
             }
 
             if (ai.meleeWeapon)
             {
-                this.physics.add.overlap(ai.meleeWeapon, this.player, this.onHitPawn, this.canHitPawn, this);
+                this.physics.add.overlap(ai.meleeWeapon, this.player, this.onHitPlayer, this.canHitPawn, this);
             }
         }, this);
         return this;
     }
 
-    private createCameras(): this {
+    private createCameras(): this
+    {
         this.cameras.main.setBounds(0, 0, this.physics.world.bounds.width, this.physics.world.bounds.height);
         this.cameras.main.startFollow(this.player);
         return this;
     }
 
-    private createUI(): void {
+    private createUI(): void
+    {
         if (!this.sceneGame_UI)
             this.sceneGame_UI = this.scene.add(CST.SCENES.GAME_UI, SceneGame_UI, true, this) as SceneGame_UI;
 
@@ -451,25 +472,29 @@ export class SceneGame extends CYBR_Scene {
         this.showGameMenu(false);
     }
 
-    public showGameUI(value: boolean): void {
+    public showGameUI(value: boolean): void
+    {
         if (this.sceneGame_UI) {
             this.sceneGame_UI.scene.setActive(value);
             this.sceneGame_UI.scene.setVisible(value);
         }
     }
 
-    public showGame(value: boolean): void {
+    public showGame(value: boolean): void
+    {
         this.scene.setActive(value);
         this.scene.setVisible(value);
         this.showGameUI(value);
     }
 
-    public showGameMenu(value: boolean) {
+    public showGameMenu(value: boolean)
+    {
         this.sceneGameMenu_UI.scene.setActive(value);
         this.sceneGameMenu_UI.setVisible(value, !this.isGameOver() && !this.isGameCompleted());
     }
 
-    public showMainMenu(): void {
+    public showMainMenu(): void
+    {
         this.showGame(false);
         this.showGameMenu(false);
 
@@ -479,20 +504,24 @@ export class SceneGame extends CYBR_Scene {
         //AudioManager.playMusic(CST.MAIN_MENU.MUSIC);
     }
 
-    private restartTokens(): void {
+    private restartTokens(): void
+    {
         this.tokens.getChildren().forEach(function (token: Token) {
             token.enableBody(true, token.x, token.y, true, true);
         }, this);
     }
 
-    private restartPickupItems(): void {
+    private restartPickupItems(): void
+    {
         this.pickupItems.getChildren().forEach(function (pickup: EffectPickup) {
             pickup.enableBody(true, pickup.x, pickup.y, true, true);
         }, this);
     }
 
-    private restartPortals(): void {
-        this.portals.getChildren().forEach(function (portal: Portal) {
+    private restartPortals(): void
+    {
+        this.portals.getChildren().forEach(function (portal: Portal)
+        {
             portal.reset();
         }, this);
     }
@@ -503,13 +532,15 @@ export class SceneGame extends CYBR_Scene {
         }, this);
     }
 
-    private restartMovingPlatforms(): void {
+    private restartMovingPlatforms(): void
+    {
         this.movingPlatforms.getChildren().forEach(function (platform: MovingPlatform) {
             platform.reset();
         }, this);
     }
 
-    private restartTraps(): void {
+    private restartTraps(): void 
+    {
         this.mines.getChildren().forEach(function (mine: Mine) {
             mine.reset();
         }, this);
@@ -518,7 +549,8 @@ export class SceneGame extends CYBR_Scene {
     // Update
     ////////////////////////////////////////////////////////////////////////
 
-    public update(time: number, delta: number): void {
+    public update(time: number, delta: number): void
+    {
         super.update(time, delta);
 
         this.ladderManager.update();
@@ -535,75 +567,116 @@ export class SceneGame extends CYBR_Scene {
         }, this);
     }
 
-    private postUpdate(): void {
+    private postUpdate(): void
+    {
         this.player.postUpdate();
         this.enemies.getChildren().forEach((ai: RifleAI) => {
             ai.postUpdate();
         }, this);
     }
 
+    // Cameras
+    ////////////////////////////////////////////////////////////////////////
+
+    private shakeCameraHurtPlayer(): void
+    {
+        this.cameras.main.shake(200, 0.002, false);
+    }
+
     // Pawns
     ////////////////////////////////////////////////////////////////////////
 
-    private weaponCanHitPawn(bullet: CYBR_Bullet, pawn: Pawn): boolean {
+    private weaponCanHitPawn(bullet: CYBR_Bullet, pawn: Pawn): boolean
+    {
         return !pawn.isDead() && !pawn.isRecovering && (Math.abs(bullet.x - pawn.x) < 20);
     }
 
-    private onWeaponHitPawn(bullet: CYBR_Bullet, pawn: Pawn): void {
+    private onWeaponHitPawn(bullet: CYBR_Bullet, pawn: Pawn): void
+    {
         pawn.hurt(bullet.damage, pawn == this.player, pawn.body.touching.right);
         bullet.kill();
     }
 
-    private onWeaponHitPlatforms(bullet: CYBR_Bullet, platform: Phaser.Tilemaps.TilemapLayer): void {
+    private onWeaponHitPlayer(bullet: CYBR_Bullet, player: Player): void
+    {
+        this.onWeaponHitPawn(bullet, player);
+        this.shakeCameraHurtPlayer();
+    }
+
+    private onWeaponHitPlatforms(bullet: CYBR_Bullet, platform: Phaser.Tilemaps.TilemapLayer): void
+    {
         bullet.kill();
     }
 
-    private onHitPawn(meleeWeapon: CYBR_MeleeWeapon, pawn: Pawn): void {
+    private onHitPawn(meleeWeapon: CYBR_MeleeWeapon, pawn: Pawn): void
+    {
         pawn.hurt(meleeWeapon.damage, true, meleeWeapon.x > pawn.x, 100);
         meleeWeapon.emit("hit");
     }
 
-    private canHitPawn(bullet: CYBR_Bullet, pawn: Pawn): boolean {
+    private onHitPlayer(meleeWeapon: CYBR_MeleeWeapon, player: Player): void
+    {
+        this.onHitPawn(meleeWeapon, player);
+        this.shakeCameraHurtPlayer();
+    }
+
+    private canHitPawn(bullet: CYBR_Bullet, pawn: Pawn): boolean
+    {
         return !pawn.isDead() && !pawn.isRecovering;
     }
 
-    private playerReachedDeadZone(): boolean {
+    private playerReachedDeadZone(): boolean
+    {
         return this.player.y > this.physics.world.bounds.height;
     }
 
-    private playerCanOverlapEnnemy(player: Player, enemy: Pawn): boolean {
+    private playerCanOverlapEnnemy(player: Player, enemy: Pawn): boolean
+    {
         return !player.isDead() && !player.isRecovering && !enemy.isDead() && (Math.abs(player.x - enemy.x) < 30);
     }
 
-    private onPlayerOverlapEnnemy(player: Player, enemy: Pawn): void {
-        this.player.hurt(enemy.getBodyDamage(), true, player.body.touching.right);
+    private onPlayerOverlapEnnemy(player: Player, enemy: Pawn): void
+    {
+        player.hurt(enemy.getBodyDamage(), true, player.body.touching.right);
+        this.shakeCameraHurtPlayer();
     }
 
-    private playerCanOverlapSpike(player: Player, spike: Spike): boolean {
+    private playerCanOverlapSpike(player: Player, spike: Spike): boolean
+    {
         return !player.isDead() && !player.isRecovering;
     }
 
-    private playerCanOverlapMine(player: Player, mine: Mine): boolean {
+    private playerCanOverlapMine(player: Player, mine: Mine): boolean
+    {
         return !player.isDead() && (!mine.activated || mine.exploding);
     }
 
-    private onPlayerOverlapSpike(player: Player, spike: Spike): void {
+    private onPlayerOverlapSpike(player: Player, spike: Spike): void
+    {
         this.player.hurt(spike.getDamage(), true, player.body.touching.right);
+        this.shakeCameraHurtPlayer();
     }
 
-    private onPlayerOverlapMine(player: Player, mine: Mine): void {
-        if (mine.exploding && !player.isDead() && !player.isRecovering) {
+    private onPlayerOverlapMine(player: Player, mine: Mine): void
+    {
+        if (mine.exploding && !player.isDead() && !player.isRecovering)
+        {
             this.player.hurt(mine.getDamage(), true, this.player.body.touching.right);
-        } else {
+            this.shakeCameraHurtPlayer();
+        }
+        else
+        {
             mine.activate();
         }
     }
 
-    private onPlayerHealthChanged(health: number, maxHealth: number): void {
+    private onPlayerHealthChanged(health: number, maxHealth: number): void
+    {
         this.events.emit("playerHealthChanged", health, maxHealth);
     }
 
-    private onPlayerDie(): void {
+    private onPlayerDie(): void
+    {
         this.setRemainLife(this.getRemainLife() - 1);
 
         if (!this.isGameOver()) {
@@ -617,18 +690,21 @@ export class SceneGame extends CYBR_Scene {
         }
     }
 
-    private collectToken(player: Player, token: Token): void {
+    private collectToken(player: Player, token: Token): void
+    {
         token.collected();
         this.setCollectedTokens(this.getCollectedTokens() + token.value);
     }
 
-    private applyEffectOnPlayer(player: Player, pickup: EffectPickup): void {
+    private applyEffectOnPlayer(player: Player, pickup: EffectPickup): void
+    {
         pickup.disableBody(true, true);
         pickup.applyEffect(this.player);
         AudioManager.playSound("Item_Pickup");
     }
 
-    private reachCheckpoint(player: Player, checkpoint: Phaser.Physics.Arcade.Image): void {
+    private reachCheckpoint(player: Player, checkpoint: Phaser.Physics.Arcade.Image): void
+    {
         checkpoint.setTexture("platform_atlas", "checkpointOn.png");
         this.spawnPositions.set(this.player.name, new Phaser.Math.Vector2(checkpoint.x, checkpoint.y));
         checkpoint.disableBody(true, false);
@@ -639,7 +715,8 @@ export class SceneGame extends CYBR_Scene {
         this.respawnPawn(this.player);
     }
 
-    private respawnPawn(pawn: Pawn): void {
+    private respawnPawn(pawn: Pawn): void
+    {
         if (pawn.currentWeapon)
             pawn.currentWeapon.bullets.getChildren().forEach((bullet: CYBR_Bullet) => {
                 bullet.kill();
@@ -649,11 +726,13 @@ export class SceneGame extends CYBR_Scene {
         pawn.reset(pawnPosition.x, pawnPosition.y);
     }
 
-    private isGameOver(): boolean {
+    private isGameOver(): boolean
+    {
         return this.gameOver;
     }
 
-    private setGameOver(gameOver: boolean): void {
+    private setGameOver(gameOver: boolean): void
+    {
         this.gameOver = gameOver;
 
         if (this.gameOver) {
@@ -666,46 +745,56 @@ export class SceneGame extends CYBR_Scene {
         this.events.emit("gameOverChanged", gameOver);
     }
 
-    private isGameCompleted(): boolean {
+    private isGameCompleted(): boolean
+    {
         return this.gameCompleted
     }
 
-    private completeGame(): void {
+    private completeGame(): void
+    {
         this.gameCompleted = true;
     }
 
-    private activatePortal(player: Player, portal: Portal) {
+    private activatePortal(player: Player, portal: Portal)
+    {
         portal.activate(player);
     }
 
-    private completeLevel(): void {
+    private completeLevel(): void
+    {
         if (!this.player.isDead())
             this.events.emit("levelCompleted");
     }
 
-    private overlapLadder(player: Player, ladder: Ladder): void {
+    private overlapLadder(player: Player, ladder: Ladder): void
+    {
         ladder.overlapPawnBegin(player);
     }
 
-    private playerCollideMovingPlatforms(player: Player, movingPlatform: MovingPlatform) {
+    private playerCollideMovingPlatforms(player: Player, movingPlatform: MovingPlatform)
+    {
         movingPlatform.activate();
         movingPlatform.addCollidedObject(player);
     }
 
-    public getCollectedTokens(): number {
+    public getCollectedTokens(): number
+    {
         return this.collectedTokens;
     }
 
-    public getRemainLife(): number {
+    public getRemainLife(): number
+    {
         return this.remainLife;
     }
 
-    private setCollectedTokens(tokens: number): void {
+    private setCollectedTokens(tokens: number): void
+    {
         this.collectedTokens = tokens;
         this.events.emit("collectedTokenChanged", this.collectedTokens);
     }
 
-    private setRemainLife(remainLife: number): void {
+    private setRemainLife(remainLife: number): void
+    {
         this.remainLife = remainLife;
         this.events.emit("playerRemainLifeChanged", this.remainLife);
         this.setGameOver(remainLife < 0);
