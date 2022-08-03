@@ -446,6 +446,8 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.stopWalking();
         this.stopFlying();
         this.stopClimbing();
+        this.stopAttacking();
+
         this.timerPrepareAttack.remove();
         this.onDeath();
         this.emit("die");
