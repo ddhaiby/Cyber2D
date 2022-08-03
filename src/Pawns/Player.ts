@@ -331,11 +331,11 @@ export class Player extends Pawn
     {
         this.isRecovering = true;
 
-        const tweenSlow = this.alphaAnimation(350, 4);
+        const tweenSlow = this.alphaAnimation(350, 2);
         tweenSlow.on("complete", () => {
             this.setAlpha(1);
 
-            const tweenFast = this.alphaAnimation(100, 6);
+            const tweenFast = this.alphaAnimation(100, 4);
             tweenFast.on("complete", () => {
                 this.setAlpha(1);
                 this.stopRecovering();
