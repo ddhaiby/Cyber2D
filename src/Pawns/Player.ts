@@ -20,7 +20,7 @@ export class Player extends Pawn
         this.deathSound = "Player_Death";
         this.maxHealth = 15;
 
-        this.sparkle = this.scene.add.sprite(this.x, this.y, "player");
+        this.sparkle = this.scene.add.sprite(this.x, this.y, "sparkles");
         this.sparkle.setVisible(false);
         this.sparkle.setDepth(1);
 
@@ -60,7 +60,7 @@ export class Player extends Pawn
         super.initAnimations(textureKey);
 
         this.initCharacterAnim();
-        //this.initSparkleAnim();
+        this.initSparkleAnim();
     }
 
     private initCharacterAnim(): void
@@ -132,16 +132,39 @@ export class Player extends Pawn
 
     private initSparkleAnim(): void
     {
+        console.log(this.sparkle);
+
         this.sparkle.anims.create({
             key: "sparkleOrange",
-            frames: this.anims.generateFrameNames(this.texture.key, { prefix: "sparkleOrange_", suffix: ".png", start: 1, end: 4, zeroPad: 3 }),
+            frames: this.anims.generateFrameNames(this.sparkle.texture.key, { prefix: "sparkleOrange_", suffix: ".png", start: 1, end: 4, zeroPad: 3 }),
             frameRate: 7,
             repeat: -1
         });
 
         this.sparkle.anims.create({
             key: "sparkleRed",
-            frames: this.anims.generateFrameNames(this.texture.key, { prefix: "sparkleRed_", suffix: ".png", start: 1, end: 4, zeroPad: 3 }),
+            frames: this.anims.generateFrameNames(this.sparkle.texture.key, { prefix: "sparkleRed_", suffix: ".png", start: 1, end: 4, zeroPad: 3 }),
+            frameRate: 10,
+            repeat: -1
+        });
+
+        this.sparkle.anims.create({
+            key: "sparkleWhite",
+            frames: this.anims.generateFrameNames(this.sparkle.texture.key, { prefix: "sparkleWhite_", suffix: ".png", start: 1, end: 4, zeroPad: 3 }),
+            frameRate: 10,
+            repeat: -1
+        });
+
+        this.sparkle.anims.create({
+            key: "sparkleYellow",
+            frames: this.anims.generateFrameNames(this.sparkle.texture.key, { prefix: "sparkleYellow_", suffix: ".png", start: 1, end: 4, zeroPad: 3 }),
+            frameRate: 10,
+            repeat: -1
+        });
+
+        this.sparkle.anims.create({
+            key: "sparkleGreen",
+            frames: this.anims.generateFrameNames(this.sparkle.texture.key, { prefix: "sparkleGreen_", suffix: ".png", start: 1, end: 4, zeroPad: 3 }),
             frameRate: 10,
             repeat: -1
         });
@@ -263,30 +286,30 @@ export class Player extends Pawn
 
     private updateSparkles(health: number, maxHealth: number): void
     {
-        return;
-        const healthRate = health / maxHealth;
+        // TODO: See the usage of the sparkles
 
-        if (healthRate < 0.4)
-        {
-            this.sparkle.anims.pause();
-            this.sparkle.setVisible(false);
-        }
-        else if (healthRate < 1)
-        {
-            this.sparkle.anims.play("sparkleRed", true);
-            this.sparkle.setVisible(true);
-        }
-        else
-        {
-            this.sparkle.anims.play("sparkleOrange", true);
-            this.sparkle.setVisible(true); 
-        }
-        this.sparkle.setVisible(false);
+        // const healthRate = health / maxHealth;
+
+        // if (healthRate < 0.4)
+        // {
+        //     this.sparkle.anims.pause();
+        //     this.sparkle.setVisible(false);
+        // }
+        // else if (healthRate < 1)
+        // {
+        //     this.sparkle.anims.play("sparkleRed", true);
+        //     this.sparkle.setVisible(true);
+        // }
+        // else
+        // {
+        //     this.sparkle.anims.play("sparkleOrange", true);
+        //     this.sparkle.setVisible(true); 
+        // }
+        // this.sparkle.setVisible(false);
     }
 
     private postUpdateSparkles(): void
     {
-        return;
         this.sparkle.setPosition(this.x, this.y);
     }
 
