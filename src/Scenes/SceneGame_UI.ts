@@ -4,18 +4,13 @@ import {SceneGame} from "./SceneGame";
 import {HealthBar} from "../UI/HealthBar";
 import {BulletBar} from "../UI/BulletBar";
 import {LevelTransition} from "../UI/LevelTransition";
-import {IRequestPlayer} from "../Interface/InterfaceRequest";
 
-
-
-export class SceneGame_UI extends CYBR_Scene {
+export class SceneGame_UI extends CYBR_Scene
+{
     private sceneGame: SceneGame;
     private elapsedTime: number = 0;
 
-
     // UI Items
-    private healthBar: HealthBar;
-    private bulletBar: BulletBar;
     private chronoText: Phaser.GameObjects.Text;
     private tokenScoreItem: Map<string, Phaser.GameObjects.GameObject>;
     private lifeItem: Map<string, Phaser.GameObjects.GameObject>;
@@ -24,26 +19,27 @@ export class SceneGame_UI extends CYBR_Scene {
     private levelTransition: LevelTransition;
     private levelStarting: boolean = false;
 
-    constructor() {
+    constructor()
+    {
         super({key: CST.SCENES.GAME_UI});
     }
 
     // Init
     ////////////////////////////////////////////////////////////////////////
 
-    public init(sceneGame: SceneGame): void {
+    public init(sceneGame: SceneGame): void
+    {
         this.sceneGame = sceneGame;
     }
 
     // Create
     ////////////////////////////////////////////////////////////////////////
 
-    public create(): void {
+    public create(): void
+    {
         const gameWidth = this.scale.displaySize.width;
         const gameHeight = this.scale.displaySize.height;
 
-        this.createHealthBar();
-        this.createBulletBar();
         this.tokenScoreItem = this.createTokenScoreItem();
         this.lifeItem = this.createLifeItem();
         this.chronoText = this.createChrono();
@@ -55,37 +51,11 @@ export class SceneGame_UI extends CYBR_Scene {
         this.sceneGame.events.on("levelCompleted", this.startLevelCompletedTransition, this);
     }
 
-    private createHealthBar(): void {
-        this.healthBar = new HealthBar(this, {x: 12, y: 12, width: 160, height: 16, color: 0x990000, value: 1});
-
-        this.sceneGame.events.on("playerHealthChanged", (health: number, maxHealth: number) => {
-            this.healthBar.setValue(health / maxHealth);
-        }, this);
-    }
-
-    private createBulletBar(): void {
-        // Bar
-        let bulletBarX = this.healthBar.x;
-        let bulletBarY = this.healthBar.y + this.healthBar.height;
-
-        this.bulletBar = new BulletBar(this, {
-            x: bulletBarX,
-            y: bulletBarY,
-            width: 160,
-            height: 12,
-            color: 0x005544,
-            value: 0
-        });
-
-        this.sceneGame.player.on("shotsChanged", (shots: number, fireLimit: number) => {
-            this.bulletBar.setValue(shots / fireLimit);
-        }, this);
-    }
-
-    private createTokenScoreItem(): Map<string, Phaser.GameObjects.GameObject> {
+    private createTokenScoreItem(): Map<string, Phaser.GameObjects.GameObject>
+    {
         // Image
-        let tokenImageX = this.bulletBar.x;
-        let tokenImageY = this.bulletBar.y + this.bulletBar.height + 8;
+        let tokenImageX = 12;
+        let tokenImageY = 12;
 
         let tokenImage = this.add.image(tokenImageX, tokenImageY, "platform_atlas", "tokenSilver.png");
         tokenImage.x += tokenImage.width / 2;
@@ -107,7 +77,8 @@ export class SceneGame_UI extends CYBR_Scene {
     }
 
     // TODO: Review position
-    private createLifeItem(): Map<string, Phaser.GameObjects.GameObject> {
+    private createLifeItem(): Map<string, Phaser.GameObjects.GameObject>
+    {
         let tokenImage = this.tokenScoreItem.get("image") as Phaser.GameObjects.Image;
 
         // Image
@@ -132,7 +103,8 @@ export class SceneGame_UI extends CYBR_Scene {
         return new Map<string, Phaser.GameObjects.GameObject>().set("image", lifeImage).set("text", lifeText);
     }
 
-    private createGameOverScreen(): void {
+    private createGameOverScreen(): void
+    {
         let gameOverText = this.add.text(0, 0, "GAME OVER", {font: '54px Arial', color: '#FFBC32', stroke: '#000000', strokeThickness: 3});
         gameOverText.visible = false;
         this.centerItem(gameOverText);
@@ -142,12 +114,14 @@ export class SceneGame_UI extends CYBR_Scene {
         }, this);
     }
 
-    private createChrono(): Phaser.GameObjects.Text {
+    private createChrono(): Phaser.GameObjects.Text
+    {
         let sceneWidth = this.scale.displaySize.width;
         return this.add.text(sceneWidth - 100, 16, "00:00:00", {font: '24px Gemunu Libre', color: '#FFBC32', stroke: '#000000', strokeThickness: 3});
     }
 
-    private startLevelCompletedTransition(): void {
+    private startLevelCompletedTransition(): void
+    {
         console.log("zebi");
         this.sceneGame.scene.pause();
 
@@ -172,7 +146,8 @@ export class SceneGame_UI extends CYBR_Scene {
 
     }
 
-    private startLevelStartedTransition(): void {
+    private startLevelStartedTransition(): void
+    {
         this.levelStarting = true;
 
         this.levelTransition.showLevelStartedAnimation(this.sceneGame.currentLevel);
@@ -186,10 +161,12 @@ export class SceneGame_UI extends CYBR_Scene {
     // Update
     ////////////////////////////////////////////////////////////////////////
 
-    public update(time: number, delta: number): void {
+    public update(time: number, delta: number): void
+    {
         super.update(time, delta);
 
-        if (!this.scene.isPaused(this.sceneGame)) {
+        if (!this.scene.isPaused(this.sceneGame))
+        {
             this.elapsedTime += delta;
             this.chronoText.setVisible(!this.levelStarting);
             this.chronoText.text = CYBR_Scene.formatTime(this.elapsedTime);

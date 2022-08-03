@@ -132,8 +132,6 @@ export class Player extends Pawn
 
     private initSparkleAnim(): void
     {
-        console.log(this.sparkle);
-
         this.sparkle.anims.create({
             key: "sparkleOrange",
             frames: this.anims.generateFrameNames(this.sparkle.texture.key, { prefix: "sparkleOrange_", suffix: ".png", start: 1, end: 4, zeroPad: 3 }),
