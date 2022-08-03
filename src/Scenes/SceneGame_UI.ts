@@ -65,7 +65,7 @@ export class SceneGame_UI extends CYBR_Scene
         let textX = tokenImage.x + tokenImage.width + 12;
         let textY = tokenImage.y + 1;
 
-        let tokenText = this.add.text(textX, textY, "0", {font: '24px Gemunu Libre', color: '#FFBC32', stroke: '#000000', strokeThickness: 3});
+        let tokenText = this.add.text(textX, textY, "0", {font: '24px Gemunu Libre', color: CST.STYLE.COLOR.ORANGE, stroke: CST.STYLE.COLOR.BLACK, strokeThickness: 3});
         tokenText.x -= tokenText.width / 2;
         tokenText.y -= tokenText.height / 2;
 
@@ -92,7 +92,7 @@ export class SceneGame_UI extends CYBR_Scene
         let textX = lifeImage.x + lifeImage.width - 5;
         let textY = lifeImage.y + 1;
 
-        let lifeText = this.add.text(textX, textY, "3", {font: '24px Gemunu Libre', color: '#FFBC32', stroke: '#000000', strokeThickness: 3});
+        let lifeText = this.add.text(textX, textY, "3", {font: '24px Gemunu Libre', color: CST.STYLE.COLOR.ORANGE, stroke: CST.STYLE.COLOR.BLACK, strokeThickness: 3});
         lifeText.x -= lifeText.width / 2;
         lifeText.y -= lifeText.height / 2;
 
@@ -105,7 +105,7 @@ export class SceneGame_UI extends CYBR_Scene
 
     private createGameOverScreen(): void
     {
-        let gameOverText = this.add.text(0, 0, "GAME OVER", {font: '54px Arial', color: '#FFBC32', stroke: '#000000', strokeThickness: 3});
+        let gameOverText = this.add.text(0, 0, "GAME OVER", {font: '54px Arial', color: CST.STYLE.COLOR.ORANGE, stroke: CST.STYLE.COLOR.BLACK, strokeThickness: 3});
         gameOverText.visible = false;
         this.centerItem(gameOverText);
 
@@ -117,7 +117,7 @@ export class SceneGame_UI extends CYBR_Scene
     private createChrono(): Phaser.GameObjects.Text
     {
         let sceneWidth = this.scale.displaySize.width;
-        return this.add.text(sceneWidth - 100, 16, "00:00:00", {font: '24px Gemunu Libre', color: '#FFBC32', stroke: '#000000', strokeThickness: 3});
+        return this.add.text(sceneWidth - 100, 16, "00:00:00", {font: '24px Gemunu Libre', color: CST.STYLE.COLOR.ORANGE, stroke: CST.STYLE.COLOR.BLACK, strokeThickness: 3});
     }
 
     private startLevelCompletedTransition(): void

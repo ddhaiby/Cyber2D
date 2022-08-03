@@ -18,7 +18,7 @@ export class LevelTransition extends Phaser.GameObjects.Container {
         this.levelBackground = new CYBR_Graphics(scene, {x: 0, y: 0 , width: 0, height: 0});
         this.add(this.levelBackground);
 
-        this.levelTitle = scene.add.text(0, 240, "", { font: '82px Gemunu Libre', color: '#ffbc32', align: "center" });
+        this.levelTitle = scene.add.text(0, 240, "", { font: '82px Gemunu Libre', color: CST.STYLE.COLOR.ORANGE, stroke: CST.STYLE.COLOR.BLACK, strokeThickness: 1, align: "center" });
         this.levelTitle.setOrigin(0.5);
         this.levelTitle.setSize(600, 0);
         this.add(this.levelTitle);

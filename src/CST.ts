@@ -48,5 +48,13 @@ export const CST = {
             CLIMB_SPEED: "climbSpeed",
             BODY_DAMAGE: "bodyDamage"
         }
+    },
+
+    STYLE: {
+        COLOR: {
+            ORANGE: "#FFBC32",
+            BLACK: "#000000",
+            WHITE: "#FFFFFF",
+        }
     }
 }
