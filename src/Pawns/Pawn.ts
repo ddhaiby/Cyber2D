@@ -447,6 +447,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.stopFlying();
         this.stopClimbing();
         this.timerPrepareAttack.remove();
+        this.onDeath();
         this.emit("die");
 
         AudioManager.playSound(this.deathSound);
@@ -455,6 +456,10 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     public isDead(): boolean
     {
         return this.getHealth() <= 0;
+    }
+
+    protected onDeath(): void
+    {
     }
 
     protected onDeathAnimationComplete(): void
@@ -470,7 +475,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         return !this.isDead() && !this.isMeleeAttacking && !this.isPreparingAttack;
     }
 
-    protected attack(): void
+    protected attack(): boolean
     {
         if (this.canAttack())
         {
@@ -483,7 +488,11 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
                 this.isMeleeAttacking = true;
                 this._meleeWeapon.enableBody(false, 0, 0, true, false);
             });
+
+            return true;
         }
+
+        return false;
     }
 
     protected stopAttacking(): void
@@ -497,7 +506,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     {
         return this._meleeWeapon;
     }
-    
+
     // Fire weapon
     ////////////////////////////////////////////////////////////////////////
 

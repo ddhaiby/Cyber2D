@@ -1,0 +1,41 @@
+{
+    "PatrolRifle": {
+		"texture": "patrol",
+		"prefix": "rifle",
+		"anims": {
+			"Idle": { "name": "Idle", "start": 1, "end": 1, "frameRate": 10, "repeat": -1 },
+			"Walk": { "name": "Walk", "start": 1, "end": 5, "frameRate": 10, "repeat": -1 },
+			"Death": { "name": "Death", "start": 1, "end": 5, "frameRate": 5, "repeat": 0 }
+		}
+	},
+	"PatrolPistol": {
+		"texture": "patrol",
+		"prefix": "pistol",
+		"anims": {
+			"Idle": { "name": "Idle", "start": 1, "end": 1, "frameRate": 10, "repeat": -1 },
+			"Walk": { "name": "Walk", "start": 1, "end": 5, "frameRate": 10, "repeat": -1 },
+			"Death": { "name": "Death", "start": 1, "end": 5, "frameRate": 5, "repeat": 0 }
+		}
+	},
+	"PatrolMelee": {
+		"texture": "patrol",
+		"prefix": "melee",
+		"anims": {
+			"Idle": { "name": "Idle", "start": 1, "end": 1, "frameRate": 10, "repeat": -1 },
+			"Walk": { "name": "Walk", "start": 1, "end": 5, "frameRate": 10, "repeat": -1 },
+			"Death": { "name": "Death", "start": 1, "end": 5, "frameRate": 5, "repeat": 0 },
+			"Attack": { "name": "Attack", "start": 1, "end": 6, "frameRate": 15, "repeat": 0 },
+			"PrepareAttack": { "name": "Idle", "start": 1, "end": 1, "frameRate": 8, "repeat": 0 }
+		}
+	},
+	"Drone": {
+		"texture": "drone",
+		"prefix": "drone",
+		"anims": {
+			"Idle": { "name": "", "start": 1, "end": 1, "frameRate": 10, "repeat": 0 },
+			"Walk": { "name": "Down", "start": 1, "end": 1, "frameRate": 10, "repeat": 0 },
+			"Fly": { "name": "Down", "start": 1, "end": 1, "frameRate": 10, "repeat": 0 },
+			"Death": { "name": "Death", "start": 1, "end": 10, "frameRate": 9, "repeat": 0 }
+		}
+	}
+}

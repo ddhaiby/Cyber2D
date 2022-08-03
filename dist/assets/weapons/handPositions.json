@@ -4,5 +4,19 @@
     "WalkLeftHoldingWeapon": [{"x": 27, "y": 17}, {"x": 27, "y": 18}, {"x": 27, "y": 19}, {"x": 27, "y": 18}, {"x": 27, "y": 18}],
     "WalkRightHoldingWeapon": [{"x": 28, "y": 17}, {"x": 28, "y": 18}, {"x": 28, "y": 19}, {"x": 28, "y": 18}, {"x": 28, "y": 18}],
     "InAirLeftHoldingWeapon": [{"x": 27, "y": 16}],
-    "InAirRightHoldingWeapon": [{"x": 28, "y": 16}]
+    "InAirRightHoldingWeapon": [{"x": 28, "y": 16}],
+
+    "IdleLeftHoldingWeaponMediumHP": [{"x": 30, "y": 17}],
+    "IdleRightHoldingWeaponMediumHP": [{"x": 28, "y": 17}],
+    "WalkLeftHoldingWeaponMediumHP": [{"x": 27, "y": 17}, {"x": 27, "y": 18}, {"x": 27, "y": 19}, {"x": 27, "y": 18}, {"x": 27, "y": 18}],
+    "WalkRightHoldingWeaponMediumHP": [{"x": 28, "y": 17}, {"x": 28, "y": 18}, {"x": 28, "y": 19}, {"x": 28, "y": 18}, {"x": 28, "y": 18}],
+    "InAirLeftHoldingWeaponMediumHP": [{"x": 27, "y": 16}],
+    "InAirRightHoldingWeaponMediumHP": [{"x": 28, "y": 16}],
+
+    "IdleLeftHoldingWeaponLowHP": [{"x": 30, "y": 17}],
+    "IdleRightHoldingWeaponLowHP": [{"x": 28, "y": 17}],
+    "WalkLeftHoldingWeaponLowHP": [{"x": 27, "y": 17}, {"x": 27, "y": 18}, {"x": 27, "y": 19}, {"x": 27, "y": 18}, {"x": 27, "y": 18}],
+    "WalkRightHoldingWeaponLowHP": [{"x": 28, "y": 17}, {"x": 28, "y": 18}, {"x": 28, "y": 19}, {"x": 28, "y": 18}, {"x": 28, "y": 18}],
+    "InAirLeftHoldingWeaponLowHP": [{"x": 27, "y": 16}],
+    "InAirRightHoldingWeaponLowHP": [{"x": 28, "y": 16}]
 }

@@ -120,12 +120,10 @@ export class BasicAI extends Pawn
     {
         if (this.isDead())
         {
-            if (this.anims.currentAnim.key != "Death")
-            {
-                this.anims.play("Death");
-            }
+           return;
         }
-        else if (this.isPreparingAttack)
+        
+        if (this.isPreparingAttack)
         {
             this.anims.play("PrepareAttack", true);
         }
@@ -138,6 +136,11 @@ export class BasicAI extends Pawn
             this.anims.play((this.body.velocity.x != 0 || this.isTakingDmg) ? "Walk" : "Idle", true);
             this.setFlipX(this.isLookingLeft);
         }
+    }
+
+    protected onDeath(): void
+    {
+        this.anims.play("Death", true);
     }
 
     // Patrols
