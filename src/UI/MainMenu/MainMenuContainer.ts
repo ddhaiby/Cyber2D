@@ -1,37 +1,61 @@
-import { CYBR_Button } from "../CYBR_Button";
+import { CST } from "../../CST";
 import { SceneMainMenu_UI } from "../../Scenes/SceneMainMenu_UI";
-import {PlayerManager} from "../../Managers/PlayerManager";
+import { PlayerManager } from "../../Managers/PlayerManager";
+import { CYBR_TextButton } from "../CYBR_TextButton";
+import {HttpServices} from "../../Core/Http.Services";
+import {StorageService} from "../../Shared/StorageService";
 
 export class MainMenuContainer extends Phaser.GameObjects.Container
 {
+    private httpService: HttpServices;
+    private localStorage: StorageService;
+
     constructor(scene: SceneMainMenu_UI, x?: number, y?: number)
     {
         super(scene, x, y);
         scene.add.existing(this);
-    
+
+        this.httpService = new HttpServices();
+        this.localStorage = new StorageService();
+
+        PlayerManager.Instance.initKeys = scene;
+
         this.width = scene.scale.displaySize.width;
         this.height = scene.scale.displaySize.height;
-        PlayerManager.Instance.initKeys = scene;
-        let buttonRegister = new CYBR_Button(scene, 0, 0, "Register");
-        buttonRegister.onClicked(this.onRegisterClicked, this);
-        scene.centerItem(buttonRegister);
-        this.add(buttonRegister);
 
-        let buttonPlay = new CYBR_Button(scene, 0, 200, "Play");
-        buttonPlay.clickSound = "Play_Button_Click";
-        buttonPlay.onClicked(this.onPlayClicked, this);
-        Phaser.Display.Align.To.TopCenter(buttonPlay, buttonRegister, 0, 40);
-        this.add(buttonPlay);
+        const playTextButton = new CYBR_TextButton(scene, 100, 100, "PLAY", { fontSize : "116px", color: CST.STYLE.COLOR.ORANGE, strokeThickness : 6});
+        scene.centerItem(playTextButton, 0, -10);
+        playTextButton.onClicked(() => {
+            playTextButton.emit("pointerout"); // Hack to ensure the button ends with its normal state here
+            this.onPlayClicked();
+        }, this);
+        this.add(playTextButton);
 
-        let buttonSettings = new CYBR_Button(scene, 0, 0, "Settings");
-        buttonSettings.onClicked(this.onSettingsClicked, this);
-        Phaser.Display.Align.To.BottomCenter(buttonSettings, buttonRegister, 0, 40);
-        this.add(buttonSettings);
+        const selectLevelTextButton = new CYBR_TextButton(scene, 100, 100, "SELECT LEVEL", { fontSize : "32px", color: CST.STYLE.COLOR.ORANGE, strokeThickness : 4});
+        scene.centerItem(selectLevelTextButton, 0, 180);
+        selectLevelTextButton.onClicked(this.onSelectLevelClicked, this);
+        this.add(selectLevelTextButton);
+
+        const settingsTextButton = new CYBR_TextButton(scene, 880, 12, "Settings", { fontSize : "20px", color: CST.STYLE.COLOR.ORANGE, strokeThickness : 2});
+        settingsTextButton.onClicked(this.onSettingsClicked, this);
+        this.add(settingsTextButton);
+
+        const discordTextButton = new CYBR_TextButton(scene, 800, 12, "Discord", { fontSize : "20px", color: CST.STYLE.COLOR.ORANGE, strokeThickness : 2});
+        discordTextButton.onClicked(this.onDiscordConnectClicked, this);
+        this.add(discordTextButton);
     }
+
+    // On button clicked
+    ////////////////////////////////////////////////////////////////////////
 
     private onPlayClicked() : void
     {
         this.emit("play");
+    }
+
+    private onSelectLevelClicked() : void
+    {
+        this.emit("selectLevel");
     }
 
     private onSettingsClicked() : void
@@ -42,5 +66,43 @@ export class MainMenuContainer extends Phaser.GameObjects.Container
     private onRegisterClicked() : void
     {
         this.emit("connect");
+    }
+
+    private onDiscordConnectClicked(): void
+    {
+        this.httpService.login().then(async result => {
+            await this.ShowAuthWindow({path: JSON.parse(result.data as unknown as string).url, callback: {}});
+
+        });
+    }
+
+    // Authentification
+    ////////////////////////////////////////////////////////////////////////
+
+    private async ShowAuthWindow(options)
+    {
+            options.windowName = options.windowName || '_blank'; // should not include space for IE
+            options.windowOptions = options.windowOptions || 'location=0,status=0,width=800,height=400';
+            options.callback = options.callback || function () {
+                window.location.reload();
+            };
+
+            let _oauthWindow = window.open(options.path, options.windowName, options.windowOptions);
+
+
+            let _oauthInterval = window.setInterval(function () {
+                if (_oauthWindow.closed) {
+
+                    clearInterval(_oauthInterval);
+                    new HttpServices().loginValidation().then(result => {
+                        if(result.status==200) {
+                            new StorageService().setToken(JSON.parse(result.data).JWT).then(() => new StorageService().setUserData({
+                                username: JSON.parse(result.data).username,
+                                email: JSON.parse(result.data).email
+                            }))
+                        }
+                    });
+                }
+            }, 100);
     }
 }

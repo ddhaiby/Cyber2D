@@ -47,7 +47,7 @@ export class LevelTransition extends Phaser.GameObjects.Container {
         this.levelBackground.width = 0;
         this.levelBackground.height = this.height;
         this.levelBackground.clear();
-        this.levelBackground.fillStyle(0x171822);
+        this.levelBackground.fillStyle(parseInt(CST.STYLE.COLOR.CYBER_BACKGROUND));
         this.levelBackground.fillRect(this.levelBackground.x, this.levelBackground.y, this.levelBackground.width, this.levelBackground.height);
 
         this.scene.tweens.add({
@@ -58,7 +58,7 @@ export class LevelTransition extends Phaser.GameObjects.Container {
             duration: 800,
             onUpdate: function() : void {
                 this.levelBackground.clear();
-                this.levelBackground.fillStyle(0x171822);
+                this.levelBackground.fillStyle(parseInt(CST.STYLE.COLOR.CYBER_BACKGROUND));
                 this.levelBackground.fillRect(this.levelBackground.x, this.levelBackground.y, this.levelBackground.width, this.levelBackground.height);
             },
             onComplete: function() : void {
@@ -77,7 +77,7 @@ export class LevelTransition extends Phaser.GameObjects.Container {
         this.levelBackground.width = this.width;
         this.levelBackground.height = this.height;
         this.levelBackground.clear();
-        this.levelBackground.fillStyle(0x171822);
+        this.levelBackground.fillStyle(parseInt(CST.STYLE.COLOR.CYBER_BACKGROUND));
         this.levelBackground.fillRect(this.levelBackground.x, this.levelBackground.y, this.levelBackground.width, this.levelBackground.height);
 
         this.levelTitle.setX(this.levelBackground.width / 2);
@@ -103,7 +103,7 @@ export class LevelTransition extends Phaser.GameObjects.Container {
             onUpdate: function() : void {
                 this.levelBackground.x = (this.width - this.levelBackground.width) / 1.5,
                 this.levelBackground.clear();
-                this.levelBackground.fillStyle(0x171822);
+                this.levelBackground.fillStyle(parseInt(CST.STYLE.COLOR.CYBER_BACKGROUND));
                 this.levelBackground.fillRect(this.levelBackground.x, this.levelBackground.y, this.levelBackground.width, this.levelBackground.height);
 
                 this.levelTitle.setX(this.levelBackground.x + this.width -this.levelBackground.width / 2);

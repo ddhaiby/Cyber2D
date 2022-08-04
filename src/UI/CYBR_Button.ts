@@ -1,11 +1,12 @@
+import { CST } from "../CST";
 import { AudioManager } from "../Managers/AudioManager";
 
 export class CYBR_Button extends Phaser.GameObjects.Container
 {
     private backgroundObject: Phaser.GameObjects.Image;
     private textObject: Phaser.GameObjects.Text;
-    public clickSound: string = "Menu_Buttons_Hover";
-    public hoverSound: string = "Menu_Buttons_Click";
+    public clickSound: string = "Menu_Buttons_Click";
+    public hoverSound: string = "Menu_Buttons_Hover";
 
     constructor(scene: Phaser.Scene, x: number, y: number, text: string)
     {
@@ -20,9 +21,9 @@ export class CYBR_Button extends Phaser.GameObjects.Container
         this.add(this.backgroundObject);
         this.backgroundObject.setX((this.width - this.backgroundObject.width) / 2);
         this.backgroundObject.setY((this.height - this.backgroundObject.height) / 2);
-    
+
         // Text
-        this.textObject = scene.add.text(0, 0, text, { fontFamily: "Gemunu Libre", fontSize: "48px", fontStyle: "bold", color: "#171822", align: "center" });
+        this.textObject = scene.add.text(0, 0, text, { fontFamily: "Gemunu Libre", fontSize: "48px", fontStyle: "bold", color: CST.STYLE.COLOR.TEXT.NORMAL, align: "center" });
         this.textObject.setFixedSize(this.width, 0);
         this.textObject.setOrigin(0);
         this.textObject.setX((this.width - this.textObject.width) / 2);

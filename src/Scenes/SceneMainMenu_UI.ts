@@ -4,16 +4,17 @@ import { SceneData } from "./CYBR_Scene";
 import { SceneGame } from "./SceneGame";
 import { CYBR_Graphics } from "../Utils/CYBR_Graphics";
 import { AudioManager } from "../Managers/AudioManager";
-import { RegisterContainer } from "../UI/MainMenu/RegisterContainer";
 import { MainMenuContainer } from "../UI/MainMenu/MainMenuContainer";
 import { SettingsContainer } from "../UI/MainMenu/SettingsContainer";
 
 export class SceneMainMenu_UI extends CYBR_Scene
 {
     private sceneGame: SceneGame;
-    private registerContainer: RegisterContainer;
     private mainMenuContainer: MainMenuContainer;
     private settingsContainer: SettingsContainer;
+
+    private menuContainers: Phaser.GameObjects.Container[];
+
     constructor()
     {
         super({key: CST.SCENES.MAINMENU_UI});
@@ -41,11 +42,6 @@ export class SceneMainMenu_UI extends CYBR_Scene
         background.fillRect(0, 0, background.width, background.height);
         this.centerItem(background);
 
-        this.registerContainer = new RegisterContainer(this, 0, 0);
-        this.registerContainer.setVisible(false);
-        this.registerContainer.on("playerSaveSettings", this.onPlayerConnected, this);
-        this.registerContainer.on("playerCancelledConnection", this.onPlayerCancelledConnection, this);
-
         // Containers
         this.mainMenuContainer = new MainMenuContainer(this, 0, 0);
         this.mainMenuContainer.setVisible(true);
@@ -57,9 +53,12 @@ export class SceneMainMenu_UI extends CYBR_Scene
         this.settingsContainer.setVisible(false);
         this.settingsContainer.on("playerSaveSettings", this.onSaveChanges, this);
         this.settingsContainer.on("playerCancelledSettings", this.onPlayerCancelledSettings, this);
+
         // Game Scene
         const sceneData = {level: 1} as SceneData;
         this.sceneGame = this.scene.add(CST.SCENES.GAME, SceneGame, false, sceneData) as SceneGame;
+
+        this.menuContainers = [this.mainMenuContainer, this.settingsContainer];
     }
 
     // Update
@@ -68,6 +67,20 @@ export class SceneMainMenu_UI extends CYBR_Scene
     public update(time: number, delta: number) : void
     {
         super.update(time, delta);
+    }
+
+    private hideAllMenuContainers() : void
+    {
+        for (let container of this.menuContainers)
+        {
+            container.setVisible(false);
+        }
+    }
+
+    private showMenuContainer(visibleContainer: Phaser.GameObjects.Container) : void
+    {
+        this.hideAllMenuContainers();
+        visibleContainer.setVisible(true);
     }
 
     private onPlay() : void
@@ -87,30 +100,16 @@ export class SceneMainMenu_UI extends CYBR_Scene
 
     private onConnect() : void
     {
-        this.mainMenuContainer.setVisible(false);
-        this.registerContainer.setVisible(true);
+
     }
 
-    private onPlayerConnected() : void
-    {
-        this.registerContainer.setVisible(false);
-        this.mainMenuContainer.setVisible(true);
-    }
-
-    private onPlayerCancelledConnection() : void
-    {
-        this.registerContainer.setVisible(false);
-        this.mainMenuContainer.setVisible(true);
-    }
     private onSaveChanges() : void
     {
-        this.settingsContainer.setVisible(false);
-        this.mainMenuContainer.setVisible(true);
+        this.showMenuContainer(this.mainMenuContainer);
     }
 
     private onPlayerCancelledSettings() : void
     {
-        this.settingsContainer.setVisible(false);
-        this.mainMenuContainer.setVisible(true);
+        this.showMenuContainer(this.mainMenuContainer);
     }
 }

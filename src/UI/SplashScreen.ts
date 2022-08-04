@@ -1,3 +1,4 @@
+import { CST } from "../CST";
 import { CYBR_Graphics } from "../Utils/CYBR_Graphics";
 
 export class SplashScreen extends Phaser.GameObjects.Container {
@@ -13,7 +14,7 @@ export class SplashScreen extends Phaser.GameObjects.Container {
         this.add(this.video);
 
         this.background = new CYBR_Graphics(scene, {x: 0, y: 0, width: width, height: height});
-        this.background.fillStyle(0x171822);
+        this.background.fillStyle(parseInt(CST.STYLE.COLOR.CYBER_BACKGROUND));
         this.background.fillRect(this.background.x, this.background.y, this.background.width, this.background.height);
         this.add(this.background);
 

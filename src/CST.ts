@@ -55,6 +55,13 @@ export const CST = {
             ORANGE: "#FFBC32",
             BLACK: "#000000",
             WHITE: "#FFFFFF",
+            CYBER_BACKGROUND: "0x171822",
+            TEXT: {
+                NORMAL: "#171822",
+                HOVERED: "#FFFFFF",
+                PRESSED: "#FFFFFFAA",
+                DISABLED: "#000000"
+            }
         }
     }
 }

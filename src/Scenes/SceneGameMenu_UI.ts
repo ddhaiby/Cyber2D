@@ -38,7 +38,7 @@ export class SceneGameMenu_UI extends CYBR_Scene
         let background = new CYBR_Graphics(this);
         background.width = this.width;
         background.height = this.height;
-        background.fillStyle(0x171822);
+        background.fillStyle(parseInt(CST.STYLE.COLOR.CYBER_BACKGROUND));
         background.fillRect(0, 0, background.width, background.height);
         this.centerItem(background);
 
