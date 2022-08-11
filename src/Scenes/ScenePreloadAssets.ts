@@ -30,6 +30,7 @@ export class ScenePreloadAssets extends CYBR_Scene
         this.loadPawns();
         this.loadWeapons();
         this.loadPlatforms();
+        this.loadPreviewLevels();
 
         this.load.setPath("./assets");
 
@@ -75,6 +76,17 @@ export class ScenePreloadAssets extends CYBR_Scene
         this.load.atlas("platform_atlas", "platform_atlas.png", "platform_atlas.json");
         this.load.atlas("mine", "mine_atlas.png", "mine_atlas.json");
         this.load.atlas("sparkles", "sparkles_atlas.png", "sparkles_atlas.json");
+    }
+
+    private loadPreviewLevels() : void
+    {
+        this.load.setPath("./assets/previewLevels");
+        
+        for (let i = 1; i <= CST.LEVELS.length; ++i)
+        {
+            const previewLevelName = "previewLevel" + i.toString();
+            this.load.image(previewLevelName, previewLevelName + ".png");
+        }
     }
 
     // Create

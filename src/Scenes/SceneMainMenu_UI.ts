@@ -6,12 +6,14 @@ import { CYBR_Graphics } from "../Utils/CYBR_Graphics";
 import { AudioManager } from "../Managers/AudioManager";
 import { MainMenuContainer } from "../UI/MainMenu/MainMenuContainer";
 import { SettingsContainer } from "../UI/MainMenu/SettingsContainer";
+import { SelectLevelContainer } from "../UI/MainMenu/SelectLevelContainer";
 
 export class SceneMainMenu_UI extends CYBR_Scene
 {
     private sceneGame: SceneGame;
     private mainMenuContainer: MainMenuContainer;
     private settingsContainer: SettingsContainer;
+    private selectLevelContainer: SelectLevelContainer;
 
     private menuContainers: Phaser.GameObjects.Container[];
 
@@ -45,20 +47,25 @@ export class SceneMainMenu_UI extends CYBR_Scene
         // Containers
         this.mainMenuContainer = new MainMenuContainer(this, 0, 0);
         this.mainMenuContainer.setVisible(true);
-        this.mainMenuContainer.on("play", this.onPlay, this);
-        this.mainMenuContainer.on("settings", this.onSettings, this);
-        this.mainMenuContainer.on("connect", this.onConnect, this);
+        this.mainMenuContainer.on("playClicked", this.launchFirstLevel, this);
+        this.mainMenuContainer.on("selectLevelClicked", this.onSelectLevelButtonClicked, this);
+        this.mainMenuContainer.on("settingsClicked", this.onSettingsButtonClicked, this);
+        this.mainMenuContainer.on("connectClicked", this.onConnectButtonClicked, this);
 
         this.settingsContainer = new SettingsContainer(this, 0, 0);
         this.settingsContainer.setVisible(false);
-        this.settingsContainer.on("playerSaveSettings", this.onSaveChanges, this);
-        this.settingsContainer.on("playerCancelledSettings", this.onPlayerCancelledSettings, this);
+        this.settingsContainer.on("saveSettings", this.onSaveChanges, this);
+        this.settingsContainer.on("cancelSettings", this.onCancelSettings, this);
+
+        this.selectLevelContainer = new SelectLevelContainer(this, 0, 0);
+        this.selectLevelContainer.setVisible(false);
+        this.selectLevelContainer.on("playLevel", this.launchLevel, this);
 
         // Game Scene
         const sceneData = {level: 1} as SceneData;
         this.sceneGame = this.scene.add(CST.SCENES.GAME, SceneGame, false, sceneData) as SceneGame;
 
-        this.menuContainers = [this.mainMenuContainer, this.settingsContainer];
+        this.menuContainers = [this.mainMenuContainer, this.settingsContainer, this.selectLevelContainer];
     }
 
     // Update
@@ -83,24 +90,31 @@ export class SceneMainMenu_UI extends CYBR_Scene
         visibleContainer.setVisible(true);
     }
 
-    private onPlay() : void
+    private launchFirstLevel() : void
+    {
+        this.launchLevel(1);
+    }
+
+    private launchLevel(level: number) : void
     {
         this.scene.setActive(false);
         this.scene.setVisible(false);
-        this.sceneGame.scene.restart({level: 1} as SceneData);
+        this.sceneGame.scene.restart({level: level} as SceneData);
         this.sceneGame.showGame(true);
     }
 
-    private onSettings() : void
+    private onSelectLevelButtonClicked() : void
     {
-        console.log("Settings requested");
-        this.mainMenuContainer.setVisible(false);
-        this.settingsContainer.setVisible(true);
+        this.showMenuContainer(this.selectLevelContainer);
     }
 
-    private onConnect() : void
+    private onSettingsButtonClicked() : void
     {
+        this.showMenuContainer(this.settingsContainer);
+    }
 
+    private onConnectButtonClicked() : void
+    {
     }
 
     private onSaveChanges() : void
@@ -108,7 +122,7 @@ export class SceneMainMenu_UI extends CYBR_Scene
         this.showMenuContainer(this.mainMenuContainer);
     }
 
-    private onPlayerCancelledSettings() : void
+    private onCancelSettings() : void
     {
         this.showMenuContainer(this.mainMenuContainer);
     }

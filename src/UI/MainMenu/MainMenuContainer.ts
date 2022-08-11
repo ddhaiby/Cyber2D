@@ -50,22 +50,22 @@ export class MainMenuContainer extends Phaser.GameObjects.Container
 
     private onPlayClicked() : void
     {
-        this.emit("play");
+        this.emit("playClicked");
     }
 
     private onSelectLevelClicked() : void
     {
-        this.emit("selectLevel");
+        this.emit("selectLevelClicked");
     }
 
     private onSettingsClicked() : void
     {
-        this.emit("settings");
+        this.emit("settingsClicked");
     }
 
     private onRegisterClicked() : void
     {
-        this.emit("connect");
+        this.emit("connectClicked");
     }
 
     private onDiscordConnectClicked(): void

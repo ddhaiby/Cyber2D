@@ -60,7 +60,7 @@ export const CST = {
                 NORMAL: "#171822",
                 HOVERED: "#FFFFFF",
                 PRESSED: "#FFFFFFAA",
-                DISABLED: "#000000"
+                DISABLED: "#555555"
             }
         }
     }

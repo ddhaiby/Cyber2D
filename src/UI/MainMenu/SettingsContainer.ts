@@ -4,7 +4,8 @@ import {CYBR_Scene} from "../../Scenes/CYBR_Scene";
 import {PlayerManager} from "../../Managers/PlayerManager";
 import Key = Phaser.Input.Keyboard.Key;
 
-export class SettingsContainer extends Phaser.GameObjects.Container {
+export class SettingsContainer extends Phaser.GameObjects.Container
+{
     private textFieldUp: CYBR_TextField;
     private textFieldDown: CYBR_TextField;
     private textFieldJump: CYBR_TextField;
@@ -129,7 +130,8 @@ export class SettingsContainer extends Phaser.GameObjects.Container {
         return this;
     }
 
-    private saveChange() {
+    private saveChange()
+    {
         PlayerManager.Instance.newKeys = {
             scene: this.scene,
             up: this.textFieldUp.text.toString() as unknown as Key,
@@ -139,10 +141,11 @@ export class SettingsContainer extends Phaser.GameObjects.Container {
             jump: this.textFieldJump.text.toString()as unknown as Key,
             fire: this.textFieldFire.text.toString()as unknown as Key
         }
-        this.emit("playerSaveSettings");
+        this.emit("saveSettings");
     }
 
-    private cancelClicked(): void {
-        this.emit("playerCancelledSettings");
+    private cancelClicked(): void
+    {
+        this.emit("cancelSettings");
     }
 }

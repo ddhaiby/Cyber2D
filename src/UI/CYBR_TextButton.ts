@@ -13,6 +13,9 @@ export class CYBR_TextButton extends Phaser.GameObjects.Text
     /** Whether the button is currently pressed */
     private pressed: boolean = false;
 
+    /** Whether the button is enabled */
+    private enabled: boolean = true;
+
     /** Sound when the user clicks on this text button */
     private clickSound: string = "Menu_Buttons_Click";
 
@@ -53,24 +56,36 @@ export class CYBR_TextButton extends Phaser.GameObjects.Text
 
         // Behaviors
         this.on("pointerover", () => {
-            this.setColor(this.hoveredColor);
-            AudioManager.playSound(this.hoverSound);
+            if (this.enabled)
+            {
+                this.setColor(this.hoveredColor);
+                AudioManager.playSound(this.hoverSound);
+            }          
         }, this);
 
         this.on("pointerout", () => {
-            this.pressed = false;
-            this.setColor(this.normalColor);
+            if (this.enabled)
+            {
+                this.pressed = false;
+                this.setColor(this.normalColor);
+            }
         }, this);
 
         this.on("pointerdown", () => {
-            this.pressed = true;
-            this.setColor(this.pressedColor);
+            if (this.enabled)
+            {
+                this.pressed = true;
+                this.setColor(this.pressedColor);
+            }
         }, this);
 
         this.on("pointerup", () => {
-            this.pressed = false;
-            this.setColor(this.hoveredColor);
-            AudioManager.playSound(this.clickSound);
+            if (this.enabled)
+            {
+                this.pressed = false;
+                this.setColor(this.hoveredColor);
+                AudioManager.playSound(this.clickSound);
+            }
         }, this);
 
         this.on("pointermove", () => { this.setColor(this.pressed ? this.pressedColor : this.hoveredColor); }, this);
@@ -80,5 +95,21 @@ export class CYBR_TextButton extends Phaser.GameObjects.Text
     {
         this.on("pointerup", fn, context);
         return this;
+    }
+
+    public setInteractive(hitArea?: any, callback?: Phaser.Types.Input.HitAreaCallback, dropZone?: boolean): this
+    {
+        this.setColor(this.normalColor);
+        this.pressed = false;
+        this.enabled = true;
+        return super.setInteractive(hitArea, callback, dropZone);
+    }
+
+    public disableInteractive(): this
+    {
+        this.setColor(this.disabledColor);
+        this.pressed = false;
+        this.enabled = false;
+        return super.disableInteractive()
     }
 }
