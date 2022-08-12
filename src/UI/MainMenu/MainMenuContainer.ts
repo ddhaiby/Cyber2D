@@ -1,9 +1,10 @@
 import { CST } from "../../CST";
 import { SceneMainMenu_UI } from "../../Scenes/SceneMainMenu_UI";
 import { PlayerManager } from "../../Managers/PlayerManager";
+import { HttpServices } from "../../Core/Http.Services";
+import { StorageService } from "../../Shared/StorageService";
 import { CYBR_TextButton } from "../CYBR_TextButton";
-import {HttpServices} from "../../Core/Http.Services";
-import {StorageService} from "../../Shared/StorageService";
+import { CYBR_IconButton } from "../CYBR_IconButton";
 
 export class MainMenuContainer extends Phaser.GameObjects.Container
 {
@@ -36,9 +37,9 @@ export class MainMenuContainer extends Phaser.GameObjects.Container
         selectLevelTextButton.onClicked(this.onSelectLevelClicked, this);
         this.add(selectLevelTextButton);
 
-        const settingsTextButton = new CYBR_TextButton(scene, 880, 12, "Settings", { fontSize : "20px", color: CST.STYLE.COLOR.ORANGE, strokeThickness : 2});
-        settingsTextButton.onClicked(this.onSettingsClicked, this);
-        this.add(settingsTextButton);
+        const settingsIconButton = new CYBR_IconButton(scene, 930, 30, {texture: "UI_atlas", iconNormal: "iconGearNormal.png", iconPressed: "iconGearPressed.png", iconHovered: "iconGearHovered.png"});
+        settingsIconButton.onClicked(this.onSettingsClicked, this);
+        this.add(settingsIconButton);
 
         const discordTextButton = new CYBR_TextButton(scene, 800, 12, "Discord", { fontSize : "20px", color: CST.STYLE.COLOR.ORANGE, strokeThickness : 2});
         discordTextButton.onClicked(this.onDiscordConnectClicked, this);

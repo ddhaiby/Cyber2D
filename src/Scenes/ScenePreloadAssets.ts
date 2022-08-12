@@ -35,7 +35,7 @@ export class ScenePreloadAssets extends CYBR_Scene
         this.load.setPath("./assets");
 
         this.load.image("background", "./background.png");
-        this.load.atlas("UI_atlas", "UI_atlas.png", "UI_atlas.json");
+        this.load.atlas("UI_atlas", "UI/UI_atlas.png", "UI/UI_atlas.json");
     }
 
     /** Load audios from an audio sprite. Below is an example to generate an audio sprite from audios (make sure to run in admin). 

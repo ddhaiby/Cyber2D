@@ -1,0 +1,146 @@
+{
+	"textures": [
+		{
+			"image": "UI_atlas.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 962,
+				"h": 626
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "iconGearHovered.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 36,
+						"h": 36
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 36,
+						"h": 36
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 36,
+						"h": 36
+					}
+				},
+				{
+					"filename": "iconGearNormal.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 36,
+						"h": 36
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 36,
+						"h": 36
+					},
+					"frame": {
+						"x": 39,
+						"y": 1,
+						"w": 36,
+						"h": 36
+					}
+				},
+				{
+					"filename": "iconGearPressed.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 36,
+						"h": 36
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 36,
+						"h": 36
+					},
+					"frame": {
+						"x": 77,
+						"y": 1,
+						"w": 36,
+						"h": 36
+					}
+				},
+				{
+					"filename": "btn_background.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 280,
+						"h": 82
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 280,
+						"h": 82
+					},
+					"frame": {
+						"x": 115,
+						"y": 1,
+						"w": 280,
+						"h": 82
+					}
+				},
+				{
+					"filename": "btn_background_hovered.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 280,
+						"h": 82
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 280,
+						"h": 82
+					},
+					"frame": {
+						"x": 397,
+						"y": 1,
+						"w": 280,
+						"h": 82
+					}
+				},
+				{
+					"filename": "cyberSplashScreen.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 960,
+						"h": 540
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 960,
+						"h": 540
+					},
+					"frame": {
+						"x": 1,
+						"y": 85,
+						"w": 960,
+						"h": 540
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:c257731af23f7eeaedc18c1ccbdcdb6a:106aa22fb9dc6469a074da7de25940d4:655d4ebe52fa3b43642cb078d947df68$"
+	}
+}
