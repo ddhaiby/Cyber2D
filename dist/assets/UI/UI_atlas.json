@@ -10,6 +10,69 @@
 			"scale": 1,
 			"frames": [
 				{
+					"filename": "iconHomeHovered.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 32,
+						"h": 32
+					}
+				},
+				{
+					"filename": "iconHomeNormal.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 35,
+						"y": 1,
+						"w": 32,
+						"h": 32
+					}
+				},
+				{
+					"filename": "iconHomePressed.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 69,
+						"y": 1,
+						"w": 32,
+						"h": 32
+					}
+				},
+				{
 					"filename": "iconGearHovered.png",
 					"rotated": false,
 					"trimmed": false,
@@ -24,7 +87,7 @@
 						"h": 36
 					},
 					"frame": {
-						"x": 1,
+						"x": 103,
 						"y": 1,
 						"w": 36,
 						"h": 36
@@ -45,7 +108,7 @@
 						"h": 36
 					},
 					"frame": {
-						"x": 39,
+						"x": 141,
 						"y": 1,
 						"w": 36,
 						"h": 36
@@ -66,7 +129,7 @@
 						"h": 36
 					},
 					"frame": {
-						"x": 77,
+						"x": 179,
 						"y": 1,
 						"w": 36,
 						"h": 36
@@ -87,7 +150,7 @@
 						"h": 82
 					},
 					"frame": {
-						"x": 115,
+						"x": 217,
 						"y": 1,
 						"w": 280,
 						"h": 82
@@ -108,7 +171,7 @@
 						"h": 82
 					},
 					"frame": {
-						"x": 397,
+						"x": 499,
 						"y": 1,
 						"w": 280,
 						"h": 82
@@ -141,6 +204,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:c257731af23f7eeaedc18c1ccbdcdb6a:106aa22fb9dc6469a074da7de25940d4:655d4ebe52fa3b43642cb078d947df68$"
+		"smartupdate": "$TexturePacker:SmartUpdate:dd19a967dd23c2b56943fb0bdd2071df:562e14e8fc62c2896bcbccd2f5b434c2:655d4ebe52fa3b43642cb078d947df68$"
 	}
 }

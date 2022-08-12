@@ -55,11 +55,12 @@ export class SceneMainMenu_UI extends CYBR_Scene
         this.settingsContainer = new SettingsContainer(this, 0, 0);
         this.settingsContainer.setVisible(false);
         this.settingsContainer.on("saveSettings", this.onSaveChanges, this);
-        this.settingsContainer.on("cancelSettings", this.onCancelSettings, this);
+        this.settingsContainer.on("cancelSettings", this.onBackToMainMenu, this);
 
         this.selectLevelContainer = new SelectLevelContainer(this, 0, 0);
         this.selectLevelContainer.setVisible(false);
         this.selectLevelContainer.on("playLevel", this.launchLevel, this);
+        this.selectLevelContainer.on("backToMainMenu", this.onBackToMainMenu, this);
 
         // Game Scene
         const sceneData = {level: 1} as SceneData;
@@ -123,7 +124,7 @@ export class SceneMainMenu_UI extends CYBR_Scene
         this.showMenuContainer(this.mainMenuContainer);
     }
 
-    private onCancelSettings() : void
+    private onBackToMainMenu() : void
     {
         this.showMenuContainer(this.mainMenuContainer);
     }
