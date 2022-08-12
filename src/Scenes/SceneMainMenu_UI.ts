@@ -100,6 +100,7 @@ export class SceneMainMenu_UI extends CYBR_Scene
         this.scene.setActive(false);
         this.scene.setVisible(false);
         this.sceneGame.scene.restart({level: level} as SceneData);
+        this.showMenuContainer(this.mainMenuContainer);
         this.sceneGame.showGame(true);
     }
 
