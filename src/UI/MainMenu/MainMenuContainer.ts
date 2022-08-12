@@ -41,9 +41,9 @@ export class MainMenuContainer extends Phaser.GameObjects.Container
         settingsIconButton.onClicked(this.onSettingsClicked, this);
         this.add(settingsIconButton);
 
-        const discordTextButton = new CYBR_TextButton(scene, 800, 12, "Discord", { fontSize : "20px", color: CST.STYLE.COLOR.ORANGE, strokeThickness : 2});
-        discordTextButton.onClicked(this.onDiscordConnectClicked, this);
-        this.add(discordTextButton);
+        // const discordTextButton = new CYBR_TextButton(scene, 800, 12, "Discord", { fontSize : "20px", color: CST.STYLE.COLOR.ORANGE, strokeThickness : 2});
+        // discordTextButton.onClicked(this.onDiscordConnectClicked, this);
+        // this.add(discordTextButton);
     }
 
     // On button clicked
