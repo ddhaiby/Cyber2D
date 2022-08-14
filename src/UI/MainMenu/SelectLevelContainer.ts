@@ -35,7 +35,7 @@ export class SelectLevelContainer extends Phaser.GameObjects.Container
 
         const playButton = new CYBR_TextButton(scene, 0, 0, "PLAY", { fontSize : "44px", color: CST.STYLE.COLOR.ORANGE, strokeThickness : 4});
         scene.centerItem(playButton, 416, 244);
-        playButton.onClicked(() => { this.emit("playLevel", this.currentLevel) }, this);
+        playButton.onClicked(this.onPlayLevelClicked, this);
         this.add(playButton);
 
         const homeIconButton = new CYBR_IconButton(scene, 930, 28, "UI_atlas", "iconHome.png");
@@ -48,7 +48,6 @@ export class SelectLevelContainer extends Phaser.GameObjects.Container
 
         this.updateTitleLevel();
         this.updatePreviewLevelImage();
-        
     }
 
     private set currentLevel(currentLevel: number)
@@ -61,6 +60,12 @@ export class SelectLevelContainer extends Phaser.GameObjects.Container
     private get currentLevel(): number
     {
         return this._currentLevel;
+    }
+
+    private onPlayLevelClicked(): void
+    {
+        this.emit("playLevel", this.currentLevel);
+        this.currentLevel = 1;
     }
 
     private onShowPreviousLevel(): void
