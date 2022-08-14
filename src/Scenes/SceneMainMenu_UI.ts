@@ -62,10 +62,6 @@ export class SceneMainMenu_UI extends CYBR_Scene
         this.selectLevelContainer.on("playLevel", this.launchLevel, this);
         this.selectLevelContainer.on("backToMainMenu", this.onBackToMainMenu, this);
 
-        // Game Scene
-        const sceneData = {level: 1} as SceneData;
-        this.sceneGame = this.scene.add(CST.SCENES.GAME, SceneGame, false, sceneData) as SceneGame;
-
         this.menuContainers = [this.mainMenuContainer, this.settingsContainer, this.selectLevelContainer];
     }
 
@@ -98,11 +94,13 @@ export class SceneMainMenu_UI extends CYBR_Scene
 
     private launchLevel(level: number) : void
     {
+        const sceneData = {level: level} as SceneData;
+        this.sceneGame = this.scene.add(CST.SCENES.GAME, SceneGame, true, sceneData) as SceneGame;
+        this.sceneGame.showGame(true);
+
         this.scene.setActive(false);
         this.scene.setVisible(false);
-        this.sceneGame.scene.restart({level: level} as SceneData);
         this.showMenuContainer(this.mainMenuContainer);
-        this.sceneGame.showGame(true);
     }
 
     private onSelectLevelButtonClicked() : void

@@ -95,10 +95,9 @@ export class SceneGame extends CYBR_Scene {
 
     public create(data?: SceneData): void
     {
-        this.events.on("postupdate", this.postUpdate, this);
-
         this.spawnPositions = new Phaser.Structs.Map([]);
         this.createLevel();
+        this.events.on("postupdate", this.postUpdate, this);
         this.events.emit("levelStarted", data.level);
         AudioManager.playSound("New_Level");
 
@@ -495,12 +494,13 @@ export class SceneGame extends CYBR_Scene {
 
     public showMainMenu(): void
     {
-        this.showGame(false);
-        this.showGameMenu(false);
-
         const sceneMainMenu_UI = this.scene.get(CST.SCENES.MAINMENU_UI) as SceneMainMenu_UI;
         sceneMainMenu_UI.scene.setActive(true);
         sceneMainMenu_UI.scene.setVisible(true);
+
+        this.scene.remove(CST.SCENES.GAMEMENU_UI);
+        this.scene.remove(CST.SCENES.GAME_UI);
+        this.scene.remove(CST.SCENES.GAME);
         //AudioManager.playMusic(CST.MAIN_MENU.MUSIC);
     }
 
