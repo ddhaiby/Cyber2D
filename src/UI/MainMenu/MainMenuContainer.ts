@@ -37,7 +37,7 @@ export class MainMenuContainer extends Phaser.GameObjects.Container
         selectLevelTextButton.onClicked(this.onSelectLevelClicked, this);
         this.add(selectLevelTextButton);
 
-        const settingsIconButton = new CYBR_IconButton(scene, 930, 30, "UI_atlas", "iconGear.png");
+        const settingsIconButton = new CYBR_IconButton(scene, 930, 28, "UI_atlas", "iconGear.png");
         settingsIconButton.onClicked(this.onSettingsClicked, this);
         this.add(settingsIconButton);
 
