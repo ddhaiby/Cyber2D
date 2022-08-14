@@ -38,7 +38,7 @@ export class SelectLevelContainer extends Phaser.GameObjects.Container
         playButton.onClicked(() => { this.emit("playLevel", this.currentLevel) }, this);
         this.add(playButton);
 
-        const homeIconButton = new CYBR_IconButton(scene, 930, 30, {texture: "UI_atlas", iconNormal: "iconHomeNormal.png", iconPressed: "iconHomePressed.png", iconHovered: "iconHomeHovered.png"});
+        const homeIconButton = new CYBR_IconButton(scene, 930, 30, "UI_atlas", "iconHome.png");
         homeIconButton.onClicked(() => { this.emit("backToMainMenu") }, this);
         this.add(homeIconButton);
 

@@ -59,7 +59,13 @@ export const CST = {
             TEXT: {
                 NORMAL: "#171822",
                 HOVERED: "#FFFFFF",
-                PRESSED: "#FFFFFFAA",
+                PRESSED: "#B2B2B2",
+                DISABLED: "#555555"
+            },
+            ICON: {
+                NORMAL: "#FFBC32",
+                HOVERED: "#FFFFFF",
+                PRESSED: "#B2B2B2",
                 DISABLED: "#555555"
             }
         }

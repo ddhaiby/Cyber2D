@@ -10,129 +10,24 @@
 			"scale": 1,
 			"frames": [
 				{
-					"filename": "iconHomeHovered.png",
+					"filename": "cyberSplashScreen.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 32,
-						"h": 32
+						"w": 960,
+						"h": 540
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 32,
-						"h": 32
+						"w": 960,
+						"h": 540
 					},
 					"frame": {
 						"x": 1,
 						"y": 1,
-						"w": 32,
-						"h": 32
-					}
-				},
-				{
-					"filename": "iconHomeNormal.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 32,
-						"h": 32
-					},
-					"frame": {
-						"x": 35,
-						"y": 1,
-						"w": 32,
-						"h": 32
-					}
-				},
-				{
-					"filename": "iconHomePressed.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 32,
-						"h": 32
-					},
-					"frame": {
-						"x": 69,
-						"y": 1,
-						"w": 32,
-						"h": 32
-					}
-				},
-				{
-					"filename": "iconGearHovered.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 36,
-						"h": 36
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 36,
-						"h": 36
-					},
-					"frame": {
-						"x": 103,
-						"y": 1,
-						"w": 36,
-						"h": 36
-					}
-				},
-				{
-					"filename": "iconGearNormal.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 36,
-						"h": 36
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 36,
-						"h": 36
-					},
-					"frame": {
-						"x": 141,
-						"y": 1,
-						"w": 36,
-						"h": 36
-					}
-				},
-				{
-					"filename": "iconGearPressed.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 36,
-						"h": 36
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 36,
-						"h": 36
-					},
-					"frame": {
-						"x": 179,
-						"y": 1,
-						"w": 36,
-						"h": 36
+						"w": 960,
+						"h": 540
 					}
 				},
 				{
@@ -150,8 +45,8 @@
 						"h": 82
 					},
 					"frame": {
-						"x": 217,
-						"y": 1,
+						"x": 1,
+						"y": 543,
 						"w": 280,
 						"h": 82
 					}
@@ -171,31 +66,52 @@
 						"h": 82
 					},
 					"frame": {
-						"x": 499,
-						"y": 1,
+						"x": 283,
+						"y": 543,
 						"w": 280,
 						"h": 82
 					}
 				},
 				{
-					"filename": "cyberSplashScreen.png",
+					"filename": "iconGear.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 960,
-						"h": 540
+						"w": 36,
+						"h": 36
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 960,
-						"h": 540
+						"w": 36,
+						"h": 36
 					},
 					"frame": {
-						"x": 1,
-						"y": 85,
-						"w": 960,
-						"h": 540
+						"x": 565,
+						"y": 543,
+						"w": 36,
+						"h": 36
+					}
+				},
+				{
+					"filename": "iconHome.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 565,
+						"y": 581,
+						"w": 32,
+						"h": 32
 					}
 				}
 			]
@@ -204,6 +120,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:dd19a967dd23c2b56943fb0bdd2071df:562e14e8fc62c2896bcbccd2f5b434c2:655d4ebe52fa3b43642cb078d947df68$"
+		"smartupdate": "$TexturePacker:SmartUpdate:1bf0012151b1ec154f4d293b46fcf408:4d80fb6b04b712f48385b35b3d045b24:655d4ebe52fa3b43642cb078d947df68$"
 	}
 }

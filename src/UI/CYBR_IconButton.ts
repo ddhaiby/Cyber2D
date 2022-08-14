@@ -1,13 +1,6 @@
+import { CST } from "../CST";
 import { AudioManager } from "../Managers/AudioManager";
-
-class CYBR_IconButtonStyle
-{
-    texture: string | Phaser.Textures.Texture;
-    iconNormal: string;
-    iconPressed?: string;
-    iconHovered?: string;
-    iconDisabled?: string;
-}
+import { CYBR_Utils } from "../Utils/CYBR_Utils";
 
 export class CYBR_IconButton extends Phaser.GameObjects.Sprite
 {
@@ -23,38 +16,18 @@ export class CYBR_IconButton extends Phaser.GameObjects.Sprite
     /** Sound when the user hovers this text button */
     private hoverSound: string = "Menu_Buttons_Hover";
 
-    /** The icon when there is no interaction from the user */
-    protected iconNormal: string = "";
-
-    /** The icon when the user hover the buton*/
-    protected iconHovered: string = "";
-
-    /** The icon when the user press the buton*/
-    protected iconPressed: string = "";
-
-    /** The icon when the user hover the buton*/
-    protected iconDisabled: string = "";
-
-    constructor(scene: Phaser.Scene, x: number, y: number, style: CYBR_IconButtonStyle)
+    constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture, frame?: string | number)
     {
-        super(scene, x, y, style.texture);
+        super(scene, x, y, texture, frame);
 
-        this.iconNormal = style.iconNormal;
-        this.iconHovered = style.iconHovered;
-        this.iconPressed = style.iconPressed;
-        this.iconDisabled = style.iconDisabled;
-
-        this.setFrame(this.iconNormal);
+        this.tintFill = true;
         this.setInteractive(new Phaser.Geom.Rectangle(0, 0, this.width, this.height), Phaser.Geom.Rectangle.Contains);
 
         // Behaviors
         this.on("pointerover", () => {
             if (this.enabled)
             {
-                if (this.iconHovered)
-                {
-                    this.setFrame(this.iconHovered);
-                }
+                this.setTintFill(CYBR_Utils.hexColorToNumber(CST.STYLE.COLOR.ICON.HOVERED));
                 AudioManager.playSound(this.hoverSound);
             }          
         }, this);
@@ -62,10 +35,7 @@ export class CYBR_IconButton extends Phaser.GameObjects.Sprite
         this.on("pointerout", () => {
             if (this.enabled)
             {
-                if (this.iconNormal)
-                {
-                    this.setFrame(this.iconNormal);
-                }
+                this.setTintFill(CYBR_Utils.hexColorToNumber(CST.STYLE.COLOR.ICON.NORMAL));
                 this.pressed = false;
             }
         }, this);
@@ -73,10 +43,7 @@ export class CYBR_IconButton extends Phaser.GameObjects.Sprite
         this.on("pointerdown", () => {
             if (this.enabled)
             {
-                if (this.iconPressed)
-                {
-                    this.setFrame(this.iconPressed);
-                }
+                this.setTintFill(CYBR_Utils.hexColorToNumber(CST.STYLE.COLOR.ICON.PRESSED));
                 this.pressed = true;
             }
         }, this);
@@ -84,14 +51,13 @@ export class CYBR_IconButton extends Phaser.GameObjects.Sprite
         this.on("pointerup", () => {
             if (this.enabled)
             {
-                if (this.iconHovered)
-                {
-                    this.setFrame(this.iconHovered);
-                }
+                this.setTintFill(CYBR_Utils.hexColorToNumber(CST.STYLE.COLOR.ICON.HOVERED));
                 this.pressed = false;
                 AudioManager.playSound(this.clickSound);
             }
         }, this);
+
+        this.emit("pointerout");
     }
 
     public onClicked(fn: Function, context?: any) : this
