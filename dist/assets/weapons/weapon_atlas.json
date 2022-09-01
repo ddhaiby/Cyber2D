@@ -4,11 +4,32 @@
 			"image": "weapon_atlas.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 143,
-				"h": 14
+				"w": 92,
+				"h": 31
 			},
 			"scale": 1,
 			"frames": [
+				{
+					"filename": "shotgunHolster.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 15
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 15
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 16,
+						"h": 15
+					}
+				},
 				{
 					"filename": "shotgun.png",
 					"rotated": false,
@@ -25,7 +46,7 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 1,
+						"y": 18,
 						"w": 66,
 						"h": 12
 					}
@@ -45,31 +66,94 @@
 						"h": 12
 					},
 					"frame": {
-						"x": 69,
+						"x": 19,
 						"y": 1,
 						"w": 59,
 						"h": 12
 					}
 				},
 				{
-					"filename": "bullet.png",
+					"filename": "pistolHolster.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
 						"w": 12,
-						"h": 5
+						"h": 11
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
 						"w": 12,
-						"h": 5
+						"h": 11
 					},
 					"frame": {
-						"x": 130,
-						"y": 1,
+						"x": 69,
+						"y": 15,
 						"w": 12,
-						"h": 5
+						"h": 11
+					}
+				},
+				{
+					"filename": "bulletShotgun.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 11,
+						"h": 11
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 11,
+						"h": 11
+					},
+					"frame": {
+						"x": 80,
+						"y": 1,
+						"w": 11,
+						"h": 11
+					}
+				},
+				{
+					"filename": "bulletPistol.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 7,
+						"h": 7
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 7,
+						"h": 7
+					},
+					"frame": {
+						"x": 83,
+						"y": 14,
+						"w": 7,
+						"h": 7
+					}
+				},
+				{
+					"filename": "bulletRobot.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 7,
+						"h": 7
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 7,
+						"h": 7
+					},
+					"frame": {
+						"x": 83,
+						"y": 23,
+						"w": 7,
+						"h": 7
 					}
 				}
 			]
@@ -78,6 +162,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:e8637b21b15e35ee86ce6443dba06a34:002c02c81449f5e62ff9204b1bc71dd1:d98a479d210189fada7fb11552a3cb5d$"
+		"smartupdate": "$TexturePacker:SmartUpdate:1be28b10272514f69aa10676cbdc0580:7255b89f3a933d22c794f502b114b3f9:d98a479d210189fada7fb11552a3cb5d$"
 	}
 }

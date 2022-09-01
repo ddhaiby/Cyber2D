@@ -7,7 +7,7 @@ export class Gattling extends CYBR_FireWeapon
 
     constructor(scene: Phaser.Scene, x: number, y: number)
     {
-        super(scene, x, y, "drone");
+        super(scene, x, y, "drone", null, "weapon_atlas", "bulletRobot.png");
 
         this.bulletSpeed = 300;
         this.fireLimit = 0;

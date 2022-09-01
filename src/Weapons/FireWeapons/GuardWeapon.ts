@@ -4,7 +4,7 @@ export class GuardWeapon extends CYBR_FireWeapon
 {
     constructor(scene: Phaser.Scene, x: number, y: number)
     {
-        super(scene, x, y);
+        super(scene, x, y, null, null, "weapon_atlas", "bulletRobot.png");
 
         this.bulletSpeed = 300;
         this.fireLimit = 0;

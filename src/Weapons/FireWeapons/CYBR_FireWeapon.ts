@@ -43,12 +43,12 @@ export class CYBR_FireWeapon extends CYBR_Weapon
     /** Sound when a weapon is reloaded */
     protected reloadSound: string = "";
 
-    constructor(scene: Phaser.Scene, x: number, y: number, texture?: string | Phaser.Textures.Texture, frame?: string | number)
+    constructor(scene: Phaser.Scene, x: number, y: number, texture?: string | Phaser.Textures.Texture, frame?: string | number, textureBullet?: string, frameBullet?: string)
     {
         super(scene, x, y, texture, frame);
         this.setVisible(!!texture);
 
-        this.weapon = new Weapon(scene, -1, "weapon_atlas", "bullet.png");
+        this.weapon = new Weapon(scene, -1, textureBullet, frameBullet);
         this.weapon.trackSprite(this);
         this.bulletClass = CYBR_Bullet;
         this.fireAngle = 0;

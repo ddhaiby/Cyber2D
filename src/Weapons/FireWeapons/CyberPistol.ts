@@ -4,9 +4,9 @@ export class CyberPistol extends CYBR_FireWeapon
 {
     constructor(scene: Phaser.Scene, x: number, y: number)
     {
-        super(scene, x, y, "pistol");
+        super(scene, x, y, "pistol", null, "weapon_atlas", "bulletPistol.png");
 
-        this.bulletSpeed = 750;
+        this.bulletSpeed = 100;
         this.fireLimit = 0;
         this.fireRate = 240;
         this.reloadRate = 400;
@@ -16,6 +16,6 @@ export class CyberPistol extends CYBR_FireWeapon
         this.emptyWeaponSound = "Pistol__Shotgun_Empty";
         this.reloadSound = "Pistol_Reload";
         this.setGripPosition(-4, 2);
-        this.setMuzzlePosition(5, -2);
+        this.setMuzzlePosition(5, 1.5);
     }
 }
