@@ -51,7 +51,7 @@ export class PlayerManager {
             right: playerKeys.right == undefined ? this.keyBinding.right : playerKeys.right,
             jump: playerKeys.jump == undefined ? this.keyBinding.jump : playerKeys.jump,
             fire: playerKeys.fire == undefined ? this.keyBinding.fire : playerKeys.fire,
-            punch: playerKeys.punch == undefined ? this.keyBinding.fire : playerKeys.punch
+            punch: playerKeys.punch == undefined ? this.keyBinding.punch : playerKeys.punch
         },false) as IPlayerKeys;
     }
 

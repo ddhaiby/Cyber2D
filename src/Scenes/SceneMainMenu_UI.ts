@@ -54,8 +54,7 @@ export class SceneMainMenu_UI extends CYBR_Scene
 
         this.settingsContainer = new SettingsContainer(this, 0, 0);
         this.settingsContainer.setVisible(false);
-        this.settingsContainer.on("saveSettings", this.onSaveChanges, this);
-        this.settingsContainer.on("cancelSettings", this.onBackToMainMenu, this);
+        this.settingsContainer.on("backToMainMenu", this.onBackToMainMenu, this);
 
         this.selectLevelContainer = new SelectLevelContainer(this, 0, 0);
         this.selectLevelContainer.setVisible(false);
@@ -117,7 +116,7 @@ export class SceneMainMenu_UI extends CYBR_Scene
     {
     }
 
-    private onSaveChanges() : void
+    private onSaveSettings() : void
     {
         this.showMenuContainer(this.mainMenuContainer);
     }

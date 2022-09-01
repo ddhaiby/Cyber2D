@@ -6,16 +6,21 @@ export class CYBR_TextField extends BBCodeText
     public width: number;
     public height: number;
 
+    public upperCase: boolean = false;
+
     /** Stores the text when you use the password mode */
     public passwordText: string;
 
+    public containerParent: Phaser.GameObjects.Container;
+
     constructor(scene: Phaser.Scene, x?: number, y?: number, content?: string, type: string = "text")
     {
+        // TODO: Expose this style to the constructor
         const style = {
             color: "yellow",
             fontSize: "24px",
-            fixedWidth: 370,
-            fixedHeight: 48,
+            fixedWidth: 80,
+            fixedHeight: 36,
             backgroundColor: "#333333",
             valign: "center",
             halign: "center"
@@ -41,10 +46,21 @@ export class CYBR_TextField extends BBCodeText
                     this.passwordText = text;
                     textObject.text = (type == "password") ? new Array(this.passwordText.length + 1).join('•') : text;
                     that.emit("textChanged", text);
+
+                    if (that.upperCase)
+                    {
+                        textObject.text = textObject.text.toUpperCase();
+                    }
                 }
             }
             // @ts-ignore
-            this.scene.plugins.get("rexTextEditPlugin").edit(this, config);
+            const editText = this.scene.plugins.get("rexTextEditPlugin").edit(this, config);
+
+            if (this.containerParent)
+            {
+                editText.inputText.x += this.containerParent.x;
+                editText.inputText.y += this.containerParent.y;
+            }
         }, this);
     }
 
