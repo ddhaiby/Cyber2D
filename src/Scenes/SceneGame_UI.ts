@@ -53,7 +53,7 @@ export class SceneGame_UI extends CYBR_Scene
     }
 
     private createHealthBar(): void {
-        const healthBar = new HealthBar(this, {x: 12, y: 12, width: 160, height: 16, color: 0x990000, value: 1});
+        const healthBar = new HealthBar(this, {x: 12, y: 16, width: 220, height: 22, color: 0x990000, value: 1});
 
         this.sceneGame.events.on("playerHealthChanged", (health: number, maxHealth: number) => {
             healthBar.setValue(health / maxHealth);
@@ -83,7 +83,7 @@ export class SceneGame_UI extends CYBR_Scene
             tokenText.text = collectedTokens.toString();
         }, this);
 
-        return new Map<string, Phaser.GameObjects.GameObject>().set("image", tokenImage).set("text", tokenText);
+        return new Map<string, Phaser.GameObjects.GameObject>().set("image", tokenImage.setVisible(false)).set("text", tokenText.setVisible(false));
     }
 
     // TODO: Review position
