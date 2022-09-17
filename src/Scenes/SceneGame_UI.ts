@@ -40,6 +40,7 @@ export class SceneGame_UI extends CYBR_Scene
         const gameWidth = this.scale.displaySize.width;
         const gameHeight = this.scale.displaySize.height;
 
+        this.createHealthBar();
         this.tokenScoreItem = this.createTokenScoreItem();
         this.lifeItem = this.createLifeItem();
         this.chronoText = this.createChrono();
@@ -51,11 +52,20 @@ export class SceneGame_UI extends CYBR_Scene
         this.sceneGame.events.on("levelCompleted", this.startLevelCompletedTransition, this);
     }
 
+    private createHealthBar(): void {
+        const healthBar = new HealthBar(this, {x: 12, y: 12, width: 160, height: 16, color: 0x990000, value: 1});
+
+        this.sceneGame.events.on("playerHealthChanged", (health: number, maxHealth: number) => {
+            healthBar.setValue(health / maxHealth);
+            healthBar.setVisible(healthBar.getValue() > 0.0);
+        }, this);
+    }
+
     private createTokenScoreItem(): Map<string, Phaser.GameObjects.GameObject>
     {
         // Image
         let tokenImageX = 12;
-        let tokenImageY = 12;
+        let tokenImageY = 40;
 
         let tokenImage = this.add.image(tokenImageX, tokenImageY, "platform_atlas", "tokenSilver.png");
         tokenImage.x += tokenImage.width / 2;
