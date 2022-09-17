@@ -257,7 +257,7 @@ export class Player extends Pawn
         const side = this.isLookingRight ? "Right" : "Left";
         const mode = this.currentWeapon ? "HoldingWeapon" : "";
         const ratioHealth = this.getHealth() / this.getMaxHealth();
-        const hpState = (ratioHealth > 0.7) ? "" : (ratioHealth > 0.35 ? "MediumHP" : "LowHP");
+        const hpState = ""//(ratioHealth > 0.7) ? "" : (ratioHealth > 0.35 ? "MediumHP" : "LowHP");
 
         if (this.isClimbing)
         {
@@ -343,7 +343,7 @@ export class Player extends Pawn
     {
         const side = this.isLookingRight ? "Right" : "Left";
         const ratioHealth = this.getHealth() / this.getMaxHealth();
-        const hpState = (ratioHealth > 0.7) ? "" : (ratioHealth > 0.35 ? "MediumHP" : "LowHP");
+        const hpState = ""//(ratioHealth > 0.7) ? "" : (ratioHealth > 0.35 ? "MediumHP" : "LowHP");
 
         this.anims.play("Death" + side + hpState, true);
     }
