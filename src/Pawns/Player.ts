@@ -38,7 +38,7 @@ export class Player extends Pawn
         super.init(playerData, "player");
         this._meleeWeapon.damage = playerData.bodyDamage;
 
-        const weaponClass = (Math.random() < 0.5) ? CyberPistol : CyberShotgun;
+        const weaponClass = CyberPistol;
         let weapon = new weaponClass(this.scene, this.x, this.y);
         this.equipWeapon(weapon);
         this.currentWeapon.setBulletPerFire(this.bulletPerFire);
