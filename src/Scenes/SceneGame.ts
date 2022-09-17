@@ -457,6 +457,8 @@ export class SceneGame extends CYBR_Scene {
     {
         this.cameras.main.setBounds(0, 0, this.physics.world.bounds.width, this.physics.world.bounds.height);
         this.cameras.main.startFollow(this.player);
+        this.cameras.main.zoomTo(CST.GAME.ZOOM, 0.0);
+        this.cameras.main.setRoundPixels(true);
         return this;
     }
 

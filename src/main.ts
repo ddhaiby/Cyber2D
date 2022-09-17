@@ -100,8 +100,8 @@ localStorage.getToken().then(async (token) => {
     }else {
         new CYBR_Game({
             type: Phaser.AUTO,
-            width: 960,//document.body.clientWidth,
-            height: 576,//window.innerHeight,
+            width: CST.GAME.WIDTH,//document.body.clientWidth,
+            height: CST.GAME.HEIGHT,//window.innerHeight,
             scale: {
                 parent: document.body,
                 autoCenter: Phaser.Scale.CENTER_BOTH

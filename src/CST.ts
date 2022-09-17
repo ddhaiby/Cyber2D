@@ -7,6 +7,12 @@ export const CST = {
         MAINMENU_UI: "MAINMENU_UI",
     },
 
+    GAME: {
+        WIDTH: 1300,
+        HEIGHT: 650,
+        ZOOM: 1.35
+    },
+
     PHYSIC: {
         GRAVITY: 530,
         PAWN_MAX_SPEED: 1000
