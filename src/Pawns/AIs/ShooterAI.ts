@@ -87,6 +87,7 @@ export class ShooterAI extends BasicAI
     public prepareNextFire() : void
     {
         this.fireWeaponTimer = this.scene.time.addEvent({ delay: this.fireWeaponDelay, callbackScope: this, callback: () => {
+            this.stopWalking();
             this.fire();
             this.prepareNextFire();
         }});

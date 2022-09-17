@@ -5,7 +5,7 @@
 			"format": "RGBA8888",
 			"size": {
 				"w": 64,
-				"h": 660
+				"h": 800
 			},
 			"scale": 1,
 			"frames": [
@@ -157,7 +157,7 @@
 					}
 				},
 				{
-					"filename": "meleeDeath_004.png",
+					"filename": "meleeAttack_003.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -165,121 +165,16 @@
 						"h": 41
 					},
 					"spriteSourceSize": {
-						"x": 1,
-						"y": 18,
-						"w": 31,
-						"h": 23
+						"x": 4,
+						"y": 0,
+						"w": 27,
+						"h": 41
 					},
 					"frame": {
 						"x": 1,
 						"y": 124,
-						"w": 31,
-						"h": 23
-					}
-				},
-				{
-					"filename": "pistolWalk_001.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 38
-					},
-					"spriteSourceSize": {
-						"x": 3,
-						"y": 0,
-						"w": 29,
-						"h": 38
-					},
-					"frame": {
-						"x": 34,
-						"y": 125,
-						"w": 29,
-						"h": 38
-					}
-				},
-				{
-					"filename": "pistolDeath_004.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 38
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 15,
-						"w": 31,
-						"h": 23
-					},
-					"frame": {
-						"x": 1,
-						"y": 149,
-						"w": 31,
-						"h": 23
-					}
-				},
-				{
-					"filename": "pistolWalk_003.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 38
-					},
-					"spriteSourceSize": {
-						"x": 3,
-						"y": 1,
-						"w": 29,
-						"h": 37
-					},
-					"frame": {
-						"x": 34,
-						"y": 165,
-						"w": 29,
-						"h": 37
-					}
-				},
-				{
-					"filename": "meleeDeath_005.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
+						"w": 27,
 						"h": 41
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 26,
-						"w": 31,
-						"h": 15
-					},
-					"frame": {
-						"x": 1,
-						"y": 174,
-						"w": 31,
-						"h": 15
-					}
-				},
-				{
-					"filename": "pistolDeath_005.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 38
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 23,
-						"w": 31,
-						"h": 15
-					},
-					"frame": {
-						"x": 1,
-						"y": 191,
-						"w": 31,
-						"h": 15
 					}
 				},
 				{
@@ -297,94 +192,10 @@
 						"h": 39
 					},
 					"frame": {
-						"x": 34,
-						"y": 204,
+						"x": 1,
+						"y": 167,
 						"w": 28,
 						"h": 39
-					}
-				},
-				{
-					"filename": "pistolWalk_004.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 38
-					},
-					"spriteSourceSize": {
-						"x": 2,
-						"y": 0,
-						"w": 30,
-						"h": 38
-					},
-					"frame": {
-						"x": 1,
-						"y": 208,
-						"w": 30,
-						"h": 38
-					}
-				},
-				{
-					"filename": "pistolWalk_005.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 38
-					},
-					"spriteSourceSize": {
-						"x": 2,
-						"y": 0,
-						"w": 30,
-						"h": 38
-					},
-					"frame": {
-						"x": 33,
-						"y": 245,
-						"w": 30,
-						"h": 38
-					}
-				},
-				{
-					"filename": "meleeDeath_003.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 41
-					},
-					"spriteSourceSize": {
-						"x": 2,
-						"y": 10,
-						"w": 30,
-						"h": 31
-					},
-					"frame": {
-						"x": 1,
-						"y": 248,
-						"w": 30,
-						"h": 31
-					}
-				},
-				{
-					"filename": "pistolDeath_003.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 38
-					},
-					"spriteSourceSize": {
-						"x": 2,
-						"y": 7,
-						"w": 30,
-						"h": 31
-					},
-					"frame": {
-						"x": 1,
-						"y": 281,
-						"w": 30,
-						"h": 31
 					}
 				},
 				{
@@ -402,8 +213,8 @@
 						"h": 38
 					},
 					"frame": {
-						"x": 33,
-						"y": 285,
+						"x": 1,
+						"y": 208,
 						"w": 28,
 						"h": 38
 					}
@@ -423,8 +234,8 @@
 						"h": 38
 					},
 					"frame": {
-						"x": 33,
-						"y": 285,
+						"x": 1,
+						"y": 208,
 						"w": 28,
 						"h": 38
 					}
@@ -445,8 +256,155 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 314,
+						"y": 248,
 						"w": 28,
+						"h": 38
+					}
+				},
+				{
+					"filename": "pistolFire_001.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 0,
+						"w": 28,
+						"h": 38
+					},
+					"frame": {
+						"x": 1,
+						"y": 288,
+						"w": 28,
+						"h": 38
+					}
+				},
+				{
+					"filename": "pistolFire_002.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 0,
+						"w": 28,
+						"h": 38
+					},
+					"frame": {
+						"x": 1,
+						"y": 328,
+						"w": 28,
+						"h": 38
+					}
+				},
+				{
+					"filename": "pistolFire_003.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 0,
+						"w": 28,
+						"h": 38
+					},
+					"frame": {
+						"x": 1,
+						"y": 368,
+						"w": 28,
+						"h": 38
+					}
+				},
+				{
+					"filename": "pistolFire_004.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 0,
+						"w": 28,
+						"h": 38
+					},
+					"frame": {
+						"x": 1,
+						"y": 408,
+						"w": 28,
+						"h": 38
+					}
+				},
+				{
+					"filename": "pistolWalk_001.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 0,
+						"w": 29,
+						"h": 38
+					},
+					"frame": {
+						"x": 1,
+						"y": 448,
+						"w": 29,
+						"h": 38
+					}
+				},
+				{
+					"filename": "pistolWalk_004.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 0,
+						"w": 30,
+						"h": 38
+					},
+					"frame": {
+						"x": 1,
+						"y": 488,
+						"w": 30,
+						"h": 38
+					}
+				},
+				{
+					"filename": "pistolWalk_005.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 0,
+						"w": 30,
+						"h": 38
+					},
+					"frame": {
+						"x": 1,
+						"y": 528,
+						"w": 30,
 						"h": 38
 					}
 				},
@@ -465,31 +423,10 @@
 						"h": 38
 					},
 					"frame": {
-						"x": 31,
-						"y": 325,
+						"x": 1,
+						"y": 568,
 						"w": 28,
 						"h": 38
-					}
-				},
-				{
-					"filename": "meleeAttack_003.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 41
-					},
-					"spriteSourceSize": {
-						"x": 4,
-						"y": 0,
-						"w": 27,
-						"h": 41
-					},
-					"frame": {
-						"x": 1,
-						"y": 354,
-						"w": 27,
-						"h": 41
 					}
 				},
 				{
@@ -507,8 +444,8 @@
 						"h": 38
 					},
 					"frame": {
-						"x": 30,
-						"y": 365,
+						"x": 1,
+						"y": 608,
 						"w": 27,
 						"h": 38
 					}
@@ -529,7 +466,91 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 397,
+						"y": 648,
+						"w": 27,
+						"h": 38
+					}
+				},
+				{
+					"filename": "rifleFire_002.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 0,
+						"w": 27,
+						"h": 38
+					},
+					"frame": {
+						"x": 1,
+						"y": 688,
+						"w": 27,
+						"h": 38
+					}
+				},
+				{
+					"filename": "rifleFire_003.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 0,
+						"w": 27,
+						"h": 38
+					},
+					"frame": {
+						"x": 1,
+						"y": 728,
+						"w": 27,
+						"h": 38
+					}
+				},
+				{
+					"filename": "pistolWalk_003.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 1,
+						"w": 29,
+						"h": 37
+					},
+					"frame": {
+						"x": 30,
+						"y": 125,
+						"w": 29,
+						"h": 37
+					}
+				},
+				{
+					"filename": "rifleFire_004.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 0,
+						"w": 27,
+						"h": 38
+					},
+					"frame": {
+						"x": 31,
+						"y": 164,
 						"w": 27,
 						"h": 38
 					}
@@ -549,8 +570,29 @@
 						"h": 38
 					},
 					"frame": {
-						"x": 30,
-						"y": 405,
+						"x": 31,
+						"y": 204,
+						"w": 26,
+						"h": 38
+					}
+				},
+				{
+					"filename": "rifleFire_001.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 0,
+						"w": 26,
+						"h": 38
+					},
+					"frame": {
+						"x": 31,
+						"y": 204,
 						"w": 26,
 						"h": 38
 					}
@@ -570,8 +612,8 @@
 						"h": 38
 					},
 					"frame": {
-						"x": 30,
-						"y": 405,
+						"x": 31,
+						"y": 204,
 						"w": 26,
 						"h": 38
 					}
@@ -591,8 +633,8 @@
 						"h": 38
 					},
 					"frame": {
-						"x": 1,
-						"y": 437,
+						"x": 31,
+						"y": 244,
 						"w": 26,
 						"h": 38
 					}
@@ -612,8 +654,8 @@
 						"h": 38
 					},
 					"frame": {
-						"x": 29,
-						"y": 445,
+						"x": 31,
+						"y": 284,
 						"w": 26,
 						"h": 38
 					}
@@ -633,8 +675,8 @@
 						"h": 38
 					},
 					"frame": {
-						"x": 1,
-						"y": 477,
+						"x": 31,
+						"y": 324,
 						"w": 26,
 						"h": 38
 					}
@@ -654,8 +696,8 @@
 						"h": 38
 					},
 					"frame": {
-						"x": 29,
-						"y": 485,
+						"x": 31,
+						"y": 364,
 						"w": 26,
 						"h": 38
 					}
@@ -675,10 +717,73 @@
 						"h": 38
 					},
 					"frame": {
-						"x": 1,
-						"y": 517,
+						"x": 31,
+						"y": 404,
 						"w": 26,
 						"h": 38
+					}
+				},
+				{
+					"filename": "meleeDeath_004.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 41
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 18,
+						"w": 31,
+						"h": 23
+					},
+					"frame": {
+						"x": 32,
+						"y": 444,
+						"w": 31,
+						"h": 23
+					}
+				},
+				{
+					"filename": "meleeDeath_003.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 41
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 10,
+						"w": 30,
+						"h": 31
+					},
+					"frame": {
+						"x": 33,
+						"y": 469,
+						"w": 30,
+						"h": 31
+					}
+				},
+				{
+					"filename": "pistolDeath_003.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 7,
+						"w": 30,
+						"h": 31
+					},
+					"frame": {
+						"x": 33,
+						"y": 502,
+						"w": 30,
+						"h": 31
 					}
 				},
 				{
@@ -696,29 +801,8 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 29,
-						"y": 525,
-						"w": 26,
-						"h": 37
-					}
-				},
-				{
-					"filename": "rifleWalk_003.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 38
-					},
-					"spriteSourceSize": {
-						"x": 5,
-						"y": 1,
-						"w": 26,
-						"h": 37
-					},
-					"frame": {
-						"x": 1,
-						"y": 557,
+						"x": 33,
+						"y": 535,
 						"w": 26,
 						"h": 37
 					}
@@ -738,14 +822,14 @@
 						"h": 31
 					},
 					"frame": {
-						"x": 29,
-						"y": 564,
+						"x": 1,
+						"y": 768,
 						"w": 26,
 						"h": 31
 					}
 				},
 				{
-					"filename": "rifleDeath_004.png",
+					"filename": "rifleWalk_003.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -754,36 +838,15 @@
 					},
 					"spriteSourceSize": {
 						"x": 5,
-						"y": 15,
+						"y": 1,
 						"w": 26,
-						"h": 23
+						"h": 37
 					},
 					"frame": {
-						"x": 1,
-						"y": 596,
+						"x": 31,
+						"y": 574,
 						"w": 26,
-						"h": 23
-					}
-				},
-				{
-					"filename": "rifleDeath_005.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 38
-					},
-					"spriteSourceSize": {
-						"x": 5,
-						"y": 23,
-						"w": 26,
-						"h": 15
-					},
-					"frame": {
-						"x": 29,
-						"y": 597,
-						"w": 26,
-						"h": 15
+						"h": 37
 					}
 				},
 				{
@@ -801,8 +864,8 @@
 						"h": 38
 					},
 					"frame": {
-						"x": 29,
-						"y": 614,
+						"x": 30,
+						"y": 613,
 						"w": 25,
 						"h": 38
 					}
@@ -822,10 +885,115 @@
 						"h": 38
 					},
 					"frame": {
-						"x": 1,
-						"y": 621,
+						"x": 30,
+						"y": 653,
 						"w": 25,
 						"h": 38
+					}
+				},
+				{
+					"filename": "pistolDeath_004.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 15,
+						"w": 31,
+						"h": 23
+					},
+					"frame": {
+						"x": 30,
+						"y": 693,
+						"w": 31,
+						"h": 23
+					}
+				},
+				{
+					"filename": "rifleDeath_004.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 15,
+						"w": 26,
+						"h": 23
+					},
+					"frame": {
+						"x": 30,
+						"y": 718,
+						"w": 26,
+						"h": 23
+					}
+				},
+				{
+					"filename": "meleeDeath_005.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 41
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 26,
+						"w": 31,
+						"h": 15
+					},
+					"frame": {
+						"x": 30,
+						"y": 743,
+						"w": 31,
+						"h": 15
+					}
+				},
+				{
+					"filename": "pistolDeath_005.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 23,
+						"w": 31,
+						"h": 15
+					},
+					"frame": {
+						"x": 30,
+						"y": 760,
+						"w": 31,
+						"h": 15
+					}
+				},
+				{
+					"filename": "rifleDeath_005.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 23,
+						"w": 26,
+						"h": 15
+					},
+					"frame": {
+						"x": 29,
+						"y": 777,
+						"w": 26,
+						"h": 15
 					}
 				}
 			]
@@ -834,6 +1002,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:bb560454c2189220f4071ce073b4e570:0fbf37289d8f3ba3151e03716f85f52a:350936d5dc64ec5e7c2a5c66f2eb433e$"
+		"smartupdate": "$TexturePacker:SmartUpdate:9b8bada7a2c4d67a48234067865735a7:2ce79cea6b25f294039b1544252f85d4:350936d5dc64ec5e7c2a5c66f2eb433e$"
 	}
 }

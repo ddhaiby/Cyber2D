@@ -70,6 +70,8 @@ export class DroneAI extends ShooterAI
     {
         const fireAngle = this.currentWeapon.flipX ? this.currentWeapon.angle : this.currentWeapon.angle + 180;
         super.fire(fireAngle);
+
+        this.isFiring = false; // Directly set firing to false since there is no anim (could use weapon anim though)
     }
 
     public hurt(health: number, isProjected: boolean = false, hurtFromRight: boolean = false, velocityProjection: number = 250): void

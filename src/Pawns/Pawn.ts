@@ -204,7 +204,9 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
             const speed = this.getWalkSpeed();
 
             if (!this.isWalking)
+            {
                 this.startWalking();
+            }
 
             this.setVelocityX(this.isLookingRight ? speed : -speed);
         }
@@ -473,6 +475,11 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.scene.time.delayedCall(500, () => { this.disableBody(true, true); }, null, this);
     }
 
+    protected onFireAnimationComplete(): void
+    {
+        this.scene.time.delayedCall(400, () => { this.stopFiring(); }, null, this);
+    }
+
     // Melee Attack
     ////////////////////////////////////////////////////////////////////////
 
@@ -539,13 +546,20 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
             this.currentWeapon.fireAngle = fireAngle;
             this.currentWeapon.fire();
             this.isFiring = true;
+
+            if (this.anims.exists("Fire"))
+            {
+                this.anims.play("Fire", true);
+            }
         }
     }
 
     public stopFiring(): void
     {
         if (this.isFiring && this.currentWeapon)
+        {
             this.currentWeapon.stopFiring();
+        }
 
         this.isFiring = false;
     }

@@ -83,6 +83,7 @@ export class BasicAI extends Pawn
 
         this.on("animationcomplete_Attack", () => { this.stopAttacking(); }, true);
         this.on("animationcomplete_Death", this.onDeathAnimationComplete, this);
+        this.on("animationcomplete_Fire", this.onFireAnimationComplete, this);
 
         this.anims.play("Idle", true);
         this.body.setSize(this.anims.currentAnim.frames[0].frame.realWidth, this.anims.currentAnim.frames[0].frame.realHeight);
@@ -131,7 +132,7 @@ export class BasicAI extends Pawn
         {
             this.anims.play("Attack", true);
         }
-        else
+        else if (!this.isFiring)
         {
             this.anims.play((this.body.velocity.x != 0 || this.isTakingDmg) ? "Walk" : "Idle", true);
             this.setFlipX(this.isLookingLeft);
@@ -148,7 +149,7 @@ export class BasicAI extends Pawn
 
     public doPatrol()
     {
-        if (this.patrol)
+        if (this.patrol && !this.isFiring)
         {
             if (this.x <= this.pathStartX)
             {
