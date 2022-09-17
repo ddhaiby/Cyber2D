@@ -23,27 +23,26 @@ export class SelectLevelContainer extends Phaser.GameObjects.Container
         this.previewLevelImage.setOrigin(0);
         this.add(this.previewLevelImage);
 
-        this.selecPreviousLevelButton = new CYBR_TextButton(scene, 0, 0, "   <   ", { fontSize : "60px", color: CST.STYLE.COLOR.ORANGE, strokeThickness : 4});
-        scene.centerItem(this.selecPreviousLevelButton, -48, 244);
+        this.selecPreviousLevelButton = new CYBR_TextButton(scene, 0, 0, "   <   ", { fontSize : "68px", color: CST.STYLE.COLOR.ORANGE, strokeThickness : 4});
+        scene.centerItem(this.selecPreviousLevelButton, -48, 280);
         this.selecPreviousLevelButton.onClicked(this.onShowPreviousLevel, this);
         this.add(this.selecPreviousLevelButton);
 
-        this.selectNextLevelButon = new CYBR_TextButton(scene, 0, 0, "   >   ", { fontSize : "60px", color: CST.STYLE.COLOR.ORANGE, strokeThickness : 4});
-        scene.centerItem(this.selectNextLevelButon, 48, 244);
+        this.selectNextLevelButon = new CYBR_TextButton(scene, 0, 0, "   >   ", { fontSize : "68px", color: CST.STYLE.COLOR.ORANGE, strokeThickness : 4});
+        scene.centerItem(this.selectNextLevelButon, 48, 280);
         this.selectNextLevelButon.onClicked(this.onShowNextLevel, this);
         this.add(this.selectNextLevelButon);
 
-        const playButton = new CYBR_TextButton(scene, 0, 0, "PLAY", { fontSize : "44px", color: CST.STYLE.COLOR.ORANGE, strokeThickness : 4});
-        scene.centerItem(playButton, 416, 244);
+        const playButton = new CYBR_TextButton(scene, CST.GAME.WIDTH - 120, CST.GAME.HEIGHT - 64, "PLAY", { fontSize : "53px", color: CST.STYLE.COLOR.ORANGE, strokeThickness : 4});
         playButton.onClicked(this.onPlayLevelClicked, this);
         this.add(playButton);
 
-        const homeIconButton = new CYBR_IconButton(scene, 930, 28, "UI_atlas", "iconHome.png");
+        const homeIconButton = new CYBR_IconButton(scene, CST.GAME.WIDTH - 36, 28, "UI_atlas", "iconHome.png");
         homeIconButton.onClicked(() => { this.emit("backToMainMenu") }, this);
         this.add(homeIconButton);
 
-        this.titleLevelText = scene.add.text(0, 0, "Level 0", {fontSize : "42px", color: CST.STYLE.COLOR.ORANGE, strokeThickness : 2, stroke: CST.STYLE.COLOR.BLACK, align: "center"});
-        scene.centerItem(this.titleLevelText, 0, -240);
+        this.titleLevelText = scene.add.text(0, 0, "Level 0", {fontSize : "50px", color: CST.STYLE.COLOR.ORANGE, strokeThickness : 2, stroke: CST.STYLE.COLOR.BLACK, align: "center"});
+        scene.centerItem(this.titleLevelText, 0, -250);
         this.add(this.titleLevelText);
 
         this.updateTitleLevel();
@@ -87,13 +86,13 @@ export class SelectLevelContainer extends Phaser.GameObjects.Container
     {
         this.previewLevelImage.setTexture("previewLevel" + this.currentLevel.toString());
 
-        this.previewLevelImage.width = 720;
-        this.previewLevelImage.height = 410;
+        this.previewLevelImage.width = 800;
+        this.previewLevelImage.height = 460;
 
         this.previewLevelImage.displayWidth = this.previewLevelImage.width;
         this.previewLevelImage.displayHeight = this.previewLevelImage.height;
 
-        (this.scene as CYBR_Scene).centerItem(this.previewLevelImage, 0, 4);
+        (this.scene as CYBR_Scene).centerItem(this.previewLevelImage, 0, 20);
 
         if (this.currentLevel <= 1)
         {

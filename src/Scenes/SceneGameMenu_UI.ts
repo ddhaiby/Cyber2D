@@ -7,8 +7,8 @@ import { CYBR_Graphics } from "../Utils/CYBR_Graphics";
 
 export class SceneGameMenu_UI extends CYBR_Scene
 {
-    private width: number = 1000;
-    private height: number = 700;
+    private width: number = CST.GAME.WIDTH;
+    private height: number = CST.GAME.HEIGHT;
 
     private sceneGame: SceneGame;
     private buttonResume: CYBR_TextButton;
