@@ -2595,28 +2595,157 @@
                         {
                          "name":"durationAttack",
                          "type":"int",
-                         "value":1000
+                         "value":2000
                         }, 
                         {
                          "name":"durationHide",
                          "type":"int",
-                         "value":500
+                         "value":2000
                         }, 
                         {
                          "name":"durationPrepareAttack",
                          "type":"int",
-                         "value":500
+                         "value":2000
                         }, 
                         {
                          "name":"startDelay",
                          "type":"float",
-                         "value":1000
+                         "value":3000
                         }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
                  "x":2240,
+                 "y":1800
+                }, 
+                {
+                 "gid":1081,
+                 "height":32,
+                 "id":1093,
+                 "name":"spikeShort",
+                 "properties":[
+                        {
+                         "name":"alwaysShow",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"damage",
+                         "type":"float",
+                         "value":5
+                        }, 
+                        {
+                         "name":"durationAttack",
+                         "type":"int",
+                         "value":2000
+                        }, 
+                        {
+                         "name":"durationHide",
+                         "type":"int",
+                         "value":2000
+                        }, 
+                        {
+                         "name":"durationPrepareAttack",
+                         "type":"int",
+                         "value":2000
+                        }, 
+                        {
+                         "name":"startDelay",
+                         "type":"float",
+                         "value":3000
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":2816,
+                 "y":1800
+                }, 
+                {
+                 "gid":1081,
+                 "height":32,
+                 "id":1094,
+                 "name":"spikeShort",
+                 "properties":[
+                        {
+                         "name":"alwaysShow",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"damage",
+                         "type":"float",
+                         "value":5
+                        }, 
+                        {
+                         "name":"durationAttack",
+                         "type":"int",
+                         "value":2000
+                        }, 
+                        {
+                         "name":"durationHide",
+                         "type":"int",
+                         "value":2000
+                        }, 
+                        {
+                         "name":"durationPrepareAttack",
+                         "type":"int",
+                         "value":2000
+                        }, 
+                        {
+                         "name":"startDelay",
+                         "type":"float",
+                         "value":3000
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":2624,
+                 "y":1800
+                }, 
+                {
+                 "gid":1081,
+                 "height":32,
+                 "id":1095,
+                 "name":"spikeShort",
+                 "properties":[
+                        {
+                         "name":"alwaysShow",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"damage",
+                         "type":"float",
+                         "value":5
+                        }, 
+                        {
+                         "name":"durationAttack",
+                         "type":"int",
+                         "value":2000
+                        }, 
+                        {
+                         "name":"durationHide",
+                         "type":"int",
+                         "value":2000
+                        }, 
+                        {
+                         "name":"durationPrepareAttack",
+                         "type":"int",
+                         "value":2000
+                        }, 
+                        {
+                         "name":"startDelay",
+                         "type":"float",
+                         "value":3000
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":2432,
                  "y":1800
                 }, 
                 {
@@ -2638,17 +2767,17 @@
                         {
                          "name":"durationAttack",
                          "type":"int",
-                         "value":1000
+                         "value":2000
                         }, 
                         {
                          "name":"durationHide",
                          "type":"int",
-                         "value":500
+                         "value":2000
                         }, 
                         {
                          "name":"durationPrepareAttack",
                          "type":"int",
-                         "value":500
+                         "value":2000
                         }, 
                         {
                          "name":"startDelay",
@@ -2681,17 +2810,17 @@
                         {
                          "name":"durationAttack",
                          "type":"int",
-                         "value":1000
+                         "value":2000
                         }, 
                         {
                          "name":"durationHide",
                          "type":"int",
-                         "value":500
+                         "value":2000
                         }, 
                         {
                          "name":"durationPrepareAttack",
                          "type":"int",
-                         "value":500
+                         "value":2000
                         }, 
                         {
                          "name":"startDelay",
@@ -2724,17 +2853,17 @@
                         {
                          "name":"durationAttack",
                          "type":"int",
-                         "value":1000
+                         "value":2000
                         }, 
                         {
                          "name":"durationHide",
                          "type":"int",
-                         "value":500
+                         "value":2000
                         }, 
                         {
                          "name":"durationPrepareAttack",
                          "type":"int",
-                         "value":500
+                         "value":2000
                         }, 
                         {
                          "name":"startDelay",
@@ -2767,17 +2896,17 @@
                         {
                          "name":"durationAttack",
                          "type":"int",
-                         "value":1000
+                         "value":2000
                         }, 
                         {
                          "name":"durationHide",
                          "type":"int",
-                         "value":500
+                         "value":2000
                         }, 
                         {
                          "name":"durationPrepareAttack",
                          "type":"int",
-                         "value":500
+                         "value":2000
                         }, 
                         {
                          "name":"startDelay",
@@ -2789,135 +2918,6 @@
                  "visible":true,
                  "width":32,
                  "x":2528,
-                 "y":1800
-                }, 
-                {
-                 "gid":1081,
-                 "height":32,
-                 "id":1083,
-                 "name":"spikeShort",
-                 "properties":[
-                        {
-                         "name":"alwaysShow",
-                         "type":"bool",
-                         "value":false
-                        }, 
-                        {
-                         "name":"damage",
-                         "type":"float",
-                         "value":5
-                        }, 
-                        {
-                         "name":"durationAttack",
-                         "type":"int",
-                         "value":1000
-                        }, 
-                        {
-                         "name":"durationHide",
-                         "type":"int",
-                         "value":500
-                        }, 
-                        {
-                         "name":"durationPrepareAttack",
-                         "type":"int",
-                         "value":500
-                        }, 
-                        {
-                         "name":"startDelay",
-                         "type":"float",
-                         "value":1000
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":2816,
-                 "y":1800
-                }, 
-                {
-                 "gid":1081,
-                 "height":32,
-                 "id":1084,
-                 "name":"spikeShort",
-                 "properties":[
-                        {
-                         "name":"alwaysShow",
-                         "type":"bool",
-                         "value":false
-                        }, 
-                        {
-                         "name":"damage",
-                         "type":"float",
-                         "value":5
-                        }, 
-                        {
-                         "name":"durationAttack",
-                         "type":"int",
-                         "value":1000
-                        }, 
-                        {
-                         "name":"durationHide",
-                         "type":"int",
-                         "value":500
-                        }, 
-                        {
-                         "name":"durationPrepareAttack",
-                         "type":"int",
-                         "value":500
-                        }, 
-                        {
-                         "name":"startDelay",
-                         "type":"float",
-                         "value":1000
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":2624,
-                 "y":1800
-                }, 
-                {
-                 "gid":1081,
-                 "height":32,
-                 "id":1085,
-                 "name":"spikeShort",
-                 "properties":[
-                        {
-                         "name":"alwaysShow",
-                         "type":"bool",
-                         "value":false
-                        }, 
-                        {
-                         "name":"damage",
-                         "type":"float",
-                         "value":5
-                        }, 
-                        {
-                         "name":"durationAttack",
-                         "type":"int",
-                         "value":1000
-                        }, 
-                        {
-                         "name":"durationHide",
-                         "type":"int",
-                         "value":500
-                        }, 
-                        {
-                         "name":"durationPrepareAttack",
-                         "type":"int",
-                         "value":500
-                        }, 
-                        {
-                         "name":"startDelay",
-                         "type":"float",
-                         "value":1000
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":2432,
                  "y":1800
                 }, 
                 {
@@ -8477,8 +8477,8 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":96,
-                 "y":96
+                 "x":2128,
+                 "y":1752
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -8487,7 +8487,7 @@
          "y":0
         }],
  "nextlayerid":19,
- "nextobjectid":1093,
+ "nextobjectid":1096,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.8.5",
