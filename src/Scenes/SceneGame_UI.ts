@@ -73,7 +73,7 @@ export class SceneGame_UI extends CYBR_Scene
             tokenText.text = collectedTokens.toString();
         }, this);
 
-        return new Map<string, Phaser.GameObjects.GameObject>().set("image", tokenImage.setVisible(false)).set("text", tokenText.setVisible(false));
+        return new Map<string, Phaser.GameObjects.GameObject>().set("image", tokenImage).set("text", tokenText);
     }
 
     // TODO: Review position
