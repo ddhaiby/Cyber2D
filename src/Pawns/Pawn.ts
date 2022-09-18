@@ -447,6 +447,17 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         return this.getAttribute(CST.PAWN.ATTRIBUTES.BODY_DAMAGE);
     }
 
+    public giveBonusDamage(damage: number, duration: number): void
+    {
+        if (this.currentWeapon)
+        {
+            this.currentWeapon.damageBonus += damage;
+            this.scene.time.delayedCall(duration, () => {
+                this.currentWeapon.damageBonus = Math.max(0, this.currentWeapon.damageBonus - damage);
+            }, null, this);
+        }
+    }
+
     // Death
     ////////////////////////////////////////////////////////////////////////
 

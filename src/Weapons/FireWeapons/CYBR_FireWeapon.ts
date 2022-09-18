@@ -125,7 +125,7 @@ export class CYBR_FireWeapon extends CYBR_Weapon
                 if (bullet)
                 {
                     bullet.setDepth(0.8);
-                    bullet.damage = this.damage;
+                    bullet.damage = this.getCurrentDamage();
                     AudioManager.playSound(this.fireSound);
                 }
                 else if ((this.shots == this.fireLimit) && (new Date().getTime() - this.lastTimeEmptyWeaponSoundPlayed > this.fireRate))

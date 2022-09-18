@@ -5,6 +5,8 @@ export class CYBR_Weapon extends Phaser.GameObjects.Sprite
     /** The damage per attack */
     public damage: number = 0;
 
+    public damageBonus: number = 0;
+
     /** The pawn that owns this weapon */
     protected owner: Pawn = null;
 
@@ -17,5 +19,10 @@ export class CYBR_Weapon extends Phaser.GameObjects.Sprite
     public setOwner(owner: Pawn): void
     {
         this.owner = owner;
+    }
+
+    public getCurrentDamage(): number
+    {
+        return this.damage + this.damageBonus;
     }
 }

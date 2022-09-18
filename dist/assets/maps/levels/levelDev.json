@@ -1342,7 +1342,7 @@
                         {
                          "name":"duration",
                          "type":"float",
-                         "value":5
+                         "value":10000
                         }],
                  "rotation":0,
                  "type":"",
@@ -1368,6 +1368,17 @@
                  "height":32,
                  "id":972,
                  "name":"potionRed",
+                 "properties":[
+                        {
+                         "name":"damageBonus",
+                         "type":"float",
+                         "value":10
+                        }, 
+                        {
+                         "name":"duration",
+                         "type":"float",
+                         "value":10000
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,

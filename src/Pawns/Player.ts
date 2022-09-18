@@ -420,8 +420,30 @@ export class Player extends Pawn
         this.sparkle.setVisible(true);
         this.sparkle.anims.play("sparkleWhite", true);
 
+        console.log("???")
         this.scene.time.delayedCall(duration, () => {
             if (this.sparkle.anims.currentAnim.key == "sparkleWhite")
+            {
+                this.sparkle.anims.pause();
+                this.sparkle.setVisible(false);
+            }
+        }, null, this);
+    }
+
+    public giveBonusDamage(damage: number, duration: number): void
+    {
+        super.giveBonusDamage(damage, duration);
+
+        this.sparkle.setVisible(true);
+        this.sparkle.anims.play("sparkleRed", true);
+
+        this.scene.time.delayedCall(duration, () => {
+            if (this.currentWeapon)
+            {
+                this.currentWeapon.damageBonus = Math.max(0, this.currentWeapon.damageBonus - damage);
+            }
+
+            if (this.sparkle.anims.currentAnim.key == "sparkleRed")
             {
                 this.sparkle.anims.pause();
                 this.sparkle.setVisible(false);

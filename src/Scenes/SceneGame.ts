@@ -23,6 +23,8 @@ import {EffectPickup} from "../Pickups/EffectPickup"
 import {HealPickup} from "../Pickups/HealPickup"
 import {WeaponBoostPickup} from "../Pickups/WeaponBoostPickup"
 import {PotionGreen} from "../Pickups/PotionGreen"
+import {PotionOrange} from "../Pickups/PotionOrange"
+import {PotionRed} from "../Pickups/PotionRed"
 
 import {Ladder} from "../Platforms/Ladder";
 import {Portal} from "../Platforms/Portal";
