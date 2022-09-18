@@ -69,6 +69,9 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     // Attributes
     protected attributes: Phaser.Structs.Map<string, number>;
 
+    /** Speed bonus for ;ovespeed qnd cli;bing */
+    public speedBonus: number = 0;
+
     /** Max hp */
     protected maxHealth: number = 10;
 
@@ -205,7 +208,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     {
         if (this.canWalk())
         {
-            const speed = this.getWalkSpeed();
+            const speed = this.getCurrentWalkSpeed();
 
             if (!this.isWalking)
             {
@@ -229,6 +232,14 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         }
 
         this.setVelocityX(0);
+    }
+
+    public addSpeedBonus(speedBonus: number, duration: number): void
+    {
+        this.speedBonus += speedBonus;
+        this.scene.time.delayedCall(duration, () => {
+            this.speedBonus = Math.max(0, this.speedBonus - speedBonus)
+        }, null, this);
     }
 
     // Fly
@@ -437,9 +448,19 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         return this.getAttribute(CST.PAWN.ATTRIBUTES.WALK_SPEED);
     }
 
+    public getCurrentWalkSpeed(): number
+    {
+        return this.getWalkSpeed() + this.speedBonus;
+    }
+
     public getClimbSpeed(): number
     {
         return this.getAttribute(CST.PAWN.ATTRIBUTES.CLIMB_SPEED);
+    }
+
+    public getCurrentClimbSpeed(): number
+    {
+        return this.getClimbSpeed() + this.speedBonus;
     }
 
     public getBodyDamage(): number

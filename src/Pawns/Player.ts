@@ -178,6 +178,8 @@ export class Player extends Pawn
     public reset(x: number, y: number) : void
     {
         super.reset(x, y);
+        this.sparkle.setVisible(false);
+        this.sparkle.anims.pause();
         this.stopRecovering();
     }
 
@@ -420,7 +422,6 @@ export class Player extends Pawn
         this.sparkle.setVisible(true);
         this.sparkle.anims.play("sparkleWhite", true);
 
-        console.log("???")
         this.scene.time.delayedCall(duration, () => {
             if (this.sparkle.anims.currentAnim.key == "sparkleWhite")
             {
@@ -438,12 +439,23 @@ export class Player extends Pawn
         this.sparkle.anims.play("sparkleRed", true);
 
         this.scene.time.delayedCall(duration, () => {
-            if (this.currentWeapon)
-            {
-                this.currentWeapon.damageBonus = Math.max(0, this.currentWeapon.damageBonus - damage);
-            }
-
             if (this.sparkle.anims.currentAnim.key == "sparkleRed")
+            {
+                this.sparkle.anims.pause();
+                this.sparkle.setVisible(false);
+            }
+        }, null, this);
+    }
+
+    public addSpeedBonus(speedBonus: number, duration: number): void
+    {
+        super.addSpeedBonus(speedBonus, duration);
+
+        this.sparkle.setVisible(true);
+        this.sparkle.anims.play("sparkleOrange", true);
+
+        this.scene.time.delayedCall(duration, () => {
+            if (this.sparkle.anims.currentAnim.key == "sparkleOrange")
             {
                 this.sparkle.anims.pause();
                 this.sparkle.setVisible(false);

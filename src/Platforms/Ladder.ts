@@ -46,13 +46,13 @@ export class Ladder extends Phaser.Physics.Arcade.Image
             {
                 const isLadderAbovePlayer = (this.player.y + this.player.height / 2 > this.y - this.height / 2);
                 if (isLadderAbovePlayer)
-                    this.player.climb(0, -this.player.getClimbSpeed());
+                    this.player.climb(0, -this.player.getCurrentClimbSpeed());
             }
             else if (this.player.isLookingDown)
             {
                 const isLadderBelowPlayer = (this.player.y - this.player.height / 2 < this.y + this.height / 2);
                 if (isLadderBelowPlayer)
-                    this.player.climb(0, this.player.getClimbSpeed());
+                    this.player.climb(0, this.player.getCurrentClimbSpeed());
             }
             else if (this.player.isClimbing)
             {
