@@ -385,7 +385,6 @@ export class Player extends Pawn
         super.hurt(health, isProjected, hurtFromRight, velocityProjection);
         if (!this.isDead())
         {
-
             this.recover();
         }
     }
@@ -409,9 +408,24 @@ export class Player extends Pawn
         return false;
     }
 
-
     public canFire(): boolean
     {
         return this.canFire && !this.isClimbing;
+    }
+
+    public makeInvincible(duration: number): void
+    {
+        super.makeInvincible(duration);
+
+        this.sparkle.setVisible(true);
+        this.sparkle.anims.play("sparkleWhite", true);
+
+        this.scene.time.delayedCall(duration, () => {
+            if (this.sparkle.anims.currentAnim.key == "sparkleWhite")
+            {
+                this.sparkle.anims.pause();
+                this.sparkle.setVisible(false);
+            }
+        }, null, this);
     }
 }

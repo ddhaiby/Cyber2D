@@ -4,8 +4,8 @@
 			"image": "platform_atlas.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 343,
-				"h": 57
+				"w": 347,
+				"h": 62
 			},
 			"scale": 1,
 			"frames": [
@@ -31,24 +31,45 @@
 					}
 				},
 				{
-					"filename": "spikeShort.png",
+					"filename": "boxOpened.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 68,
-						"h": 16
+						"w": 30,
+						"h": 21
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 68,
-						"h": 16
+						"w": 30,
+						"h": 21
 					},
 					"frame": {
 						"x": 1,
 						"y": 39,
-						"w": 68,
-						"h": 16
+						"w": 30,
+						"h": 21
+					}
+				},
+				{
+					"filename": "boxClosed.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 20
+					},
+					"frame": {
+						"x": 33,
+						"y": 39,
+						"w": 32,
+						"h": 20
 					}
 				},
 				{
@@ -94,23 +115,23 @@
 					}
 				},
 				{
-					"filename": "boxClosed.png",
+					"filename": "weaponBoost.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 32,
+						"w": 27,
 						"h": 20
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 32,
+						"w": 27,
 						"h": 20
 					},
 					"frame": {
-						"x": 71,
+						"x": 67,
 						"y": 36,
-						"w": 32,
+						"w": 27,
 						"h": 20
 					}
 				},
@@ -136,45 +157,66 @@
 					}
 				},
 				{
-					"filename": "boxOpened.png",
+					"filename": "potionGreen.png",
 					"rotated": false,
-					"trimmed": false,
+					"trimmed": true,
 					"sourceSize": {
-						"w": 30,
-						"h": 21
+						"w": 32,
+						"h": 32
 					},
 					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 30,
-						"h": 21
+						"x": 7,
+						"y": 6,
+						"w": 18,
+						"h": 26
 					},
 					"frame": {
-						"x": 105,
+						"x": 96,
 						"y": 35,
-						"w": 30,
-						"h": 21
+						"w": 18,
+						"h": 26
 					}
 				},
 				{
-					"filename": "weaponBoost.png",
+					"filename": "potionOrange.png",
 					"rotated": false,
-					"trimmed": false,
+					"trimmed": true,
 					"sourceSize": {
-						"w": 27,
-						"h": 20
+						"w": 32,
+						"h": 32
 					},
 					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 27,
-						"h": 20
+						"x": 7,
+						"y": 6,
+						"w": 18,
+						"h": 26
 					},
 					"frame": {
-						"x": 137,
+						"x": 116,
 						"y": 35,
-						"w": 27,
-						"h": 20
+						"w": 18,
+						"h": 26
+					}
+				},
+				{
+					"filename": "potionRed.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 6,
+						"w": 18,
+						"h": 26
+					},
+					"frame": {
+						"x": 136,
+						"y": 35,
+						"w": 18,
+						"h": 26
 					}
 				},
 				{
@@ -192,30 +234,30 @@
 						"h": 20
 					},
 					"frame": {
-						"x": 166,
+						"x": 156,
 						"y": 35,
 						"w": 20,
 						"h": 20
 					}
 				},
 				{
-					"filename": "movingPlatformHorizontal.png",
+					"filename": "spikeShort.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 32,
+						"w": 68,
 						"h": 16
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 32,
+						"w": 68,
 						"h": 16
 					},
 					"frame": {
-						"x": 188,
+						"x": 178,
 						"y": 35,
-						"w": 32,
+						"w": 68,
 						"h": 16
 					}
 				},
@@ -241,6 +283,27 @@
 					}
 				},
 				{
+					"filename": "movingPlatformHorizontal.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 16
+					},
+					"frame": {
+						"x": 248,
+						"y": 35,
+						"w": 32,
+						"h": 16
+					}
+				},
+				{
 					"filename": "movingPlatformVertical.png",
 					"rotated": false,
 					"trimmed": false,
@@ -255,73 +318,10 @@
 						"h": 16
 					},
 					"frame": {
-						"x": 222,
+						"x": 282,
 						"y": 35,
 						"w": 32,
 						"h": 16
-					}
-				},
-				{
-					"filename": "tokenGold.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 16,
-						"h": 16
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 16,
-						"h": 16
-					},
-					"frame": {
-						"x": 256,
-						"y": 35,
-						"w": 16,
-						"h": 16
-					}
-				},
-				{
-					"filename": "tokenSilver.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 12,
-						"h": 12
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 12,
-						"h": 12
-					},
-					"frame": {
-						"x": 274,
-						"y": 35,
-						"w": 12,
-						"h": 12
-					}
-				},
-				{
-					"filename": "tokenCopper.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 9,
-						"h": 9
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 9,
-						"h": 9
-					},
-					"frame": {
-						"x": 288,
-						"y": 35,
-						"w": 9,
-						"h": 9
 					}
 				},
 				{
@@ -386,6 +386,69 @@
 						"w": 24,
 						"h": 32
 					}
+				},
+				{
+					"filename": "tokenGold.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 16
+					},
+					"frame": {
+						"x": 316,
+						"y": 35,
+						"w": 16,
+						"h": 16
+					}
+				},
+				{
+					"filename": "tokenSilver.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 12,
+						"h": 12
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 12,
+						"h": 12
+					},
+					"frame": {
+						"x": 334,
+						"y": 35,
+						"w": 12,
+						"h": 12
+					}
+				},
+				{
+					"filename": "tokenCopper.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 9,
+						"h": 9
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 9,
+						"h": 9
+					},
+					"frame": {
+						"x": 334,
+						"y": 49,
+						"w": 9,
+						"h": 9
+					}
 				}
 			]
 		}
@@ -393,6 +456,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:f5cd290f6deaae982ddde6b0ac77d7a5:bdf82232aff7ad38164fc5a5ef3dc2be:e0b2e34388d1fe0258fcee2f0a850454$"
+		"smartupdate": "$TexturePacker:SmartUpdate:a2f627e218cb8fc78b5948fa84999f33:1cf65b7dfc87f93bf3be6e24fa2d50be:e0b2e34388d1fe0258fcee2f0a850454$"
 	}
 }

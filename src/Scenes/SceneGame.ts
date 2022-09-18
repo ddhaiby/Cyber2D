@@ -22,6 +22,7 @@ import {CyberToken} from "../Pickups/CyberToken";
 import {EffectPickup} from "../Pickups/EffectPickup"
 import {HealPickup} from "../Pickups/HealPickup"
 import {WeaponBoostPickup} from "../Pickups/WeaponBoostPickup"
+import {PotionGreen} from "../Pickups/PotionGreen"
 
 import {Ladder} from "../Platforms/Ladder";
 import {Portal} from "../Platforms/Portal";
@@ -315,17 +316,38 @@ export class SceneGame extends CYBR_Scene {
         this.pickupItems = this.physics.add.staticGroup();
 
         // @ts-ignore - Problem with Phaser’s types. classType supports classes
-        const healObjects = this.currentMap.createFromObjects("Pickups", { name: "healthPackage", classType: HealPickup });
-        healObjects.map((pickup: HealPickup) => {
+        let pickupObjects = this.currentMap.createFromObjects("Pickups", { name: "healthPackage", classType: HealPickup });
+        pickupObjects.map((pickup: HealPickup) => {
             pickup.setTexture("platform_atlas", "healthPackage.png");
             this.pickupItems.add(pickup);
         });
 
         // @ts-ignore - Problem with Phaser’s types. classType supports classes
-        const weaponBoostObjects = this.currentMap.createFromObjects("Pickups", { name: "weaponBoost", classType: WeaponBoostPickup });
-        weaponBoostObjects.map((boost: WeaponBoostPickup) => {
-            boost.setTexture("platform_atlas", "weaponBoost.png");
-            this.pickupItems.add(boost);
+        pickupObjects = this.currentMap.createFromObjects("Pickups", { name: "weaponBoost", classType: WeaponBoostPickup });
+        pickupObjects.map((pickup: WeaponBoostPickup) => {
+            pickup.setTexture("platform_atlas", "weaponBoost.png");
+            this.pickupItems.add(pickup);
+        });
+
+        // @ts-ignore - Problem with Phaser’s types. classType supports classes
+        pickupObjects = this.currentMap.createFromObjects("Pickups", { name: "potionGreen", classType: PotionGreen });
+        pickupObjects.map((pickup: PotionGreen) => {
+            pickup.setTexture("platform_atlas", "potionGreen.png");
+            this.pickupItems.add(pickup);
+        });
+
+        // @ts-ignore - Problem with Phaser’s types. classType supports classes
+        pickupObjects = this.currentMap.createFromObjects("Pickups", { name: "potionOrange", classType: PotionOrange });
+        pickupObjects.map((pickup: PotionOrange) => {
+            pickup.setTexture("platform_atlas", "potionOrange.png");
+            this.pickupItems.add(pickup);
+        });
+
+        // @ts-ignore - Problem with Phaser’s types. classType supports classes
+        pickupObjects = this.currentMap.createFromObjects("Pickups", { name: "potionRed", classType: PotionRed });
+        pickupObjects.map((pickup: PotionRed) => {
+            pickup.setTexture("platform_atlas", "potionRed.png");
+            this.pickupItems.add(pickup);
         });
         return this;
     }
@@ -601,8 +623,11 @@ export class SceneGame extends CYBR_Scene {
 
     private onWeaponHitPlayer(bullet: CYBR_Bullet, player: Player): void
     {
-        this.onWeaponHitPawn(bullet, player);
-        this.shakeCameraHurtPlayer();
+        if (!player.isInvincible)
+        {
+            this.onWeaponHitPawn(bullet, player);
+            this.shakeCameraHurtPlayer();
+        }
     }
 
     private onWeaponHitPlatforms(bullet: CYBR_Bullet, platform: Phaser.Tilemaps.TilemapLayer): void
@@ -618,8 +643,11 @@ export class SceneGame extends CYBR_Scene {
 
     private onHitPlayer(meleeWeapon: CYBR_MeleeWeapon, player: Player): void
     {
-        this.onHitPawn(meleeWeapon, player);
-        this.shakeCameraHurtPlayer();
+        if (!player.isInvincible)
+        {
+            this.onHitPawn(meleeWeapon, player);
+            this.shakeCameraHurtPlayer();
+        }
     }
 
     private canHitPawn(bullet: CYBR_Bullet, pawn: Pawn): boolean
@@ -639,8 +667,11 @@ export class SceneGame extends CYBR_Scene {
 
     private onPlayerOverlapEnnemy(player: Player, enemy: Pawn): void
     {
-        player.hurt(enemy.getBodyDamage(), true, player.body.touching.right);
-        this.shakeCameraHurtPlayer();
+        if (!player.isInvincible)
+        {
+            player.hurt(enemy.getBodyDamage(), true, player.body.touching.right);
+            this.shakeCameraHurtPlayer();
+        }
     }
 
     private playerCanOverlapSpike(player: Player, spike: Spike): boolean
@@ -655,16 +686,22 @@ export class SceneGame extends CYBR_Scene {
 
     private onPlayerOverlapSpike(player: Player, spike: Spike): void
     {
-        this.player.hurt(spike.getDamage(), true, player.body.touching.right);
-        this.shakeCameraHurtPlayer();
+        if (!player.isInvincible)
+        {
+            this.player.hurt(spike.getDamage(), true, player.body.touching.right);
+            this.shakeCameraHurtPlayer();
+        }
     }
 
     private onPlayerOverlapMine(player: Player, mine: Mine): void
     {
-        if (mine.exploding && !player.isDead() && !player.isRecovering)
+        if (mine.exploding)
         {
-            this.player.hurt(mine.getDamage(), true, this.player.body.touching.right);
-            this.shakeCameraHurtPlayer();
+            if (!player.isDead() && !player.isRecovering && !player.isInvincible)
+            {
+                this.player.hurt(mine.getDamage(), true, this.player.body.touching.right);
+                this.shakeCameraHurtPlayer();
+            }
         }
         else
         {

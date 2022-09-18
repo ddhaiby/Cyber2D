@@ -45,8 +45,11 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     /** Whether the pawn is climbing */
     public isClimbing: boolean = false;
 
-    /** Whether the pawn is recovering from damage it took. This property is used to handle invincible mode */
+    /** Whether the pawn is recovering from damage it took. */
     public isRecovering: boolean = false;
+
+    /** Whether the pawn is invincible */
+    public isInvincible: boolean = false;
 
     /** Whether the pawn is taking damage. The pawn can't move on this state */
     public isTakingDmg: boolean = false;
@@ -169,6 +172,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.setAlpha(1);
         this.initStates();
         this.isTakingDmg = false;
+        this.isInvincible = false;
     }
 
     // Update
@@ -387,7 +391,6 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
             });
         }
 
-
         AudioManager.playSound(this.hurtSound);
     }
 
@@ -406,6 +409,12 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
             this.die();
             this.stopFiring();
         }
+    }
+
+    public makeInvincible(duration: number): void
+    {
+        this.isInvincible = true;
+        this.scene.time.delayedCall(duration, () => { this.isInvincible = false; }, null, this);
     }
 
     public getAttribute(name: string): number
