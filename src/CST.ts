@@ -29,9 +29,14 @@ export const CST = {
             MUSIC: "8-bit-samba"
         },
         {
-            TITLE: "Hunt them down",
+            TITLE: "The Cyber Odyssey continues",
             DESCRIPTION: "",
             MUSIC: "super-duper"
+        },
+        {
+            TITLE: "Hunt them down",
+            DESCRIPTION: "",
+            MUSIC: "breaking-point"
         },
         {
             TITLE: "Woop woop",
