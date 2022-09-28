@@ -33,9 +33,9 @@ export class PlayerManager {
 
     set initKeys(scene: Phaser.Scene) {
         this.keys = scene.input.keyboard.addKeys({
-            up: "Z",
+            up: "W",
             down: "S",
-            left: "Q",
+            left: "A",
             right: "D",
             jump: "SPACE",
             fire: "K",
