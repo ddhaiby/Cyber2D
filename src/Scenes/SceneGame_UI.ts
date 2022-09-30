@@ -46,6 +46,12 @@ export class SceneGame_UI extends CYBR_Scene
         this.createGameOverScreen();
 
         this.levelTransition = new LevelTransition(this, 0, 0, gameWidth, gameHeight);
+        this.levelTransition.onAnimationCompleted("levelCompletedAnimationCompleted", () => { this.sceneGame.startNextLevel(); }, this);
+        this.levelTransition.onAnimationCompleted("levelStartedAnimationCompleted", () => {
+            this.elapsedTime = 0;
+            this.sceneGame.scene.resume();
+            this.levelStarting = false;
+        }, this);
 
         this.sceneGame.events.on("levelStarted", this.startLevelStartedTransition, this);
         this.sceneGame.events.on("levelCompleted", this.startLevelCompletedTransition, this);
@@ -122,28 +128,9 @@ export class SceneGame_UI extends CYBR_Scene
 
     private startLevelCompletedTransition(): void
     {
-        console.log("zebi");
         this.sceneGame.scene.pause();
 
         this.levelTransition.showLevelCompletedAnimation();
-        this.levelTransition.onAnimationCompleted("levelCompletedAnimationCompleted", async () => {
-          /*  const playerData: IRequestPlayer = {
-                playerId: await this.storageService.getToken(),
-                level: this.sceneGame.currentLevel,
-                score: this.sceneGame.getCollectedTokens() * 4,
-                cybr_coin_amount: this.sceneGame.getCollectedTokens(),
-                cybr_coin_per_level: this.sceneGame.getCollectedTokens(),
-                best_time: this.elapsedTime,
-            }
-            let res = await this.httpServices.patchPlayerData(playerData);
-            if (res.status == 404) {
-                console.log(res.data.message);
-            } else {
-
-            }*/
-            this.sceneGame.startNextLevel();
-        }, this);
-
     }
 
     private startLevelStartedTransition(): void
@@ -151,11 +138,6 @@ export class SceneGame_UI extends CYBR_Scene
         this.levelStarting = true;
 
         this.levelTransition.showLevelStartedAnimation(this.sceneGame.currentLevel);
-        this.levelTransition.onAnimationCompleted("levelStartedAnimationCompleted", () => {
-            this.elapsedTime = 0;
-            this.sceneGame.scene.resume();
-            this.levelStarting = false;
-        }, this);
     }
 
     // Update

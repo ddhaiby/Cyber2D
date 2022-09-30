@@ -1,4 +1,5 @@
-export interface IPlayerKeys {
+export interface IPlayerKeys
+{
     up: Phaser.Input.Keyboard.Key;
     down: Phaser.Input.Keyboard.Key;
     left: Phaser.Input.Keyboard.Key;
@@ -8,31 +9,47 @@ export interface IPlayerKeys {
     punch: Phaser.Input.Keyboard.Key;
 }
 
-export interface ISetPlayerKeys extends Partial<IPlayerKeys> {
+declare type KeyMap =
+{
+    up: string;
+    down: string;
+    left: string;
+    right: string;
+    fire: string;
+    jump: string;
+    punch: string;
+}
+
+export interface ISetPlayerKeys extends Partial<IPlayerKeys>
+{
     scene: Phaser.Scene;
 }
 
-export class PlayerManager {
-    private keys: IPlayerKeys;
-    static instance: PlayerManager;
+export class PlayerManager
+{
+    // private _keys: IPlayerKeys;
+    private keyMap: KeyMap;
 
-    constructor() {
+    public static instance: PlayerManager;
+
+    constructor()
+    {
         PlayerManager.instance = this;
+        this.initKeyMap();
     }
 
-    public get keyBinding(): IPlayerKeys {
-        return this.keys;
-    }
-
-    static get Instance(): PlayerManager {
-        if (this.instance == null) {
+    public static get Instance(): PlayerManager
+    {
+        if (this.instance == null)
+        {
             this.instance = new PlayerManager();
         }
         return this.instance;
     }
 
-    set initKeys(scene: Phaser.Scene) {
-        this.keys = scene.input.keyboard.addKeys({
+    public initKeyMap(): void
+    {
+        this.keyMap = {
             up: "W",
             down: "S",
             left: "A",
@@ -40,30 +57,32 @@ export class PlayerManager {
             jump: "SPACE",
             fire: "K",
             punch: "J"
-        },false) as IPlayerKeys;
+        };
     }
 
-    set newKeys(playerKeys: ISetPlayerKeys) {
-        this.keys = playerKeys.scene.input.keyboard.addKeys({
-            up: playerKeys.up == undefined ? this.keyBinding.up : playerKeys.up,
-            down: playerKeys.down == undefined ? this.keyBinding.down : playerKeys.down,
-            left: playerKeys.left == undefined ? this.keyBinding.left : playerKeys.left,
-            right: playerKeys.right == undefined ? this.keyBinding.right : playerKeys.right,
-            jump: playerKeys.jump == undefined ? this.keyBinding.jump : playerKeys.jump,
-            fire: playerKeys.fire == undefined ? this.keyBinding.fire : playerKeys.fire,
-            punch: playerKeys.punch == undefined ? this.keyBinding.punch : playerKeys.punch
-        },false) as IPlayerKeys;
-    }
+    // public set newKeys(playerKeys: ISetPlayerKeys)
+    // {
+    //     this._keys = playerKeys.scene.input.keyboard.addKeys({
+    //         up: playerKeys.up == undefined ? this.keys.up : playerKeys.up,
+    //         down: playerKeys.down == undefined ? this.keys.down : playerKeys.down,
+    //         left: playerKeys.left == undefined ? this.keys.left : playerKeys.left,
+    //         right: playerKeys.right == undefined ? this.keys.right : playerKeys.right,
+    //         jump: playerKeys.jump == undefined ? this.keys.jump : playerKeys.jump,
+    //         fire: playerKeys.fire == undefined ? this.keys.fire : playerKeys.fire,
+    //         punch: playerKeys.punch == undefined ? this.keys.punch : playerKeys.punch
+    //     },false) as IPlayerKeys;
+    // }
 
-    reloadKeys(scene: Phaser.Scene) {
-        this.keys = scene.input.keyboard.addKeys({
-            up: this.keyBinding.up,
-            down: this.keyBinding.down,
-            left: this.keyBinding.left,
-            right: this.keyBinding.right,
-            jump: this.keyBinding.jump,
-            fire: this.keyBinding.fire,
-            punch: this.keyBinding.punch
-        },true) as IPlayerKeys
+    loadKeys(scene: Phaser.Scene): IPlayerKeys
+    {
+        return scene.input.keyboard.addKeys({
+            up: this.keyMap.up,
+            down: this.keyMap.down,
+            left: this.keyMap.left,
+            right: this.keyMap.right,
+            jump: this.keyMap.jump,
+            fire: this.keyMap.fire,
+            punch: this.keyMap.punch
+        }, true) as IPlayerKeys
     }
 }

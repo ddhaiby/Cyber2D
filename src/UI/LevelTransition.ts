@@ -62,9 +62,7 @@ export class LevelTransition extends Phaser.GameObjects.Container {
                 this.levelBackground.fillRect(this.levelBackground.x, this.levelBackground.y, this.levelBackground.width, this.levelBackground.height);
             },
             onComplete: function() : void {
-                this.scene.time.delayedCall(400, () => {
-                    this.emit("levelCompletedAnimationCompleted");
-                });
+                this.scene.time.delayedCall(400, () => { this.emit("levelCompletedAnimationCompleted"); });
             },
             onUpdateScope: this,
             onCompleteScope: this

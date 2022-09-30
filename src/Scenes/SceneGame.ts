@@ -35,9 +35,10 @@ import {Mine} from "../Platforms/Mine";
 import {LadderManager} from "../Managers/LadderManager";
 import {AudioManager} from "../Managers/AudioManager";
 
-export class SceneGame extends CYBR_Scene {
+export class SceneGame extends CYBR_Scene
+{
     // Pawns
-    public player: Player;
+    public player: Player = null;
     public currentLevel: number;
     // Scene
     private sceneGame_UI: SceneGame_UI = null;
@@ -63,14 +64,16 @@ export class SceneGame extends CYBR_Scene {
     private gameOver: boolean = false;
     private gameCompleted: boolean = false;
 
-    constructor() {
+    constructor()
+    {
         super({key: CST.SCENES.GAME});
     }
 
     // Init
     ////////////////////////////////////////////////////////////////////////
 
-    public init(data?: SceneData): void {
+    public init(data?: SceneData): void
+    {
         this.gameCompleted = false;
         this.currentLevel = data && data.level ? data.level : 1;
     }
@@ -78,11 +81,13 @@ export class SceneGame extends CYBR_Scene {
     // Preload
     ////////////////////////////////////////////////////////////////////////
 
-    public preload(): void {
+    public preload(): void
+    {
         this.loadMap();
     }
 
-    private loadMap(): void {
+    private loadMap(): void
+    {
         this.load.setPath("./assets/maps");
         this.load.image("terrain", "./cyber_plateforms_atlas.png");
 
@@ -129,6 +134,9 @@ export class SceneGame extends CYBR_Scene {
 
     public startLevel(level: number): void
     {
+        this.player.destroy();
+        this.player = null;
+        this.input.keyboard.removeAllKeys();
         this.events.off("postupdate");
         this.scene.restart({level: level});
     }
@@ -141,8 +149,11 @@ export class SceneGame extends CYBR_Scene {
     public startNextLevel(): void
     {
         if (this.currentLevel < CST.LEVELS.length)
+        {
             this.startLevel(this.currentLevel + 1);
-        else {
+        }
+        else
+        {
             this.completeGame();
             this.showGameMenu(true);
             this.showGame(false);

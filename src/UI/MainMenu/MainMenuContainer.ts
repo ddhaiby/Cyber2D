@@ -19,8 +19,6 @@ export class MainMenuContainer extends Phaser.GameObjects.Container
         this.httpService = new HttpServices();
         this.localStorage = new StorageService();
 
-        PlayerManager.Instance.initKeys = scene;
-
         this.width = scene.scale.displaySize.width;
         this.height = scene.scale.displaySize.height;
 

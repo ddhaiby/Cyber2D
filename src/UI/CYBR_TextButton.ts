@@ -60,7 +60,7 @@ export class CYBR_TextButton extends Phaser.GameObjects.Text
             {
                 this.setColor(this.hoveredColor);
                 AudioManager.playSound(this.hoverSound);
-            }          
+            }
         }, this);
 
         this.on("pointerout", () => {

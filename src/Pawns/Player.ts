@@ -8,7 +8,7 @@ import { PawnData } from "./PawnSpawn";
 
 export class Player extends Pawn
 {
-    private keys: IPlayerKeys;
+    private _keys: IPlayerKeys;
     private currentHandPosition: Phaser.Math.Vector2;
     private handPositions: Phaser.Math.Vector2[];
     private sparkle: Phaser.GameObjects.Sprite = null;
@@ -44,10 +44,9 @@ export class Player extends Pawn
         this.currentWeapon.setBulletPerFire(this.bulletPerFire);
         this.currentWeapon.setBulletSpeed(this.bulletSpeed);
 
-        PlayerManager.Instance.reloadKeys(this.scene);
-        this.keys = PlayerManager.Instance.keyBinding;
-        this.keys.jump.on("down", this.jump, this);
-        this.keys.punch.on("down", this.attack, this);
+        this._keys = PlayerManager.Instance.loadKeys(this.scene);
+        this._keys.jump.on("down", this.jump, this);
+        this._keys.punch.on("down", this.attack, this);
 
         this.on("healthChanged", this.updateSparkles, this);
         this.emit("healthChanged");
@@ -76,7 +75,7 @@ export class Player extends Pawn
                 for (let mode of modes)
                 {
                     this.anims.create({
-                        key: "Idle" + side + mode+ hpState,
+                        key: "Idle" + side + mode + hpState,
                         frames: this.anims.generateFrameNames(this.texture.key, { prefix: "idle" + side + mode + hpState + "_", suffix: ".png", start: 1, end: 1, zeroPad: 3 }),
                         frameRate: 1,
                         repeat: -1
@@ -212,12 +211,12 @@ export class Player extends Pawn
 
     protected updateControl() : void
     {
-        if (this.keys.up.isDown)
+        if (this._keys.up.isDown)
         {
             this.lookUp();
         }
             
-        else if (this.keys.down.isDown)
+        else if (this._keys.down.isDown)
         {
             this.lookDown();
         }
@@ -226,12 +225,12 @@ export class Player extends Pawn
             this.lookStraight();
         }
 
-        if (this.keys.left.isDown)
+        if (this._keys.left.isDown)
         {
             this.lookOnLeft();
             this.walk();
         }
-        else if (this.keys.right.isDown)
+        else if (this._keys.right.isDown)
         {
             this.lookOnRight();
             this.walk();
@@ -239,7 +238,7 @@ export class Player extends Pawn
         else
             this.stopWalking();
 
-        if (this.keys.fire.isDown && !this.isMeleeAttacking)
+        if (this._keys.fire.isDown && !this.isMeleeAttacking)
         {
             this.fire();
         }
