@@ -56,10 +56,10 @@ export class BasicAI extends Pawn
     {
         if (!this.pawnName)
         {
-            return;   
+            return;
         }
 
-        const animationsJSON = this.scene.cache.json.get("animationsPawn");
+        const animationsJSON = this.scene.cache.json.get("pawnSettings");
         const animationData = animationsJSON ? animationsJSON[this.pawnName] : null;
 
         if (!animationData)

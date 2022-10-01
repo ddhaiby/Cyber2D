@@ -2,7 +2,7 @@ import { AudioManager } from "../Managers/AudioManager";
 import { CST } from "../CST";
 import { CYBR_MeleeWeapon } from "../Weapons/MeleeWeapons/CYBR_MeleeWeapon";
 import { CYBR_FireWeapon } from "../Weapons/FireWeapons/CYBR_FireWeapon";
-import { PawnData } from "./PawnSpawn";
+import { PawnSpawnData } from "./PawnSpawn";
 
 export class Pawn extends Phaser.Physics.Arcade.Sprite
 {
@@ -114,19 +114,19 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     // Init
     ////////////////////////////////////////////////////////////////////////
 
-    public init(pawnData?: PawnData, textureKey?: string): this
+    public init(pawnSpawnData?: PawnSpawnData, textureKey?: string): this
     {
-        if (pawnData)
+        if (pawnSpawnData)
         {
-            this.x = pawnData.x;
-            this.y = pawnData.y;
-            this.maxHealth = pawnData.maxHealth;
-            this.startOnRight = pawnData.startOnRight;
-            this.startUp = pawnData.startUp;
-            this.bodyDamage = pawnData.bodyDamage;
-            this.bulletDamage = pawnData.bulletDamage;
-            this.bulletPerFire = pawnData.bulletPerFire;
-            this.bulletSpeed = pawnData.bulletSpeed;
+            this.x = pawnSpawnData.x;
+            this.y = pawnSpawnData.y;
+            this.maxHealth = pawnSpawnData.maxHealth;
+            this.startOnRight = pawnSpawnData.startOnRight;
+            this.startUp = pawnSpawnData.startUp;
+            this.bodyDamage = pawnSpawnData.bodyDamage;
+            this.bulletDamage = pawnSpawnData.bulletDamage;
+            this.bulletPerFire = pawnSpawnData.bulletPerFire;
+            this.bulletSpeed = pawnSpawnData.bulletSpeed;
         }
 
         this.initStates();

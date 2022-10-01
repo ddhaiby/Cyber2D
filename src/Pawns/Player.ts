@@ -4,7 +4,7 @@ import { CyberPistol } from "../Weapons/FireWeapons/CyberPistol";
 import { CyberShotgun } from "../Weapons/FireWeapons/CyberShotgun";
 import { CyberPunch } from "../Weapons/MeleeWeapons/CyberPunch";
 import { CST } from "../CST";
-import { PawnData } from "./PawnSpawn";
+import { PawnSpawnData } from "./PawnSpawn";
 
 export class Player extends Pawn
 {
@@ -33,10 +33,10 @@ export class Player extends Pawn
     // Init
     ////////////////////////////////////////////////////////////////////////
 
-    public init(playerData: PawnData) : this
+    public init(playerSpawnData: PawnSpawnData) : this
     {
-        super.init(playerData, "player");
-        this._meleeWeapon.damage = playerData.bodyDamage;
+        super.init(playerSpawnData, "player");
+        this._meleeWeapon.damage = playerSpawnData.bodyDamage;
 
         const weaponClass = CyberPistol;
         let weapon = new weaponClass(this.scene, this.x, this.y);

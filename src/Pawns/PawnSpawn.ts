@@ -1,4 +1,4 @@
-export declare type PawnData = {
+export declare type PawnSpawnData = {
     x: number;
     y: number;
     bodyDamage: number;
@@ -38,7 +38,7 @@ export class PawnSpawn extends Phaser.GameObjects.Image
         super(scene, x, y, texture, frame);
     }
 
-    public getPawnData(): PawnData
+    public getPawnData(): PawnSpawnData
     {
         return {
             x: this.x,
