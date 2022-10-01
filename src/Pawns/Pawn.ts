@@ -482,10 +482,11 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     // Death
     ////////////////////////////////////////////////////////////////////////
 
-    // Called when the health reaches 0 or to kill instantly 
+    /** Called when the health reaches 0 or to kill instantly */
     public die(): void
     {
         this.attributes.set(CST.PAWN.ATTRIBUTES.HEALTH, 0);
+        this.lookStraight();
         this.stopWalking();
         this.stopFlying();
         this.stopClimbing();

@@ -236,7 +236,9 @@ export class Player extends Pawn
             this.walk();
         }
         else
+        {
             this.stopWalking();
+        }
 
         if (this._keys.fire.isDown && !this.isMeleeAttacking)
         {
