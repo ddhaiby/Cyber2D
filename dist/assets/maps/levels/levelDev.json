@@ -369,49 +369,6 @@
                 {
                  "gid":1081,
                  "height":32,
-                 "id":891,
-                 "name":"spikeShort",
-                 "properties":[
-                        {
-                         "name":"alwaysShow",
-                         "type":"bool",
-                         "value":false
-                        }, 
-                        {
-                         "name":"damage",
-                         "type":"float",
-                         "value":5
-                        }, 
-                        {
-                         "name":"durationAttack",
-                         "type":"int",
-                         "value":300
-                        }, 
-                        {
-                         "name":"durationHide",
-                         "type":"int",
-                         "value":300
-                        }, 
-                        {
-                         "name":"durationPrepareAttack",
-                         "type":"int",
-                         "value":300
-                        }, 
-                        {
-                         "name":"startDelay",
-                         "type":"float",
-                         "value":100
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":768,
-                 "y":840
-                }, 
-                {
-                 "gid":1081,
-                 "height":32,
                  "id":892,
                  "name":"spikeShort",
                  "properties":[
@@ -450,49 +407,6 @@
                  "visible":true,
                  "width":32,
                  "x":736,
-                 "y":840
-                }, 
-                {
-                 "gid":1081,
-                 "height":32,
-                 "id":897,
-                 "name":"spikeShort",
-                 "properties":[
-                        {
-                         "name":"alwaysShow",
-                         "type":"bool",
-                         "value":false
-                        }, 
-                        {
-                         "name":"damage",
-                         "type":"float",
-                         "value":5
-                        }, 
-                        {
-                         "name":"durationAttack",
-                         "type":"int",
-                         "value":300
-                        }, 
-                        {
-                         "name":"durationHide",
-                         "type":"int",
-                         "value":300
-                        }, 
-                        {
-                         "name":"durationPrepareAttack",
-                         "type":"int",
-                         "value":300
-                        }, 
-                        {
-                         "name":"startDelay",
-                         "type":"float",
-                         "value":200
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":800,
                  "y":840
                 }, 
                 {
@@ -765,6 +679,92 @@
                  "width":32,
                  "x":144,
                  "y":544
+                }, 
+                {
+                 "gid":1081,
+                 "height":32,
+                 "id":973,
+                 "name":"spikeShort",
+                 "properties":[
+                        {
+                         "name":"alwaysShow",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"damage",
+                         "type":"float",
+                         "value":5
+                        }, 
+                        {
+                         "name":"durationAttack",
+                         "type":"int",
+                         "value":300
+                        }, 
+                        {
+                         "name":"durationHide",
+                         "type":"int",
+                         "value":300
+                        }, 
+                        {
+                         "name":"durationPrepareAttack",
+                         "type":"int",
+                         "value":300
+                        }, 
+                        {
+                         "name":"startDelay",
+                         "type":"float",
+                         "value":0
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":768,
+                 "y":840
+                }, 
+                {
+                 "gid":1081,
+                 "height":32,
+                 "id":974,
+                 "name":"spikeShort",
+                 "properties":[
+                        {
+                         "name":"alwaysShow",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"damage",
+                         "type":"float",
+                         "value":5
+                        }, 
+                        {
+                         "name":"durationAttack",
+                         "type":"int",
+                         "value":300
+                        }, 
+                        {
+                         "name":"durationHide",
+                         "type":"int",
+                         "value":300
+                        }, 
+                        {
+                         "name":"durationPrepareAttack",
+                         "type":"int",
+                         "value":300
+                        }, 
+                        {
+                         "name":"startDelay",
+                         "type":"float",
+                         "value":0
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":800,
+                 "y":840
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1944,7 +1944,7 @@
          "y":0
         }],
  "nextlayerid":17,
- "nextobjectid":973,
+ "nextobjectid":975,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",
