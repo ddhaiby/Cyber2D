@@ -285,11 +285,6 @@ export class SceneGame extends CYBR_Scene
         spikeObjects.map((spike: Spike) => {
             this.spikes.add(spike);
             spike.init();
-
-            if (spike.rotation == 0)
-                spike.setBodySize(spike.width, spike.height);
-            else // rotation is ±90 so we do this hack as we can't rotate arcade physic body
-                spike.setBodySize(spike.height, spike.width);
         });
 
         // @ts-ignore - Problem with Phaser’s types. classType supports classes

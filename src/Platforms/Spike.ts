@@ -23,6 +23,32 @@ export class Spike extends Phaser.Physics.Arcade.Sprite
     public init(): void
     {
         this.initAnimations();
+
+        if (this.name == "spikeShort")
+        {
+            if (Math.abs(Math.sin(this.rotation)) <= Phaser.Math.EPSILON) // Rotation is 0 or PI
+            {
+                this.setBodySize(this.width, this.height);
+            }
+            else // rotation is ±PI/2 so we do this hack as we can't rotate arcade physic body
+            {
+                this.setBodySize(this.height, this.width);
+            }
+            this.setOffset(7, 7);
+        }
+        else
+        {
+            if (Math.abs(Math.sin(this.rotation)) <= Phaser.Math.EPSILON) // Rotation is 0 or PI
+            {
+                this.setBodySize(this.width, this.height);
+                this.setOffset(7, 0);
+            }
+            else // rotation is ±90 so we do this hack as we can't rotate arcade physic body
+            {
+                this.setBodySize(this.height, this.width);
+                this.setOffset(0, 7);
+            }
+        }
     }
 
     private initAnimations() : void
