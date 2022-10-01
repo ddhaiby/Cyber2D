@@ -6,6 +6,9 @@ import { PawnSpawnData } from "./PawnSpawn";
 
 export class Pawn extends Phaser.Physics.Arcade.Sprite
 {
+    /** Name used for the animations */
+    protected pawnName: string = null;
+
     protected timerPrepareAttack: Phaser.Time.TimerEvent;
 
     protected startOnRight: boolean = false;
@@ -133,6 +136,9 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.initAttributes();
         this.initAnimations(textureKey);
 
+        const pawnSettings = this.scene.cache.json.get("pawnSettings");
+        this.body.setSize(pawnSettings[this.pawnName].body.width, pawnSettings[this.pawnName].body.height);
+        this.body.setOffset((this.width - pawnSettings[this.pawnName].body.width) * 0.5, (this.height - pawnSettings[this.pawnName].body.height));
         return this;
     }
 
@@ -154,7 +160,9 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     protected initAnimations(textureKey?: string): void
     {
         if (textureKey)
+        {
             this.setTexture(textureKey);
+        }
     }
 
     protected initAttributes(): void

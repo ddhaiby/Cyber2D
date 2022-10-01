@@ -347,6 +347,7 @@ export class SceneGame extends CYBR_Scene
         pickupObjects.map((pickup: PotionGreen) => {
             pickup.setTexture("platform_atlas", "potionGreen.png");
             this.pickupItems.add(pickup);
+            pickup.body.setSize(20, 24).setOffset((pickup.width - pickup.body.width) * 0.5, (pickup.height - pickup.body.height));
         });
 
         // @ts-ignore - Problem with Phaser’s types. classType supports classes
@@ -354,6 +355,7 @@ export class SceneGame extends CYBR_Scene
         pickupObjects.map((pickup: PotionOrange) => {
             pickup.setTexture("platform_atlas", "potionOrange.png");
             this.pickupItems.add(pickup);
+            pickup.body.setSize(20, 24).setOffset((pickup.width - pickup.body.width) * 0.5, (pickup.height - pickup.body.height));
         });
 
         // @ts-ignore - Problem with Phaser’s types. classType supports classes
@@ -361,6 +363,7 @@ export class SceneGame extends CYBR_Scene
         pickupObjects.map((pickup: PotionRed) => {
             pickup.setTexture("platform_atlas", "potionRed.png");
             this.pickupItems.add(pickup);
+            pickup.body.setSize(20, 24).setOffset((pickup.width - pickup.body.width) * 0.5, (pickup.height - pickup.body.height));
         });
         return this;
     }

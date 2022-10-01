@@ -15,6 +15,8 @@ export class Player extends Pawn
 
     constructor(scene: Phaser.Scene, x?: number, y?: number, texture?: string | Phaser.Textures.Texture) {
         super(scene, x, y, texture);
+
+        this.pawnName = "Player";
         this.setDepth(1);
         this.hurtSound = "Player_Damage";
         this.deathSound = "Player_Death";
@@ -125,8 +127,6 @@ export class Player extends Pawn
         const keyIdle = this.isLookingRight ? "IdleRightHoldingWeapon" : "IdleLeftHoldingWeapon";
         this.anims.play(keyIdle, true);
         this.handPositions = this.scene.cache.json.get("handPositions");
-        this.body.setSize(this.anims.currentAnim.frames[0].frame.realWidth, this.anims.currentAnim.frames[0].frame.realHeight);
-        this.body.setOffset(0,0);
     }
 
     private initSparkleAnim(): void

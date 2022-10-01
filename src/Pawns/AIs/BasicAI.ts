@@ -20,9 +20,6 @@ export class BasicAI extends Pawn
     /** The Y end position for the patrol. Must be greater than pathStartY */
     protected pathEndY: number = null;
 
-    /** Name used for the animations */
-    protected pawnName: string = null;
-
     /** Whether this AI should have a melee attack */
     protected hasMeleeAttackAnim: boolean = false;
 

@@ -1,5 +1,15 @@
 {
+	"Player": {
+		"body": {
+			"width": 24,
+			"height": 34 
+		}
+	},
     "PatrolRifle": {
+		"body": {
+			"width": 24,
+			"height": 37
+		},
 		"texture": "patrol",
 		"prefix": "rifle",
 		"anims": {
@@ -10,6 +20,10 @@
 		}
 	},
 	"PatrolPistol": {
+		"body": {
+			"width": 24,
+			"height": 37
+		},
 		"texture": "patrol",
 		"prefix": "pistol",
 		"anims": {
@@ -20,6 +34,10 @@
 		}
 	},
 	"PatrolMelee": {
+		"body": {
+			"width": 24,
+			"height": 37
+		},
 		"texture": "patrol",
 		"prefix": "melee",
 		"anims": {
@@ -31,6 +49,10 @@
 		}
 	},
 	"Drone": {
+		"body": {
+			"width": 37,
+			"height": 37
+		},
 		"texture": "drone",
 		"prefix": "drone",
 		"anims": {
