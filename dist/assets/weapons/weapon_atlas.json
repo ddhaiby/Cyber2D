@@ -4,32 +4,11 @@
 			"image": "weapon_atlas.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 92,
+				"w": 102,
 				"h": 31
 			},
 			"scale": 1,
 			"frames": [
-				{
-					"filename": "shotgunHolster.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 16,
-						"h": 15
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 16,
-						"h": 15
-					},
-					"frame": {
-						"x": 1,
-						"y": 1,
-						"w": 16,
-						"h": 15
-					}
-				},
 				{
 					"filename": "shotgun.png",
 					"rotated": false,
@@ -46,9 +25,30 @@
 					},
 					"frame": {
 						"x": 1,
-						"y": 18,
+						"y": 1,
 						"w": 66,
 						"h": 12
+					}
+				},
+				{
+					"filename": "shotgunHolster.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 15
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 15
+					},
+					"frame": {
+						"x": 69,
+						"y": 1,
+						"w": 16,
+						"h": 15
 					}
 				},
 				{
@@ -66,8 +66,8 @@
 						"h": 12
 					},
 					"frame": {
-						"x": 19,
-						"y": 1,
+						"x": 1,
+						"y": 15,
 						"w": 59,
 						"h": 12
 					}
@@ -87,30 +87,9 @@
 						"h": 11
 					},
 					"frame": {
-						"x": 69,
-						"y": 15,
-						"w": 12,
-						"h": 11
-					}
-				},
-				{
-					"filename": "bulletShotgun.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 11,
-						"h": 11
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 11,
-						"h": 11
-					},
-					"frame": {
-						"x": 80,
+						"x": 87,
 						"y": 1,
-						"w": 11,
+						"w": 12,
 						"h": 11
 					}
 				},
@@ -119,20 +98,41 @@
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 7,
+						"w": 14,
 						"h": 7
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 7,
+						"w": 14,
 						"h": 7
 					},
 					"frame": {
-						"x": 83,
+						"x": 87,
 						"y": 14,
-						"w": 7,
+						"w": 14,
 						"h": 7
+					}
+				},
+				{
+					"filename": "bulletShotgun.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 18,
+						"h": 12
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 18,
+						"h": 12
+					},
+					"frame": {
+						"x": 62,
+						"y": 18,
+						"w": 18,
+						"h": 12
 					}
 				},
 				{
@@ -140,19 +140,19 @@
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 7,
+						"w": 14,
 						"h": 7
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 7,
+						"w": 14,
 						"h": 7
 					},
 					"frame": {
-						"x": 83,
+						"x": 82,
 						"y": 23,
-						"w": 7,
+						"w": 14,
 						"h": 7
 					}
 				}
@@ -162,6 +162,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:1be28b10272514f69aa10676cbdc0580:7255b89f3a933d22c794f502b114b3f9:d98a479d210189fada7fb11552a3cb5d$"
+		"smartupdate": "$TexturePacker:SmartUpdate:3e6b82787d6279eeb7178df0e55a2e7e:1130080d87ea87e3647afb5a612ebfc1:d98a479d210189fada7fb11552a3cb5d$"
 	}
 }
