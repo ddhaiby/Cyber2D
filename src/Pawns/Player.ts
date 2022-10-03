@@ -8,13 +8,30 @@ import { PawnSpawnData } from "./PawnSpawn";
 
 export class Player extends Pawn
 {
+    /** They keys to control the player */
     private _keys: IPlayerKeys;
+
+    /** Current position of the hand given the current animation. This is use to determine the location of the weapon */
     private currentHandPosition: Phaser.Math.Vector2;
+
+    /** Positions of the hand at each animation frame. This is use to determine the location of the weapon */
     private handPositions: Phaser.Math.Vector2[];
+
+    /** Sparkles in front of the player. Indicates the bonus */
     private sparkle: Phaser.GameObjects.Sprite = null;
 
-    constructor(scene: Phaser.Scene, x?: number, y?: number, texture?: string | Phaser.Textures.Texture) {
+    /** How many frames has the player hold jump key */
+    private jumpHoldTime: number = 0;
+
+    /** Max number of frames the player can hold the jump key and expect the pawn to go up */
+    private maxJumpHoldTime: number = 35;
+
+    constructor(scene: Phaser.Scene, x?: number, y?: number, texture?: string | Phaser.Textures.Texture)
+    {
         super(scene, x, y, texture);
+
+        this.jumpVelocity = 320;
+        this.maxJumpHoldTime = 35;
 
         this.pawnName = "Player";
         this.setDepth(1);
@@ -198,7 +215,6 @@ export class Player extends Pawn
         {
             this.updateControl();
         }
-
     }
 
     public postUpdate(): void
@@ -215,7 +231,6 @@ export class Player extends Pawn
         {
             this.lookUp();
         }
-            
         else if (this._keys.down.isDown)
         {
             this.lookDown();
@@ -238,6 +253,16 @@ export class Player extends Pawn
         else
         {
             this.stopWalking();
+        }
+
+        if (this._keys.jump.isDown && (this.jumpHoldTime > 0 && this.jumpHoldTime < this.maxJumpHoldTime))
+        {
+            ++this.jumpHoldTime;
+            this.setVelocityY(-this.jumpVelocity);
+        }
+        else
+        {
+            this.jumpHoldTime = 0;
         }
 
         if (this._keys.fire.isDown && !this.isMeleeAttacking)
@@ -462,5 +487,14 @@ export class Player extends Pawn
                 this.sparkle.setVisible(false);
             }
         }, null, this);
+    }
+
+    public jump(): void
+    {
+        super.jump();
+        if (this.canJump())
+        {
+            this.jumpHoldTime = 1;
+        }
     }
 }

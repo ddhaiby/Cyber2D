@@ -72,7 +72,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     // Attributes
     protected attributes: Phaser.Structs.Map<string, number>;
 
-    /** Speed bonus for ;ovespeed qnd cli;bing */
+    /** Speed bonus for movespeed and climbing */
     public speedBonus: number = 0;
 
     /** Max hp */
@@ -89,6 +89,9 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
 
     /** The damage of each bullet */
     protected bulletDamage: number = 1;
+
+    /** Jump velocity for the jump */
+    protected jumpVelocity: number = 320;
 
     // Sounds
     protected hurtSound: string = "";
@@ -304,7 +307,9 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     public climb(speedX: number, speedY: number): void
     {
         if (!this.isClimbing)
+        {
             this.startClimbing();
+        }
 
         this.setVelocity(speedX, speedY);
     }
@@ -358,6 +363,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     // Jump
     ////////////////////////////////////////////////////////////////////////
 
+    /** Whether this Body is touching a tile or the world boundary while moving down */
     public isOnFloor(): boolean
     {
         return (this.body as Phaser.Physics.Arcade.Body).onFloor();
@@ -373,9 +379,11 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         if (this.canJump())
         {
             if (this.isClimbing)
+            {
                 this.stopClimbing();
+            }
 
-            this.setVelocityY(-475);
+            this.setVelocityY(-this.jumpVelocity);
             this.isJumping = true;
         }
     }
