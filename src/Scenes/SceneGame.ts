@@ -30,6 +30,7 @@ import {Ladder} from "../Platforms/Ladder";
 import {Portal} from "../Platforms/Portal";
 import {MovingPlatform} from "../Platforms/MovingPlatform";
 import {Spike} from "../Platforms/Spike";
+import {SpringPad} from "../Platforms/SpringPad";
 import {Mine} from "../Platforms/Mine";
 
 import {LadderManager} from "../Managers/LadderManager";
@@ -51,6 +52,7 @@ export class SceneGame extends CYBR_Scene
     private movingPlatforms: Phaser.Physics.Arcade.Group;
     private checkpoints: Phaser.Physics.Arcade.StaticGroup;
     private portals: Phaser.Physics.Arcade.StaticGroup;
+    private springPads: Phaser.Physics.Arcade.Group;
     private spikes: Phaser.Physics.Arcade.StaticGroup;
     private mines: Phaser.Physics.Arcade.StaticGroup;
     private backgrounds: Phaser.Physics.Arcade.StaticGroup;
@@ -125,6 +127,7 @@ export class SceneGame extends CYBR_Scene
             .createCheckpoints()
             .createLadders()
             .createPortals()
+            .createSpringPad()
             .createTraps()
             .createTokens()
             .createPickupItems()
@@ -182,7 +185,7 @@ export class SceneGame extends CYBR_Scene
         this.backgrounds = this.physics.add.staticGroup().setDepth(-999);
         this.backgrounds.add(this.add.image(0, 0, "background").setScale(4, 4).setScrollFactor(0));
 
-        const terrain = this.currentMap.addTilesetImage("cyber_plateforms_atlas", "terrain");
+        const terrain = this.currentMap.addTilesetImage("cyber_plateforms_atlas", "cyber_plateforms_atlas");
         this.currentMap.createLayer("Background", [terrain], 0, 0);
         return this;
     }
@@ -273,7 +276,27 @@ export class SceneGame extends CYBR_Scene
             this.portals.add(portal);
             portal.init();
         });
-        return this
+        return this;
+    }
+
+    private createSpringPad(): this
+    {
+        this.springPads = this.physics.add.group();
+
+        // @ts-ignore - Problem with Phaser’s types. classType supports classes
+        let springPadObjects = this.currentMap.createFromObjects("SpringPads", {name: "SpringPadVertical", classType: SpringPad});
+        springPadObjects.map((springPad: SpringPad) => {
+            this.springPads.add(springPad);
+            springPad.init(true);
+        });
+
+        // @ts-ignore - Problem with Phaser’s types. classType supports classes
+        springPadObjects = this.currentMap.createFromObjects("SpringPads", {name: "SpringPadHorizontal", classType: SpringPad});
+        springPadObjects.map((springPad: SpringPad) => {
+            this.springPads.add(springPad);
+            springPad.init(false);
+        });
+        return this;
     }
 
     private createTraps(): this
@@ -454,10 +477,15 @@ export class SceneGame extends CYBR_Scene
         this.physics.add.overlap(this.player, this.checkpoints, this.reachCheckpoint, null, this);
         this.physics.add.overlap(this.player, this.spikes, this.onPlayerOverlapSpike, this.playerCanOverlapSpike, this);
         this.physics.add.overlap(this.player, this.mines, this.onPlayerOverlapMine, this.playerCanOverlapMine, this);
+        this.physics.add.collider(this.player, this.springPads, this.onPlayerCollideSpringPad, this.playerCanCollideSpringPad, this);
 
         if (this.player.currentWeapon)
         {
-            this.physics.add.collider(this.player.currentWeapon.bullets, this.platforms, this.onWeaponHitPlatforms.bind(this));
+            // @ts-ignore
+            this.physics.add.collider(this.player.currentWeapon.bullets, this.platforms, this.onWeaponHitPlatforms, null, this);
+
+            // @ts-ignore
+            this.physics.add.collider(this.player.currentWeapon.bullets, this.springPads, this.onWeaponHitPlatforms, null, this);
         }
 
         /////// Enemies
@@ -644,7 +672,7 @@ export class SceneGame extends CYBR_Scene
         }
     }
 
-    private onWeaponHitPlatforms(bullet: CYBR_Bullet, platform: Phaser.Tilemaps.TilemapLayer): void
+    private onWeaponHitPlatforms(bullet: CYBR_Bullet, platform: Phaser.Tilemaps.TilemapLayer | Phaser.GameObjects.Image): void
     {
         bullet.kill();
     }
@@ -720,6 +748,30 @@ export class SceneGame extends CYBR_Scene
         else
         {
             mine.activate();
+        }
+    }
+
+    private playerCanCollideSpringPad(player: Player, springPad: SpringPad): boolean
+    {
+        return !springPad.activating;
+    }
+
+    private onPlayerCollideSpringPad(player: Player, springPad: SpringPad): void
+    {
+        let shouldActivate = false;
+
+        if (springPad.isVertical)
+        {
+            shouldActivate = player.y + player.height * 0.5 <= springPad.y - springPad.height;
+        }
+        else
+        {
+            shouldActivate = true;
+        }
+
+        if (shouldActivate)
+        {
+            springPad.activate(player);
         }
     }
 

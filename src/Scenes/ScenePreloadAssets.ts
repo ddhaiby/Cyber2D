@@ -75,6 +75,7 @@ export class ScenePreloadAssets extends CYBR_Scene
         this.load.setPath("./assets/platforms");
         this.load.atlas("platform_atlas", "platform_atlas.png", "platform_atlas.json");
         this.load.atlas("mine", "mine_atlas.png", "mine_atlas.json");
+        this.load.atlas("springPad", "springPad_atlas.png", "springPad_atlas.json");
         this.load.atlas("sparkles", "sparkles_atlas.png", "sparkles_atlas.json");
     }
 

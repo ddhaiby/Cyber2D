@@ -1,0 +1,104 @@
+{
+	"textures": [
+		{
+			"image": "springPad_atlas.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 34,
+				"h": 94
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "springPad_004.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 32,
+						"h": 32
+					}
+				},
+				{
+					"filename": "springPad_003.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 29
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 29
+					},
+					"frame": {
+						"x": 1,
+						"y": 35,
+						"w": 32,
+						"h": 29
+					}
+				},
+				{
+					"filename": "springPad_002.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 16
+					},
+					"frame": {
+						"x": 1,
+						"y": 66,
+						"w": 32,
+						"h": 16
+					}
+				},
+				{
+					"filename": "springPad_001.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 9
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 9
+					},
+					"frame": {
+						"x": 1,
+						"y": 84,
+						"w": 32,
+						"h": 9
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:730ad9e488dd28c5e9e7af55e186493f:a494bfc401ce0940f7b35f429a7d46b3:efd88c16b84ceaffd868dc1e659b6ecc$"
+	}
+}
