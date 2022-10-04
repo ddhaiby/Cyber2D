@@ -58,7 +58,7 @@ localStorage.getToken().then(async (token) => {
                         }]
                 }
             }, tokenState);
-            console.log(CYBR_Game.isConnected, tokenState);
+            // console.log(CYBR_Game.isConnected, tokenState);
         } else {
             tokenState = false;
             await httpService.logout(token);
@@ -95,7 +95,7 @@ localStorage.getToken().then(async (token) => {
                         }]
                 }
             }, tokenState);
-            console.log(CYBR_Game.isConnected, tokenState);
+            // console.log(CYBR_Game.isConnected, tokenState);
         }
     }else {
         new CYBR_Game({
@@ -129,7 +129,7 @@ localStorage.getToken().then(async (token) => {
                     }]
             }
         }, tokenState);
-        console.log(CYBR_Game.isConnected, tokenState);
+        //console.log(CYBR_Game.isConnected, tokenState);
     }
 });/*
 window.addEventListener("load", event => {

@@ -40,9 +40,11 @@ export class SceneGame extends CYBR_Scene
     // Pawns
     public player: Player = null;
     public currentLevel: number;
+
     // Scene
     private sceneGame_UI: SceneGame_UI = null;
     private sceneGameMenu_UI: SceneGameMenu_UI = null;
+
     // Map
     private currentMap: Phaser.Tilemaps.Tilemap;
     private platforms: Phaser.Tilemaps.TilemapLayer;
@@ -54,9 +56,11 @@ export class SceneGame extends CYBR_Scene
     private backgrounds: Phaser.Physics.Arcade.StaticGroup;
     private tokens: Phaser.Physics.Arcade.StaticGroup;
     private pickupItems: Phaser.Physics.Arcade.StaticGroup;
+
     // Managers
     private ladderManager: LadderManager;
     private enemies: Phaser.Physics.Arcade.Group;
+
     // GameMode
     private spawnPositions: Phaser.Structs.Map<string, Phaser.Math.Vector2>;
     private collectedTokens: number = 0;
@@ -89,7 +93,7 @@ export class SceneGame extends CYBR_Scene
     private loadMap(): void
     {
         this.load.setPath("./assets/maps");
-        this.load.image("terrain", "./cyber_plateforms_atlas.png");
+        this.load.image("cyber_plateforms_atlas", "./cyber_plateforms_atlas.png");
 
         const levelName = "level" + this.currentLevel.toString();
         // console.log(await this.httpService.getLevel(levelName));
@@ -185,7 +189,7 @@ export class SceneGame extends CYBR_Scene
 
     private createPlatforms(): this
     {
-        const terrain = this.currentMap.addTilesetImage("cyber_plateforms_atlas", "terrain");
+        const terrain = this.currentMap.addTilesetImage("cyber_plateforms_atlas", "cyber_plateforms_atlas");
 
         // Tile platforms
         this.platforms = this.currentMap.createLayer("Platforms", [terrain], 0, 0);
@@ -491,7 +495,6 @@ export class SceneGame extends CYBR_Scene
         this.cameras.main.setBounds(0, 0, this.physics.world.bounds.width, this.physics.world.bounds.height);
         this.cameras.main.startFollow(this.player);
         this.cameras.main.zoomTo(CST.GAME.ZOOM, 0.0);
-        this.cameras.main.setRoundPixels(true);
         return this;
     }
 
