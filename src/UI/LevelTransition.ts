@@ -69,7 +69,7 @@ export class LevelTransition extends Phaser.GameObjects.Container {
         });
     }
 
-    public showLevelStartedAnimation(level: number) : void
+    public showLevelStartedAnimation(level: number, isTutorial: boolean) : void
     {
         this.levelBackground.x = 0;
         this.levelBackground.width = this.width;
@@ -79,13 +79,13 @@ export class LevelTransition extends Phaser.GameObjects.Container {
         this.levelBackground.fillRect(this.levelBackground.x, this.levelBackground.y, this.levelBackground.width, this.levelBackground.height);
 
         this.levelTitle.setX(this.levelBackground.width / 2);
-        this.levelTitle.text = "Level " + level;
+        this.levelTitle.text = isTutorial ? "Tutorial" : "Level " + level;
 
         this.levelSubTitle.setX(this.levelBackground.width / 2);
-        this.levelSubTitle.text = CST.LEVELS[level - 1].TITLE;
+        this.levelSubTitle.text = isTutorial ? "A safe place to learn" : CST.LEVELS[level - 1].TITLE;
 
         this.levelDescription.setX(this.levelBackground.width / 2);
-        this.levelDescription.text = CST.LEVELS[level - 1].DESCRIPTION;
+        this.levelDescription.text = isTutorial ? "" : CST.LEVELS[level - 1].DESCRIPTION;
 
         this.levelBackground.setVisible(true);
         this.levelTitle.setVisible(true);

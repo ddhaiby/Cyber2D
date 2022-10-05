@@ -30,12 +30,21 @@ export class MainMenuContainer extends Phaser.GameObjects.Container
         }, this);
         this.add(playTextButton);
 
-        const selectLevelTextButton = new CYBR_TextButton(scene, 100, 100, "SELECT LEVEL", { fontSize : "32px", color: CST.STYLE.COLOR.ORANGE, strokeThickness : 4});
+        const selectLevelTextButton = new CYBR_TextButton(scene, 100, 100, "SELECT LEVEL", { fontSize : "30px", color: CST.STYLE.COLOR.ORANGE, strokeThickness : 4});
         scene.centerItem(selectLevelTextButton, 0, 180);
         selectLevelTextButton.onClicked(this.onSelectLevelClicked, this);
         this.add(selectLevelTextButton);
 
-        // const settingsIconButton = new CYBR_IconButton(scene, 930, 28, "UI_atlas", "iconGear.png");
+        const tutorialTextButton = new CYBR_TextButton(scene, 100, 100, "TUTORIAL", { fontSize : "30px", color: CST.STYLE.COLOR.ORANGE, strokeThickness : 4});
+        scene.centerItem(tutorialTextButton, 0, 230);
+        tutorialTextButton.onClicked(() => {
+            tutorialTextButton.emit("pointerout"); // Hack to ensure the button ends with its normal state here
+            this.onTutorialClicked();
+        }, this);
+
+        this.add(tutorialTextButton);
+
+        // const settingsIconButton = new CYBR_IconButton(scene, 1268, 28, "UI_atlas", "iconGear.png");
         // settingsIconButton.onClicked(this.onSettingsClicked, this);
         // this.add(settingsIconButton);
 
@@ -62,6 +71,11 @@ export class MainMenuContainer extends Phaser.GameObjects.Container
         this.emit("settingsClicked");
     }
 
+    private onTutorialClicked() : void
+    {
+        this.emit("tutorialClicked");
+    }
+
     private onRegisterClicked() : void
     {
         this.emit("connectClicked");
@@ -71,7 +85,6 @@ export class MainMenuContainer extends Phaser.GameObjects.Container
     {
         this.httpService.login().then(async result => {
             await this.ShowAuthWindow({path: JSON.parse(result.data as unknown as string).url, callback: {}});
-
         });
     }
 

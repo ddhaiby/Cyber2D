@@ -40,7 +40,10 @@ export class SceneGame extends CYBR_Scene
 {
     // Pawns
     public player: Player = null;
-    public currentLevel: number;
+
+    // Level data
+    private _currentLevel: number;
+    private _isTutorial: boolean;
 
     // Scene
     private sceneGame_UI: SceneGame_UI = null;
@@ -81,7 +84,8 @@ export class SceneGame extends CYBR_Scene
     public init(data?: SceneData): void
     {
         this.gameCompleted = false;
-        this.currentLevel = data && data.level ? data.level : 1;
+        this._isTutorial = data ? !!data.isTutorial : false;
+        this._currentLevel = data && data.level ? data.level : 1;
     }
 
     // Preload
@@ -97,11 +101,16 @@ export class SceneGame extends CYBR_Scene
         this.load.setPath("./assets/maps");
         this.load.image("cyber_plateforms_atlas", "./cyber_plateforms_atlas.png");
 
-        const levelName = "level" + this.currentLevel.toString();
-        // console.log(await this.httpService.getLevel(levelName));
-        this.load.tilemapTiledJSON(levelName, "./levels" + "/" + levelName + ".json");
-        //this.load.tilemapTiledJSON(levelName, "./levels/levelDev.json");
-        //this.load.tilemapTiledJSON(levelName,this.httpService.getLevel(levelName));
+        if (this._isTutorial)
+        {
+            this.load.tilemapTiledJSON("levelTutorial", "./levels/levelTutorial.json")
+        }
+        else
+        {
+            const levelName = "level" + this._currentLevel.toString();
+            this.load.tilemapTiledJSON(levelName, "./levels" + "/" + levelName + ".json");
+            //this.load.tilemapTiledJSON(levelName, "./levels/levelDev.json");
+        }
     }
 
     // Create
@@ -139,44 +148,58 @@ export class SceneGame extends CYBR_Scene
             .createUI();
     }
 
-    public startLevel(level: number): void
+    public startLevel(level: number, isTutorial: boolean = false): void
     {
         this.player.destroy();
         this.player = null;
         this.input.keyboard.removeAllKeys();
         this.events.off("postupdate");
-        this.scene.restart({level: level});
+        this.scene.restart({level: level, isTutorial: isTutorial});
     }
 
     public restartLevel(): void
     {
-        this.startLevel(this.currentLevel);
+        this.startLevel(this._currentLevel, this._isTutorial);
     }
 
     public startNextLevel(): void
     {
-        if (this.currentLevel < CST.LEVELS.length)
+        if (this._isTutorial)
         {
-            this.startLevel(this.currentLevel + 1);
+            this.showMainMenu();
         }
         else
         {
-            this.completeGame();
-            this.showGameMenu(true);
-            this.showGame(false);
+            if (this._currentLevel < CST.LEVELS.length)
+            {
+                this.startLevel(this._currentLevel + 1);
+            }
+            else
+            {
+                this.completeGame();
+                this.showGameMenu(true);
+                this.showGame(false);
+            }
         }
     }
 
     private createGameMode(): this
     {
-        this.setRemainLife(3);
+        this.setRemainLife(this._isTutorial ? 999 : 3);
         this.setCollectedTokens(0);
         return this;
     }
 
     private createMap(): this
     {
-        this.currentMap = this.add.tilemap("level" + this.currentLevel.toString());
+        if (this.currentMap)
+        {
+            this.currentMap.destroy();
+            this.currentMap = null;
+        }
+
+        const mapName = this._isTutorial ? "levelTutorial" : "level" + this._currentLevel.toString();
+        this.currentMap = this.add.tilemap(mapName);
         return this;
     }
 
@@ -187,6 +210,22 @@ export class SceneGame extends CYBR_Scene
 
         const terrain = this.currentMap.addTilesetImage("cyber_plateforms_atlas", "cyber_plateforms_atlas");
         this.currentMap.createLayer("Background", [terrain], 0, 0);
+
+        if (this._isTutorial)
+        {
+            const keyImages = ["keyFire", "keyMovement", "keyJump"];
+
+            for (const key of keyImages)
+            {
+                // @ts-ignore - Problem with Phaser’s types. classType supports classes
+                let tutorialObjects = this.currentMap.createFromObjects("Tutorial", { name: key, classType: Phaser.GameObjects.Image });
+                tutorialObjects.map((image: Phaser.GameObjects.Image) => { 
+                    image.setTexture(key).setScale(image.scaleX, image.scaleY);
+                    image.displayWidth = 32 * image.scaleX;
+                    image.displayHeight = 32 * image.scaleY;
+                });
+            }
+        }
         return this;
     }
 
@@ -639,6 +678,19 @@ export class SceneGame extends CYBR_Scene
         this.enemies.getChildren().forEach((ai: RifleAI) => {
             ai.postUpdate();
         }, this);
+    }
+
+    // Level
+    ////////////////////////////////////////////////////////////////////////
+
+    public get isTutorial(): boolean
+    {
+        return this._isTutorial;
+    }
+
+    public get currentLevel(): number
+    {
+        return this._currentLevel;
     }
 
     // Cameras

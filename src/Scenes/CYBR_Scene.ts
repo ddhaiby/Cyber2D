@@ -7,6 +7,7 @@ declare type CenterableObject = Phaser.GameObjects.Text | Phaser.GameObjects.Ima
 
 export declare type SceneData = {
     level: number;
+    isTutorial?: boolean
 }
 
 export class CYBR_Scene extends Phaser.Scene

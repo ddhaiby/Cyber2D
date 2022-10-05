@@ -50,6 +50,7 @@ export class SceneMainMenu_UI extends CYBR_Scene
         this.mainMenuContainer.on("playClicked", this.launchFirstLevel, this);
         this.mainMenuContainer.on("selectLevelClicked", this.onSelectLevelButtonClicked, this);
         this.mainMenuContainer.on("settingsClicked", this.onSettingsButtonClicked, this);
+        this.mainMenuContainer.on("tutorialClicked", this.onTutorialButtonClicked, this);
         this.mainMenuContainer.on("connectClicked", this.onConnectButtonClicked, this);
 
         this.settingsContainer = new SettingsContainer(this, 0, 0);
@@ -110,6 +111,17 @@ export class SceneMainMenu_UI extends CYBR_Scene
     private onSettingsButtonClicked() : void
     {
         this.showMenuContainer(this.settingsContainer);
+    }
+
+    private onTutorialButtonClicked() : void
+    {
+        const sceneData = {isTutorial: true} as SceneData;
+        this.sceneGame = this.scene.add(CST.SCENES.GAME, SceneGame, true, sceneData) as SceneGame;
+        this.sceneGame.showGame(true);
+
+        this.scene.setActive(false);
+        this.scene.setVisible(false);
+        this.showMenuContainer(this.mainMenuContainer);
     }
 
     private onConnectButtonClicked() : void

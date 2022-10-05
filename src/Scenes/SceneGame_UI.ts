@@ -47,11 +47,7 @@ export class SceneGame_UI extends CYBR_Scene
 
         this.levelTransition = new LevelTransition(this, 0, 0, gameWidth, gameHeight);
         this.levelTransition.onAnimationCompleted("levelCompletedAnimationCompleted", () => { this.sceneGame.startNextLevel(); }, this);
-        this.levelTransition.onAnimationCompleted("levelStartedAnimationCompleted", () => {
-            this.elapsedTime = 0;
-            this.sceneGame.scene.resume();
-            this.levelStarting = false;
-        }, this);
+        this.levelTransition.onAnimationCompleted("levelStartedAnimationCompleted", this.startGame, this);
 
         this.sceneGame.events.on("levelStarted", this.startLevelStartedTransition, this);
         this.sceneGame.events.on("levelCompleted", this.startLevelCompletedTransition, this);
@@ -126,6 +122,13 @@ export class SceneGame_UI extends CYBR_Scene
         return this.add.text(sceneWidth - 100, 16, "00:00:00", {font: '24px Gemunu Libre', color: CST.STYLE.COLOR.ORANGE, stroke: CST.STYLE.COLOR.BLACK, strokeThickness: 3});
     }
 
+    private startGame(): void
+    {
+        this.elapsedTime = 0;
+        this.sceneGame.scene.resume();
+        this.levelStarting = false;
+    }
+
     private startLevelCompletedTransition(): void
     {
         this.sceneGame.scene.pause();
@@ -135,9 +138,13 @@ export class SceneGame_UI extends CYBR_Scene
 
     private startLevelStartedTransition(): void
     {
-        this.levelStarting = true;
+        (this.tokenScoreItem.get("image") as Phaser.GameObjects.Image).setVisible(!this.sceneGame.isTutorial);
+        (this.tokenScoreItem.get("text") as Phaser.GameObjects.Text).setVisible(!this.sceneGame.isTutorial);
+        (this.lifeItem.get("image") as Phaser.GameObjects.Image).setVisible(!this.sceneGame.isTutorial);
+        (this.lifeItem.get("text") as Phaser.GameObjects.Text).setVisible(!this.sceneGame.isTutorial);
 
-        this.levelTransition.showLevelStartedAnimation(this.sceneGame.currentLevel);
+        this.levelStarting = true;
+        this.levelTransition.showLevelStartedAnimation(this.sceneGame.currentLevel, this.sceneGame.isTutorial);
     }
 
     // Update

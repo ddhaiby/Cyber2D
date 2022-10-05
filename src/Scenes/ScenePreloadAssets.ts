@@ -31,6 +31,7 @@ export class ScenePreloadAssets extends CYBR_Scene
         this.loadWeapons();
         this.loadPlatforms();
         this.loadPreviewLevels();
+        this.loadTutorialAssets();
 
         this.load.setPath("./assets");
 
@@ -88,6 +89,15 @@ export class ScenePreloadAssets extends CYBR_Scene
             const previewLevelName = "previewLevel" + i.toString();
             this.load.image(previewLevelName, previewLevelName + ".png");
         }
+    }
+
+    private loadTutorialAssets() : void
+    {
+        this.load.setPath("./assets/tutorial");
+
+        this.load.image("keyFire", "keyFire.png");
+        this.load.image("keyMovement", "keyMovement.png");
+        this.load.image("keyJump", "keyJump.png");
     }
 
     // Create
