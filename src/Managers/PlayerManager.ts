@@ -27,8 +27,7 @@ export interface ISetPlayerKeys extends Partial<IPlayerKeys>
 
 export class PlayerManager
 {
-    // private _keys: IPlayerKeys;
-    private keyMap: KeyMap;
+    private _keyMap: KeyMap;
 
     public static instance: PlayerManager;
 
@@ -47,9 +46,19 @@ export class PlayerManager
         return this.instance;
     }
 
+    public get keyMap(): KeyMap
+    {
+        return this._keyMap;
+    }
+
+    public set keyMap(keyMap: KeyMap)
+    {
+        this._keyMap = keyMap;
+    }
+
     public initKeyMap(): void
     {
-        this.keyMap = {
+        this._keyMap = {
             up: "W",
             down: "S",
             left: "A",
@@ -76,13 +85,13 @@ export class PlayerManager
     loadKeys(scene: Phaser.Scene): IPlayerKeys
     {
         return scene.input.keyboard.addKeys({
-            up: this.keyMap.up,
-            down: this.keyMap.down,
-            left: this.keyMap.left,
-            right: this.keyMap.right,
-            jump: this.keyMap.jump,
-            fire: this.keyMap.fire,
-            punch: this.keyMap.punch
+            up: this._keyMap.up,
+            down: this._keyMap.down,
+            left: this._keyMap.left,
+            right: this._keyMap.right,
+            jump: this._keyMap.jump,
+            fire: this._keyMap.fire,
+            punch: this._keyMap.punch
         }, true) as IPlayerKeys
     }
 }

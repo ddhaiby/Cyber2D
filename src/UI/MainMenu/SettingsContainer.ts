@@ -78,7 +78,7 @@ export class SettingsContainer extends Phaser.GameObjects.Container
         this.jumpKeyWidget = new KeySelectionWidget(this.scene, 0, 0, "JUMP");
         this.fireKeyWidget = new KeySelectionWidget(this.scene, 0, 0, "FIRE");
         this.punchKeyWidget = new KeySelectionWidget(this.scene, 0, 0, "PUNCH");
-        
+
         const keyWidgets = [this.upKeyWidget, this.downKeyWidget, this.rightKeyWidget, this.leftKeyWidget, this.jumpKeyWidget, this.fireKeyWidget, this.punchKeyWidget] as KeySelectionWidget[];
 
         for (let i = 0; i < keyWidgets.length; ++i)
@@ -97,29 +97,30 @@ export class SettingsContainer extends Phaser.GameObjects.Container
     {
         super.setVisible(value);
 
-        if (value) {
-            this.upKeyWidget.textField.setText(String.fromCharCode((PlayerManager.Instance.keyBinding.up as Phaser.Input.Keyboard.Key).keyCode));
-            this.downKeyWidget.textField.setText(String.fromCharCode((PlayerManager.Instance.keyBinding.down as Phaser.Input.Keyboard.Key).keyCode));
-            this.rightKeyWidget.textField.setText(String.fromCharCode((PlayerManager.Instance.keyBinding.right as Phaser.Input.Keyboard.Key).keyCode));
-            this.leftKeyWidget.textField.setText(String.fromCharCode((PlayerManager.Instance.keyBinding.left as Phaser.Input.Keyboard.Key).keyCode));
-            this.jumpKeyWidget.textField.setText(String.fromCharCode((PlayerManager.Instance.keyBinding.jump as Phaser.Input.Keyboard.Key).keyCode) == " " ? "SPACE" : "");
-            this.fireKeyWidget.textField.setText(String.fromCharCode((PlayerManager.Instance.keyBinding.fire as Phaser.Input.Keyboard.Key).keyCode));
-            this.punchKeyWidget.textField.setText(String.fromCharCode((PlayerManager.Instance.keyBinding.fire as Phaser.Input.Keyboard.Key).keyCode));
+        if (value)
+        {
+            this.upKeyWidget.textField.setText(PlayerManager.Instance.keyMap.up);
+            this.downKeyWidget.textField.setText(PlayerManager.Instance.keyMap.down);
+            this.rightKeyWidget.textField.setText(PlayerManager.Instance.keyMap.right);
+            this.leftKeyWidget.textField.setText(PlayerManager.Instance.keyMap.left);
+            this.jumpKeyWidget.textField.setText(PlayerManager.Instance.keyMap.jump);
+            this.fireKeyWidget.textField.setText(PlayerManager.Instance.keyMap.fire);
+            this.punchKeyWidget.textField.setText(PlayerManager.Instance.keyMap.punch);
         }
         return this;
     }
 
     private saveChange()
     {
-        PlayerManager.Instance.newKeys = {
-            scene: this.scene,
-            up: this.upKeyWidget.textField.text.toString() as unknown as Key,
-            down: this.downKeyWidget.textField.text.toString() as unknown as Key,
-            right: this.rightKeyWidget.textField.text.toString() as unknown as Key,
-            left: this.leftKeyWidget.textField.text.toString() as unknown as Key,
-            jump: this.jumpKeyWidget.textField.text.toString() as unknown as Key,
-            fire: this.fireKeyWidget.textField.text.toString() as unknown as Key,
-            punch: this.punchKeyWidget.textField.text.toString() as unknown as Key
+        PlayerManager.Instance.keyMap =
+        {
+            up: this.upKeyWidget.textField.text.toString(),
+            down: this.downKeyWidget.textField.text.toString(),
+            right: this.rightKeyWidget.textField.text.toString(),
+            left: this.leftKeyWidget.textField.text.toString(),
+            jump: this.jumpKeyWidget.textField.text.toString(),
+            fire: this.fireKeyWidget.textField.text.toString(),
+            punch: this.punchKeyWidget.textField.text.toString()
         }
         this.emit("backToMainMenu");
     }
