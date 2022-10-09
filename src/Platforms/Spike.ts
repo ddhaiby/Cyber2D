@@ -75,6 +75,8 @@ export class Spike extends Phaser.Physics.Arcade.Sprite
             frameRate: 30,
         });
 
+        this.anims.play("Hide", true);
+
         if (this.alwaysShow)
         {
             this.anims.play({ key: "Attack", frameRate: 100 });
