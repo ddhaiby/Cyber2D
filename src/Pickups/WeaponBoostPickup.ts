@@ -10,7 +10,9 @@ export class WeaponBoostPickup extends EffectPickup
 
     public applyEffect(pawn: Pawn) : void
     {
-        if (pawn.currentWeapon)
+        super.applyEffect(pawn);
+
+        if (pawn && pawn.currentWeapon)
         {
             const normalFireLimit = pawn.currentWeapon.fireLimit;
             const normalFireRate = pawn.currentWeapon.fireRate;

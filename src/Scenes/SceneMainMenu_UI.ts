@@ -3,7 +3,7 @@ import { CYBR_Scene } from "./CYBR_Scene";
 import { SceneData } from "./CYBR_Scene";
 import { SceneGame } from "./SceneGame";
 import { CYBR_Graphics } from "../Utils/CYBR_Graphics";
-import { AudioManager } from "../Managers/AudioManager";
+import { CYBR_AudioManager } from "../Managers/CYBR_AudioManager";
 import { MainMenuContainer } from "../UI/MainMenu/MainMenuContainer";
 import { SettingsContainer } from "../UI/MainMenu/SettingsContainer";
 import { SelectLevelContainer } from "../UI/MainMenu/SelectLevelContainer";
@@ -34,8 +34,6 @@ export class SceneMainMenu_UI extends CYBR_Scene
 
     public create() : void
     {
-        //AudioManager.playMusic(CST.MAIN_MENU.MUSIC);
-
         // Background
         let background = new CYBR_Graphics(this);
         background.width = this.scale.displaySize.width;

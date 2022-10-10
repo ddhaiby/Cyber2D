@@ -1,9 +1,9 @@
-import { AudioManager } from "../Managers/AudioManager";
+import { CYBR_AudioManager } from "../Managers/CYBR_AudioManager";
 
 export class Token extends Phaser.Physics.Arcade.Image
 {
     // Sounds
-    protected collectedSound: string = "";
+    public collectedSound: string = "coinGoldCollected";
     public value: number = -9999;
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture, frame?: string | number)
@@ -14,6 +14,6 @@ export class Token extends Phaser.Physics.Arcade.Image
     public collected(): void
     {
         this.disableBody(true, true);
-        AudioManager.playSound(this.collectedSound);
+        CYBR_AudioManager.instance.playSound(this.collectedSound);
     }
 }

@@ -10,7 +10,7 @@ export class GuardWeapon extends CYBR_FireWeapon
         this.fireLimit = 0;
         this.fireRate = 100;
         this.damage = 5;
-        this.fireSound = "";
+        this.fireSoundPrimary = "robotWeaponFirePrimary";
 
         this.setGripPosition(0, 0);
         this.setMuzzlePosition(0, 0);

@@ -10,6 +10,7 @@ export class HealPickup extends EffectPickup
 
     public applyEffect(pawn: Pawn) : void
     {
+        super.applyEffect(pawn);
         pawn.heal(this.value);
     }
 }

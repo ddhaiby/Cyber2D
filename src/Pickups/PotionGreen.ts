@@ -10,6 +10,8 @@ export class PotionGreen extends EffectPickup
 
     public applyEffect(pawn: Pawn) : void
     {
+        super.applyEffect(pawn);
+        
         if (pawn)
         {
             pawn.makeInvincible(this.duration);

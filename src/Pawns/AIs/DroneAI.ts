@@ -10,6 +10,7 @@ export class DroneAI extends ShooterAI
 
         this.patrol = true;
         this.pawnName = "Drone";
+        this.deathSound = "droneDeath";
         this.ClassWeapon = Gattling;
     }
 

@@ -29,21 +29,21 @@ export class PlayerManager
 {
     private _keyMap: KeyMap;
 
-    public static instance: PlayerManager;
+    public static _instance: PlayerManager;
 
     constructor()
     {
-        PlayerManager.instance = this;
+        PlayerManager._instance = this;
         this.initKeyMap();
     }
 
-    public static get Instance(): PlayerManager
+    public static get instance(): PlayerManager
     {
-        if (this.instance == null)
+        if (this._instance == null)
         {
-            this.instance = new PlayerManager();
+            this._instance = new PlayerManager();
         }
-        return this.instance;
+        return this._instance;
     }
 
     public get keyMap(): KeyMap

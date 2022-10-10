@@ -1,5 +1,5 @@
 import { CST } from "../CST";
-import { AudioManager } from "../Managers/AudioManager";
+import { CYBR_AudioManager } from "../Managers/CYBR_AudioManager";
 
 class CYBR_TextButtonStyle
 {
@@ -17,10 +17,10 @@ export class CYBR_TextButton extends Phaser.GameObjects.Text
     private enabled: boolean = true;
 
     /** Sound when the user clicks on this text button */
-    private clickSound: string = "Menu_Buttons_Click";
+    public clickSound: string = "menuButtonClicked";
 
     /** Sound when the user hovers this text button */
-    private hoverSound: string = "Menu_Buttons_Hover";
+    private hoverSound: string = "";
 
     /** Text color when there is no interaction from the user */
     private normalColor: string;
@@ -59,7 +59,7 @@ export class CYBR_TextButton extends Phaser.GameObjects.Text
             if (this.enabled)
             {
                 this.setColor(this.hoveredColor);
-                AudioManager.playSound(this.hoverSound);
+                CYBR_AudioManager.instance.playSound(this.hoverSound);
             }
         }, this);
 
@@ -84,7 +84,7 @@ export class CYBR_TextButton extends Phaser.GameObjects.Text
             {
                 this.pressed = false;
                 this.setColor(this.hoveredColor);
-                AudioManager.playSound(this.clickSound);
+                CYBR_AudioManager.instance.playSound(this.clickSound);
             }
         }, this);
 

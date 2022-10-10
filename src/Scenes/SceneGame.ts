@@ -34,7 +34,7 @@ import {SpringPad} from "../Platforms/SpringPad";
 import {Mine} from "../Platforms/Mine";
 
 import {LadderManager} from "../Managers/LadderManager";
-import {AudioManager} from "../Managers/AudioManager";
+import {CYBR_AudioManager} from "../Managers/CYBR_AudioManager";
 
 export class SceneGame extends CYBR_Scene
 {
@@ -122,9 +122,7 @@ export class SceneGame extends CYBR_Scene
         this.createLevel();
         this.events.on("postupdate", this.postUpdate, this);
         this.events.emit("levelStarted", data.level);
-        AudioManager.playSound("New_Level");
-
-        //AudioManager.playMusic(CST.LEVELS[this.currentLevel - 1].MUSIC);
+        CYBR_AudioManager.instance.playSound("New_Level");
     }
 
     private createLevel(): void
@@ -367,18 +365,20 @@ export class SceneGame extends CYBR_Scene
     {
         this.tokens = this.physics.add.staticGroup();
 
-        const tokenData = [
-            {name: "tokenCopper", classType: Token},
-            {name: "tokenSilver", classType: Token},
-            {name: "tokenGold", classType: Token},
-            {name: "tokenCyber", classType: CyberToken}
+        const tokenDataList = [
+            {name: "tokenCopper", collectedSound: "", classType: Token},
+            {name: "tokenSilver", collectedSound: "", classType: Token},
+            {name: "tokenGold", collectedSound: "coinGoldCollected", classType: Token},
+            {name: "tokenCyber", collectedSound: "coinCyberCollected", classType: CyberToken}
         ];
 
-        for (let token of tokenData) {
+        for (let tokenData of tokenDataList)
+        {
             // @ts-ignore - Problem with Phaser’s types. classType supports classes
-            const tokenObjects = this.currentMap.createFromObjects("Tokens", { name: token.name, classType: token.classType });
+            const tokenObjects = this.currentMap.createFromObjects("Tokens", { name: tokenData.name, classType: tokenData.classType });
             tokenObjects.map((token: Token) => {
                 token.setTexture("platform_atlas", token.name + ".png");
+                token.collectedSound = tokenData.collectedSound;
                 this.tokens.add(token);
             });
         }
@@ -606,7 +606,6 @@ export class SceneGame extends CYBR_Scene
         this.scene.remove(CST.SCENES.GAMEMENU_UI);
         this.scene.remove(CST.SCENES.GAME_UI);
         this.scene.remove(CST.SCENES.GAME);
-        //AudioManager.playMusic(CST.MAIN_MENU.MUSIC);
     }
 
     private restartTokens(): void
@@ -658,6 +657,8 @@ export class SceneGame extends CYBR_Scene
     {
         super.update(time, delta);
 
+        CYBR_AudioManager.instance.update();
+
         this.ladderManager.update();
         this.movingPlatforms.getChildren().forEach((movingPlatform: MovingPlatform) => {
             movingPlatform.update();
@@ -691,6 +692,16 @@ export class SceneGame extends CYBR_Scene
     public get currentLevel(): number
     {
         return this._currentLevel;
+    }
+
+    public get playerX(): number
+    {
+        return this.player.x;
+    }
+
+    public get playerY(): number
+    {
+        return this.player.y;
     }
 
     // Cameras
@@ -857,7 +868,7 @@ export class SceneGame extends CYBR_Scene
     {
         pickup.disableBody(true, true);
         pickup.applyEffect(this.player);
-        AudioManager.playSound("Item_Pickup");
+        CYBR_AudioManager.instance.playSound("Item_Pickup");
     }
 
     private reachCheckpoint(player: Player, checkpoint: Phaser.Physics.Arcade.Image): void
@@ -865,7 +876,7 @@ export class SceneGame extends CYBR_Scene
         checkpoint.setTexture("platform_atlas", "checkpointOn.png");
         this.spawnPositions.set(this.player.name, new Phaser.Math.Vector2(checkpoint.x, checkpoint.y));
         checkpoint.disableBody(true, false);
-        AudioManager.playSound("Checkpoint");
+        CYBR_AudioManager.instance.playSound("checkpointReached");
     }
 
     private respawnPlayer(): void {

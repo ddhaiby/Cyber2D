@@ -2,7 +2,7 @@ import { CST } from "../CST";
 import { CYBR_Scene } from "./CYBR_Scene";
 import { SceneMainMenu_UI } from "./SceneMainMenu_UI";
 import { SplashScreen } from "../UI/SplashScreen";
-import { AudioManager } from "../Managers/AudioManager";
+import { CYBR_AudioManager } from "../Managers/CYBR_AudioManager";
 
 export class ScenePreloadAssets extends CYBR_Scene
 {
@@ -40,7 +40,8 @@ export class ScenePreloadAssets extends CYBR_Scene
     }
 
     /** Load audios from an audio sprite. Below is an example to generate an audio sprite from audios (make sure to run in admin). 
-     * audiosprite -e "mp3,ogg" -o ./audiosprite *.mp3 -f howler
+     * npm install -g audiosprite
+     * audiosprite -e "mp3,ogg" -o ./audiosprite *.wav -f howler
      * Check https://www.npmjs.com/package/audiosprite
       */
     private loadAudioSprite() : void
@@ -142,6 +143,6 @@ export class ScenePreloadAssets extends CYBR_Scene
     {
         let audioSprite = this.cache.json.get("audiosprite");
         audioSprite = JSON.parse(JSON.stringify(audioSprite).replace("urls", "src").replace("./", "./assets/audio/")/*.replace("./", "./assets/audio/")*/);
-        AudioManager.init(audioSprite);
+        CYBR_AudioManager.instance.init(audioSprite);
     }
 }

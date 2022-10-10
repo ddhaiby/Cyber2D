@@ -1,4 +1,4 @@
-import { AudioManager } from "../Managers/AudioManager";
+import { CYBR_AudioManager } from "../Managers/CYBR_AudioManager";
 import { Pawn } from "../Pawns/Pawn";
 
 export class SpringPad extends Phaser.Physics.Arcade.Sprite
@@ -125,7 +125,7 @@ export class SpringPad extends Phaser.Physics.Arcade.Sprite
                 }
 
                 this.anims.play("Up", true);
-                AudioManager.playSound("SpringPadActivating");
+                CYBR_AudioManager.instance.playSound("SpringPadActivating");
             }
         }, this);
     }

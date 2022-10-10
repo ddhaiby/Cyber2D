@@ -1,5 +1,5 @@
 import { CST } from "../CST";
-import { AudioManager } from "../Managers/AudioManager";
+import { CYBR_AudioManager } from "../Managers/CYBR_AudioManager";
 import { CYBR_Utils } from "../Utils/CYBR_Utils";
 
 export class CYBR_IconButton extends Phaser.GameObjects.Sprite
@@ -11,10 +11,10 @@ export class CYBR_IconButton extends Phaser.GameObjects.Sprite
     private enabled: boolean = true;
 
     /** Sound when the user clicks on this text button */
-    private clickSound: string = "Menu_Buttons_Click";
+    private clickSound: string = "menuButtonClicked";
 
     /** Sound when the user hovers this text button */
-    private hoverSound: string = "Menu_Buttons_Hover";
+    private hoverSound: string = "";
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture, frame?: string | number)
     {
@@ -28,8 +28,8 @@ export class CYBR_IconButton extends Phaser.GameObjects.Sprite
             if (this.enabled)
             {
                 this.setTintFill(CYBR_Utils.hexColorToNumber(CST.STYLE.COLOR.ICON.HOVERED));
-                AudioManager.playSound(this.hoverSound);
-            }          
+                CYBR_AudioManager.instance.playSound(this.hoverSound);
+            }
         }, this);
 
         this.on("pointerout", () => {
@@ -53,7 +53,7 @@ export class CYBR_IconButton extends Phaser.GameObjects.Sprite
             {
                 this.setTintFill(CYBR_Utils.hexColorToNumber(CST.STYLE.COLOR.ICON.HOVERED));
                 this.pressed = false;
-                AudioManager.playSound(this.clickSound);
+                CYBR_AudioManager.instance.playSound(this.clickSound);
             }
         }, this);
 

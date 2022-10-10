@@ -1,3 +1,6 @@
+import { SceneGame } from "../Scenes/SceneGame";
+import { CYBR_AudioManager } from "../Managers/CYBR_AudioManager";
+
 export class Spike extends Phaser.Physics.Arcade.Sprite
 {
     private durationPrepareAttack: number = 1000;
@@ -7,9 +10,12 @@ export class Spike extends Phaser.Physics.Arcade.Sprite
     private alwaysShow: boolean = false;
     private damage: number = 5;
 
-    constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture, frame?: string | number)
+    private sceneGame: SceneGame = null;
+
+    constructor(scene: SceneGame, x: number, y: number, texture: string | Phaser.Textures.Texture, frame?: string | number)
     {
         super(scene, x, y, texture, frame);
+        this.sceneGame = scene;
 
         this.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function (anim: Phaser.Animations.Animation, frame: Phaser.Animations.AnimationFrame) {
             this.emit("animationcomplete_" + anim.key, anim, frame);
@@ -89,6 +95,11 @@ export class Spike extends Phaser.Physics.Arcade.Sprite
     
             this.on("animationstart_Attack", () => {
                 this.enableBody(false, 0, 0, true, true);
+
+                if (CYBR_AudioManager.instance.spikeCount < 5)
+                {
+                    this.playSpikeSound("spikeGoUp");
+                }
             }, true);
     
             this.on("animationcomplete_Attack", () => {
@@ -97,6 +108,11 @@ export class Spike extends Phaser.Physics.Arcade.Sprite
     
             this.on("animationstart_Hide", () => {
                 this.disableBody();
+
+                if (CYBR_AudioManager.instance.spikeCount < 5)
+                {
+                    this.playSpikeSound("spikeGoDown");
+                }
             }, true);
     
             this.on("animationcomplete_Hide", () => {
@@ -110,5 +126,17 @@ export class Spike extends Phaser.Physics.Arcade.Sprite
     public getDamage(): number
     {
         return this.damage;
+    }
+
+    private playSpikeSound(soundName: string): void
+    {
+        const soundPosX = CYBR_AudioManager.instance.getSoundPosX((this.x - this.sceneGame.playerX));
+        if (soundPosX <= 30)
+        {
+            const idSound = CYBR_AudioManager.instance.playSound(soundName, false, 0.2);
+            CYBR_AudioManager.instance.setSoundPosition(idSound, soundPosX, 0, 0);
+
+            ++CYBR_AudioManager.instance.spikeCount;
+        }
     }
 }

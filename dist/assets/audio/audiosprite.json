@@ -4,85 +4,81 @@
     "./audiosprite.ogg"
   ],
   "sprite": {
-    "audiosprite": [
+    "checkpointReached": [
       0,
-      344000
+      8480.77097505669
     ],
-    "Checkpoint": [
-      345000,
-      7439.999999999998
+    "coinCyberCollected": [
+      10000,
+      8480.77097505669
     ],
-    "Coin_Collect": [
-      354000,
-      7439.999999999998
+    "coinGoldCollected": [
+      20000,
+      8480.77097505669
     ],
-    "Item_Pickup": [
-      363000,
-      7439.999999999998
+    "droneDeath": [
+      30000,
+      8480.770975056686
     ],
-    "Laser_Gun_1 low": [
-      372000,
-      7439.999999999998
+    "levelCompletion - Copie": [
+      40000,
+      8480.770975056686
     ],
-    "Laser_Gun_1": [
-      381000,
-      7439.999999999998
+    "levelCompletion": [
+      50000,
+      8480.770975056686
     ],
-    "Laser_Gun_2": [
-      390000,
-      7439.999999999998
+    "menuButtonClicked": [
+      60000,
+      8480.770975056686
     ],
-    "Level_Completion": [
-      399000,
-      11160.000000000025
+    "menuPlayButtonClicked": [
+      70000,
+      8480.770975056686
     ],
-    "Menu_Buttons_Click": [
-      412000,
-      7439.999999999998
+    "mineExplosion": [
+      80000,
+      8480.770975056686
     ],
-    "Menu_Buttons_Hover": [
-      421000,
-      7439.999999999998
+    "pickupCollected": [
+      90000,
+      8480.770975056686
     ],
-    "New_Level": [
-      430000,
-      8832.018140589582
+    "playerBark": [
+      100000,
+      8480.770975056686
     ],
-    "Pistol__Shotgun_Empty": [
-      440000,
-      7439.999999999998
+    "playerDeath": [
+      110000,
+      8480.770975056686
     ],
-    "Pistol_Reload": [
-      449000,
-      7439.999999999998
+    "playerHurt": [
+      120000,
+      8480.770975056686
     ],
-    "Pistol_Shot": [
-      458000,
-      7439.999999999998
+    "playerWeaponFirePrimary": [
+      130000,
+      8480.770975056686
     ],
-    "Play_Button_Click": [
-      467000,
-      7439.999999999998
+    "playerWeaponFireSecondary": [
+      140000,
+      8919.999999999987
     ],
-    "Player_Damage": [
-      476000,
-      7439.999999999998
+    "robotDeath": [
+      150000,
+      8480.770975056686
     ],
-    "Player_Death": [
-      485000,
-      7439.999999999998
+    "robotWeaponFirePrimary": [
+      160000,
+      8480.770975056686
     ],
-    "Robot_Death": [
-      494000,
-      7439.999999999998
+    "spikeGoDown": [
+      170000,
+      8480.770975056686
     ],
-    "Shotgun_Reload_One_Bullet": [
-      503000,
-      7439.999999999998
-    ],
-    "Shotgun_Shot": [
-      512000,
-      7440.000000000055
+    "spikeGoUp": [
+      180000,
+      8480.770975056686
     ]
   }
 }

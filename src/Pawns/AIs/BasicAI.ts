@@ -29,7 +29,7 @@ export class BasicAI extends Pawn
     {
         super(scene, x, y, texture, frame);
 
-        this.deathSound = "Robot_Death";
+        this.deathSound = "robotDeath";
     }
 
     // Init

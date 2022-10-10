@@ -1,5 +1,6 @@
 import { Weapon, consts, Bullet, ObjectWithTransform } from "phaser3-weapon-plugin";
-import { AudioManager } from "../../Managers/AudioManager";
+import { SceneGame } from "../../Scenes/SceneGame";
+import { CYBR_AudioManager } from "../../Managers/CYBR_AudioManager";
 import { CYBR_Bullet } from "./CYBR_Bullet";
 import { Pawn } from "..//../Pawns/Pawn";
 import { CYBR_Weapon } from "../CYBR_Weapon"
@@ -8,6 +9,8 @@ export class CYBR_FireWeapon extends CYBR_Weapon
 {
     protected timerReloadWeapon: Phaser.Time.TimerEvent;
     protected weapon: Weapon;
+
+    private sceneGame: SceneGame = null;
 
     /** X-position from where the bullets will spawn */
     protected muzzleX: number = 0;
@@ -32,7 +35,11 @@ export class CYBR_FireWeapon extends CYBR_Weapon
 
     // Sounds
     /** Sound for the fire */
-    protected fireSound: string = "";
+    protected fireSoundPrimary: string = "";
+    protected fireSoundSecondary: string = "";
+
+    protected fireSoundPrimaryVolume: number = 1;
+    protected fireSoundSecondaryVolume: number = 1;
 
     /** Sound when trying to fire with 0 bullet */
     protected emptyWeaponSound: string = "";
@@ -43,9 +50,10 @@ export class CYBR_FireWeapon extends CYBR_Weapon
     /** Sound when a weapon is reloaded */
     protected reloadSound: string = "";
 
-    constructor(scene: Phaser.Scene, x: number, y: number, texture?: string | Phaser.Textures.Texture, frame?: string | number, textureBullet?: string, frameBullet?: string)
+    constructor(scene: SceneGame, x: number, y: number, texture?: string | Phaser.Textures.Texture, frame?: string | number, textureBullet?: string, frameBullet?: string)
     {
         super(scene, x, y, texture, frame);
+        this.sceneGame = scene;
         this.setVisible(!!texture);
 
         this.weapon = new Weapon(scene, -1, textureBullet, frameBullet);
@@ -126,11 +134,13 @@ export class CYBR_FireWeapon extends CYBR_Weapon
                 {
                     bullet.setDepth(0.8);
                     bullet.damage = this.getCurrentDamage();
-                    AudioManager.playSound(this.fireSound);
+
+                    this.playFireSound(this.fireSoundPrimary, this.fireSoundPrimaryVolume);
+                    this.playFireSound(this.fireSoundSecondary, this.fireSoundSecondaryVolume);
                 }
                 else if ((this.shots == this.fireLimit) && (new Date().getTime() - this.lastTimeEmptyWeaponSoundPlayed > this.fireRate))
                 {
-                    AudioManager.playSound(this.emptyWeaponSound);
+                    CYBR_AudioManager.instance.playSound(this.emptyWeaponSound);
                     this.lastTimeEmptyWeaponSoundPlayed = new Date().getTime();
                 }
             }, null, this);
@@ -162,11 +172,15 @@ export class CYBR_FireWeapon extends CYBR_Weapon
     {
         this.decrementShots();
         if (this.shots > 0)
+        {
             this.timerReloadWeapon = this.timerReloadWeapon.reset({delay: this.timerReloadWeapon.delay, repeat: 1, callbackScope: this, callback: this.reload });
+        }
         else
+        {
             this.stopReloading();
+        }
 
-        AudioManager.playSound(this.reloadSound);
+        CYBR_AudioManager.instance.playSound(this.reloadSound);
     }
 
     private decrementShots(): void
@@ -304,5 +318,17 @@ export class CYBR_FireWeapon extends CYBR_Weapon
     public set autofire(autofire: boolean)
     {
         this.weapon.autofire = autofire;
+    }
+
+    protected playFireSound(soundName: string, soundVolume: number): void
+    {
+        const soundPosX = CYBR_AudioManager.instance.getSoundPosX((this.x - this.sceneGame.playerX));
+        if (soundPosX <= 30)
+        {
+            const idSound = CYBR_AudioManager.instance.playSound(soundName, false, soundVolume);
+            CYBR_AudioManager.instance.setSoundPosition(idSound, soundPosX, 0, 0);
+
+            ++CYBR_AudioManager.instance.spikeCount;
+        }
     }
 }

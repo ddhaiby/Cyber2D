@@ -1,5 +1,5 @@
 import { CST } from "../CST";
-import { AudioManager } from "../Managers/AudioManager";
+import { CYBR_AudioManager } from "../Managers/CYBR_AudioManager";
 
 export class CYBR_Button extends Phaser.GameObjects.Container
 {
@@ -33,7 +33,7 @@ export class CYBR_Button extends Phaser.GameObjects.Container
         // Behaviors
         this.backgroundObject.on("pointerover", () => {
             this.backgroundObject.setTexture("UI_atlas", "btn_background_hovered.png");
-            AudioManager.playSound(this.hoverSound);
+            CYBR_AudioManager.instance.playSound(this.hoverSound);
         }, this);
 
         this.backgroundObject.on("pointerout", () => { this.backgroundObject.setTexture("UI_atlas", "btn_background.png"); }, this);
@@ -42,7 +42,7 @@ export class CYBR_Button extends Phaser.GameObjects.Container
 
         this.backgroundObject.on("pointerup", () => {
             this.backgroundObject.setTexture("UI_atlas", "btn_background.png");
-            AudioManager.playSound(this.clickSound);
+            CYBR_AudioManager.instance.playSound(this.clickSound);
         }, this);
 
         this.backgroundObject.on("pointermove", () => { this.backgroundObject.setTexture("UI_atlas", "btn_background_hovered.png"); }, this);

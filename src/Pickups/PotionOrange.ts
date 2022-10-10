@@ -12,6 +12,8 @@ export class PotionOrange extends EffectPickup
 
     public applyEffect(pawn: Pawn) : void
     {
+        super.applyEffect(pawn);
+        
         if (pawn)
         {
             pawn.addSpeedBonus(this.speedBonus, this.duration);

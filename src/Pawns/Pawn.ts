@@ -1,4 +1,4 @@
-import { AudioManager } from "../Managers/AudioManager";
+import { CYBR_AudioManager } from "../Managers/CYBR_AudioManager";
 import { CST } from "../CST";
 import { CYBR_MeleeWeapon } from "../Weapons/MeleeWeapons/CYBR_MeleeWeapon";
 import { CYBR_FireWeapon } from "../Weapons/FireWeapons/CYBR_FireWeapon";
@@ -418,7 +418,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
             });
         }
 
-        AudioManager.playSound(this.hurtSound);
+        CYBR_AudioManager.instance.playSound(this.hurtSound);
     }
 
     public heal(health: number): void
@@ -516,7 +516,7 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         this.onDeath();
         this.emit("die");
 
-        AudioManager.playSound(this.deathSound);
+        CYBR_AudioManager.instance.playSound(this.deathSound);
     }
 
     public isDead(): boolean

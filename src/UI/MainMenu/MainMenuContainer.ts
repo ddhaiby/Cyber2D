@@ -24,6 +24,7 @@ export class MainMenuContainer extends Phaser.GameObjects.Container
 
         const playTextButton = new CYBR_TextButton(scene, 100, 100, "PLAY", { fontSize : "116px", color: CST.STYLE.COLOR.ORANGE, strokeThickness : 6});
         scene.centerItem(playTextButton, 0, -10);
+        playTextButton.clickSound = "menuPlayButtonClicked";
         playTextButton.onClicked(() => {
             playTextButton.emit("pointerout"); // Hack to ensure the button ends with its normal state here
             this.onPlayClicked();

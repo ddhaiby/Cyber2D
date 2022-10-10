@@ -35,8 +35,8 @@ export class Player extends Pawn
 
         this.pawnName = "Player";
         this.setDepth(1);
-        this.hurtSound = "Player_Damage";
-        this.deathSound = "Player_Death";
+        this.hurtSound = "playerHurt";
+        this.deathSound = "playerDeath";
         this.maxHealth = 15;
 
         this.sparkle = this.scene.add.sprite(this.x, this.y, "sparkles");
@@ -63,7 +63,7 @@ export class Player extends Pawn
         this.currentWeapon.setBulletPerFire(this.bulletPerFire);
         this.currentWeapon.setBulletSpeed(this.bulletSpeed);
 
-        this._keys = PlayerManager.Instance.loadKeys(this.scene);
+        this._keys = PlayerManager.instance.loadKeys(this.scene);
         this._keys.jump.on("down", this.jump, this);
         this._keys.punch.on("down", this.attack, this);
 

@@ -34,6 +34,7 @@ export class SelectLevelContainer extends Phaser.GameObjects.Container
         this.add(this.selectNextLevelButon);
 
         const playButton = new CYBR_TextButton(scene, CST.GAME.WIDTH - 120, CST.GAME.HEIGHT - 64, "PLAY", { fontSize : "53px", color: CST.STYLE.COLOR.ORANGE, strokeThickness : 4});
+        playButton.clickSound = "menuPlayButtonClicked";
         playButton.onClicked(this.onPlayLevelClicked, this);
         this.add(playButton);
 

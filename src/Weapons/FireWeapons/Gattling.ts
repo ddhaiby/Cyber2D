@@ -16,7 +16,7 @@ export class Gattling extends CYBR_FireWeapon
         this.damage = 5;
         this.bindGripToFlipX = false;
     
-        this.fireSound = "Pistol_Shot";
+        this.fireSoundPrimary = "Pistol_Shot";
         this.setGripPosition(2, -16);
         this.setMuzzlePosition(22, 3);
         this.setOrigin(this.gattlingOriginX, 0.5);

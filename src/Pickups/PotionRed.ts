@@ -12,6 +12,8 @@ export class PotionRed extends EffectPickup
 
     public applyEffect(pawn: Pawn) : void
     {
+        super.applyEffect(pawn);
+        
         if (pawn)
         {
             pawn.giveBonusDamage(this.damageBonus, this.duration);

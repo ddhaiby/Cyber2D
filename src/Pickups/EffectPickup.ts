@@ -1,3 +1,4 @@
+import { CYBR_AudioManager } from "../Managers/CYBR_AudioManager";
 import { Pawn } from "../Pawns/Pawn";
 
 export class EffectPickup extends Phaser.Physics.Arcade.Image
@@ -7,6 +8,9 @@ export class EffectPickup extends Phaser.Physics.Arcade.Image
 
     /** Value of the effect if any */
     protected value: number = 0;
+
+    /** Sound to apply when pickup is collected */
+    public pickupCollectedSound = "pickupCollected";
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string | Phaser.Textures.Texture, frame?: string | number)
     {
@@ -20,5 +24,6 @@ export class EffectPickup extends Phaser.Physics.Arcade.Image
 
     public applyEffect(pawn: Pawn) : void
     {
+        CYBR_AudioManager.instance.playSound(this.pickupCollectedSound);
     }
 }

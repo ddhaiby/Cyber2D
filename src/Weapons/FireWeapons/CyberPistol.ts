@@ -12,9 +12,13 @@ export class CyberPistol extends CYBR_FireWeapon
         this.reloadRate = 400;
         this.damage = 5;
 
-        this.fireSound = "Pistol_Shot";
-        this.emptyWeaponSound = "Pistol__Shotgun_Empty";
-        this.reloadSound = "Pistol_Reload";
+        this.fireSoundPrimary = "playerWeaponFirePrimary";
+        this.fireSoundSecondary = "playerWeaponFireSecondary";
+        this.fireSoundPrimaryVolume = 0.5;
+        this.fireSoundSecondaryVolume = 0.4;
+
+        this.emptyWeaponSound = "";
+        this.reloadSound = "";
         this.setGripPosition(-4, 2);
         this.setMuzzlePosition(-8, 1.5);
     }

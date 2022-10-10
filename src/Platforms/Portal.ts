@@ -1,4 +1,4 @@
-import { AudioManager } from "../Managers/AudioManager";
+import { CYBR_AudioManager } from "../Managers/CYBR_AudioManager";
 import { Player } from "../Pawns/Player";
 
 export class Portal extends Phaser.Physics.Arcade.Sprite
@@ -49,6 +49,7 @@ export class Portal extends Phaser.Physics.Arcade.Sprite
                 this.activated = true;
                 this.disableBody(true);
                 this.emit("activated", anim, frame);
+                CYBR_AudioManager.instance.playSound("levelCompletion");
             }
         }, this);
     }
@@ -59,7 +60,6 @@ export class Portal extends Phaser.Physics.Arcade.Sprite
         {
             this.activating = true;
             this.anims.play("Activating", true);
-            AudioManager.playSound("Level_Completion");
         }
     }
 
