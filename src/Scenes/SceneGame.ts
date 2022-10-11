@@ -510,7 +510,7 @@ export class SceneGame extends CYBR_Scene
             return !player.isClimbing || (!this.ladderManager.areLaddersOnPlayerUnderY(platform.bottom - platform.width / 2));
         }, this);
 
-        this.physics.add.overlap(this.player, this.portals, this.activatePortal, null, this);
+        this.physics.add.overlap(this.player, this.portals, this.activatePortal, this.canActivatePortal, this);
         this.physics.add.overlap(this.player, this.tokens, this.collectToken, null, this);
         this.physics.add.overlap(this.player, this.pickupItems, this.applyEffectOnPlayer, null, this);
         this.physics.add.overlap(this.player, this.checkpoints, this.reachCheckpoint, null, this);
@@ -923,9 +923,17 @@ export class SceneGame extends CYBR_Scene
         this.gameCompleted = true;
     }
 
-    private activatePortal(player: Player, portal: Portal)
+    private activatePortal(player: Player, portal: Portal): void
     {
+        player.x = portal.x;
+        player.isInteracting = true;
+        player.disableBody(true, false);
         portal.activate(player);
+    }
+
+    private canActivatePortal(player: Player, portal: Portal): boolean
+    {
+        return Math.abs(player.x - portal.x) <= 6;
     }
 
     private completeLevel(): void

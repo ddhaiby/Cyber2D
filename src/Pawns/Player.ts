@@ -21,15 +21,19 @@ export class Player extends Pawn
     private sparkle: Phaser.GameObjects.Sprite = null;
 
     /** How many frames has the player hold jump key */
-    private jumpHoldTime: number = 0;
+    private jumpHoldTime: number;
 
     /** Max number of frames the player can hold the jump key and expect the pawn to go up */
-    private maxJumpHoldTime: number = 35;
+    private maxJumpHoldTime: number;
+
+    /** Whether this player is interacting with special objects */
+    public isInteracting: boolean = false;
 
     constructor(scene: Phaser.Scene, x?: number, y?: number, texture?: string | Phaser.Textures.Texture)
     {
         super(scene, x, y, texture);
 
+        this.jumpHoldTime = 0;
         this.jumpVelocity = 320;
         this.maxJumpHoldTime = 35;
 
@@ -211,7 +215,7 @@ export class Player extends Pawn
             this.isJumping = false;
         }
 
-        if (!this.isDead() && !this.isTakingDmg)
+        if (!this.isDead() && !this.isTakingDmg && !this.isInteracting)
         {
             this.updateControl();
         }
@@ -287,7 +291,11 @@ export class Player extends Pawn
         const ratioHealth = this.getHealth() / this.getMaxHealth();
         const hpState = (ratioHealth > 0.7) ? "" : (ratioHealth > 0.35 ? "MediumHP" : "LowHP");
 
-        if (this.isClimbing)
+        if (this.isInteracting)
+        {
+            this.anims.play("Idle" + side + "" + hpState, true);
+        }
+        else if (this.isClimbing)
         {
             this.anims.play("Climb" + hpState, true);
 
