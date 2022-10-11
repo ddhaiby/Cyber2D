@@ -560,8 +560,33 @@ export class SceneGame extends CYBR_Scene
     private createCameras(): this
     {
         this.cameras.main.setBounds(0, 0, this.physics.world.bounds.width, this.physics.world.bounds.height);
-        this.cameras.main.startFollow(this.player);
         this.cameras.main.zoomTo(CST.GAME.ZOOM, 0.0);
+        this.cameras.main.startFollow(this.portals.getChildren()[0]);
+
+        if (this.isTutorial)
+        {
+            this.cameras.main.startFollow(this.player);
+        }
+        else
+        {
+            this.time.delayedCall(1700, () => {
+                this.cameras.main.stopFollow();
+                let cameraCenter = this.cameras.main.midPoint;
+
+                this.tweens.add({
+                    targets: cameraCenter,
+                    x: this.player.x,
+                    y: this.player.y,
+                    duration: 600,
+                    repeat: false,
+                    onUpdateScope: this,
+                    onUpdate: () => { this.cameras.main.centerOn(cameraCenter.x, cameraCenter.y); },
+                    onCompleteParams: this,
+                    onComplete: () => { this.cameras.main.startFollow(this.player); }
+                });
+            }, null, this);
+        }
+
         return this;
     }
 
