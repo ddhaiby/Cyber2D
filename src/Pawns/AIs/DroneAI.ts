@@ -1,10 +1,11 @@
+import { SceneGame } from "../../Scenes/SceneGame";
 import { ShooterAI } from "./ShooterAI";
 import { AIData } from "./AISpawn";
 import { Gattling } from "../../Weapons/FireWeapons/Gattling";
 
 export class DroneAI extends ShooterAI
 {
-    constructor(scene: Phaser.Scene, x?: number, y?: number, texture?: string | Phaser.Textures.Texture, frame?: string | number)
+    constructor(scene: SceneGame, x?: number, y?: number, texture?: string | Phaser.Textures.Texture, frame?: string | number)
     {
         super(scene, x, y, texture, frame);
 

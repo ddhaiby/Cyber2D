@@ -1,3 +1,4 @@
+import { SceneGame } from "../../Scenes/SceneGame";
 import {CST} from "../../CST";
 import {Pawn} from "../Pawn";
 import {AIData} from "./AISpawn";
@@ -25,7 +26,7 @@ export class BasicAI extends Pawn
 
     public target: Pawn = null;
 
-    constructor(scene: Phaser.Scene, x?: number, y?: number, texture?: string | Phaser.Textures.Texture, frame?: string | number)
+    constructor(scene: SceneGame, x?: number, y?: number, texture?: string | Phaser.Textures.Texture, frame?: string | number)
     {
         super(scene, x, y, texture, frame);
 

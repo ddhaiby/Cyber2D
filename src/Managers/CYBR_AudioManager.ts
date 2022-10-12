@@ -17,6 +17,7 @@ export class CYBR_AudioManager extends AudioManager
     {
         super.init(audiosprite);
         this.spikeCount = 0;
+        this.weaponFireCount = 0;
     }
 
     public update(): void
@@ -29,6 +30,10 @@ export class CYBR_AudioManager extends AudioManager
 
     public static get instance(): CYBR_AudioManager
     {
-        return AudioManager.instance as CYBR_AudioManager;
+        if (this._instance == null)
+        {
+            this._instance = new CYBR_AudioManager();
+        }
+        return this._instance as CYBR_AudioManager;
     }
 }

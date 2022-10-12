@@ -1,8 +1,10 @@
 import { CYBR_FireWeapon } from "./CYBR_FireWeapon";
+import { SceneGame } from "../../Scenes/SceneGame";
+import { CYBR_AudioManager } from "../../Managers/CYBR_AudioManager";
 
 export class CyberPistol extends CYBR_FireWeapon
 {
-    constructor(scene: Phaser.Scene, x: number, y: number)
+    constructor(scene: SceneGame, x: number, y: number)
     {
         super(scene, x, y, "pistol", null, "weapon_atlas", "bulletPistol.png");
 
@@ -21,5 +23,10 @@ export class CyberPistol extends CYBR_FireWeapon
         this.reloadSound = "";
         this.setGripPosition(-4, 2);
         this.setMuzzlePosition(-8, 1.5);
+    }
+
+    protected playFireSound(soundName: string, soundVolume: number): void
+    {
+        CYBR_AudioManager.instance.playSound(soundName, false, soundVolume);
     }
 }

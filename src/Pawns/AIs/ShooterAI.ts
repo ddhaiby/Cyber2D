@@ -1,3 +1,4 @@
+import { SceneGame } from "../../Scenes/SceneGame";
 import { GuardWeapon } from "../../Weapons/FireWeapons/GuardWeapon";
 import { AIData } from "./AISpawn";
 import { BasicAI } from "./BasicAI";
@@ -19,7 +20,7 @@ export class ShooterAI extends BasicAI
 
     protected ClassWeapon: Class = GuardWeapon;
 
-    constructor(scene: Phaser.Scene, x?: number, y?: number, texture?: string | Phaser.Textures.Texture, frame?: string | number)
+    constructor(scene: SceneGame, x?: number, y?: number, texture?: string | Phaser.Textures.Texture, frame?: string | number)
     {
         super(scene, x, y, texture, frame);
 

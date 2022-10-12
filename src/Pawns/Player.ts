@@ -1,10 +1,12 @@
 import {Pawn} from "./Pawn";
+import { SceneGame } from "../Scenes/SceneGame";
 import {IPlayerKeys, PlayerManager} from "../Managers/PlayerManager";
 import { CyberPistol } from "../Weapons/FireWeapons/CyberPistol";
 import { CyberShotgun } from "../Weapons/FireWeapons/CyberShotgun";
 import { CyberPunch } from "../Weapons/MeleeWeapons/CyberPunch";
 import { CST } from "../CST";
 import { PawnSpawnData } from "./PawnSpawn";
+import { CYBR_AudioManager } from "../Managers/CYBR_AudioManager";
 
 export class Player extends Pawn
 {
@@ -29,7 +31,7 @@ export class Player extends Pawn
     /** Whether this player is interacting with special objects */
     public isInteracting: boolean = false;
 
-    constructor(scene: Phaser.Scene, x?: number, y?: number, texture?: string | Phaser.Textures.Texture)
+    constructor(scene: SceneGame, x?: number, y?: number, texture?: string | Phaser.Textures.Texture)
     {
         super(scene, x, y, texture);
 
@@ -62,7 +64,7 @@ export class Player extends Pawn
         this._meleeWeapon.damage = playerSpawnData.bodyDamage;
 
         const weaponClass = CyberPistol;
-        let weapon = new weaponClass(this.scene, this.x, this.y);
+        let weapon = new weaponClass(this.sceneGame, this.x, this.y);
         this.equipWeapon(weapon);
         this.currentWeapon.setBulletPerFire(this.bulletPerFire);
         this.currentWeapon.setBulletSpeed(this.bulletSpeed);

@@ -135,8 +135,7 @@ export class CYBR_FireWeapon extends CYBR_Weapon
                     bullet.setDepth(0.8);
                     bullet.damage = this.getCurrentDamage();
 
-                    this.playFireSound(this.fireSoundPrimary, this.fireSoundPrimaryVolume);
-                    this.playFireSound(this.fireSoundSecondary, this.fireSoundSecondaryVolume);
+                    this.playFireSounds();
                 }
                 else if ((this.shots == this.fireLimit) && (new Date().getTime() - this.lastTimeEmptyWeaponSoundPlayed > this.fireRate))
                 {
@@ -320,6 +319,16 @@ export class CYBR_FireWeapon extends CYBR_Weapon
         this.weapon.autofire = autofire;
     }
 
+    protected playFireSounds(): void
+    {
+        if (CYBR_AudioManager.instance.weaponFireCount < 5)
+        {
+            this.playFireSound(this.fireSoundPrimary, this.fireSoundPrimaryVolume);
+            this.playFireSound(this.fireSoundSecondary, this.fireSoundSecondaryVolume);
+            ++CYBR_AudioManager.instance.weaponFireCount;
+        }
+    }
+
     protected playFireSound(soundName: string, soundVolume: number): void
     {
         const soundPosX = CYBR_AudioManager.instance.getSoundPosX((this.x - this.sceneGame.playerX));
@@ -327,8 +336,6 @@ export class CYBR_FireWeapon extends CYBR_Weapon
         {
             const idSound = CYBR_AudioManager.instance.playSound(soundName, false, soundVolume);
             CYBR_AudioManager.instance.setSoundPosition(idSound, soundPosX, 0, 0);
-
-            ++CYBR_AudioManager.instance.spikeCount;
         }
     }
 }

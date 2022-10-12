@@ -1,4 +1,5 @@
 import { CYBR_AudioManager } from "../Managers/CYBR_AudioManager";
+import { SceneGame } from "../Scenes/SceneGame";
 import { CST } from "../CST";
 import { CYBR_MeleeWeapon } from "../Weapons/MeleeWeapons/CYBR_MeleeWeapon";
 import { CYBR_FireWeapon } from "../Weapons/FireWeapons/CYBR_FireWeapon";
@@ -6,6 +7,8 @@ import { PawnSpawnData } from "./PawnSpawn";
 
 export class Pawn extends Phaser.Physics.Arcade.Sprite
 {
+    protected sceneGame: SceneGame = null;
+
     /** Name used for the animations */
     protected pawnName: string = null;
 
@@ -97,9 +100,10 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
     protected hurtSound: string = "";
     protected deathSound: string = "";
 
-    constructor(scene: Phaser.Scene, x?: number, y?: number, texture?: string | Phaser.Textures.Texture, frame?: string | number)
+    constructor(scene: SceneGame, x?: number, y?: number, texture?: string | Phaser.Textures.Texture, frame?: string | number)
     {
         super(scene, x, y, texture, frame);
+        this.sceneGame = scene;
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
