@@ -958,6 +958,7 @@ export class SceneGame extends CYBR_Scene
     private activatePortal(player: Player, portal: Portal): void
     {
         player.x = portal.x;
+        player.y = portal.y - (player.height - portal.height) * 0.5;
         player.isInteracting = true;
         player.disableBody(true, false);
         portal.activate(player);
