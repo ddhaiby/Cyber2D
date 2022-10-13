@@ -244,6 +244,11 @@
                  "name":"mine",
                  "properties":[
                         {
+                         "name":"bigExplosion",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
                          "name":"damage",
                          "type":"float",
                          "value":5
@@ -257,11 +262,6 @@
                          "name":"delayExplosion",
                          "type":"float",
                          "value":3000
-                        }, 
-                        {
-                         "name":"sizeExplosion",
-                         "type":"float",
-                         "value":40
                         }],
                  "rotation":0,
                  "type":"",
@@ -277,9 +277,14 @@
                  "name":"mine",
                  "properties":[
                         {
+                         "name":"bigExplosion",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
                          "name":"damage",
                          "type":"float",
-                         "value":5
+                         "value":10
                         }, 
                         {
                          "name":"delayAboutToExplode",
@@ -290,11 +295,6 @@
                          "name":"delayExplosion",
                          "type":"float",
                          "value":1000
-                        }, 
-                        {
-                         "name":"sizeExplosion",
-                         "type":"float",
-                         "value":40
                         }],
                  "rotation":0,
                  "type":"",
@@ -304,15 +304,20 @@
                  "y":608
                 }, 
                 {
-                 "gid":58,
+                 "gid":1073741882,
                  "height":32,
                  "id":926,
                  "name":"mine",
                  "properties":[
                         {
+                         "name":"bigExplosion",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
                          "name":"damage",
                          "type":"float",
-                         "value":5
+                         "value":10
                         }, 
                         {
                          "name":"delayAboutToExplode",
@@ -323,18 +328,13 @@
                          "name":"delayExplosion",
                          "type":"float",
                          "value":2000
-                        }, 
-                        {
-                         "name":"sizeExplosion",
-                         "type":"float",
-                         "value":40
                         }],
-                 "rotation":180,
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":144,
-                 "y":544
+                 "x":96,
+                 "y":576
                 }, 
                 {
                  "gid":1073741905,
@@ -765,6 +765,39 @@
                  "width":32,
                  "x":1512,
                  "y":840
+                }, 
+                {
+                 "gid":1073741882,
+                 "height":32,
+                 "id":1016,
+                 "name":"mine",
+                 "properties":[
+                        {
+                         "name":"bigExplosion",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"damage",
+                         "type":"float",
+                         "value":5
+                        }, 
+                        {
+                         "name":"delayAboutToExplode",
+                         "type":"float",
+                         "value":2000
+                        }, 
+                        {
+                         "name":"delayExplosion",
+                         "type":"float",
+                         "value":3000
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":144,
+                 "y":576
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1553,18 +1586,6 @@
          "name":"Portals",
          "objects":[
                 {
-                 "gid":9,
-                 "height":32,
-                 "id":993,
-                 "name":"Portal",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":1480,
-                 "y":736
-                }, 
-                {
                  "gid":13,
                  "height":32,
                  "id":994,
@@ -1598,6 +1619,18 @@
                  "visible":true,
                  "width":32,
                  "x":680,
+                 "y":736
+                }, 
+                {
+                 "gid":9,
+                 "height":32,
+                 "id":1017,
+                 "name":"Portal",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":784,
                  "y":736
                 }],
          "opacity":1,
@@ -2102,7 +2135,7 @@
                         {
                          "name":"maxHealth",
                          "type":"float",
-                         "value":150
+                         "value":15
                         }, 
                         {
                          "name":"startOnRight",
@@ -2113,8 +2146,8 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":264,
-                 "y":736
+                 "x":208,
+                 "y":608
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2123,7 +2156,7 @@
          "y":0
         }],
  "nextlayerid":18,
- "nextobjectid":1014,
+ "nextobjectid":1018,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",

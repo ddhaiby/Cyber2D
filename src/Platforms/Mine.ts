@@ -4,8 +4,8 @@ export class Mine extends Phaser.Physics.Arcade.Sprite
 {
     private delayAboutToExplode: number = 2000;
     private delayExplosion: number = 3000;
-    private sizeExplosion: number = 40;
     private damage: number = 5;
+    private bigExplosion: boolean = false;
 
     private _exploding: boolean = false;
     private _activated: boolean = false;
@@ -25,6 +25,9 @@ export class Mine extends Phaser.Physics.Arcade.Sprite
 
     public init(): void
     {
+        this.setOrigin(0.5, this.flipY ? 0 : 1);
+        this.setY(this.flipY ? this.y - this.height * 0.5 : this.y + this.height * 0.5);
+
         this.initAnimations();
     }
 
@@ -32,32 +35,33 @@ export class Mine extends Phaser.Physics.Arcade.Sprite
     {
         this.setTexture("mine");
 
+        const sizeExplosion = this.bigExplosion ? "Big" : "";
 
         this.anims.create({
             key: "Idle",
-            frames: this.anims.generateFrameNames(this.texture.key, { prefix: "mine_", suffix: ".png", start: 1, end: 1, zeroPad: 3 }),
+            frames: this.anims.generateFrameNames(this.texture.key, { prefix: "mineActivation_", suffix: ".png", start: 1, end: 1, zeroPad: 3 }),
             frameRate: 1,
             repeat: 0
         });
 
         this.anims.create({
             key: "Activating",
-            frames: this.anims.generateFrameNames(this.texture.key, { prefix: "mine_", suffix: ".png", start: 1, end: 2, zeroPad: 3 }),
+            frames: this.anims.generateFrameNames(this.texture.key, { prefix: "mineActivation_", suffix: ".png", start: 1, end: 4, zeroPad: 3 }),
             frameRate: 4,
             repeat: -1
         });
 
         this.anims.create({
             key: "AboutToExplode",
-            frames: this.anims.generateFrameNames(this.texture.key, { prefix: "mine_", suffix: ".png", start: 1, end: 2, zeroPad: 3 }),
+            frames: this.anims.generateFrameNames(this.texture.key, { prefix: "mineActivation_", suffix: ".png", start: 1, end: 4, zeroPad: 3 }),
             frameRate: 12,
             repeat: -1
         });
 
         this.anims.create({
             key: "Explode",
-            frames: this.anims.generateFrameNames(this.texture.key, { prefix: "mine_", suffix: ".png", start: 2, end: 7, zeroPad: 3 }),
-            frameRate: 11,
+            frames: this.anims.generateFrameNames(this.texture.key, { prefix: "mineExplosion" + sizeExplosion + "_", suffix: ".png", start: 2, end: this.bigExplosion ? 8 : 6, zeroPad: 3 }),
+            frameRate: 12,
             repeat: 0
         });
 
@@ -102,7 +106,7 @@ export class Mine extends Phaser.Physics.Arcade.Sprite
     {
         this._exploding = true;
         this.enableBody(false, 0, 0, true, true);
-        this.body.setSize(this.sizeExplosion, this.sizeExplosion);
+        // this.body.setSize(this.sizeExplosion, this.sizeExplosion);
         CYBR_AudioManager.instance.playSound("mineExplosion");
         this.scene.time.delayedCall(100, () => { this.disableBody(); this._activated = false; }, null, this);
     }

@@ -4,97 +4,223 @@
 			"image": "mine_atlas.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 122,
-				"h": 44
+				"w": 340,
+				"h": 64
 			},
 			"scale": 1,
 			"frames": [
 				{
-					"filename": "mine_007.png",
+					"filename": "mineExplosionBig_006.png",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
-						"w": 32,
-						"h": 32
+						"w": 61,
+						"h": 62
 					},
 					"spriteSourceSize": {
 						"x": 0,
-						"y": 1,
-						"w": 32,
-						"h": 31
+						"y": 0,
+						"w": 61,
+						"h": 62
 					},
 					"frame": {
 						"x": 1,
 						"y": 1,
+						"w": 61,
+						"h": 62
+					}
+				},
+				{
+					"filename": "mineExplosionBig_007.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 61,
+						"h": 62
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 61,
+						"h": 62
+					},
+					"frame": {
+						"x": 64,
+						"y": 1,
+						"w": 61,
+						"h": 62
+					}
+				},
+				{
+					"filename": "mineExplosionBig_008.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 61,
+						"h": 62
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 61,
+						"h": 55
+					},
+					"frame": {
+						"x": 127,
+						"y": 1,
+						"w": 61,
+						"h": 55
+					}
+				},
+				{
+					"filename": "mineExplosionBig_005.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 51,
+						"h": 50
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 51,
+						"h": 50
+					},
+					"frame": {
+						"x": 190,
+						"y": 1,
+						"w": 51,
+						"h": 50
+					}
+				},
+				{
+					"filename": "mineActivation_001.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 23,
+						"w": 17,
+						"h": 9
+					},
+					"frame": {
+						"x": 190,
+						"y": 53,
+						"w": 17,
+						"h": 9
+					}
+				},
+				{
+					"filename": "mineActivation_002.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 23,
+						"w": 17,
+						"h": 9
+					},
+					"frame": {
+						"x": 209,
+						"y": 53,
+						"w": 17,
+						"h": 9
+					}
+				},
+				{
+					"filename": "mineActivation_003.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 23,
+						"w": 17,
+						"h": 9
+					},
+					"frame": {
+						"x": 228,
+						"y": 53,
+						"w": 17,
+						"h": 9
+					}
+				},
+				{
+					"filename": "mineExplosionBig_001.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 23,
+						"w": 17,
+						"h": 9
+					},
+					"frame": {
+						"x": 228,
+						"y": 53,
+						"w": 17,
+						"h": 9
+					}
+				},
+				{
+					"filename": "mineExplosion_001.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 17,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 23,
+						"w": 17,
+						"h": 9
+					},
+					"frame": {
+						"x": 228,
+						"y": 53,
+						"w": 17,
+						"h": 9
+					}
+				},
+				{
+					"filename": "mineExplosion_006.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 32,
+						"h": 31
+					},
+					"frame": {
+						"x": 243,
+						"y": 1,
 						"w": 32,
 						"h": 31
 					}
 				},
 				{
-					"filename": "mine_005.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 30,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 1,
-						"w": 30,
-						"h": 31
-					},
-					"frame": {
-						"x": 35,
-						"y": 1,
-						"w": 30,
-						"h": 31
-					}
-				},
-				{
-					"filename": "mine_006.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 30,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 1,
-						"w": 30,
-						"h": 31
-					},
-					"frame": {
-						"x": 67,
-						"y": 1,
-						"w": 30,
-						"h": 31
-					}
-				},
-				{
-					"filename": "mine_004.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 22,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 9,
-						"w": 22,
-						"h": 23
-					},
-					"frame": {
-						"x": 99,
-						"y": 1,
-						"w": 22,
-						"h": 23
-					}
-				},
-				{
-					"filename": "mine_003.png",
+					"filename": "mineExplosion_002.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -108,14 +234,14 @@
 						"h": 15
 					},
 					"frame": {
-						"x": 99,
-						"y": 26,
+						"x": 243,
+						"y": 34,
 						"w": 17,
 						"h": 15
 					}
 				},
 				{
-					"filename": "mine_001.png",
+					"filename": "mineActivation_004.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -129,31 +255,157 @@
 						"h": 9
 					},
 					"frame": {
-						"x": 1,
-						"y": 34,
+						"x": 247,
+						"y": 51,
 						"w": 17,
 						"h": 9
 					}
 				},
 				{
-					"filename": "mine_002.png",
+					"filename": "mineExplosionBig_002.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 17,
+						"h": 14
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 17,
+						"h": 14
+					},
+					"frame": {
+						"x": 262,
+						"y": 34,
+						"w": 17,
+						"h": 14
+					}
+				},
+				{
+					"filename": "mineExplosionBig_004.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 30,
+						"h": 31
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 30,
+						"h": 31
+					},
+					"frame": {
+						"x": 277,
+						"y": 1,
+						"w": 30,
+						"h": 31
+					}
+				},
+				{
+					"filename": "mineExplosion_004.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 17,
+						"w": 30,
 						"h": 32
 					},
 					"spriteSourceSize": {
 						"x": 0,
-						"y": 23,
-						"w": 17,
-						"h": 9
+						"y": 1,
+						"w": 30,
+						"h": 31
 					},
 					"frame": {
-						"x": 20,
+						"x": 277,
+						"y": 1,
+						"w": 30,
+						"h": 31
+					}
+				},
+				{
+					"filename": "mineExplosionBig_009.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 61,
+						"h": 62
+					},
+					"spriteSourceSize": {
+						"x": 25,
+						"y": 33,
+						"w": 13,
+						"h": 13
+					},
+					"frame": {
+						"x": 266,
+						"y": 50,
+						"w": 13,
+						"h": 13
+					}
+				},
+				{
+					"filename": "mineExplosion_003.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 22,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 9,
+						"w": 22,
+						"h": 23
+					},
+					"frame": {
+						"x": 281,
 						"y": 34,
-						"w": 17,
-						"h": 9
+						"w": 22,
+						"h": 23
+					}
+				},
+				{
+					"filename": "mineExplosionBig_003.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 22,
+						"h": 22
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 22,
+						"h": 22
+					},
+					"frame": {
+						"x": 305,
+						"y": 34,
+						"w": 22,
+						"h": 22
+					}
+				},
+				{
+					"filename": "mineExplosion_005.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 30,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 30,
+						"h": 31
+					},
+					"frame": {
+						"x": 309,
+						"y": 1,
+						"w": 30,
+						"h": 31
 					}
 				}
 			]
@@ -162,6 +414,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:204724a0bbd07a54104c3c2d78b60cbe:0e287cc6dfd569153ab5881b9587baee:def1523f38bd2982432f1fbbbae2e6d4$"
+		"smartupdate": "$TexturePacker:SmartUpdate:3ef382665d0c4ce88c7e9ed40be0a317:3d1bb82259c925fa3fcf4ca3ee6f1ce3:def1523f38bd2982432f1fbbbae2e6d4$"
 	}
 }
