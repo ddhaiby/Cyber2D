@@ -334,31 +334,31 @@ export class Pawn extends Phaser.Physics.Arcade.Sprite
         }
     }
 
-    protected lookUp(): void
+    public lookUp(): void
     {
         this.isLookingUp = true;
         this.isLookingDown = false;
     }
 
-    protected lookDown(): void
+    public lookDown(): void
     {
         this.isLookingUp = false;
         this.isLookingDown = true;
     }
     
-    protected lookOnRight(): void
+    public lookOnRight(): void
     {
         this.isLookingRight = true;
         this.isLookingLeft = false;
     }
 
-    protected lookOnLeft(): void
+    public lookOnLeft(): void
     {
         this.isLookingRight = false;
         this.isLookingLeft = true;
     }
 
-    protected lookStraight(): void
+    public lookStraight(): void
     {
         this.isLookingUp = false;
         this.isLookingDown = false;

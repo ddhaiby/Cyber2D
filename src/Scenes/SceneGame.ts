@@ -30,7 +30,7 @@ import {Ladder} from "../Platforms/Ladder";
 import {Portal} from "../Platforms/Portal";
 import {MovingPlatform} from "../Platforms/MovingPlatform";
 import {Spike} from "../Platforms/Spike";
-import {SpringPad} from "../Platforms/SpringPad";
+import {SpringPad, SPRING_PAD_TYPES} from "../Platforms/SpringPad";
 import {Mine} from "../Platforms/Mine";
 
 import {LadderManager} from "../Managers/LadderManager";
@@ -324,14 +324,21 @@ export class SceneGame extends CYBR_Scene
         let springPadObjects = this.currentMap.createFromObjects("SpringPads", {name: "SpringPadVertical", classType: SpringPad});
         springPadObjects.map((springPad: SpringPad) => {
             this.springPads.add(springPad);
-            springPad.init(true);
+            springPad.init(SPRING_PAD_TYPES.VERTICAL);
         });
 
         // @ts-ignore - Problem with Phaser’s types. classType supports classes
         springPadObjects = this.currentMap.createFromObjects("SpringPads", {name: "SpringPadHorizontal", classType: SpringPad});
         springPadObjects.map((springPad: SpringPad) => {
             this.springPads.add(springPad);
-            springPad.init(false);
+            springPad.init(SPRING_PAD_TYPES.HORIZONTAL);
+        });
+
+        // @ts-ignore - Problem with Phaser’s types. classType supports classes
+        springPadObjects = this.currentMap.createFromObjects("SpringPads", {name: "SpringPadDiagonal", classType: SpringPad});
+        springPadObjects.map((springPad: SpringPad) => {
+            this.springPads.add(springPad);
+            springPad.init(SPRING_PAD_TYPES.DIAGONAL);
         });
         return this;
     }
@@ -490,7 +497,7 @@ export class SceneGame extends CYBR_Scene
         return this;
     }
 
-    // Create all the overlaps and the colldiers - The order is important!
+    /** Create all the overlaps and the colliders - The order is important! */
     private createInteractions(): this
     {
         this.ladderManager.init(this.player);
@@ -846,15 +853,15 @@ export class SceneGame extends CYBR_Scene
 
     private onPlayerCollideSpringPad(player: Player, springPad: SpringPad): void
     {
-        let shouldActivate = false;
+        let shouldActivate = true;
 
-        if (springPad.isVertical)
+        if (springPad.springPadType == SPRING_PAD_TYPES.VERTICAL)
         {
             shouldActivate = player.y + player.height * 0.5 <= springPad.y - springPad.height;
         }
-        else
+        else if (springPad.springPadType == SPRING_PAD_TYPES.HORIZONTAL)
         {
-            shouldActivate = true;
+            shouldActivate = Math.abs(player.y - springPad.y) < 30;
         }
 
         if (shouldActivate)

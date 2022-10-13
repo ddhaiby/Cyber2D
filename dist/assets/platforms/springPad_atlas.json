@@ -4,34 +4,181 @@
 			"image": "springPad_atlas.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 34,
-				"h": 94
+				"w": 99,
+				"h": 101
 			},
 			"scale": 1,
 			"frames": [
 				{
-					"filename": "springPad_004.png",
+					"filename": "springPadDiagonal_004.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 32,
-						"h": 32
+						"w": 43,
+						"h": 31
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 32,
-						"h": 32
+						"w": 43,
+						"h": 31
 					},
 					"frame": {
 						"x": 1,
 						"y": 1,
+						"w": 43,
+						"h": 31
+					}
+				},
+				{
+					"filename": "springPadDiagonal_003.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 34,
+						"h": 21
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 34,
+						"h": 21
+					},
+					"frame": {
+						"x": 46,
+						"y": 1,
+						"w": 34,
+						"h": 21
+					}
+				},
+				{
+					"filename": "springPadHorizontal_002.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 32
+					},
+					"frame": {
+						"x": 82,
+						"y": 1,
+						"w": 16,
+						"h": 32
+					}
+				},
+				{
+					"filename": "springPadDiagonal_002.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 13
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 13
+					},
+					"frame": {
+						"x": 46,
+						"y": 24,
+						"w": 33,
+						"h": 13
+					}
+				},
+				{
+					"filename": "springPadHorizontal_004.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 1,
+						"y": 34,
 						"w": 32,
 						"h": 32
 					}
 				},
 				{
-					"filename": "springPad_003.png",
+					"filename": "springPadHorizontal_001.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 9,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 9,
+						"h": 32
+					},
+					"frame": {
+						"x": 35,
+						"y": 34,
+						"w": 9,
+						"h": 32
+					}
+				},
+				{
+					"filename": "springPadVertical_004.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 1,
+						"y": 68,
+						"w": 32,
+						"h": 32
+					}
+				},
+				{
+					"filename": "springPadHorizontal_003.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 29,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 29,
+						"h": 32
+					},
+					"frame": {
+						"x": 35,
+						"y": 68,
+						"w": 29,
+						"h": 32
+					}
+				},
+				{
+					"filename": "springPadVertical_003.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -45,14 +192,14 @@
 						"h": 29
 					},
 					"frame": {
-						"x": 1,
-						"y": 35,
+						"x": 66,
+						"y": 39,
 						"w": 32,
 						"h": 29
 					}
 				},
 				{
-					"filename": "springPad_002.png",
+					"filename": "springPadVertical_002.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -66,14 +213,14 @@
 						"h": 16
 					},
 					"frame": {
-						"x": 1,
-						"y": 66,
+						"x": 66,
+						"y": 70,
 						"w": 32,
 						"h": 16
 					}
 				},
 				{
-					"filename": "springPad_001.png",
+					"filename": "springPadDiagonal_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -87,8 +234,29 @@
 						"h": 9
 					},
 					"frame": {
-						"x": 1,
-						"y": 84,
+						"x": 66,
+						"y": 88,
+						"w": 32,
+						"h": 9
+					}
+				},
+				{
+					"filename": "springPadVertical_001.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 9
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 9
+					},
+					"frame": {
+						"x": 66,
+						"y": 88,
 						"w": 32,
 						"h": 9
 					}
@@ -99,6 +267,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:730ad9e488dd28c5e9e7af55e186493f:a494bfc401ce0940f7b35f429a7d46b3:efd88c16b84ceaffd868dc1e659b6ecc$"
+		"smartupdate": "$TexturePacker:SmartUpdate:1b1aae19de2086dcec2340027fc87500:91c49ad52d9b245a9be21e451cb91802:efd88c16b84ceaffd868dc1e659b6ecc$"
 	}
 }

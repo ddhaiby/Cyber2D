@@ -1,6 +1,14 @@
 import { CYBR_AudioManager } from "../Managers/CYBR_AudioManager";
 import { Pawn } from "../Pawns/Pawn";
 
+export const SPRING_PAD_TYPES = {
+    HORIZONTAL: "Horizontal" as SpringPadType,
+    VERTICAL: "Vertical" as SpringPadType,
+    DIAGONAL: "Diagonal" as SpringPadType
+};
+
+export declare type SpringPadType = "Horizontal" | "Vertical" | "Diagonal";
+
 export class SpringPad extends Phaser.Physics.Arcade.Sprite
 {
     /** Whether this spring pad is activating */
@@ -9,8 +17,11 @@ export class SpringPad extends Phaser.Physics.Arcade.Sprite
     /** Determine the velocity to apply to the pawn */
     private springStrength: number = 400;
 
-    /** Whether the spring applies vertical  */
-    private _isVertical: boolean = true;
+    /** Duration of the projection (for horizontal and vertical mode only) */
+    private projectionDuration: number = 300;
+
+    /** Whether the spring works in vertical, horizontal or diagonal  */
+    private _springPadType: SpringPadType;
 
     private currentPawn: Pawn = null;
 
@@ -19,19 +30,19 @@ export class SpringPad extends Phaser.Physics.Arcade.Sprite
        super(scene, x, y, texture, frame);
     }
 
-    public init(isVertical: boolean): void
+    public init(springPadType: SpringPadType): void
     {
-        this._isVertical = isVertical;
+        this._springPadType = springPadType;
 
-        if (this._isVertical)
+        if (this._springPadType == SPRING_PAD_TYPES.HORIZONTAL)
+        {
+            this.setOrigin(this.flipX ? 1 : 0, 0.5);
+            this.setX(this.flipX ? this.x + this.width * 0.5 : this.x - this.width * 0.5);
+        }
+        else // if (this._springPadType == SPRING_PAD_TYPES.VERTICAL || this._springPadType == SPRING_PAD_TYPES.VERTICAL)
         {
             this.setOrigin(0.5, 1);
             this.setY(this.y + this.height * 0.5);
-        }
-        else
-        {
-            // this.setOrigin(0, 0.5);
-            // this.setX(this.x - this.width * 0.5);
         }
 
         this.initAnimations();
@@ -47,7 +58,7 @@ export class SpringPad extends Phaser.Physics.Arcade.Sprite
 
         this.anims.create({
             key: "Idle",
-            frames: this.anims.generateFrameNames(this.texture.key, { prefix: "springPad_", suffix: ".png", start: 4, end: 4, zeroPad: 3 }),
+            frames: this.anims.generateFrameNames(this.texture.key, { prefix: "springPad" + this._springPadType + "_", suffix: ".png", start: 4, end: 4, zeroPad: 3 }),
             frameRate: 1,
             repeat: 0
         });
@@ -56,66 +67,35 @@ export class SpringPad extends Phaser.Physics.Arcade.Sprite
 
         this.anims.create({
             key: "Down",
-            frames: this.anims.generateFrameNames(this.texture.key, { prefix: "springPad_", suffix: ".png", start: 4, end: 1, zeroPad: 3 }),
+            frames: this.anims.generateFrameNames(this.texture.key, { prefix: "springPad" + this._springPadType + "_", suffix: ".png", start: 4, end: 1, zeroPad: 3 }),
             frameRate: frameRateActivation,
             repeat: 0
         });
 
         this.anims.create({
             key: "Up",
-            frames: this.anims.generateFrameNames(this.texture.key, { prefix: "springPad_", suffix: ".png", start: 1, end: 4, zeroPad: 3 }),
+            frames: this.anims.generateFrameNames(this.texture.key, { prefix: "springPad" + this._springPadType + "_", suffix: ".png", start: 1, end: 4, zeroPad: 3 }),
             frameRate: frameRateActivation,
             repeat: 0
         });
 
         this.anims.play("Idle", true);
 
-        if (!this._isVertical)
-        {
-            this.rotation = Math.PI / 2;
-        }
-
         this.on(Phaser.Animations.Events.ANIMATION_UPDATE, function (anim: Phaser.Animations.Animation, frame: Phaser.Animations.AnimationFrame) {
-            const springPadBody = (this.body as Phaser.Physics.Arcade.Body);
-
-            if (this.isVertical)
-            {
-                springPadBody.setSize(this.width, this.height);
-            }
-            else
-            {
-                // springPadBody.setSize(this.height, this.width);
-                // this.setOrigin(0, 0.5);
-                // // this.setX(this.x - this.width * 0.5);
-            }
+            (this.body as Phaser.Physics.Arcade.Body).setSize(this.width, this.height);
         }, this);
 
         this.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function (anim: Phaser.Animations.Animation, frame: Phaser.Animations.AnimationFrame) {
             if (anim.key == "Down")
             {
-                if (this.isVertical)
-                {
-                    this.currentPawn.setVelocityY(-this.springStrength);
-                    this.currentPawn = null;
-                    this._activating = false;
-                }
-                else
-                {
-                    let newVelocityX = this.springStrength;
-                    if (this.flipX)
-                    {
-                        newVelocityX = -this.springStrength;
-                        this.currentPawn.lookOnLeft();
-                    }
-                    else
-                    {
-                        this.currentPawn.lookOnRight();
-                    }
+                this.anims.play("Up", true);
+                CYBR_AudioManager.instance.playSound("SpringPadActivating");
 
-                    this.currentPawn.setVelocityX(newVelocityX);
-                    this.currentPawn.isTakingDmg = true;
+                if (this._springPadType == SPRING_PAD_TYPES.HORIZONTAL)
+                {
+                    this.projectHorizontal();
 
-                    this.scene.time.delayedCall(300, () => {
+                    this.scene.time.delayedCall(this.projectionDuration, () => {
                         this.currentPawn.isTakingDmg = false;
                         this.currentPawn.setVelocityX(0);
 
@@ -123,11 +103,49 @@ export class SpringPad extends Phaser.Physics.Arcade.Sprite
                         this._activating = false;
                     }, null, this);
                 }
+                else if (this._springPadType == SPRING_PAD_TYPES.VERTICAL)
+                {
+                    this.projectVertical();
+                    this.currentPawn = null;
+                    this._activating = false;
+                }
+                else // if (this._springPadType == SPRING_PAD_TYPES.DIAGONAL)
+                {
+                    this.projectVertical();
+                    this.projectHorizontal();
 
-                this.anims.play("Up", true);
-                CYBR_AudioManager.instance.playSound("SpringPadActivating");
+                    this.scene.time.delayedCall(this.projectionDuration, () => {
+                        this.currentPawn.isTakingDmg = false;
+                        this.currentPawn.setVelocityX(0);
+
+                        this.currentPawn = null;
+                        this._activating = false;
+                    }, null, this);
+                }
             }
         }, this);
+    }
+
+    private projectVertical(): void
+    {
+        this.currentPawn.setVelocityY(-this.springStrength);
+    }
+
+    private projectHorizontal(): void
+    {
+        let newVelocityX = this.springStrength;
+        if (this.flipX)
+        {
+            newVelocityX = -this.springStrength;
+            this.currentPawn.lookOnLeft();
+        }
+        else
+        {
+            this.currentPawn.lookOnRight();
+        }
+
+        this.currentPawn.setVelocityX(newVelocityX);
+        this.currentPawn.isTakingDmg = true;
     }
 
     public activate(pawn: Pawn): void
@@ -145,8 +163,8 @@ export class SpringPad extends Phaser.Physics.Arcade.Sprite
         return this._activating;
     }
 
-    public get isVertical(): boolean
+    public get springPadType(): SpringPadType
     {
-        return this._isVertical;
+        return this._springPadType;
     }
 }
