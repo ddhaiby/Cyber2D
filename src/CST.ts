@@ -15,7 +15,7 @@ export const CST = {
 
     PHYSIC: {
         GRAVITY: 530,
-        PAWN_MAX_SPEED: 1000
+        PAWN_MAX_SPEED: 950
     },
 
     MAIN_MENU: {
@@ -40,6 +40,21 @@ export const CST = {
         },
         {
             TITLE: "Woop woop",
+            DESCRIPTION: "",
+            MUSIC: "breaking-point"
+        },
+        {
+            TITLE: "Crazy world, cyber world",
+            DESCRIPTION: "",
+            MUSIC: "breaking-point"
+        },
+        {
+            TITLE: "Never say no to progress",
+            DESCRIPTION: "",
+            MUSIC: "breaking-point"
+        },
+        {
+            TITLE: "May Cyber reach the sky",
             DESCRIPTION: "",
             MUSIC: "breaking-point"
         }
