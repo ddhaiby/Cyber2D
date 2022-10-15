@@ -4413,6 +4413,24 @@
                  "y":160
                 }, 
                 {
+                 "gid":8,
+                 "height":32,
+                 "id":635,
+                 "name":"healthPackage",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"float",
+                         "value":30
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":2528,
+                 "y":256
+                }, 
+                {
                  "gid":56,
                  "height":32,
                  "id":390,
@@ -5667,7 +5685,7 @@
          "y":0
         }],
  "nextlayerid":18,
- "nextobjectid":635,
+ "nextobjectid":636,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.8.5",
