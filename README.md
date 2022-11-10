@@ -28,7 +28,7 @@ Download and install Visual Studio Code.
 https://code.visualstudio.com/download
 
 #### _npm_
-Download and install nodejs 
+Download and install nodejs version 16.15.1
 
 https://nodejs.org/en/download/
 
